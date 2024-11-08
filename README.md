@@ -1,5 +1,8 @@
 # mavlink_common
 
+[![Build with Alire](https://github.com/reznikmm/mavlink_common/actions/workflows/alire.yml/badge.svg)](https://github.com/reznikmm/mavlink_common/actions/workflows/alire.yml)
+[![Alire](https://img.shields.io/endpoint?url=https://alire.ada.dev/badges/mavlink_common.json)](https://alire.ada.dev/crates/mavlink_common.html)
+
 > MAVLink -- Micro Air Vehicle Message Marshalling Library.
 
 This repository provides an Ada library for MAVLink, a lightweight
@@ -49,7 +52,7 @@ require communication with MAVLink-compliant devices. Features
      resource-constrained embedded applications.
 
      ```gpr
-     with "mavlink_common.gpr";
+     with "mavlink_common_limited.gpr";
      ```
 
    Choose the project file that best fits your requirements when building your
@@ -62,7 +65,18 @@ TBD. See [`examples`](examples/) for now.
 ## Mavlink commit id
 
 The code was generated from `e221d46` commit of
-the [mavlink](https://github.com/mavlink/mavlink) repo.
+the [mavlink](https://github.com/mavlink/mavlink) repo. I used this steps:
+
+```shell
+python -m venv venv
+source venv/bin/activate
+git clone --depth=1 https://github.com/ArduPilot/pymavlink
+git clone --depth=1 https://github.com/mavlink/mavlink
+MDEF=$PWD/mavlink/message_definitions python -m pip install pymavlink
+
+python3 -m pymavlink.tools.mavgen --lang=Ada --wire-protocol=1.0 \
+  --output=generated mavlink/message_definitions/v1.0/common.xml
+```
 
 ## Contributing
 
