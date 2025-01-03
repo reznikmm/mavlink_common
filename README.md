@@ -64,7 +64,7 @@ TBD. See [`examples`](examples/) for now.
 
 ## Mavlink commit id
 
-The code was generated from `e221d46` commit of
+The code was generated from `619947d` commit of
 the [mavlink](https://github.com/mavlink/mavlink) repo. I used this steps:
 
 ```shell

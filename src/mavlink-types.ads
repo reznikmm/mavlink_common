@@ -445,8 +445,8 @@ package MAVLink.Types is
      (Mav_Result_Accepted, Mav_Result_Temporarily_Rejected, Mav_Result_Denied, 
       Mav_Result_Unsupported, Mav_Result_Failed, Mav_Result_In_Progress, 
       Mav_Result_Cancelled, Mav_Result_Command_Long_Only, 
-      Mav_Result_Command_Int_Only, Mav_Result_Command_Unsupported_Mav_Frame, 
-      Mav_Result_Permission_Denied) with Size => 8;
+      Mav_Result_Command_Int_Only, Mav_Result_Command_Unsupported_Mav_Frame)
+     with Size => 8;
    for Mav_Result use
      (Mav_Result_Accepted                      => 0,
       Mav_Result_Temporarily_Rejected          => 1,
@@ -457,8 +457,7 @@ package MAVLink.Types is
       Mav_Result_Cancelled                     => 6,
       Mav_Result_Command_Long_Only             => 7,
       Mav_Result_Command_Int_Only              => 8,
-      Mav_Result_Command_Unsupported_Mav_Frame => 9,
-      Mav_Result_Permission_Denied             => 10);
+      Mav_Result_Command_Unsupported_Mav_Frame => 9);
 
    type Mav_Mission_Result is
      (Mav_Mission_Accepted, Mav_Mission_Error, Mav_Mission_Unsupported_Frame, 

@@ -1,6 +1,6 @@
 name = "mavlink_common"
 description = "MAVLink -- Micro Air Vehicle Message Marshalling Library."
-version = "0.1.0-dev"
+version = "1.0.0"
 
 authors = ["Fil Andri"]
 maintainers = ["Fil Andri <root.fi36@gmail.com>", "Max Reznik <reznikmm@gmail.com>"]
