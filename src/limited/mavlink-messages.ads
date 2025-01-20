@@ -1,12 +1,12 @@
--- Defines Mavlink messages
--- Copyright Fil Andrii root.fi36@gmail.com 2022
+--  Defines MAVLink messages
+--  Copyright Fil Andrii root.fi36@gmail.com 2022
 
 with Interfaces;
-with Mavlink.Types; use Mavlink.Types;
+with MAVLink.Types; use MAVLink.Types;
 
-package Mavlink.Messages is
+package MAVLink.Messages is
 
-   pragma Pure (Mavlink.Messages);
+   pragma Pure (MAVLink.Messages);
 
    type Message
      (Message_Id : Msg_Id;

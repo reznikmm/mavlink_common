@@ -1,9 +1,9 @@
--- Defines Mavlink types
--- Copyright Fil Andrii root.fi36@gmail.com 2022
+--  Defines MAVLink types
+--  Copyright Fil Andrii root.fi36@gmail.com 2022
 
 package MAVLink.Types is
 
-   pragma Pure (Mavlink.Types);
+   pragma Pure (MAVLink.Types);
 
    type Hl_Failure_Flag is record
       Hl_Failure_Flag_Gps                   : Boolean := False;

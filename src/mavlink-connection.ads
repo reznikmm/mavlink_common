@@ -1,13 +1,13 @@
--- Mavlink connection
--- Copyright Fil Andrii root.fi36@gmail.com 2022
+--  MAVLink connection
+--  Copyright Fil Andrii root.fi36@gmail.com 2022
 
 with Interfaces;
-with Mavlink.Messages;
+with MAVLink.Messages;
 with X25CRC;
 
-package Mavlink.Connection is
+package MAVLink.Connection is
 
-   pragma Pure (Mavlink.Connection);
+   pragma Pure (MAVLink.Connection);
 
    type Connection (System_Id : Interfaces.Unsigned_8) is tagged private;
 
@@ -17,10 +17,10 @@ package Mavlink.Connection is
    function Get_Msg_Id (Conn : Connection) return Msg_Id;
 
    function Pack (Conn : in out Connection;
-                  Msg : Mavlink.Messages.Message'Class) return Byte_Arrray;
+                  Msg : MAVLink.Messages.Message'Class) return Byte_Array;
 
    procedure Unpack (Conn : in out Connection;
-                     Msg  : in out Mavlink.Messages.Message'Class);
+                     Msg  : in out MAVLink.Messages.Message'Class);
 
 private
 
@@ -28,11 +28,11 @@ private
 
    type Connection (System_Id : Interfaces.Unsigned_8) is tagged record
       Component_Id : Interfaces.Unsigned_8 := 1;
-      In_Buf       : Byte_Arrray (0 .. 255 + 8) := (others => 0);
+      In_Buf       : Byte_Array (0 .. 255 + 8) := (others => 0);
       In_Ptr       : Natural := 0;
       Len          : Natural := 0;
       Out_Sequency : Interfaces.Unsigned_8 := 0;
       Checksum     : X25CRC.Checksum;
    end record;
 
-end Mavlink.Connection;
+end MAVLink.Connection;
