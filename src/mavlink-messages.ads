@@ -6,7 +6,7 @@ with MAVLink.Types; use MAVLink.Types;
 
 package MAVLink.Messages is
 
-   pragma Pure (MAVLink.Messages);
+   pragma Pure;
 
    type Message
      (Message_Id : Msg_Id;

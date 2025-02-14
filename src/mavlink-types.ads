@@ -1,1174 +1,2039 @@
 --  Defines MAVLink types
---  Copyright Fil Andrii root.fi36@gmail.com 2022
+--  Copyright Fil Andrii root.fi36@gmail.com 2022-2025
+
+pragma Ada_2022;
 
 package MAVLink.Types is
 
-   pragma Pure (MAVLink.Types);
+   pragma Pure;
 
    type Hl_Failure_Flag is record
-      Hl_Failure_Flag_Gps                   : Boolean := False;
-      Hl_Failure_Flag_Differential_Pressure : Boolean := False;
-      Hl_Failure_Flag_Absolute_Pressure     : Boolean := False;
-      Hl_Failure_Flag_3D_Accel              : Boolean := False;
-      Hl_Failure_Flag_3D_Gyro               : Boolean := False;
-      Hl_Failure_Flag_3D_Mag                : Boolean := False;
-      Hl_Failure_Flag_Terrain               : Boolean := False;
-      Hl_Failure_Flag_Battery               : Boolean := False;
-      Hl_Failure_Flag_Rc_Receiver           : Boolean := False;
-      Hl_Failure_Flag_Offboard_Link         : Boolean := False;
-      Hl_Failure_Flag_Engine                : Boolean := False;
-      Hl_Failure_Flag_Geofence              : Boolean := False;
-      Hl_Failure_Flag_Estimator             : Boolean := False;
-      Hl_Failure_Flag_Mission               : Boolean := False;
+      Gps                   : Boolean := False;
+      Differential_Pressure : Boolean := False;
+      Absolute_Pressure     : Boolean := False;
+      A_3D_Accel            : Boolean := False;
+      A_3D_Gyro             : Boolean := False;
+      A_3D_Mag              : Boolean := False;
+      Terrain               : Boolean := False;
+      Battery               : Boolean := False;
+      Rc_Receiver           : Boolean := False;
+      Offboard_Link         : Boolean := False;
+      Engine                : Boolean := False;
+      Geofence              : Boolean := False;
+      Estimator             : Boolean := False;
+      Mission               : Boolean := False;
+      Reserved_14           : Boolean := False;
+      Reserved_15           : Boolean := False;
    end record with Size => 16;
    for Hl_Failure_Flag use record
-      Hl_Failure_Flag_Gps                   at 0 range 0 .. 0;
-      Hl_Failure_Flag_Differential_Pressure at 0 range 1 .. 1;
-      Hl_Failure_Flag_Absolute_Pressure     at 0 range 2 .. 2;
-      Hl_Failure_Flag_3D_Accel              at 0 range 3 .. 3;
-      Hl_Failure_Flag_3D_Gyro               at 0 range 4 .. 4;
-      Hl_Failure_Flag_3D_Mag                at 0 range 5 .. 5;
-      Hl_Failure_Flag_Terrain               at 0 range 6 .. 6;
-      Hl_Failure_Flag_Battery               at 0 range 7 .. 7;
-      Hl_Failure_Flag_Rc_Receiver           at 0 range 8 .. 8;
-      Hl_Failure_Flag_Offboard_Link         at 0 range 9 .. 9;
-      Hl_Failure_Flag_Engine                at 0 range 10 .. 10;
-      Hl_Failure_Flag_Geofence              at 0 range 11 .. 11;
-      Hl_Failure_Flag_Estimator             at 0 range 12 .. 12;
-      Hl_Failure_Flag_Mission               at 0 range 13 .. 13;
+      Gps                   at 0 range 0 .. 0;
+      Differential_Pressure at 0 range 1 .. 1;
+      Absolute_Pressure     at 0 range 2 .. 2;
+      A_3D_Accel            at 0 range 3 .. 3;
+      A_3D_Gyro             at 0 range 4 .. 4;
+      A_3D_Mag              at 0 range 5 .. 5;
+      Terrain               at 0 range 6 .. 6;
+      Battery               at 0 range 7 .. 7;
+      Rc_Receiver           at 0 range 8 .. 8;
+      Offboard_Link         at 0 range 9 .. 9;
+      Engine                at 0 range 10 .. 10;
+      Geofence              at 0 range 11 .. 11;
+      Estimator             at 0 range 12 .. 12;
+      Mission               at 0 range 13 .. 13;
+      Reserved_14           at 0 range 14 .. 14;
+      Reserved_15           at 0 range 15 .. 15;
    end record;
 
-   type Mav_Mode is
-     (Mav_Mode_Preflight, Mav_Mode_Manual_Disarmed, Mav_Mode_Test_Disarmed, 
-      Mav_Mode_Stabilize_Disarmed, Mav_Mode_Guided_Disarmed, 
-      Mav_Mode_Auto_Disarmed, Mav_Mode_Manual_Armed, Mav_Mode_Test_Armed, 
-      Mav_Mode_Stabilize_Armed, Mav_Mode_Guided_Armed, Mav_Mode_Auto_Armed)
-     with Size => 8;
-   for Mav_Mode use
-     (Mav_Mode_Preflight          => 0,
-      Mav_Mode_Manual_Disarmed    => 64,
-      Mav_Mode_Test_Disarmed      => 66,
-      Mav_Mode_Stabilize_Disarmed => 80,
-      Mav_Mode_Guided_Disarmed    => 88,
-      Mav_Mode_Auto_Disarmed      => 92,
-      Mav_Mode_Manual_Armed       => 192,
-      Mav_Mode_Test_Armed         => 194,
-      Mav_Mode_Stabilize_Armed    => 208,
-      Mav_Mode_Guided_Armed       => 216,
-      Mav_Mode_Auto_Armed         => 220);
+   type Mav_Mode is new Interfaces.Unsigned_8;
+
+   function Preflight return Mav_Mode is (0)
+     with Static;
+
+   function Manual_Disarmed return Mav_Mode is (64)
+     with Static;
+
+   function Test_Disarmed return Mav_Mode is (66)
+     with Static;
+
+   function Stabilize_Disarmed return Mav_Mode is (80)
+     with Static;
+
+   function Guided_Disarmed return Mav_Mode is (88)
+     with Static;
+
+   function Auto_Disarmed return Mav_Mode is (92)
+     with Static;
+
+   function Manual_Armed return Mav_Mode is (192)
+     with Static;
+
+   function Test_Armed return Mav_Mode is (194)
+     with Static;
+
+   function Stabilize_Armed return Mav_Mode is (208)
+     with Static;
+
+   function Guided_Armed return Mav_Mode is (216)
+     with Static;
+
+   function Auto_Armed return Mav_Mode is (220)
+     with Static;
+
 
    type Mav_Sys_Status_Sensor is record
-      Mav_Sys_Status_Sensor_3D_Gyro                : Boolean := False;
-      Mav_Sys_Status_Sensor_3D_Accel               : Boolean := False;
-      Mav_Sys_Status_Sensor_3D_Mag                 : Boolean := False;
-      Mav_Sys_Status_Sensor_Absolute_Pressure      : Boolean := False;
-      Mav_Sys_Status_Sensor_Differential_Pressure  : Boolean := False;
-      Mav_Sys_Status_Sensor_Gps                    : Boolean := False;
-      Mav_Sys_Status_Sensor_Optical_Flow           : Boolean := False;
-      Mav_Sys_Status_Sensor_Vision_Position        : Boolean := False;
-      Mav_Sys_Status_Sensor_Laser_Position         : Boolean := False;
-      Mav_Sys_Status_Sensor_External_Ground_Truth  : Boolean := False;
-      Mav_Sys_Status_Sensor_Angular_Rate_Control   : Boolean := False;
-      Mav_Sys_Status_Sensor_Attitude_Stabilization : Boolean := False;
-      Mav_Sys_Status_Sensor_Yaw_Position           : Boolean := False;
-      Mav_Sys_Status_Sensor_Z_Altitude_Control     : Boolean := False;
-      Mav_Sys_Status_Sensor_Xy_Position_Control    : Boolean := False;
-      Mav_Sys_Status_Sensor_Motor_Outputs          : Boolean := False;
-      Mav_Sys_Status_Sensor_Rc_Receiver            : Boolean := False;
-      Mav_Sys_Status_Sensor_3D_Gyro2               : Boolean := False;
-      Mav_Sys_Status_Sensor_3D_Accel2              : Boolean := False;
-      Mav_Sys_Status_Sensor_3D_Mag2                : Boolean := False;
-      Mav_Sys_Status_Geofence                      : Boolean := False;
-      Mav_Sys_Status_Ahrs                          : Boolean := False;
-      Mav_Sys_Status_Terrain                       : Boolean := False;
-      Mav_Sys_Status_Reverse_Motor                 : Boolean := False;
-      Mav_Sys_Status_Logging                       : Boolean := False;
-      Mav_Sys_Status_Sensor_Battery                : Boolean := False;
-      Mav_Sys_Status_Sensor_Proximity              : Boolean := False;
-      Mav_Sys_Status_Sensor_Satcom                 : Boolean := False;
-      Mav_Sys_Status_Prearm_Check                  : Boolean := False;
-      Mav_Sys_Status_Obstacle_Avoidance            : Boolean := False;
-      Mav_Sys_Status_Sensor_Propulsion             : Boolean := False;
-      Mav_Sys_Status_Extension_Used                : Boolean := False;
+      Sensor_3D_Gyro                : Boolean := False;
+      Sensor_3D_Accel               : Boolean := False;
+      Sensor_3D_Mag                 : Boolean := False;
+      Sensor_Absolute_Pressure      : Boolean := False;
+      Sensor_Differential_Pressure  : Boolean := False;
+      Sensor_Gps                    : Boolean := False;
+      Sensor_Optical_Flow           : Boolean := False;
+      Sensor_Vision_Position        : Boolean := False;
+      Sensor_Laser_Position         : Boolean := False;
+      Sensor_External_Ground_Truth  : Boolean := False;
+      Sensor_Angular_Rate_Control   : Boolean := False;
+      Sensor_Attitude_Stabilization : Boolean := False;
+      Sensor_Yaw_Position           : Boolean := False;
+      Sensor_Z_Altitude_Control     : Boolean := False;
+      Sensor_Xy_Position_Control    : Boolean := False;
+      Sensor_Motor_Outputs          : Boolean := False;
+      Sensor_Rc_Receiver            : Boolean := False;
+      Sensor_3D_Gyro2               : Boolean := False;
+      Sensor_3D_Accel2              : Boolean := False;
+      Sensor_3D_Mag2                : Boolean := False;
+      Geofence                      : Boolean := False;
+      Ahrs                          : Boolean := False;
+      Terrain                       : Boolean := False;
+      Reverse_Motor                 : Boolean := False;
+      Logging                       : Boolean := False;
+      Sensor_Battery                : Boolean := False;
+      Sensor_Proximity              : Boolean := False;
+      Sensor_Satcom                 : Boolean := False;
+      Prearm_Check                  : Boolean := False;
+      Obstacle_Avoidance            : Boolean := False;
+      Sensor_Propulsion             : Boolean := False;
+      Extension_Used                : Boolean := False;
    end record with Size => 32;
    for Mav_Sys_Status_Sensor use record
-      Mav_Sys_Status_Sensor_3D_Gyro                at 0 range 0 .. 0;
-      Mav_Sys_Status_Sensor_3D_Accel               at 0 range 1 .. 1;
-      Mav_Sys_Status_Sensor_3D_Mag                 at 0 range 2 .. 2;
-      Mav_Sys_Status_Sensor_Absolute_Pressure      at 0 range 3 .. 3;
-      Mav_Sys_Status_Sensor_Differential_Pressure  at 0 range 4 .. 4;
-      Mav_Sys_Status_Sensor_Gps                    at 0 range 5 .. 5;
-      Mav_Sys_Status_Sensor_Optical_Flow           at 0 range 6 .. 6;
-      Mav_Sys_Status_Sensor_Vision_Position        at 0 range 7 .. 7;
-      Mav_Sys_Status_Sensor_Laser_Position         at 0 range 8 .. 8;
-      Mav_Sys_Status_Sensor_External_Ground_Truth  at 0 range 9 .. 9;
-      Mav_Sys_Status_Sensor_Angular_Rate_Control   at 0 range 10 .. 10;
-      Mav_Sys_Status_Sensor_Attitude_Stabilization at 0 range 11 .. 11;
-      Mav_Sys_Status_Sensor_Yaw_Position           at 0 range 12 .. 12;
-      Mav_Sys_Status_Sensor_Z_Altitude_Control     at 0 range 13 .. 13;
-      Mav_Sys_Status_Sensor_Xy_Position_Control    at 0 range 14 .. 14;
-      Mav_Sys_Status_Sensor_Motor_Outputs          at 0 range 15 .. 15;
-      Mav_Sys_Status_Sensor_Rc_Receiver            at 0 range 16 .. 16;
-      Mav_Sys_Status_Sensor_3D_Gyro2               at 0 range 17 .. 17;
-      Mav_Sys_Status_Sensor_3D_Accel2              at 0 range 18 .. 18;
-      Mav_Sys_Status_Sensor_3D_Mag2                at 0 range 19 .. 19;
-      Mav_Sys_Status_Geofence                      at 0 range 20 .. 20;
-      Mav_Sys_Status_Ahrs                          at 0 range 21 .. 21;
-      Mav_Sys_Status_Terrain                       at 0 range 22 .. 22;
-      Mav_Sys_Status_Reverse_Motor                 at 0 range 23 .. 23;
-      Mav_Sys_Status_Logging                       at 0 range 24 .. 24;
-      Mav_Sys_Status_Sensor_Battery                at 0 range 25 .. 25;
-      Mav_Sys_Status_Sensor_Proximity              at 0 range 26 .. 26;
-      Mav_Sys_Status_Sensor_Satcom                 at 0 range 27 .. 27;
-      Mav_Sys_Status_Prearm_Check                  at 0 range 28 .. 28;
-      Mav_Sys_Status_Obstacle_Avoidance            at 0 range 29 .. 29;
-      Mav_Sys_Status_Sensor_Propulsion             at 0 range 30 .. 30;
-      Mav_Sys_Status_Extension_Used                at 0 range 31 .. 31;
+      Sensor_3D_Gyro                at 0 range 0 .. 0;
+      Sensor_3D_Accel               at 0 range 1 .. 1;
+      Sensor_3D_Mag                 at 0 range 2 .. 2;
+      Sensor_Absolute_Pressure      at 0 range 3 .. 3;
+      Sensor_Differential_Pressure  at 0 range 4 .. 4;
+      Sensor_Gps                    at 0 range 5 .. 5;
+      Sensor_Optical_Flow           at 0 range 6 .. 6;
+      Sensor_Vision_Position        at 0 range 7 .. 7;
+      Sensor_Laser_Position         at 0 range 8 .. 8;
+      Sensor_External_Ground_Truth  at 0 range 9 .. 9;
+      Sensor_Angular_Rate_Control   at 0 range 10 .. 10;
+      Sensor_Attitude_Stabilization at 0 range 11 .. 11;
+      Sensor_Yaw_Position           at 0 range 12 .. 12;
+      Sensor_Z_Altitude_Control     at 0 range 13 .. 13;
+      Sensor_Xy_Position_Control    at 0 range 14 .. 14;
+      Sensor_Motor_Outputs          at 0 range 15 .. 15;
+      Sensor_Rc_Receiver            at 0 range 16 .. 16;
+      Sensor_3D_Gyro2               at 0 range 17 .. 17;
+      Sensor_3D_Accel2              at 0 range 18 .. 18;
+      Sensor_3D_Mag2                at 0 range 19 .. 19;
+      Geofence                      at 0 range 20 .. 20;
+      Ahrs                          at 0 range 21 .. 21;
+      Terrain                       at 0 range 22 .. 22;
+      Reverse_Motor                 at 0 range 23 .. 23;
+      Logging                       at 0 range 24 .. 24;
+      Sensor_Battery                at 0 range 25 .. 25;
+      Sensor_Proximity              at 0 range 26 .. 26;
+      Sensor_Satcom                 at 0 range 27 .. 27;
+      Prearm_Check                  at 0 range 28 .. 28;
+      Obstacle_Avoidance            at 0 range 29 .. 29;
+      Sensor_Propulsion             at 0 range 30 .. 30;
+      Extension_Used                at 0 range 31 .. 31;
    end record;
 
-   type Mav_Frame is
-     (Mav_Frame_Global, Mav_Frame_Local_Ned, Mav_Frame_Mission, 
-      Mav_Frame_Global_Relative_Alt, Mav_Frame_Local_Enu, Mav_Frame_Global_Int, 
-      Mav_Frame_Global_Relative_Alt_Int, Mav_Frame_Local_Offset_Ned, 
-      Mav_Frame_Body_Ned, Mav_Frame_Body_Offset_Ned, 
-      Mav_Frame_Global_Terrain_Alt, Mav_Frame_Global_Terrain_Alt_Int, 
-      Mav_Frame_Body_Frd, Mav_Frame_Reserved_13, Mav_Frame_Reserved_14, 
-      Mav_Frame_Reserved_15, Mav_Frame_Reserved_16, Mav_Frame_Reserved_17, 
-      Mav_Frame_Reserved_18, Mav_Frame_Reserved_19, Mav_Frame_Local_Frd, 
-      Mav_Frame_Local_Flu) with Size => 8;
-   for Mav_Frame use
-     (Mav_Frame_Global                  => 0,
-      Mav_Frame_Local_Ned               => 1,
-      Mav_Frame_Mission                 => 2,
-      Mav_Frame_Global_Relative_Alt     => 3,
-      Mav_Frame_Local_Enu               => 4,
-      Mav_Frame_Global_Int              => 5,
-      Mav_Frame_Global_Relative_Alt_Int => 6,
-      Mav_Frame_Local_Offset_Ned        => 7,
-      Mav_Frame_Body_Ned                => 8,
-      Mav_Frame_Body_Offset_Ned         => 9,
-      Mav_Frame_Global_Terrain_Alt      => 10,
-      Mav_Frame_Global_Terrain_Alt_Int  => 11,
-      Mav_Frame_Body_Frd                => 12,
-      Mav_Frame_Reserved_13             => 13,
-      Mav_Frame_Reserved_14             => 14,
-      Mav_Frame_Reserved_15             => 15,
-      Mav_Frame_Reserved_16             => 16,
-      Mav_Frame_Reserved_17             => 17,
-      Mav_Frame_Reserved_18             => 18,
-      Mav_Frame_Reserved_19             => 19,
-      Mav_Frame_Local_Frd               => 20,
-      Mav_Frame_Local_Flu               => 21);
+   type Mav_Frame is new Interfaces.Unsigned_8;
 
-   type Mavlink_Data_Stream_Type is
-     (Mavlink_Data_Stream_Img_Jpeg, Mavlink_Data_Stream_Img_Bmp, 
-      Mavlink_Data_Stream_Img_Raw8U, Mavlink_Data_Stream_Img_Raw32U, 
-      Mavlink_Data_Stream_Img_Pgm, Mavlink_Data_Stream_Img_Png)
-     with Size => 8;
-   for Mavlink_Data_Stream_Type use
-     (Mavlink_Data_Stream_Img_Jpeg   => 0,
-      Mavlink_Data_Stream_Img_Bmp    => 1,
-      Mavlink_Data_Stream_Img_Raw8U  => 2,
-      Mavlink_Data_Stream_Img_Raw32U => 3,
-      Mavlink_Data_Stream_Img_Pgm    => 4,
-      Mavlink_Data_Stream_Img_Png    => 5);
+   function Global return Mav_Frame is (0)
+     with Static;
 
-   type Fence_Breach is
-     (Fence_Breach_None, Fence_Breach_Minalt, Fence_Breach_Maxalt, 
-      Fence_Breach_Boundary) with Size => 8;
-   for Fence_Breach use
-     (Fence_Breach_None     => 0,
-      Fence_Breach_Minalt   => 1,
-      Fence_Breach_Maxalt   => 2,
-      Fence_Breach_Boundary => 3);
+   function Local_Ned return Mav_Frame is (1)
+     with Static;
 
-   type Mav_Cmd is
-     (Mav_Cmd_Nav_Waypoint, Mav_Cmd_Nav_Loiter_Unlim, 
-      Mav_Cmd_Nav_Loiter_Turns, Mav_Cmd_Nav_Loiter_Time, 
-      Mav_Cmd_Nav_Return_To_Launch, Mav_Cmd_Nav_Land, Mav_Cmd_Nav_Takeoff, 
-      Mav_Cmd_Nav_Land_Local, Mav_Cmd_Nav_Takeoff_Local, Mav_Cmd_Nav_Follow, 
-      Mav_Cmd_Nav_Continue_And_Change_Alt, Mav_Cmd_Nav_Loiter_To_Alt, 
-      Mav_Cmd_Do_Follow, Mav_Cmd_Do_Follow_Reposition, Mav_Cmd_Do_Orbit, 
-      Mav_Cmd_Nav_Roi, Mav_Cmd_Nav_Pathplanning, Mav_Cmd_Nav_Spline_Waypoint, 
-      Mav_Cmd_Nav_Vtol_Takeoff, Mav_Cmd_Nav_Vtol_Land, 
-      Mav_Cmd_Nav_Guided_Enable, Mav_Cmd_Nav_Delay, Mav_Cmd_Nav_Payload_Place, 
-      Mav_Cmd_Nav_Last, Mav_Cmd_Condition_Delay, Mav_Cmd_Condition_Change_Alt, 
-      Mav_Cmd_Condition_Distance, Mav_Cmd_Condition_Yaw, 
-      Mav_Cmd_Condition_Last, Mav_Cmd_Do_Set_Mode, Mav_Cmd_Do_Jump, 
-      Mav_Cmd_Do_Change_Speed, Mav_Cmd_Do_Set_Home, Mav_Cmd_Do_Set_Parameter, 
-      Mav_Cmd_Do_Set_Relay, Mav_Cmd_Do_Repeat_Relay, Mav_Cmd_Do_Set_Servo, 
-      Mav_Cmd_Do_Repeat_Servo, Mav_Cmd_Do_Flighttermination, 
-      Mav_Cmd_Do_Change_Altitude, Mav_Cmd_Do_Set_Actuator, 
-      Mav_Cmd_Do_Return_Path_Start, Mav_Cmd_Do_Land_Start, 
-      Mav_Cmd_Do_Rally_Land, Mav_Cmd_Do_Go_Around, Mav_Cmd_Do_Reposition, 
-      Mav_Cmd_Do_Pause_Continue, Mav_Cmd_Do_Set_Reverse, 
-      Mav_Cmd_Do_Set_Roi_Location, Mav_Cmd_Do_Set_Roi_Wpnext_Offset, 
-      Mav_Cmd_Do_Set_Roi_None, Mav_Cmd_Do_Set_Roi_Sysid, 
-      Mav_Cmd_Do_Control_Video, Mav_Cmd_Do_Set_Roi, 
-      Mav_Cmd_Do_Digicam_Configure, Mav_Cmd_Do_Digicam_Control, 
-      Mav_Cmd_Do_Mount_Configure, Mav_Cmd_Do_Mount_Control, 
-      Mav_Cmd_Do_Set_Cam_Trigg_Dist, Mav_Cmd_Do_Fence_Enable, 
-      Mav_Cmd_Do_Parachute, Mav_Cmd_Do_Motor_Test, Mav_Cmd_Do_Inverted_Flight, 
-      Mav_Cmd_Do_Gripper, Mav_Cmd_Do_Autotune_Enable, 
-      Mav_Cmd_Nav_Set_Yaw_Speed, Mav_Cmd_Do_Set_Cam_Trigg_Interval, 
-      Mav_Cmd_Do_Mount_Control_Quat, Mav_Cmd_Do_Guided_Master, 
-      Mav_Cmd_Do_Guided_Limits, Mav_Cmd_Do_Engine_Control, 
-      Mav_Cmd_Do_Set_Mission_Current, Mav_Cmd_Do_Last, 
-      Mav_Cmd_Preflight_Calibration, Mav_Cmd_Preflight_Set_Sensor_Offsets, 
-      Mav_Cmd_Preflight_Uavcan, Mav_Cmd_Preflight_Storage, 
-      Mav_Cmd_Preflight_Reboot_Shutdown, Mav_Cmd_Override_Goto, 
-      Mav_Cmd_Oblique_Survey, Mav_Cmd_Mission_Start, Mav_Cmd_Actuator_Test, 
-      Mav_Cmd_Configure_Actuator, Mav_Cmd_Component_Arm_Disarm, 
-      Mav_Cmd_Run_Prearm_Checks, Mav_Cmd_Illuminator_On_Off, 
-      Mav_Cmd_Do_Illuminator_Configure, Mav_Cmd_Get_Home_Position, 
-      Mav_Cmd_Inject_Failure, Mav_Cmd_Start_Rx_Pair, 
-      Mav_Cmd_Get_Message_Interval, Mav_Cmd_Set_Message_Interval, 
-      Mav_Cmd_Request_Message, Mav_Cmd_Request_Protocol_Version, 
-      Mav_Cmd_Request_Autopilot_Capabilities, 
-      Mav_Cmd_Request_Camera_Information, Mav_Cmd_Request_Camera_Settings, 
-      Mav_Cmd_Request_Storage_Information, Mav_Cmd_Storage_Format, 
-      Mav_Cmd_Request_Camera_Capture_Status, Mav_Cmd_Request_Flight_Information, 
-      Mav_Cmd_Reset_Camera_Settings, Mav_Cmd_Set_Camera_Mode, 
-      Mav_Cmd_Set_Camera_Zoom, Mav_Cmd_Set_Camera_Focus, 
-      Mav_Cmd_Set_Storage_Usage, Mav_Cmd_Set_Camera_Source, Mav_Cmd_Jump_Tag, 
-      Mav_Cmd_Do_Jump_Tag, Mav_Cmd_Do_Gimbal_Manager_Pitchyaw, 
-      Mav_Cmd_Do_Gimbal_Manager_Configure, Mav_Cmd_Image_Start_Capture, 
-      Mav_Cmd_Image_Stop_Capture, Mav_Cmd_Request_Camera_Image_Capture, 
-      Mav_Cmd_Do_Trigger_Control, Mav_Cmd_Camera_Track_Point, 
-      Mav_Cmd_Camera_Track_Rectangle, Mav_Cmd_Camera_Stop_Tracking, 
-      Mav_Cmd_Video_Start_Capture, Mav_Cmd_Video_Stop_Capture, 
-      Mav_Cmd_Video_Start_Streaming, Mav_Cmd_Video_Stop_Streaming, 
-      Mav_Cmd_Request_Video_Stream_Information, 
-      Mav_Cmd_Request_Video_Stream_Status, Mav_Cmd_Logging_Start, 
-      Mav_Cmd_Logging_Stop, Mav_Cmd_Airframe_Configuration, 
-      Mav_Cmd_Control_High_Latency, Mav_Cmd_Panorama_Create, 
-      Mav_Cmd_Do_Vtol_Transition, Mav_Cmd_Arm_Authorization_Request, 
-      Mav_Cmd_Set_Guided_Submode_Standard, Mav_Cmd_Set_Guided_Submode_Circle, 
-      Mav_Cmd_Condition_Gate, Mav_Cmd_Nav_Fence_Return_Point, 
-      Mav_Cmd_Nav_Fence_Polygon_Vertex_Inclusion, 
-      Mav_Cmd_Nav_Fence_Polygon_Vertex_Exclusion, 
-      Mav_Cmd_Nav_Fence_Circle_Inclusion, Mav_Cmd_Nav_Fence_Circle_Exclusion, 
-      Mav_Cmd_Nav_Rally_Point, Mav_Cmd_Uavcan_Get_Node_Info, 
-      Mav_Cmd_Do_Set_Safety_Switch_State, Mav_Cmd_Do_Adsb_Out_Ident, 
-      Mav_Cmd_Payload_Prepare_Deploy, Mav_Cmd_Payload_Control_Deploy, 
-      Mav_Cmd_Waypoint_User_1, Mav_Cmd_Waypoint_User_2, 
-      Mav_Cmd_Waypoint_User_3, Mav_Cmd_Waypoint_User_4, 
-      Mav_Cmd_Waypoint_User_5, Mav_Cmd_Spatial_User_1, Mav_Cmd_Spatial_User_2, 
-      Mav_Cmd_Spatial_User_3, Mav_Cmd_Spatial_User_4, Mav_Cmd_Spatial_User_5, 
-      Mav_Cmd_User_1, Mav_Cmd_User_2, Mav_Cmd_User_3, Mav_Cmd_User_4, 
-      Mav_Cmd_User_5, Mav_Cmd_Can_Forward, Mav_Cmd_Fixed_Mag_Cal_Yaw, 
-      Mav_Cmd_Do_Winch, Mav_Cmd_External_Position_Estimate) with Size => 16;
-   for Mav_Cmd use
-     (Mav_Cmd_Nav_Waypoint                       => 16,
-      Mav_Cmd_Nav_Loiter_Unlim                   => 17,
-      Mav_Cmd_Nav_Loiter_Turns                   => 18,
-      Mav_Cmd_Nav_Loiter_Time                    => 19,
-      Mav_Cmd_Nav_Return_To_Launch               => 20,
-      Mav_Cmd_Nav_Land                           => 21,
-      Mav_Cmd_Nav_Takeoff                        => 22,
-      Mav_Cmd_Nav_Land_Local                     => 23,
-      Mav_Cmd_Nav_Takeoff_Local                  => 24,
-      Mav_Cmd_Nav_Follow                         => 25,
-      Mav_Cmd_Nav_Continue_And_Change_Alt        => 30,
-      Mav_Cmd_Nav_Loiter_To_Alt                  => 31,
-      Mav_Cmd_Do_Follow                          => 32,
-      Mav_Cmd_Do_Follow_Reposition               => 33,
-      Mav_Cmd_Do_Orbit                           => 34,
-      Mav_Cmd_Nav_Roi                            => 80,
-      Mav_Cmd_Nav_Pathplanning                   => 81,
-      Mav_Cmd_Nav_Spline_Waypoint                => 82,
-      Mav_Cmd_Nav_Vtol_Takeoff                   => 84,
-      Mav_Cmd_Nav_Vtol_Land                      => 85,
-      Mav_Cmd_Nav_Guided_Enable                  => 92,
-      Mav_Cmd_Nav_Delay                          => 93,
-      Mav_Cmd_Nav_Payload_Place                  => 94,
-      Mav_Cmd_Nav_Last                           => 95,
-      Mav_Cmd_Condition_Delay                    => 112,
-      Mav_Cmd_Condition_Change_Alt               => 113,
-      Mav_Cmd_Condition_Distance                 => 114,
-      Mav_Cmd_Condition_Yaw                      => 115,
-      Mav_Cmd_Condition_Last                     => 159,
-      Mav_Cmd_Do_Set_Mode                        => 176,
-      Mav_Cmd_Do_Jump                            => 177,
-      Mav_Cmd_Do_Change_Speed                    => 178,
-      Mav_Cmd_Do_Set_Home                        => 179,
-      Mav_Cmd_Do_Set_Parameter                   => 180,
-      Mav_Cmd_Do_Set_Relay                       => 181,
-      Mav_Cmd_Do_Repeat_Relay                    => 182,
-      Mav_Cmd_Do_Set_Servo                       => 183,
-      Mav_Cmd_Do_Repeat_Servo                    => 184,
-      Mav_Cmd_Do_Flighttermination               => 185,
-      Mav_Cmd_Do_Change_Altitude                 => 186,
-      Mav_Cmd_Do_Set_Actuator                    => 187,
-      Mav_Cmd_Do_Return_Path_Start               => 188,
-      Mav_Cmd_Do_Land_Start                      => 189,
-      Mav_Cmd_Do_Rally_Land                      => 190,
-      Mav_Cmd_Do_Go_Around                       => 191,
-      Mav_Cmd_Do_Reposition                      => 192,
-      Mav_Cmd_Do_Pause_Continue                  => 193,
-      Mav_Cmd_Do_Set_Reverse                     => 194,
-      Mav_Cmd_Do_Set_Roi_Location                => 195,
-      Mav_Cmd_Do_Set_Roi_Wpnext_Offset           => 196,
-      Mav_Cmd_Do_Set_Roi_None                    => 197,
-      Mav_Cmd_Do_Set_Roi_Sysid                   => 198,
-      Mav_Cmd_Do_Control_Video                   => 200,
-      Mav_Cmd_Do_Set_Roi                         => 201,
-      Mav_Cmd_Do_Digicam_Configure               => 202,
-      Mav_Cmd_Do_Digicam_Control                 => 203,
-      Mav_Cmd_Do_Mount_Configure                 => 204,
-      Mav_Cmd_Do_Mount_Control                   => 205,
-      Mav_Cmd_Do_Set_Cam_Trigg_Dist              => 206,
-      Mav_Cmd_Do_Fence_Enable                    => 207,
-      Mav_Cmd_Do_Parachute                       => 208,
-      Mav_Cmd_Do_Motor_Test                      => 209,
-      Mav_Cmd_Do_Inverted_Flight                 => 210,
-      Mav_Cmd_Do_Gripper                         => 211,
-      Mav_Cmd_Do_Autotune_Enable                 => 212,
-      Mav_Cmd_Nav_Set_Yaw_Speed                  => 213,
-      Mav_Cmd_Do_Set_Cam_Trigg_Interval          => 214,
-      Mav_Cmd_Do_Mount_Control_Quat              => 220,
-      Mav_Cmd_Do_Guided_Master                   => 221,
-      Mav_Cmd_Do_Guided_Limits                   => 222,
-      Mav_Cmd_Do_Engine_Control                  => 223,
-      Mav_Cmd_Do_Set_Mission_Current             => 224,
-      Mav_Cmd_Do_Last                            => 240,
-      Mav_Cmd_Preflight_Calibration              => 241,
-      Mav_Cmd_Preflight_Set_Sensor_Offsets       => 242,
-      Mav_Cmd_Preflight_Uavcan                   => 243,
-      Mav_Cmd_Preflight_Storage                  => 245,
-      Mav_Cmd_Preflight_Reboot_Shutdown          => 246,
-      Mav_Cmd_Override_Goto                      => 252,
-      Mav_Cmd_Oblique_Survey                     => 260,
-      Mav_Cmd_Mission_Start                      => 300,
-      Mav_Cmd_Actuator_Test                      => 310,
-      Mav_Cmd_Configure_Actuator                 => 311,
-      Mav_Cmd_Component_Arm_Disarm               => 400,
-      Mav_Cmd_Run_Prearm_Checks                  => 401,
-      Mav_Cmd_Illuminator_On_Off                 => 405,
-      Mav_Cmd_Do_Illuminator_Configure           => 406,
-      Mav_Cmd_Get_Home_Position                  => 410,
-      Mav_Cmd_Inject_Failure                     => 420,
-      Mav_Cmd_Start_Rx_Pair                      => 500,
-      Mav_Cmd_Get_Message_Interval               => 510,
-      Mav_Cmd_Set_Message_Interval               => 511,
-      Mav_Cmd_Request_Message                    => 512,
-      Mav_Cmd_Request_Protocol_Version           => 519,
-      Mav_Cmd_Request_Autopilot_Capabilities     => 520,
-      Mav_Cmd_Request_Camera_Information         => 521,
-      Mav_Cmd_Request_Camera_Settings            => 522,
-      Mav_Cmd_Request_Storage_Information        => 525,
-      Mav_Cmd_Storage_Format                     => 526,
-      Mav_Cmd_Request_Camera_Capture_Status      => 527,
-      Mav_Cmd_Request_Flight_Information         => 528,
-      Mav_Cmd_Reset_Camera_Settings              => 529,
-      Mav_Cmd_Set_Camera_Mode                    => 530,
-      Mav_Cmd_Set_Camera_Zoom                    => 531,
-      Mav_Cmd_Set_Camera_Focus                   => 532,
-      Mav_Cmd_Set_Storage_Usage                  => 533,
-      Mav_Cmd_Set_Camera_Source                  => 534,
-      Mav_Cmd_Jump_Tag                           => 600,
-      Mav_Cmd_Do_Jump_Tag                        => 601,
-      Mav_Cmd_Do_Gimbal_Manager_Pitchyaw         => 1000,
-      Mav_Cmd_Do_Gimbal_Manager_Configure        => 1001,
-      Mav_Cmd_Image_Start_Capture                => 2000,
-      Mav_Cmd_Image_Stop_Capture                 => 2001,
-      Mav_Cmd_Request_Camera_Image_Capture       => 2002,
-      Mav_Cmd_Do_Trigger_Control                 => 2003,
-      Mav_Cmd_Camera_Track_Point                 => 2004,
-      Mav_Cmd_Camera_Track_Rectangle             => 2005,
-      Mav_Cmd_Camera_Stop_Tracking               => 2010,
-      Mav_Cmd_Video_Start_Capture                => 2500,
-      Mav_Cmd_Video_Stop_Capture                 => 2501,
-      Mav_Cmd_Video_Start_Streaming              => 2502,
-      Mav_Cmd_Video_Stop_Streaming               => 2503,
-      Mav_Cmd_Request_Video_Stream_Information   => 2504,
-      Mav_Cmd_Request_Video_Stream_Status        => 2505,
-      Mav_Cmd_Logging_Start                      => 2510,
-      Mav_Cmd_Logging_Stop                       => 2511,
-      Mav_Cmd_Airframe_Configuration             => 2520,
-      Mav_Cmd_Control_High_Latency               => 2600,
-      Mav_Cmd_Panorama_Create                    => 2800,
-      Mav_Cmd_Do_Vtol_Transition                 => 3000,
-      Mav_Cmd_Arm_Authorization_Request          => 3001,
-      Mav_Cmd_Set_Guided_Submode_Standard        => 4000,
-      Mav_Cmd_Set_Guided_Submode_Circle          => 4001,
-      Mav_Cmd_Condition_Gate                     => 4501,
-      Mav_Cmd_Nav_Fence_Return_Point             => 5000,
-      Mav_Cmd_Nav_Fence_Polygon_Vertex_Inclusion => 5001,
-      Mav_Cmd_Nav_Fence_Polygon_Vertex_Exclusion => 5002,
-      Mav_Cmd_Nav_Fence_Circle_Inclusion         => 5003,
-      Mav_Cmd_Nav_Fence_Circle_Exclusion         => 5004,
-      Mav_Cmd_Nav_Rally_Point                    => 5100,
-      Mav_Cmd_Uavcan_Get_Node_Info               => 5200,
-      Mav_Cmd_Do_Set_Safety_Switch_State         => 5300,
-      Mav_Cmd_Do_Adsb_Out_Ident                  => 10001,
-      Mav_Cmd_Payload_Prepare_Deploy             => 30001,
-      Mav_Cmd_Payload_Control_Deploy             => 30002,
-      Mav_Cmd_Waypoint_User_1                    => 31000,
-      Mav_Cmd_Waypoint_User_2                    => 31001,
-      Mav_Cmd_Waypoint_User_3                    => 31002,
-      Mav_Cmd_Waypoint_User_4                    => 31003,
-      Mav_Cmd_Waypoint_User_5                    => 31004,
-      Mav_Cmd_Spatial_User_1                     => 31005,
-      Mav_Cmd_Spatial_User_2                     => 31006,
-      Mav_Cmd_Spatial_User_3                     => 31007,
-      Mav_Cmd_Spatial_User_4                     => 31008,
-      Mav_Cmd_Spatial_User_5                     => 31009,
-      Mav_Cmd_User_1                             => 31010,
-      Mav_Cmd_User_2                             => 31011,
-      Mav_Cmd_User_3                             => 31012,
-      Mav_Cmd_User_4                             => 31013,
-      Mav_Cmd_User_5                             => 31014,
-      Mav_Cmd_Can_Forward                        => 32000,
-      Mav_Cmd_Fixed_Mag_Cal_Yaw                  => 42006,
-      Mav_Cmd_Do_Winch                           => 42600,
-      Mav_Cmd_External_Position_Estimate         => 43003);
+   function Mission return Mav_Frame is (2)
+     with Static;
 
-   type Mav_Param_Type is
-     (Mav_Param_Type_Uint8, Mav_Param_Type_Int8, Mav_Param_Type_Uint16, 
-      Mav_Param_Type_Int16, Mav_Param_Type_Uint32, Mav_Param_Type_Int32, 
-      Mav_Param_Type_Uint64, Mav_Param_Type_Int64, Mav_Param_Type_Real32, 
-      Mav_Param_Type_Real64) with Size => 8;
-   for Mav_Param_Type use
-     (Mav_Param_Type_Uint8  => 1,
-      Mav_Param_Type_Int8   => 2,
-      Mav_Param_Type_Uint16 => 3,
-      Mav_Param_Type_Int16  => 4,
-      Mav_Param_Type_Uint32 => 5,
-      Mav_Param_Type_Int32  => 6,
-      Mav_Param_Type_Uint64 => 7,
-      Mav_Param_Type_Int64  => 8,
-      Mav_Param_Type_Real32 => 9,
-      Mav_Param_Type_Real64 => 10);
+   function Global_Relative_Alt return Mav_Frame is (3)
+     with Static;
 
-   type Mav_Result is
-     (Mav_Result_Accepted, Mav_Result_Temporarily_Rejected, Mav_Result_Denied, 
-      Mav_Result_Unsupported, Mav_Result_Failed, Mav_Result_In_Progress, 
-      Mav_Result_Cancelled, Mav_Result_Command_Long_Only, 
-      Mav_Result_Command_Int_Only, Mav_Result_Command_Unsupported_Mav_Frame)
-     with Size => 8;
-   for Mav_Result use
-     (Mav_Result_Accepted                      => 0,
-      Mav_Result_Temporarily_Rejected          => 1,
-      Mav_Result_Denied                        => 2,
-      Mav_Result_Unsupported                   => 3,
-      Mav_Result_Failed                        => 4,
-      Mav_Result_In_Progress                   => 5,
-      Mav_Result_Cancelled                     => 6,
-      Mav_Result_Command_Long_Only             => 7,
-      Mav_Result_Command_Int_Only              => 8,
-      Mav_Result_Command_Unsupported_Mav_Frame => 9);
+   function Local_Enu return Mav_Frame is (4)
+     with Static;
 
-   type Mav_Mission_Result is
-     (Mav_Mission_Accepted, Mav_Mission_Error, Mav_Mission_Unsupported_Frame, 
-      Mav_Mission_Unsupported, Mav_Mission_No_Space, Mav_Mission_Invalid, 
-      Mav_Mission_Invalid_Param1, Mav_Mission_Invalid_Param2, 
-      Mav_Mission_Invalid_Param3, Mav_Mission_Invalid_Param4, 
-      Mav_Mission_Invalid_Param5_X, Mav_Mission_Invalid_Param6_Y, 
-      Mav_Mission_Invalid_Param7, Mav_Mission_Invalid_Sequence, 
-      Mav_Mission_Denied, Mav_Mission_Operation_Cancelled) with Size => 8;
-   for Mav_Mission_Result use
-     (Mav_Mission_Accepted            => 0,
-      Mav_Mission_Error               => 1,
-      Mav_Mission_Unsupported_Frame   => 2,
-      Mav_Mission_Unsupported         => 3,
-      Mav_Mission_No_Space            => 4,
-      Mav_Mission_Invalid             => 5,
-      Mav_Mission_Invalid_Param1      => 6,
-      Mav_Mission_Invalid_Param2      => 7,
-      Mav_Mission_Invalid_Param3      => 8,
-      Mav_Mission_Invalid_Param4      => 9,
-      Mav_Mission_Invalid_Param5_X    => 10,
-      Mav_Mission_Invalid_Param6_Y    => 11,
-      Mav_Mission_Invalid_Param7      => 12,
-      Mav_Mission_Invalid_Sequence    => 13,
-      Mav_Mission_Denied              => 14,
-      Mav_Mission_Operation_Cancelled => 15);
+   function Global_Int return Mav_Frame is (5)
+     with Static;
 
-   type Mav_Severity is
-     (Mav_Severity_Emergency, Mav_Severity_Alert, Mav_Severity_Critical, 
-      Mav_Severity_Error, Mav_Severity_Warning, Mav_Severity_Notice, 
-      Mav_Severity_Info, Mav_Severity_Debug) with Size => 8;
-   for Mav_Severity use
-     (Mav_Severity_Emergency => 0,
-      Mav_Severity_Alert     => 1,
-      Mav_Severity_Critical  => 2,
-      Mav_Severity_Error     => 3,
-      Mav_Severity_Warning   => 4,
-      Mav_Severity_Notice    => 5,
-      Mav_Severity_Info      => 6,
-      Mav_Severity_Debug     => 7);
+   function Global_Relative_Alt_Int return Mav_Frame is (6)
+     with Static;
+
+   function Local_Offset_Ned return Mav_Frame is (7)
+     with Static;
+
+   function Body_Ned return Mav_Frame is (8)
+     with Static;
+
+   function Body_Offset_Ned return Mav_Frame is (9)
+     with Static;
+
+   function Global_Terrain_Alt return Mav_Frame is (10)
+     with Static;
+
+   function Global_Terrain_Alt_Int return Mav_Frame is (11)
+     with Static;
+
+   function Body_Frd return Mav_Frame is (12)
+     with Static;
+
+   function Reserved_13 return Mav_Frame is (13)
+     with Static;
+
+   function Reserved_14 return Mav_Frame is (14)
+     with Static;
+
+   function Reserved_15 return Mav_Frame is (15)
+     with Static;
+
+   function Reserved_16 return Mav_Frame is (16)
+     with Static;
+
+   function Reserved_17 return Mav_Frame is (17)
+     with Static;
+
+   function Reserved_18 return Mav_Frame is (18)
+     with Static;
+
+   function Reserved_19 return Mav_Frame is (19)
+     with Static;
+
+   function Local_Frd return Mav_Frame is (20)
+     with Static;
+
+   function Local_Flu return Mav_Frame is (21)
+     with Static;
+
+
+   type Mavlink_Data_Stream_Type is new Interfaces.Unsigned_8;
+
+   function Img_Jpeg return Mavlink_Data_Stream_Type is (0)
+     with Static;
+
+   function Img_Bmp return Mavlink_Data_Stream_Type is (1)
+     with Static;
+
+   function Img_Raw8U return Mavlink_Data_Stream_Type is (2)
+     with Static;
+
+   function Img_Raw32U return Mavlink_Data_Stream_Type is (3)
+     with Static;
+
+   function Img_Pgm return Mavlink_Data_Stream_Type is (4)
+     with Static;
+
+   function Img_Png return Mavlink_Data_Stream_Type is (5)
+     with Static;
+
+
+   type Fence_Breach is new Interfaces.Unsigned_8;
+
+   function None return Fence_Breach is (0)
+     with Static;
+
+   function Minalt return Fence_Breach is (1)
+     with Static;
+
+   function Maxalt return Fence_Breach is (2)
+     with Static;
+
+   function Boundary return Fence_Breach is (3)
+     with Static;
+
+
+   type Mav_Cmd is new Interfaces.Unsigned_16;
+
+   function Nav_Waypoint return Mav_Cmd is (16)
+     with Static;
+
+   function Nav_Loiter_Unlim return Mav_Cmd is (17)
+     with Static;
+
+   function Nav_Loiter_Turns return Mav_Cmd is (18)
+     with Static;
+
+   function Nav_Loiter_Time return Mav_Cmd is (19)
+     with Static;
+
+   function Nav_Return_To_Launch return Mav_Cmd is (20)
+     with Static;
+
+   function Nav_Land return Mav_Cmd is (21)
+     with Static;
+
+   function Nav_Takeoff return Mav_Cmd is (22)
+     with Static;
+
+   function Nav_Land_Local return Mav_Cmd is (23)
+     with Static;
+
+   function Nav_Takeoff_Local return Mav_Cmd is (24)
+     with Static;
+
+   function Nav_Follow return Mav_Cmd is (25)
+     with Static;
+
+   function Nav_Continue_And_Change_Alt return Mav_Cmd is (30)
+     with Static;
+
+   function Nav_Loiter_To_Alt return Mav_Cmd is (31)
+     with Static;
+
+   function Do_Follow return Mav_Cmd is (32)
+     with Static;
+
+   function Do_Follow_Reposition return Mav_Cmd is (33)
+     with Static;
+
+   function Do_Orbit return Mav_Cmd is (34)
+     with Static;
+
+   function Nav_Roi return Mav_Cmd is (80)
+     with Static;
+
+   function Nav_Pathplanning return Mav_Cmd is (81)
+     with Static;
+
+   function Nav_Spline_Waypoint return Mav_Cmd is (82)
+     with Static;
+
+   function Nav_Vtol_Takeoff return Mav_Cmd is (84)
+     with Static;
+
+   function Nav_Vtol_Land return Mav_Cmd is (85)
+     with Static;
+
+   function Nav_Guided_Enable return Mav_Cmd is (92)
+     with Static;
+
+   function Nav_Delay return Mav_Cmd is (93)
+     with Static;
+
+   function Nav_Payload_Place return Mav_Cmd is (94)
+     with Static;
+
+   function Nav_Last return Mav_Cmd is (95)
+     with Static;
+
+   function Condition_Delay return Mav_Cmd is (112)
+     with Static;
+
+   function Condition_Change_Alt return Mav_Cmd is (113)
+     with Static;
+
+   function Condition_Distance return Mav_Cmd is (114)
+     with Static;
+
+   function Condition_Yaw return Mav_Cmd is (115)
+     with Static;
+
+   function Condition_Last return Mav_Cmd is (159)
+     with Static;
+
+   function Do_Set_Mode return Mav_Cmd is (176)
+     with Static;
+
+   function Do_Jump return Mav_Cmd is (177)
+     with Static;
+
+   function Do_Change_Speed return Mav_Cmd is (178)
+     with Static;
+
+   function Do_Set_Home return Mav_Cmd is (179)
+     with Static;
+
+   function Do_Set_Parameter return Mav_Cmd is (180)
+     with Static;
+
+   function Do_Set_Relay return Mav_Cmd is (181)
+     with Static;
+
+   function Do_Repeat_Relay return Mav_Cmd is (182)
+     with Static;
+
+   function Do_Set_Servo return Mav_Cmd is (183)
+     with Static;
+
+   function Do_Repeat_Servo return Mav_Cmd is (184)
+     with Static;
+
+   function Do_Flighttermination return Mav_Cmd is (185)
+     with Static;
+
+   function Do_Change_Altitude return Mav_Cmd is (186)
+     with Static;
+
+   function Do_Set_Actuator return Mav_Cmd is (187)
+     with Static;
+
+   function Do_Return_Path_Start return Mav_Cmd is (188)
+     with Static;
+
+   function Do_Land_Start return Mav_Cmd is (189)
+     with Static;
+
+   function Do_Rally_Land return Mav_Cmd is (190)
+     with Static;
+
+   function Do_Go_Around return Mav_Cmd is (191)
+     with Static;
+
+   function Do_Reposition return Mav_Cmd is (192)
+     with Static;
+
+   function Do_Pause_Continue return Mav_Cmd is (193)
+     with Static;
+
+   function Do_Set_Reverse return Mav_Cmd is (194)
+     with Static;
+
+   function Do_Set_Roi_Location return Mav_Cmd is (195)
+     with Static;
+
+   function Do_Set_Roi_Wpnext_Offset return Mav_Cmd is (196)
+     with Static;
+
+   function Do_Set_Roi_None return Mav_Cmd is (197)
+     with Static;
+
+   function Do_Set_Roi_Sysid return Mav_Cmd is (198)
+     with Static;
+
+   function Do_Control_Video return Mav_Cmd is (200)
+     with Static;
+
+   function Do_Set_Roi return Mav_Cmd is (201)
+     with Static;
+
+   function Do_Digicam_Configure return Mav_Cmd is (202)
+     with Static;
+
+   function Do_Digicam_Control return Mav_Cmd is (203)
+     with Static;
+
+   function Do_Mount_Configure return Mav_Cmd is (204)
+     with Static;
+
+   function Do_Mount_Control return Mav_Cmd is (205)
+     with Static;
+
+   function Do_Set_Cam_Trigg_Dist return Mav_Cmd is (206)
+     with Static;
+
+   function Do_Fence_Enable return Mav_Cmd is (207)
+     with Static;
+
+   function Do_Parachute return Mav_Cmd is (208)
+     with Static;
+
+   function Do_Motor_Test return Mav_Cmd is (209)
+     with Static;
+
+   function Do_Inverted_Flight return Mav_Cmd is (210)
+     with Static;
+
+   function Do_Gripper return Mav_Cmd is (211)
+     with Static;
+
+   function Do_Autotune_Enable return Mav_Cmd is (212)
+     with Static;
+
+   function Nav_Set_Yaw_Speed return Mav_Cmd is (213)
+     with Static;
+
+   function Do_Set_Cam_Trigg_Interval return Mav_Cmd is (214)
+     with Static;
+
+   function Do_Mount_Control_Quat return Mav_Cmd is (220)
+     with Static;
+
+   function Do_Guided_Master return Mav_Cmd is (221)
+     with Static;
+
+   function Do_Guided_Limits return Mav_Cmd is (222)
+     with Static;
+
+   function Do_Engine_Control return Mav_Cmd is (223)
+     with Static;
+
+   function Do_Set_Mission_Current return Mav_Cmd is (224)
+     with Static;
+
+   function Do_Last return Mav_Cmd is (240)
+     with Static;
+
+   function Preflight_Calibration return Mav_Cmd is (241)
+     with Static;
+
+   function Preflight_Set_Sensor_Offsets return Mav_Cmd is (242)
+     with Static;
+
+   function Preflight_Uavcan return Mav_Cmd is (243)
+     with Static;
+
+   function Preflight_Storage return Mav_Cmd is (245)
+     with Static;
+
+   function Preflight_Reboot_Shutdown return Mav_Cmd is (246)
+     with Static;
+
+   function Override_Goto return Mav_Cmd is (252)
+     with Static;
+
+   function Oblique_Survey return Mav_Cmd is (260)
+     with Static;
+
+   function Mission_Start return Mav_Cmd is (300)
+     with Static;
+
+   function Actuator_Test return Mav_Cmd is (310)
+     with Static;
+
+   function Configure_Actuator return Mav_Cmd is (311)
+     with Static;
+
+   function Component_Arm_Disarm return Mav_Cmd is (400)
+     with Static;
+
+   function Run_Prearm_Checks return Mav_Cmd is (401)
+     with Static;
+
+   function Illuminator_On_Off return Mav_Cmd is (405)
+     with Static;
+
+   function Do_Illuminator_Configure return Mav_Cmd is (406)
+     with Static;
+
+   function Get_Home_Position return Mav_Cmd is (410)
+     with Static;
+
+   function Inject_Failure return Mav_Cmd is (420)
+     with Static;
+
+   function Start_Rx_Pair return Mav_Cmd is (500)
+     with Static;
+
+   function Get_Message_Interval return Mav_Cmd is (510)
+     with Static;
+
+   function Set_Message_Interval return Mav_Cmd is (511)
+     with Static;
+
+   function Request_Message return Mav_Cmd is (512)
+     with Static;
+
+   function Request_Protocol_Version return Mav_Cmd is (519)
+     with Static;
+
+   function Request_Autopilot_Capabilities return Mav_Cmd is (520)
+     with Static;
+
+   function Request_Camera_Information return Mav_Cmd is (521)
+     with Static;
+
+   function Request_Camera_Settings return Mav_Cmd is (522)
+     with Static;
+
+   function Request_Storage_Information return Mav_Cmd is (525)
+     with Static;
+
+   function Storage_Format return Mav_Cmd is (526)
+     with Static;
+
+   function Request_Camera_Capture_Status return Mav_Cmd is (527)
+     with Static;
+
+   function Request_Flight_Information return Mav_Cmd is (528)
+     with Static;
+
+   function Reset_Camera_Settings return Mav_Cmd is (529)
+     with Static;
+
+   function Set_Camera_Mode return Mav_Cmd is (530)
+     with Static;
+
+   function Set_Camera_Zoom return Mav_Cmd is (531)
+     with Static;
+
+   function Set_Camera_Focus return Mav_Cmd is (532)
+     with Static;
+
+   function Set_Storage_Usage return Mav_Cmd is (533)
+     with Static;
+
+   function Set_Camera_Source return Mav_Cmd is (534)
+     with Static;
+
+   function Jump_Tag return Mav_Cmd is (600)
+     with Static;
+
+   function Do_Jump_Tag return Mav_Cmd is (601)
+     with Static;
+
+   function Do_Gimbal_Manager_Pitchyaw return Mav_Cmd is (1000)
+     with Static;
+
+   function Do_Gimbal_Manager_Configure return Mav_Cmd is (1001)
+     with Static;
+
+   function Image_Start_Capture return Mav_Cmd is (2000)
+     with Static;
+
+   function Image_Stop_Capture return Mav_Cmd is (2001)
+     with Static;
+
+   function Request_Camera_Image_Capture return Mav_Cmd is (2002)
+     with Static;
+
+   function Do_Trigger_Control return Mav_Cmd is (2003)
+     with Static;
+
+   function Camera_Track_Point return Mav_Cmd is (2004)
+     with Static;
+
+   function Camera_Track_Rectangle return Mav_Cmd is (2005)
+     with Static;
+
+   function Camera_Stop_Tracking return Mav_Cmd is (2010)
+     with Static;
+
+   function Video_Start_Capture return Mav_Cmd is (2500)
+     with Static;
+
+   function Video_Stop_Capture return Mav_Cmd is (2501)
+     with Static;
+
+   function Video_Start_Streaming return Mav_Cmd is (2502)
+     with Static;
+
+   function Video_Stop_Streaming return Mav_Cmd is (2503)
+     with Static;
+
+   function Request_Video_Stream_Information return Mav_Cmd is (2504)
+     with Static;
+
+   function Request_Video_Stream_Status return Mav_Cmd is (2505)
+     with Static;
+
+   function Logging_Start return Mav_Cmd is (2510)
+     with Static;
+
+   function Logging_Stop return Mav_Cmd is (2511)
+     with Static;
+
+   function Airframe_Configuration return Mav_Cmd is (2520)
+     with Static;
+
+   function Control_High_Latency return Mav_Cmd is (2600)
+     with Static;
+
+   function Panorama_Create return Mav_Cmd is (2800)
+     with Static;
+
+   function Do_Vtol_Transition return Mav_Cmd is (3000)
+     with Static;
+
+   function Arm_Authorization_Request return Mav_Cmd is (3001)
+     with Static;
+
+   function Set_Guided_Submode_Standard return Mav_Cmd is (4000)
+     with Static;
+
+   function Set_Guided_Submode_Circle return Mav_Cmd is (4001)
+     with Static;
+
+   function Condition_Gate return Mav_Cmd is (4501)
+     with Static;
+
+   function Nav_Fence_Return_Point return Mav_Cmd is (5000)
+     with Static;
+
+   function Nav_Fence_Polygon_Vertex_Inclusion return Mav_Cmd is (5001)
+     with Static;
+
+   function Nav_Fence_Polygon_Vertex_Exclusion return Mav_Cmd is (5002)
+     with Static;
+
+   function Nav_Fence_Circle_Inclusion return Mav_Cmd is (5003)
+     with Static;
+
+   function Nav_Fence_Circle_Exclusion return Mav_Cmd is (5004)
+     with Static;
+
+   function Nav_Rally_Point return Mav_Cmd is (5100)
+     with Static;
+
+   function Uavcan_Get_Node_Info return Mav_Cmd is (5200)
+     with Static;
+
+   function Do_Set_Safety_Switch_State return Mav_Cmd is (5300)
+     with Static;
+
+   function Do_Adsb_Out_Ident return Mav_Cmd is (10001)
+     with Static;
+
+   function Payload_Prepare_Deploy return Mav_Cmd is (30001)
+     with Static;
+
+   function Payload_Control_Deploy return Mav_Cmd is (30002)
+     with Static;
+
+   function Waypoint_User_1 return Mav_Cmd is (31000)
+     with Static;
+
+   function Waypoint_User_2 return Mav_Cmd is (31001)
+     with Static;
+
+   function Waypoint_User_3 return Mav_Cmd is (31002)
+     with Static;
+
+   function Waypoint_User_4 return Mav_Cmd is (31003)
+     with Static;
+
+   function Waypoint_User_5 return Mav_Cmd is (31004)
+     with Static;
+
+   function Spatial_User_1 return Mav_Cmd is (31005)
+     with Static;
+
+   function Spatial_User_2 return Mav_Cmd is (31006)
+     with Static;
+
+   function Spatial_User_3 return Mav_Cmd is (31007)
+     with Static;
+
+   function Spatial_User_4 return Mav_Cmd is (31008)
+     with Static;
+
+   function Spatial_User_5 return Mav_Cmd is (31009)
+     with Static;
+
+   function User_1 return Mav_Cmd is (31010)
+     with Static;
+
+   function User_2 return Mav_Cmd is (31011)
+     with Static;
+
+   function User_3 return Mav_Cmd is (31012)
+     with Static;
+
+   function User_4 return Mav_Cmd is (31013)
+     with Static;
+
+   function User_5 return Mav_Cmd is (31014)
+     with Static;
+
+   function Can_Forward return Mav_Cmd is (32000)
+     with Static;
+
+   function Fixed_Mag_Cal_Yaw return Mav_Cmd is (42006)
+     with Static;
+
+   function Do_Winch return Mav_Cmd is (42600)
+     with Static;
+
+   function External_Position_Estimate return Mav_Cmd is (43003)
+     with Static;
+
+
+   type Mav_Param_Type is new Interfaces.Unsigned_8;
+
+   function Uint8 return Mav_Param_Type is (1)
+     with Static;
+
+   function Int8 return Mav_Param_Type is (2)
+     with Static;
+
+   function Uint16 return Mav_Param_Type is (3)
+     with Static;
+
+   function Int16 return Mav_Param_Type is (4)
+     with Static;
+
+   function Uint32 return Mav_Param_Type is (5)
+     with Static;
+
+   function Int32 return Mav_Param_Type is (6)
+     with Static;
+
+   function Uint64 return Mav_Param_Type is (7)
+     with Static;
+
+   function Int64 return Mav_Param_Type is (8)
+     with Static;
+
+   function Real32 return Mav_Param_Type is (9)
+     with Static;
+
+   function Real64 return Mav_Param_Type is (10)
+     with Static;
+
+
+   type Mav_Result is new Interfaces.Unsigned_8;
+
+   function Accepted return Mav_Result is (0)
+     with Static;
+
+   function Temporarily_Rejected return Mav_Result is (1)
+     with Static;
+
+   function Denied return Mav_Result is (2)
+     with Static;
+
+   function Unsupported return Mav_Result is (3)
+     with Static;
+
+   function Failed return Mav_Result is (4)
+     with Static;
+
+   function In_Progress return Mav_Result is (5)
+     with Static;
+
+   function Cancelled return Mav_Result is (6)
+     with Static;
+
+   function Command_Long_Only return Mav_Result is (7)
+     with Static;
+
+   function Command_Int_Only return Mav_Result is (8)
+     with Static;
+
+   function Command_Unsupported_Mav_Frame return Mav_Result is (9)
+     with Static;
+
+
+   type Mav_Mission_Result is new Interfaces.Unsigned_8;
+
+   function Accepted return Mav_Mission_Result is (0)
+     with Static;
+
+   function Error return Mav_Mission_Result is (1)
+     with Static;
+
+   function Unsupported_Frame return Mav_Mission_Result is (2)
+     with Static;
+
+   function Unsupported return Mav_Mission_Result is (3)
+     with Static;
+
+   function No_Space return Mav_Mission_Result is (4)
+     with Static;
+
+   function Invalid return Mav_Mission_Result is (5)
+     with Static;
+
+   function Invalid_Param1 return Mav_Mission_Result is (6)
+     with Static;
+
+   function Invalid_Param2 return Mav_Mission_Result is (7)
+     with Static;
+
+   function Invalid_Param3 return Mav_Mission_Result is (8)
+     with Static;
+
+   function Invalid_Param4 return Mav_Mission_Result is (9)
+     with Static;
+
+   function Invalid_Param5_X return Mav_Mission_Result is (10)
+     with Static;
+
+   function Invalid_Param6_Y return Mav_Mission_Result is (11)
+     with Static;
+
+   function Invalid_Param7 return Mav_Mission_Result is (12)
+     with Static;
+
+   function Invalid_Sequence return Mav_Mission_Result is (13)
+     with Static;
+
+   function Denied return Mav_Mission_Result is (14)
+     with Static;
+
+   function Operation_Cancelled return Mav_Mission_Result is (15)
+     with Static;
+
+
+   type Mav_Severity is new Interfaces.Unsigned_8;
+
+   function Emergency return Mav_Severity is (0)
+     with Static;
+
+   function Alert return Mav_Severity is (1)
+     with Static;
+
+   function Critical return Mav_Severity is (2)
+     with Static;
+
+   function Error return Mav_Severity is (3)
+     with Static;
+
+   function Warning return Mav_Severity is (4)
+     with Static;
+
+   function Notice return Mav_Severity is (5)
+     with Static;
+
+   function Info return Mav_Severity is (6)
+     with Static;
+
+   function Debug return Mav_Severity is (7)
+     with Static;
+
 
    type Mav_Power_Status is record
-      Mav_Power_Status_Brick_Valid                : Boolean := False;
-      Mav_Power_Status_Servo_Valid                : Boolean := False;
-      Mav_Power_Status_Usb_Connected              : Boolean := False;
-      Mav_Power_Status_Periph_Overcurrent         : Boolean := False;
-      Mav_Power_Status_Periph_Hipower_Overcurrent : Boolean := False;
-      Mav_Power_Status_Changed                    : Boolean := False;
+      Brick_Valid                : Boolean := False;
+      Servo_Valid                : Boolean := False;
+      Usb_Connected              : Boolean := False;
+      Periph_Overcurrent         : Boolean := False;
+      Periph_Hipower_Overcurrent : Boolean := False;
+      Changed                    : Boolean := False;
+      Reserved_6                 : Boolean := False;
+      Reserved_7                 : Boolean := False;
+      Reserved_8                 : Boolean := False;
+      Reserved_9                 : Boolean := False;
+      Reserved_10                : Boolean := False;
+      Reserved_11                : Boolean := False;
+      Reserved_12                : Boolean := False;
+      Reserved_13                : Boolean := False;
+      Reserved_14                : Boolean := False;
+      Reserved_15                : Boolean := False;
    end record with Size => 16;
    for Mav_Power_Status use record
-      Mav_Power_Status_Brick_Valid                at 0 range 0 .. 0;
-      Mav_Power_Status_Servo_Valid                at 0 range 1 .. 1;
-      Mav_Power_Status_Usb_Connected              at 0 range 2 .. 2;
-      Mav_Power_Status_Periph_Overcurrent         at 0 range 3 .. 3;
-      Mav_Power_Status_Periph_Hipower_Overcurrent at 0 range 4 .. 4;
-      Mav_Power_Status_Changed                    at 0 range 5 .. 5;
+      Brick_Valid                at 0 range 0 .. 0;
+      Servo_Valid                at 0 range 1 .. 1;
+      Usb_Connected              at 0 range 2 .. 2;
+      Periph_Overcurrent         at 0 range 3 .. 3;
+      Periph_Hipower_Overcurrent at 0 range 4 .. 4;
+      Changed                    at 0 range 5 .. 5;
+      Reserved_6                 at 0 range 6 .. 6;
+      Reserved_7                 at 0 range 7 .. 7;
+      Reserved_8                 at 0 range 8 .. 8;
+      Reserved_9                 at 0 range 9 .. 9;
+      Reserved_10                at 0 range 10 .. 10;
+      Reserved_11                at 0 range 11 .. 11;
+      Reserved_12                at 0 range 12 .. 12;
+      Reserved_13                at 0 range 13 .. 13;
+      Reserved_14                at 0 range 14 .. 14;
+      Reserved_15                at 0 range 15 .. 15;
    end record;
 
-   type Serial_Control_Dev is
-     (Serial_Control_Dev_Telem1, Serial_Control_Dev_Telem2, 
-      Serial_Control_Dev_Gps1, Serial_Control_Dev_Gps2, 
-      Serial_Control_Dev_Shell, Serial_Control_Serial0, Serial_Control_Serial1, 
-      Serial_Control_Serial2, Serial_Control_Serial3, Serial_Control_Serial4, 
-      Serial_Control_Serial5, Serial_Control_Serial6, Serial_Control_Serial7, 
-      Serial_Control_Serial8, Serial_Control_Serial9) with Size => 8;
-   for Serial_Control_Dev use
-     (Serial_Control_Dev_Telem1 => 0,
-      Serial_Control_Dev_Telem2 => 1,
-      Serial_Control_Dev_Gps1   => 2,
-      Serial_Control_Dev_Gps2   => 3,
-      Serial_Control_Dev_Shell  => 10,
-      Serial_Control_Serial0    => 100,
-      Serial_Control_Serial1    => 101,
-      Serial_Control_Serial2    => 102,
-      Serial_Control_Serial3    => 103,
-      Serial_Control_Serial4    => 104,
-      Serial_Control_Serial5    => 105,
-      Serial_Control_Serial6    => 106,
-      Serial_Control_Serial7    => 107,
-      Serial_Control_Serial8    => 108,
-      Serial_Control_Serial9    => 109);
+   type Serial_Control_Dev is new Interfaces.Unsigned_8;
+
+   function Dev_Telem1 return Serial_Control_Dev is (0)
+     with Static;
+
+   function Dev_Telem2 return Serial_Control_Dev is (1)
+     with Static;
+
+   function Dev_Gps1 return Serial_Control_Dev is (2)
+     with Static;
+
+   function Dev_Gps2 return Serial_Control_Dev is (3)
+     with Static;
+
+   function Dev_Shell return Serial_Control_Dev is (10)
+     with Static;
+
+   function Serial0 return Serial_Control_Dev is (100)
+     with Static;
+
+   function Serial1 return Serial_Control_Dev is (101)
+     with Static;
+
+   function Serial2 return Serial_Control_Dev is (102)
+     with Static;
+
+   function Serial3 return Serial_Control_Dev is (103)
+     with Static;
+
+   function Serial4 return Serial_Control_Dev is (104)
+     with Static;
+
+   function Serial5 return Serial_Control_Dev is (105)
+     with Static;
+
+   function Serial6 return Serial_Control_Dev is (106)
+     with Static;
+
+   function Serial7 return Serial_Control_Dev is (107)
+     with Static;
+
+   function Serial8 return Serial_Control_Dev is (108)
+     with Static;
+
+   function Serial9 return Serial_Control_Dev is (109)
+     with Static;
+
 
    type Serial_Control_Flag is record
-      Serial_Control_Flag_Reply     : Boolean := False;
-      Serial_Control_Flag_Respond   : Boolean := False;
-      Serial_Control_Flag_Exclusive : Boolean := False;
-      Serial_Control_Flag_Blocking  : Boolean := False;
-      Serial_Control_Flag_Multi     : Boolean := False;
+      Reply      : Boolean := False;
+      Respond    : Boolean := False;
+      Exclusive  : Boolean := False;
+      Blocking   : Boolean := False;
+      Multi      : Boolean := False;
+      Reserved_5 : Boolean := False;
+      Reserved_6 : Boolean := False;
+      Reserved_7 : Boolean := False;
    end record with Size => 8;
    for Serial_Control_Flag use record
-      Serial_Control_Flag_Reply     at 0 range 0 .. 0;
-      Serial_Control_Flag_Respond   at 0 range 1 .. 1;
-      Serial_Control_Flag_Exclusive at 0 range 2 .. 2;
-      Serial_Control_Flag_Blocking  at 0 range 3 .. 3;
-      Serial_Control_Flag_Multi     at 0 range 4 .. 4;
+      Reply      at 0 range 0 .. 0;
+      Respond    at 0 range 1 .. 1;
+      Exclusive  at 0 range 2 .. 2;
+      Blocking   at 0 range 3 .. 3;
+      Multi      at 0 range 4 .. 4;
+      Reserved_5 at 0 range 5 .. 5;
+      Reserved_6 at 0 range 6 .. 6;
+      Reserved_7 at 0 range 7 .. 7;
    end record;
 
-   type Mav_Distance_Sensor is
-     (Mav_Distance_Sensor_Laser, Mav_Distance_Sensor_Ultrasound, 
-      Mav_Distance_Sensor_Infrared, Mav_Distance_Sensor_Radar, 
-      Mav_Distance_Sensor_Unknown) with Size => 8;
-   for Mav_Distance_Sensor use
-     (Mav_Distance_Sensor_Laser      => 0,
-      Mav_Distance_Sensor_Ultrasound => 1,
-      Mav_Distance_Sensor_Infrared   => 2,
-      Mav_Distance_Sensor_Radar      => 3,
-      Mav_Distance_Sensor_Unknown    => 4);
+   type Mav_Distance_Sensor is new Interfaces.Unsigned_8;
 
-   type Mav_Sensor_Orientation is
-     (Mav_Sensor_Rotation_None, Mav_Sensor_Rotation_Yaw_45, 
-      Mav_Sensor_Rotation_Yaw_90, Mav_Sensor_Rotation_Yaw_135, 
-      Mav_Sensor_Rotation_Yaw_180, Mav_Sensor_Rotation_Yaw_225, 
-      Mav_Sensor_Rotation_Yaw_270, Mav_Sensor_Rotation_Yaw_315, 
-      Mav_Sensor_Rotation_Roll_180, Mav_Sensor_Rotation_Roll_180_Yaw_45, 
-      Mav_Sensor_Rotation_Roll_180_Yaw_90, Mav_Sensor_Rotation_Roll_180_Yaw_135, 
-      Mav_Sensor_Rotation_Pitch_180, Mav_Sensor_Rotation_Roll_180_Yaw_225, 
-      Mav_Sensor_Rotation_Roll_180_Yaw_270, 
-      Mav_Sensor_Rotation_Roll_180_Yaw_315, Mav_Sensor_Rotation_Roll_90, 
-      Mav_Sensor_Rotation_Roll_90_Yaw_45, Mav_Sensor_Rotation_Roll_90_Yaw_90, 
-      Mav_Sensor_Rotation_Roll_90_Yaw_135, Mav_Sensor_Rotation_Roll_270, 
-      Mav_Sensor_Rotation_Roll_270_Yaw_45, Mav_Sensor_Rotation_Roll_270_Yaw_90, 
-      Mav_Sensor_Rotation_Roll_270_Yaw_135, Mav_Sensor_Rotation_Pitch_90, 
-      Mav_Sensor_Rotation_Pitch_270, Mav_Sensor_Rotation_Pitch_180_Yaw_90, 
-      Mav_Sensor_Rotation_Pitch_180_Yaw_270, 
-      Mav_Sensor_Rotation_Roll_90_Pitch_90, 
-      Mav_Sensor_Rotation_Roll_180_Pitch_90, 
-      Mav_Sensor_Rotation_Roll_270_Pitch_90, 
-      Mav_Sensor_Rotation_Roll_90_Pitch_180, 
-      Mav_Sensor_Rotation_Roll_270_Pitch_180, 
-      Mav_Sensor_Rotation_Roll_90_Pitch_270, 
-      Mav_Sensor_Rotation_Roll_180_Pitch_270, 
-      Mav_Sensor_Rotation_Roll_270_Pitch_270, 
-      Mav_Sensor_Rotation_Roll_90_Pitch_180_Yaw_90, 
-      Mav_Sensor_Rotation_Roll_90_Yaw_270, 
-      Mav_Sensor_Rotation_Roll_90_Pitch_68_Yaw_293, 
-      Mav_Sensor_Rotation_Pitch_315, Mav_Sensor_Rotation_Roll_90_Pitch_315, 
-      Mav_Sensor_Rotation_Custom) with Size => 8;
-   for Mav_Sensor_Orientation use
-     (Mav_Sensor_Rotation_None                     => 0,
-      Mav_Sensor_Rotation_Yaw_45                   => 1,
-      Mav_Sensor_Rotation_Yaw_90                   => 2,
-      Mav_Sensor_Rotation_Yaw_135                  => 3,
-      Mav_Sensor_Rotation_Yaw_180                  => 4,
-      Mav_Sensor_Rotation_Yaw_225                  => 5,
-      Mav_Sensor_Rotation_Yaw_270                  => 6,
-      Mav_Sensor_Rotation_Yaw_315                  => 7,
-      Mav_Sensor_Rotation_Roll_180                 => 8,
-      Mav_Sensor_Rotation_Roll_180_Yaw_45          => 9,
-      Mav_Sensor_Rotation_Roll_180_Yaw_90          => 10,
-      Mav_Sensor_Rotation_Roll_180_Yaw_135         => 11,
-      Mav_Sensor_Rotation_Pitch_180                => 12,
-      Mav_Sensor_Rotation_Roll_180_Yaw_225         => 13,
-      Mav_Sensor_Rotation_Roll_180_Yaw_270         => 14,
-      Mav_Sensor_Rotation_Roll_180_Yaw_315         => 15,
-      Mav_Sensor_Rotation_Roll_90                  => 16,
-      Mav_Sensor_Rotation_Roll_90_Yaw_45           => 17,
-      Mav_Sensor_Rotation_Roll_90_Yaw_90           => 18,
-      Mav_Sensor_Rotation_Roll_90_Yaw_135          => 19,
-      Mav_Sensor_Rotation_Roll_270                 => 20,
-      Mav_Sensor_Rotation_Roll_270_Yaw_45          => 21,
-      Mav_Sensor_Rotation_Roll_270_Yaw_90          => 22,
-      Mav_Sensor_Rotation_Roll_270_Yaw_135         => 23,
-      Mav_Sensor_Rotation_Pitch_90                 => 24,
-      Mav_Sensor_Rotation_Pitch_270                => 25,
-      Mav_Sensor_Rotation_Pitch_180_Yaw_90         => 26,
-      Mav_Sensor_Rotation_Pitch_180_Yaw_270        => 27,
-      Mav_Sensor_Rotation_Roll_90_Pitch_90         => 28,
-      Mav_Sensor_Rotation_Roll_180_Pitch_90        => 29,
-      Mav_Sensor_Rotation_Roll_270_Pitch_90        => 30,
-      Mav_Sensor_Rotation_Roll_90_Pitch_180        => 31,
-      Mav_Sensor_Rotation_Roll_270_Pitch_180       => 32,
-      Mav_Sensor_Rotation_Roll_90_Pitch_270        => 33,
-      Mav_Sensor_Rotation_Roll_180_Pitch_270       => 34,
-      Mav_Sensor_Rotation_Roll_270_Pitch_270       => 35,
-      Mav_Sensor_Rotation_Roll_90_Pitch_180_Yaw_90 => 36,
-      Mav_Sensor_Rotation_Roll_90_Yaw_270          => 37,
-      Mav_Sensor_Rotation_Roll_90_Pitch_68_Yaw_293 => 38,
-      Mav_Sensor_Rotation_Pitch_315                => 39,
-      Mav_Sensor_Rotation_Roll_90_Pitch_315        => 40,
-      Mav_Sensor_Rotation_Custom                   => 100);
+   function Laser return Mav_Distance_Sensor is (0)
+     with Static;
+
+   function Ultrasound return Mav_Distance_Sensor is (1)
+     with Static;
+
+   function Infrared return Mav_Distance_Sensor is (2)
+     with Static;
+
+   function Radar return Mav_Distance_Sensor is (3)
+     with Static;
+
+   function Unknown return Mav_Distance_Sensor is (4)
+     with Static;
+
+
+   type Mav_Sensor_Orientation is new Interfaces.Unsigned_8;
+
+   function Rotation_None return Mav_Sensor_Orientation is (0)
+     with Static;
+
+   function Rotation_Yaw_45 return Mav_Sensor_Orientation is (1)
+     with Static;
+
+   function Rotation_Yaw_90 return Mav_Sensor_Orientation is (2)
+     with Static;
+
+   function Rotation_Yaw_135 return Mav_Sensor_Orientation is (3)
+     with Static;
+
+   function Rotation_Yaw_180 return Mav_Sensor_Orientation is (4)
+     with Static;
+
+   function Rotation_Yaw_225 return Mav_Sensor_Orientation is (5)
+     with Static;
+
+   function Rotation_Yaw_270 return Mav_Sensor_Orientation is (6)
+     with Static;
+
+   function Rotation_Yaw_315 return Mav_Sensor_Orientation is (7)
+     with Static;
+
+   function Rotation_Roll_180 return Mav_Sensor_Orientation is (8)
+     with Static;
+
+   function Rotation_Roll_180_Yaw_45 return Mav_Sensor_Orientation is (9)
+     with Static;
+
+   function Rotation_Roll_180_Yaw_90 return Mav_Sensor_Orientation is (10)
+     with Static;
+
+   function Rotation_Roll_180_Yaw_135 return Mav_Sensor_Orientation is (11)
+     with Static;
+
+   function Rotation_Pitch_180 return Mav_Sensor_Orientation is (12)
+     with Static;
+
+   function Rotation_Roll_180_Yaw_225 return Mav_Sensor_Orientation is (13)
+     with Static;
+
+   function Rotation_Roll_180_Yaw_270 return Mav_Sensor_Orientation is (14)
+     with Static;
+
+   function Rotation_Roll_180_Yaw_315 return Mav_Sensor_Orientation is (15)
+     with Static;
+
+   function Rotation_Roll_90 return Mav_Sensor_Orientation is (16)
+     with Static;
+
+   function Rotation_Roll_90_Yaw_45 return Mav_Sensor_Orientation is (17)
+     with Static;
+
+   function Rotation_Roll_90_Yaw_90 return Mav_Sensor_Orientation is (18)
+     with Static;
+
+   function Rotation_Roll_90_Yaw_135 return Mav_Sensor_Orientation is (19)
+     with Static;
+
+   function Rotation_Roll_270 return Mav_Sensor_Orientation is (20)
+     with Static;
+
+   function Rotation_Roll_270_Yaw_45 return Mav_Sensor_Orientation is (21)
+     with Static;
+
+   function Rotation_Roll_270_Yaw_90 return Mav_Sensor_Orientation is (22)
+     with Static;
+
+   function Rotation_Roll_270_Yaw_135 return Mav_Sensor_Orientation is (23)
+     with Static;
+
+   function Rotation_Pitch_90 return Mav_Sensor_Orientation is (24)
+     with Static;
+
+   function Rotation_Pitch_270 return Mav_Sensor_Orientation is (25)
+     with Static;
+
+   function Rotation_Pitch_180_Yaw_90 return Mav_Sensor_Orientation is (26)
+     with Static;
+
+   function Rotation_Pitch_180_Yaw_270 return Mav_Sensor_Orientation is (27)
+     with Static;
+
+   function Rotation_Roll_90_Pitch_90 return Mav_Sensor_Orientation is (28)
+     with Static;
+
+   function Rotation_Roll_180_Pitch_90 return Mav_Sensor_Orientation is (29)
+     with Static;
+
+   function Rotation_Roll_270_Pitch_90 return Mav_Sensor_Orientation is (30)
+     with Static;
+
+   function Rotation_Roll_90_Pitch_180 return Mav_Sensor_Orientation is (31)
+     with Static;
+
+   function Rotation_Roll_270_Pitch_180 return Mav_Sensor_Orientation is (32)
+     with Static;
+
+   function Rotation_Roll_90_Pitch_270 return Mav_Sensor_Orientation is (33)
+     with Static;
+
+   function Rotation_Roll_180_Pitch_270 return Mav_Sensor_Orientation is (34)
+     with Static;
+
+   function Rotation_Roll_270_Pitch_270 return Mav_Sensor_Orientation is (35)
+     with Static;
+
+   function Rotation_Roll_90_Pitch_180_Yaw_90 return Mav_Sensor_Orientation is (36)
+     with Static;
+
+   function Rotation_Roll_90_Yaw_270 return Mav_Sensor_Orientation is (37)
+     with Static;
+
+   function Rotation_Roll_90_Pitch_68_Yaw_293 return Mav_Sensor_Orientation is (38)
+     with Static;
+
+   function Rotation_Pitch_315 return Mav_Sensor_Orientation is (39)
+     with Static;
+
+   function Rotation_Roll_90_Pitch_315 return Mav_Sensor_Orientation is (40)
+     with Static;
+
+   function Rotation_Custom return Mav_Sensor_Orientation is (100)
+     with Static;
+
 
    type Mav_Protocol_Capability is record
-      Mav_Protocol_Capability_Mission_Float                       : Boolean := False;
-      Mav_Protocol_Capability_Param_Float                         : Boolean := False;
-      Mav_Protocol_Capability_Mission_Int                         : Boolean := False;
-      Mav_Protocol_Capability_Command_Int                         : Boolean := False;
-      Mav_Protocol_Capability_Param_Encode_Bytewise               : Boolean := False;
-      Mav_Protocol_Capability_Ftp                                 : Boolean := False;
-      Mav_Protocol_Capability_Set_Attitude_Target                 : Boolean := False;
-      Mav_Protocol_Capability_Set_Position_Target_Local_Ned       : Boolean := False;
-      Mav_Protocol_Capability_Set_Position_Target_Global_Int      : Boolean := False;
-      Mav_Protocol_Capability_Terrain                             : Boolean := False;
-      Mav_Protocol_Capability_Reserved3                           : Boolean := False;
-      Mav_Protocol_Capability_Flight_Termination                  : Boolean := False;
-      Mav_Protocol_Capability_Compass_Calibration                 : Boolean := False;
-      Mav_Protocol_Capability_Mavlink2                            : Boolean := False;
-      Mav_Protocol_Capability_Mission_Fence                       : Boolean := False;
-      Mav_Protocol_Capability_Mission_Rally                       : Boolean := False;
-      Mav_Protocol_Capability_Reserved2                           : Boolean := False;
-      Mav_Protocol_Capability_Param_Encode_C_Cast                 : Boolean := False;
-      Mav_Protocol_Capability_Component_Implements_Gimbal_Manager : Boolean := False;
-      Mav_Protocol_Capability_Component_Accepts_Gcs_Control       : Boolean := False;
+      Mission_Float                       : Boolean := False;
+      Param_Float                         : Boolean := False;
+      Mission_Int                         : Boolean := False;
+      Command_Int                         : Boolean := False;
+      Param_Encode_Bytewise               : Boolean := False;
+      Ftp                                 : Boolean := False;
+      Set_Attitude_Target                 : Boolean := False;
+      Set_Position_Target_Local_Ned       : Boolean := False;
+      Set_Position_Target_Global_Int      : Boolean := False;
+      Terrain                             : Boolean := False;
+      Reserved3                           : Boolean := False;
+      Flight_Termination                  : Boolean := False;
+      Compass_Calibration                 : Boolean := False;
+      Mavlink2                            : Boolean := False;
+      Mission_Fence                       : Boolean := False;
+      Mission_Rally                       : Boolean := False;
+      Reserved2                           : Boolean := False;
+      Param_Encode_C_Cast                 : Boolean := False;
+      Component_Implements_Gimbal_Manager : Boolean := False;
+      Component_Accepts_Gcs_Control       : Boolean := False;
+      Reserved_20                         : Boolean := False;
+      Reserved_21                         : Boolean := False;
+      Reserved_22                         : Boolean := False;
+      Reserved_23                         : Boolean := False;
+      Reserved_24                         : Boolean := False;
+      Reserved_25                         : Boolean := False;
+      Reserved_26                         : Boolean := False;
+      Reserved_27                         : Boolean := False;
+      Reserved_28                         : Boolean := False;
+      Reserved_29                         : Boolean := False;
+      Reserved_30                         : Boolean := False;
+      Reserved_31                         : Boolean := False;
+      Reserved_32                         : Boolean := False;
+      Reserved_33                         : Boolean := False;
+      Reserved_34                         : Boolean := False;
+      Reserved_35                         : Boolean := False;
+      Reserved_36                         : Boolean := False;
+      Reserved_37                         : Boolean := False;
+      Reserved_38                         : Boolean := False;
+      Reserved_39                         : Boolean := False;
+      Reserved_40                         : Boolean := False;
+      Reserved_41                         : Boolean := False;
+      Reserved_42                         : Boolean := False;
+      Reserved_43                         : Boolean := False;
+      Reserved_44                         : Boolean := False;
+      Reserved_45                         : Boolean := False;
+      Reserved_46                         : Boolean := False;
+      Reserved_47                         : Boolean := False;
+      Reserved_48                         : Boolean := False;
+      Reserved_49                         : Boolean := False;
+      Reserved_50                         : Boolean := False;
+      Reserved_51                         : Boolean := False;
+      Reserved_52                         : Boolean := False;
+      Reserved_53                         : Boolean := False;
+      Reserved_54                         : Boolean := False;
+      Reserved_55                         : Boolean := False;
+      Reserved_56                         : Boolean := False;
+      Reserved_57                         : Boolean := False;
+      Reserved_58                         : Boolean := False;
+      Reserved_59                         : Boolean := False;
+      Reserved_60                         : Boolean := False;
+      Reserved_61                         : Boolean := False;
+      Reserved_62                         : Boolean := False;
+      Reserved_63                         : Boolean := False;
    end record with Size => 64;
    for Mav_Protocol_Capability use record
-      Mav_Protocol_Capability_Mission_Float                       at 0 range 0 .. 0;
-      Mav_Protocol_Capability_Param_Float                         at 0 range 1 .. 1;
-      Mav_Protocol_Capability_Mission_Int                         at 0 range 2 .. 2;
-      Mav_Protocol_Capability_Command_Int                         at 0 range 3 .. 3;
-      Mav_Protocol_Capability_Param_Encode_Bytewise               at 0 range 4 .. 4;
-      Mav_Protocol_Capability_Ftp                                 at 0 range 5 .. 5;
-      Mav_Protocol_Capability_Set_Attitude_Target                 at 0 range 6 .. 6;
-      Mav_Protocol_Capability_Set_Position_Target_Local_Ned       at 0 range 7 .. 7;
-      Mav_Protocol_Capability_Set_Position_Target_Global_Int      at 0 range 8 .. 8;
-      Mav_Protocol_Capability_Terrain                             at 0 range 9 .. 9;
-      Mav_Protocol_Capability_Reserved3                           at 0 range 10 .. 10;
-      Mav_Protocol_Capability_Flight_Termination                  at 0 range 11 .. 11;
-      Mav_Protocol_Capability_Compass_Calibration                 at 0 range 12 .. 12;
-      Mav_Protocol_Capability_Mavlink2                            at 0 range 13 .. 13;
-      Mav_Protocol_Capability_Mission_Fence                       at 0 range 14 .. 14;
-      Mav_Protocol_Capability_Mission_Rally                       at 0 range 15 .. 15;
-      Mav_Protocol_Capability_Reserved2                           at 0 range 16 .. 16;
-      Mav_Protocol_Capability_Param_Encode_C_Cast                 at 0 range 17 .. 17;
-      Mav_Protocol_Capability_Component_Implements_Gimbal_Manager at 0 range 18 .. 18;
-      Mav_Protocol_Capability_Component_Accepts_Gcs_Control       at 0 range 19 .. 19;
+      Mission_Float                       at 0 range 0 .. 0;
+      Param_Float                         at 0 range 1 .. 1;
+      Mission_Int                         at 0 range 2 .. 2;
+      Command_Int                         at 0 range 3 .. 3;
+      Param_Encode_Bytewise               at 0 range 4 .. 4;
+      Ftp                                 at 0 range 5 .. 5;
+      Set_Attitude_Target                 at 0 range 6 .. 6;
+      Set_Position_Target_Local_Ned       at 0 range 7 .. 7;
+      Set_Position_Target_Global_Int      at 0 range 8 .. 8;
+      Terrain                             at 0 range 9 .. 9;
+      Reserved3                           at 0 range 10 .. 10;
+      Flight_Termination                  at 0 range 11 .. 11;
+      Compass_Calibration                 at 0 range 12 .. 12;
+      Mavlink2                            at 0 range 13 .. 13;
+      Mission_Fence                       at 0 range 14 .. 14;
+      Mission_Rally                       at 0 range 15 .. 15;
+      Reserved2                           at 0 range 16 .. 16;
+      Param_Encode_C_Cast                 at 0 range 17 .. 17;
+      Component_Implements_Gimbal_Manager at 0 range 18 .. 18;
+      Component_Accepts_Gcs_Control       at 0 range 19 .. 19;
+      Reserved_20                         at 0 range 20 .. 20;
+      Reserved_21                         at 0 range 21 .. 21;
+      Reserved_22                         at 0 range 22 .. 22;
+      Reserved_23                         at 0 range 23 .. 23;
+      Reserved_24                         at 0 range 24 .. 24;
+      Reserved_25                         at 0 range 25 .. 25;
+      Reserved_26                         at 0 range 26 .. 26;
+      Reserved_27                         at 0 range 27 .. 27;
+      Reserved_28                         at 0 range 28 .. 28;
+      Reserved_29                         at 0 range 29 .. 29;
+      Reserved_30                         at 0 range 30 .. 30;
+      Reserved_31                         at 0 range 31 .. 31;
+      Reserved_32                         at 0 range 32 .. 32;
+      Reserved_33                         at 0 range 33 .. 33;
+      Reserved_34                         at 0 range 34 .. 34;
+      Reserved_35                         at 0 range 35 .. 35;
+      Reserved_36                         at 0 range 36 .. 36;
+      Reserved_37                         at 0 range 37 .. 37;
+      Reserved_38                         at 0 range 38 .. 38;
+      Reserved_39                         at 0 range 39 .. 39;
+      Reserved_40                         at 0 range 40 .. 40;
+      Reserved_41                         at 0 range 41 .. 41;
+      Reserved_42                         at 0 range 42 .. 42;
+      Reserved_43                         at 0 range 43 .. 43;
+      Reserved_44                         at 0 range 44 .. 44;
+      Reserved_45                         at 0 range 45 .. 45;
+      Reserved_46                         at 0 range 46 .. 46;
+      Reserved_47                         at 0 range 47 .. 47;
+      Reserved_48                         at 0 range 48 .. 48;
+      Reserved_49                         at 0 range 49 .. 49;
+      Reserved_50                         at 0 range 50 .. 50;
+      Reserved_51                         at 0 range 51 .. 51;
+      Reserved_52                         at 0 range 52 .. 52;
+      Reserved_53                         at 0 range 53 .. 53;
+      Reserved_54                         at 0 range 54 .. 54;
+      Reserved_55                         at 0 range 55 .. 55;
+      Reserved_56                         at 0 range 56 .. 56;
+      Reserved_57                         at 0 range 57 .. 57;
+      Reserved_58                         at 0 range 58 .. 58;
+      Reserved_59                         at 0 range 59 .. 59;
+      Reserved_60                         at 0 range 60 .. 60;
+      Reserved_61                         at 0 range 61 .. 61;
+      Reserved_62                         at 0 range 62 .. 62;
+      Reserved_63                         at 0 range 63 .. 63;
    end record;
 
-   type Mav_Estimator_Type is
-     (Mav_Estimator_Type_Unknown, Mav_Estimator_Type_Naive, 
-      Mav_Estimator_Type_Vision, Mav_Estimator_Type_Vio, 
-      Mav_Estimator_Type_Gps, Mav_Estimator_Type_Gps_Ins, 
-      Mav_Estimator_Type_Mocap, Mav_Estimator_Type_Lidar, 
-      Mav_Estimator_Type_Autopilot) with Size => 8;
-   for Mav_Estimator_Type use
-     (Mav_Estimator_Type_Unknown   => 0,
-      Mav_Estimator_Type_Naive     => 1,
-      Mav_Estimator_Type_Vision    => 2,
-      Mav_Estimator_Type_Vio       => 3,
-      Mav_Estimator_Type_Gps       => 4,
-      Mav_Estimator_Type_Gps_Ins   => 5,
-      Mav_Estimator_Type_Mocap     => 6,
-      Mav_Estimator_Type_Lidar     => 7,
-      Mav_Estimator_Type_Autopilot => 8);
+   type Mav_Estimator_Type is new Interfaces.Unsigned_8;
 
-   type Mav_Battery_Type is
-     (Mav_Battery_Type_Unknown, Mav_Battery_Type_Lipo, Mav_Battery_Type_Life, 
-      Mav_Battery_Type_Lion, Mav_Battery_Type_Nimh) with Size => 8;
-   for Mav_Battery_Type use
-     (Mav_Battery_Type_Unknown => 0,
-      Mav_Battery_Type_Lipo    => 1,
-      Mav_Battery_Type_Life    => 2,
-      Mav_Battery_Type_Lion    => 3,
-      Mav_Battery_Type_Nimh    => 4);
+   function Unknown return Mav_Estimator_Type is (0)
+     with Static;
 
-   type Mav_Battery_Function is
-     (Mav_Battery_Function_Unknown, Mav_Battery_Function_All, 
-      Mav_Battery_Function_Propulsion, Mav_Battery_Function_Avionics, 
-      Mav_Battery_Function_Payload) with Size => 8;
-   for Mav_Battery_Function use
-     (Mav_Battery_Function_Unknown    => 0,
-      Mav_Battery_Function_All        => 1,
-      Mav_Battery_Function_Propulsion => 2,
-      Mav_Battery_Function_Avionics   => 3,
-      Mav_Battery_Function_Payload    => 4);
+   function Naive return Mav_Estimator_Type is (1)
+     with Static;
 
-   type Mav_Vtol_State is
-     (Mav_Vtol_State_Undefined, Mav_Vtol_State_Transition_To_Fw, 
-      Mav_Vtol_State_Transition_To_Mc, Mav_Vtol_State_Mc, Mav_Vtol_State_Fw)
-     with Size => 8;
-   for Mav_Vtol_State use
-     (Mav_Vtol_State_Undefined        => 0,
-      Mav_Vtol_State_Transition_To_Fw => 1,
-      Mav_Vtol_State_Transition_To_Mc => 2,
-      Mav_Vtol_State_Mc               => 3,
-      Mav_Vtol_State_Fw               => 4);
+   function Vision return Mav_Estimator_Type is (2)
+     with Static;
 
-   type Mav_Landed_State is
-     (Mav_Landed_State_Undefined, Mav_Landed_State_On_Ground, 
-      Mav_Landed_State_In_Air, Mav_Landed_State_Takeoff, 
-      Mav_Landed_State_Landing) with Size => 8;
-   for Mav_Landed_State use
-     (Mav_Landed_State_Undefined => 0,
-      Mav_Landed_State_On_Ground => 1,
-      Mav_Landed_State_In_Air    => 2,
-      Mav_Landed_State_Takeoff   => 3,
-      Mav_Landed_State_Landing   => 4);
+   function Vio return Mav_Estimator_Type is (3)
+     with Static;
 
-   type Adsb_Altitude_Type is
-     (Adsb_Altitude_Type_Pressure_Qnh, Adsb_Altitude_Type_Geometric)
-     with Size => 8;
-   for Adsb_Altitude_Type use
-     (Adsb_Altitude_Type_Pressure_Qnh => 0,
-      Adsb_Altitude_Type_Geometric    => 1);
+   function Gps return Mav_Estimator_Type is (4)
+     with Static;
 
-   type Adsb_Emitter_Type is
-     (Adsb_Emitter_Type_No_Info, Adsb_Emitter_Type_Light, 
-      Adsb_Emitter_Type_Small, Adsb_Emitter_Type_Large, 
-      Adsb_Emitter_Type_High_Vortex_Large, Adsb_Emitter_Type_Heavy, 
-      Adsb_Emitter_Type_Highly_Manuv, Adsb_Emitter_Type_Rotocraft, 
-      Adsb_Emitter_Type_Unassigned, Adsb_Emitter_Type_Glider, 
-      Adsb_Emitter_Type_Lighter_Air, Adsb_Emitter_Type_Parachute, 
-      Adsb_Emitter_Type_Ultra_Light, Adsb_Emitter_Type_Unassigned2, 
-      Adsb_Emitter_Type_Uav, Adsb_Emitter_Type_Space, 
-      Adsb_Emitter_Type_Unassgined3, Adsb_Emitter_Type_Emergency_Surface, 
-      Adsb_Emitter_Type_Service_Surface, Adsb_Emitter_Type_Point_Obstacle)
-     with Size => 8;
-   for Adsb_Emitter_Type use
-     (Adsb_Emitter_Type_No_Info           => 0,
-      Adsb_Emitter_Type_Light             => 1,
-      Adsb_Emitter_Type_Small             => 2,
-      Adsb_Emitter_Type_Large             => 3,
-      Adsb_Emitter_Type_High_Vortex_Large => 4,
-      Adsb_Emitter_Type_Heavy             => 5,
-      Adsb_Emitter_Type_Highly_Manuv      => 6,
-      Adsb_Emitter_Type_Rotocraft         => 7,
-      Adsb_Emitter_Type_Unassigned        => 8,
-      Adsb_Emitter_Type_Glider            => 9,
-      Adsb_Emitter_Type_Lighter_Air       => 10,
-      Adsb_Emitter_Type_Parachute         => 11,
-      Adsb_Emitter_Type_Ultra_Light       => 12,
-      Adsb_Emitter_Type_Unassigned2       => 13,
-      Adsb_Emitter_Type_Uav               => 14,
-      Adsb_Emitter_Type_Space             => 15,
-      Adsb_Emitter_Type_Unassgined3       => 16,
-      Adsb_Emitter_Type_Emergency_Surface => 17,
-      Adsb_Emitter_Type_Service_Surface   => 18,
-      Adsb_Emitter_Type_Point_Obstacle    => 19);
+   function Gps_Ins return Mav_Estimator_Type is (5)
+     with Static;
+
+   function Mocap return Mav_Estimator_Type is (6)
+     with Static;
+
+   function Lidar return Mav_Estimator_Type is (7)
+     with Static;
+
+   function Autopilot return Mav_Estimator_Type is (8)
+     with Static;
+
+
+   type Mav_Battery_Type is new Interfaces.Unsigned_8;
+
+   function Unknown return Mav_Battery_Type is (0)
+     with Static;
+
+   function Lipo return Mav_Battery_Type is (1)
+     with Static;
+
+   function Life return Mav_Battery_Type is (2)
+     with Static;
+
+   function Lion return Mav_Battery_Type is (3)
+     with Static;
+
+   function Nimh return Mav_Battery_Type is (4)
+     with Static;
+
+
+   type Mav_Battery_Function is new Interfaces.Unsigned_8;
+
+   function Unknown return Mav_Battery_Function is (0)
+     with Static;
+
+   function All_Entry return Mav_Battery_Function is (1)
+     with Static;
+
+   function Propulsion return Mav_Battery_Function is (2)
+     with Static;
+
+   function Avionics return Mav_Battery_Function is (3)
+     with Static;
+
+   function Payload return Mav_Battery_Function is (4)
+     with Static;
+
+
+   type Mav_Vtol_State is new Interfaces.Unsigned_8;
+
+   function Undefined return Mav_Vtol_State is (0)
+     with Static;
+
+   function Transition_To_Fw return Mav_Vtol_State is (1)
+     with Static;
+
+   function Transition_To_Mc return Mav_Vtol_State is (2)
+     with Static;
+
+   function Mc return Mav_Vtol_State is (3)
+     with Static;
+
+   function Fw return Mav_Vtol_State is (4)
+     with Static;
+
+
+   type Mav_Landed_State is new Interfaces.Unsigned_8;
+
+   function Undefined return Mav_Landed_State is (0)
+     with Static;
+
+   function On_Ground return Mav_Landed_State is (1)
+     with Static;
+
+   function In_Air return Mav_Landed_State is (2)
+     with Static;
+
+   function Takeoff return Mav_Landed_State is (3)
+     with Static;
+
+   function Landing return Mav_Landed_State is (4)
+     with Static;
+
+
+   type Adsb_Altitude_Type is new Interfaces.Unsigned_8;
+
+   function Pressure_Qnh return Adsb_Altitude_Type is (0)
+     with Static;
+
+   function Geometric return Adsb_Altitude_Type is (1)
+     with Static;
+
+
+   type Adsb_Emitter_Type is new Interfaces.Unsigned_8;
+
+   function No_Info return Adsb_Emitter_Type is (0)
+     with Static;
+
+   function Light return Adsb_Emitter_Type is (1)
+     with Static;
+
+   function Small return Adsb_Emitter_Type is (2)
+     with Static;
+
+   function Large return Adsb_Emitter_Type is (3)
+     with Static;
+
+   function High_Vortex_Large return Adsb_Emitter_Type is (4)
+     with Static;
+
+   function Heavy return Adsb_Emitter_Type is (5)
+     with Static;
+
+   function Highly_Manuv return Adsb_Emitter_Type is (6)
+     with Static;
+
+   function Rotocraft return Adsb_Emitter_Type is (7)
+     with Static;
+
+   function Unassigned return Adsb_Emitter_Type is (8)
+     with Static;
+
+   function Glider return Adsb_Emitter_Type is (9)
+     with Static;
+
+   function Lighter_Air return Adsb_Emitter_Type is (10)
+     with Static;
+
+   function Parachute return Adsb_Emitter_Type is (11)
+     with Static;
+
+   function Ultra_Light return Adsb_Emitter_Type is (12)
+     with Static;
+
+   function Unassigned2 return Adsb_Emitter_Type is (13)
+     with Static;
+
+   function Uav return Adsb_Emitter_Type is (14)
+     with Static;
+
+   function Space return Adsb_Emitter_Type is (15)
+     with Static;
+
+   function Unassgined3 return Adsb_Emitter_Type is (16)
+     with Static;
+
+   function Emergency_Surface return Adsb_Emitter_Type is (17)
+     with Static;
+
+   function Service_Surface return Adsb_Emitter_Type is (18)
+     with Static;
+
+   function Point_Obstacle return Adsb_Emitter_Type is (19)
+     with Static;
+
 
    type Adsb_Flags is record
-      Adsb_Flags_Valid_Coords            : Boolean := False;
-      Adsb_Flags_Valid_Altitude          : Boolean := False;
-      Adsb_Flags_Valid_Heading           : Boolean := False;
-      Adsb_Flags_Valid_Velocity          : Boolean := False;
-      Adsb_Flags_Valid_Callsign          : Boolean := False;
-      Adsb_Flags_Valid_Squawk            : Boolean := False;
-      Adsb_Flags_Simulated               : Boolean := False;
-      Adsb_Flags_Vertical_Velocity_Valid : Boolean := False;
-      Adsb_Flags_Baro_Valid              : Boolean := False;
-      Adsb_Flags_Source_Uat              : Boolean := False;
+      Valid_Coords            : Boolean := False;
+      Valid_Altitude          : Boolean := False;
+      Valid_Heading           : Boolean := False;
+      Valid_Velocity          : Boolean := False;
+      Valid_Callsign          : Boolean := False;
+      Valid_Squawk            : Boolean := False;
+      Simulated               : Boolean := False;
+      Vertical_Velocity_Valid : Boolean := False;
+      Baro_Valid              : Boolean := False;
+      Source_Uat              : Boolean := False;
    end record with Size => 16;
    for Adsb_Flags use record
-      Adsb_Flags_Valid_Coords            at 0 range 0 .. 0;
-      Adsb_Flags_Valid_Altitude          at 0 range 1 .. 1;
-      Adsb_Flags_Valid_Heading           at 0 range 2 .. 2;
-      Adsb_Flags_Valid_Velocity          at 0 range 3 .. 3;
-      Adsb_Flags_Valid_Callsign          at 0 range 4 .. 4;
-      Adsb_Flags_Valid_Squawk            at 0 range 5 .. 5;
-      Adsb_Flags_Simulated               at 0 range 6 .. 6;
-      Adsb_Flags_Vertical_Velocity_Valid at 0 range 7 .. 7;
-      Adsb_Flags_Baro_Valid              at 0 range 8 .. 8;
-      Adsb_Flags_Source_Uat              at 0 range 15 .. 15;
+      Valid_Coords            at 0 range 0 .. 0;
+      Valid_Altitude          at 0 range 1 .. 1;
+      Valid_Heading           at 0 range 2 .. 2;
+      Valid_Velocity          at 0 range 3 .. 3;
+      Valid_Callsign          at 0 range 4 .. 4;
+      Valid_Squawk            at 0 range 5 .. 5;
+      Simulated               at 0 range 6 .. 6;
+      Vertical_Velocity_Valid at 0 range 7 .. 7;
+      Baro_Valid              at 0 range 8 .. 8;
+      Source_Uat              at 0 range 15 .. 15;
    end record;
 
    type Estimator_Status_Flags is record
-      Estimator_Attitude           : Boolean := False;
-      Estimator_Velocity_Horiz     : Boolean := False;
-      Estimator_Velocity_Vert      : Boolean := False;
-      Estimator_Pos_Horiz_Rel      : Boolean := False;
-      Estimator_Pos_Horiz_Abs      : Boolean := False;
-      Estimator_Pos_Vert_Abs       : Boolean := False;
-      Estimator_Pos_Vert_Agl       : Boolean := False;
-      Estimator_Const_Pos_Mode     : Boolean := False;
-      Estimator_Pred_Pos_Horiz_Rel : Boolean := False;
-      Estimator_Pred_Pos_Horiz_Abs : Boolean := False;
-      Estimator_Gps_Glitch         : Boolean := False;
-      Estimator_Accel_Error        : Boolean := False;
+      Attitude           : Boolean := False;
+      Velocity_Horiz     : Boolean := False;
+      Velocity_Vert      : Boolean := False;
+      Pos_Horiz_Rel      : Boolean := False;
+      Pos_Horiz_Abs      : Boolean := False;
+      Pos_Vert_Abs       : Boolean := False;
+      Pos_Vert_Agl       : Boolean := False;
+      Const_Pos_Mode     : Boolean := False;
+      Pred_Pos_Horiz_Rel : Boolean := False;
+      Pred_Pos_Horiz_Abs : Boolean := False;
+      Gps_Glitch         : Boolean := False;
+      Accel_Error        : Boolean := False;
+      Reserved_12        : Boolean := False;
+      Reserved_13        : Boolean := False;
+      Reserved_14        : Boolean := False;
+      Reserved_15        : Boolean := False;
    end record with Size => 16;
    for Estimator_Status_Flags use record
-      Estimator_Attitude           at 0 range 0 .. 0;
-      Estimator_Velocity_Horiz     at 0 range 1 .. 1;
-      Estimator_Velocity_Vert      at 0 range 2 .. 2;
-      Estimator_Pos_Horiz_Rel      at 0 range 3 .. 3;
-      Estimator_Pos_Horiz_Abs      at 0 range 4 .. 4;
-      Estimator_Pos_Vert_Abs       at 0 range 5 .. 5;
-      Estimator_Pos_Vert_Agl       at 0 range 6 .. 6;
-      Estimator_Const_Pos_Mode     at 0 range 7 .. 7;
-      Estimator_Pred_Pos_Horiz_Rel at 0 range 8 .. 8;
-      Estimator_Pred_Pos_Horiz_Abs at 0 range 9 .. 9;
-      Estimator_Gps_Glitch         at 0 range 10 .. 10;
-      Estimator_Accel_Error        at 0 range 11 .. 11;
+      Attitude           at 0 range 0 .. 0;
+      Velocity_Horiz     at 0 range 1 .. 1;
+      Velocity_Vert      at 0 range 2 .. 2;
+      Pos_Horiz_Rel      at 0 range 3 .. 3;
+      Pos_Horiz_Abs      at 0 range 4 .. 4;
+      Pos_Vert_Abs       at 0 range 5 .. 5;
+      Pos_Vert_Agl       at 0 range 6 .. 6;
+      Const_Pos_Mode     at 0 range 7 .. 7;
+      Pred_Pos_Horiz_Rel at 0 range 8 .. 8;
+      Pred_Pos_Horiz_Abs at 0 range 9 .. 9;
+      Gps_Glitch         at 0 range 10 .. 10;
+      Accel_Error        at 0 range 11 .. 11;
+      Reserved_12        at 0 range 12 .. 12;
+      Reserved_13        at 0 range 13 .. 13;
+      Reserved_14        at 0 range 14 .. 14;
+      Reserved_15        at 0 range 15 .. 15;
    end record;
 
    type Gps_Input_Ignore_Flags is record
-      Gps_Input_Ignore_Flag_Alt                 : Boolean := False;
-      Gps_Input_Ignore_Flag_Hdop                : Boolean := False;
-      Gps_Input_Ignore_Flag_Vdop                : Boolean := False;
-      Gps_Input_Ignore_Flag_Vel_Horiz           : Boolean := False;
-      Gps_Input_Ignore_Flag_Vel_Vert            : Boolean := False;
-      Gps_Input_Ignore_Flag_Speed_Accuracy      : Boolean := False;
-      Gps_Input_Ignore_Flag_Horizontal_Accuracy : Boolean := False;
-      Gps_Input_Ignore_Flag_Vertical_Accuracy   : Boolean := False;
+      Alt                 : Boolean := False;
+      Hdop                : Boolean := False;
+      Vdop                : Boolean := False;
+      Vel_Horiz           : Boolean := False;
+      Vel_Vert            : Boolean := False;
+      Speed_Accuracy      : Boolean := False;
+      Horizontal_Accuracy : Boolean := False;
+      Vertical_Accuracy   : Boolean := False;
+      Reserved_8          : Boolean := False;
+      Reserved_9          : Boolean := False;
+      Reserved_10         : Boolean := False;
+      Reserved_11         : Boolean := False;
+      Reserved_12         : Boolean := False;
+      Reserved_13         : Boolean := False;
+      Reserved_14         : Boolean := False;
+      Reserved_15         : Boolean := False;
    end record with Size => 16;
    for Gps_Input_Ignore_Flags use record
-      Gps_Input_Ignore_Flag_Alt                 at 0 range 0 .. 0;
-      Gps_Input_Ignore_Flag_Hdop                at 0 range 1 .. 1;
-      Gps_Input_Ignore_Flag_Vdop                at 0 range 2 .. 2;
-      Gps_Input_Ignore_Flag_Vel_Horiz           at 0 range 3 .. 3;
-      Gps_Input_Ignore_Flag_Vel_Vert            at 0 range 4 .. 4;
-      Gps_Input_Ignore_Flag_Speed_Accuracy      at 0 range 5 .. 5;
-      Gps_Input_Ignore_Flag_Horizontal_Accuracy at 0 range 6 .. 6;
-      Gps_Input_Ignore_Flag_Vertical_Accuracy   at 0 range 7 .. 7;
+      Alt                 at 0 range 0 .. 0;
+      Hdop                at 0 range 1 .. 1;
+      Vdop                at 0 range 2 .. 2;
+      Vel_Horiz           at 0 range 3 .. 3;
+      Vel_Vert            at 0 range 4 .. 4;
+      Speed_Accuracy      at 0 range 5 .. 5;
+      Horizontal_Accuracy at 0 range 6 .. 6;
+      Vertical_Accuracy   at 0 range 7 .. 7;
+      Reserved_8          at 0 range 8 .. 8;
+      Reserved_9          at 0 range 9 .. 9;
+      Reserved_10         at 0 range 10 .. 10;
+      Reserved_11         at 0 range 11 .. 11;
+      Reserved_12         at 0 range 12 .. 12;
+      Reserved_13         at 0 range 13 .. 13;
+      Reserved_14         at 0 range 14 .. 14;
+      Reserved_15         at 0 range 15 .. 15;
    end record;
 
-   type Mav_Collision_Action is
-     (Mav_Collision_Action_None, Mav_Collision_Action_Report, 
-      Mav_Collision_Action_Ascend_Or_Descend, 
-      Mav_Collision_Action_Move_Horizontally, 
-      Mav_Collision_Action_Move_Perpendicular, Mav_Collision_Action_Rtl, 
-      Mav_Collision_Action_Hover) with Size => 8;
-   for Mav_Collision_Action use
-     (Mav_Collision_Action_None               => 0,
-      Mav_Collision_Action_Report             => 1,
-      Mav_Collision_Action_Ascend_Or_Descend  => 2,
-      Mav_Collision_Action_Move_Horizontally  => 3,
-      Mav_Collision_Action_Move_Perpendicular => 4,
-      Mav_Collision_Action_Rtl                => 5,
-      Mav_Collision_Action_Hover              => 6);
+   type Mav_Collision_Action is new Interfaces.Unsigned_8;
 
-   type Mav_Collision_Threat_Level is
-     (Mav_Collision_Threat_Level_None, Mav_Collision_Threat_Level_Low, 
-      Mav_Collision_Threat_Level_High) with Size => 8;
-   for Mav_Collision_Threat_Level use
-     (Mav_Collision_Threat_Level_None => 0,
-      Mav_Collision_Threat_Level_Low  => 1,
-      Mav_Collision_Threat_Level_High => 2);
+   function None return Mav_Collision_Action is (0)
+     with Static;
 
-   type Mav_Collision_Src is
-     (Mav_Collision_Src_Adsb, Mav_Collision_Src_Mavlink_Gps_Global_Int)
-     with Size => 8;
-   for Mav_Collision_Src use
-     (Mav_Collision_Src_Adsb                   => 0,
-      Mav_Collision_Src_Mavlink_Gps_Global_Int => 1);
+   function Report return Mav_Collision_Action is (1)
+     with Static;
 
-   type Gps_Fix_Type is
-     (Gps_Fix_Type_No_Gps, Gps_Fix_Type_No_Fix, Gps_Fix_Type_2D_Fix, 
-      Gps_Fix_Type_3D_Fix, Gps_Fix_Type_Dgps, Gps_Fix_Type_Rtk_Float, 
-      Gps_Fix_Type_Rtk_Fixed, Gps_Fix_Type_Static, Gps_Fix_Type_Ppp)
-     with Size => 8;
-   for Gps_Fix_Type use
-     (Gps_Fix_Type_No_Gps    => 0,
-      Gps_Fix_Type_No_Fix    => 1,
-      Gps_Fix_Type_2D_Fix    => 2,
-      Gps_Fix_Type_3D_Fix    => 3,
-      Gps_Fix_Type_Dgps      => 4,
-      Gps_Fix_Type_Rtk_Float => 5,
-      Gps_Fix_Type_Rtk_Fixed => 6,
-      Gps_Fix_Type_Static    => 7,
-      Gps_Fix_Type_Ppp       => 8);
+   function Ascend_Or_Descend return Mav_Collision_Action is (2)
+     with Static;
 
-   type Rtk_Baseline_Coordinate_System is
-     (Rtk_Baseline_Coordinate_System_Ecef, Rtk_Baseline_Coordinate_System_Ned)
-     with Size => 8;
-   for Rtk_Baseline_Coordinate_System use
-     (Rtk_Baseline_Coordinate_System_Ecef => 0,
-      Rtk_Baseline_Coordinate_System_Ned  => 1);
+   function Move_Horizontally return Mav_Collision_Action is (3)
+     with Static;
+
+   function Move_Perpendicular return Mav_Collision_Action is (4)
+     with Static;
+
+   function Rtl return Mav_Collision_Action is (5)
+     with Static;
+
+   function Hover return Mav_Collision_Action is (6)
+     with Static;
+
+
+   type Mav_Collision_Threat_Level is new Interfaces.Unsigned_8;
+
+   function None return Mav_Collision_Threat_Level is (0)
+     with Static;
+
+   function Low return Mav_Collision_Threat_Level is (1)
+     with Static;
+
+   function High return Mav_Collision_Threat_Level is (2)
+     with Static;
+
+
+   type Mav_Collision_Src is new Interfaces.Unsigned_8;
+
+   function Adsb return Mav_Collision_Src is (0)
+     with Static;
+
+   function Mavlink_Gps_Global_Int return Mav_Collision_Src is (1)
+     with Static;
+
+
+   type Gps_Fix_Type is new Interfaces.Unsigned_8;
+
+   function No_Gps return Gps_Fix_Type is (0)
+     with Static;
+
+   function No_Fix return Gps_Fix_Type is (1)
+     with Static;
+
+   function A_2D_Fix return Gps_Fix_Type is (2)
+     with Static;
+
+   function A_3D_Fix return Gps_Fix_Type is (3)
+     with Static;
+
+   function Dgps return Gps_Fix_Type is (4)
+     with Static;
+
+   function Rtk_Float return Gps_Fix_Type is (5)
+     with Static;
+
+   function Rtk_Fixed return Gps_Fix_Type is (6)
+     with Static;
+
+   function Static return Gps_Fix_Type is (7)
+     with Static;
+
+   function Ppp return Gps_Fix_Type is (8)
+     with Static;
+
+
+   type Rtk_Baseline_Coordinate_System is new Interfaces.Unsigned_8;
+
+   function Ecef return Rtk_Baseline_Coordinate_System is (0)
+     with Static;
+
+   function Ned return Rtk_Baseline_Coordinate_System is (1)
+     with Static;
+
 
    type Position_Target_Typemask is record
-      Position_Target_Typemask_X_Ignore        : Boolean := False;
-      Position_Target_Typemask_Y_Ignore        : Boolean := False;
-      Position_Target_Typemask_Z_Ignore        : Boolean := False;
-      Position_Target_Typemask_Vx_Ignore       : Boolean := False;
-      Position_Target_Typemask_Vy_Ignore       : Boolean := False;
-      Position_Target_Typemask_Vz_Ignore       : Boolean := False;
-      Position_Target_Typemask_Ax_Ignore       : Boolean := False;
-      Position_Target_Typemask_Ay_Ignore       : Boolean := False;
-      Position_Target_Typemask_Az_Ignore       : Boolean := False;
-      Position_Target_Typemask_Force_Set       : Boolean := False;
-      Position_Target_Typemask_Yaw_Ignore      : Boolean := False;
-      Position_Target_Typemask_Yaw_Rate_Ignore : Boolean := False;
+      X_Ignore        : Boolean := False;
+      Y_Ignore        : Boolean := False;
+      Z_Ignore        : Boolean := False;
+      Vx_Ignore       : Boolean := False;
+      Vy_Ignore       : Boolean := False;
+      Vz_Ignore       : Boolean := False;
+      Ax_Ignore       : Boolean := False;
+      Ay_Ignore       : Boolean := False;
+      Az_Ignore       : Boolean := False;
+      Force_Set       : Boolean := False;
+      Yaw_Ignore      : Boolean := False;
+      Yaw_Rate_Ignore : Boolean := False;
+      Reserved_12     : Boolean := False;
+      Reserved_13     : Boolean := False;
+      Reserved_14     : Boolean := False;
+      Reserved_15     : Boolean := False;
    end record with Size => 16;
    for Position_Target_Typemask use record
-      Position_Target_Typemask_X_Ignore        at 0 range 0 .. 0;
-      Position_Target_Typemask_Y_Ignore        at 0 range 1 .. 1;
-      Position_Target_Typemask_Z_Ignore        at 0 range 2 .. 2;
-      Position_Target_Typemask_Vx_Ignore       at 0 range 3 .. 3;
-      Position_Target_Typemask_Vy_Ignore       at 0 range 4 .. 4;
-      Position_Target_Typemask_Vz_Ignore       at 0 range 5 .. 5;
-      Position_Target_Typemask_Ax_Ignore       at 0 range 6 .. 6;
-      Position_Target_Typemask_Ay_Ignore       at 0 range 7 .. 7;
-      Position_Target_Typemask_Az_Ignore       at 0 range 8 .. 8;
-      Position_Target_Typemask_Force_Set       at 0 range 9 .. 9;
-      Position_Target_Typemask_Yaw_Ignore      at 0 range 10 .. 10;
-      Position_Target_Typemask_Yaw_Rate_Ignore at 0 range 11 .. 11;
+      X_Ignore        at 0 range 0 .. 0;
+      Y_Ignore        at 0 range 1 .. 1;
+      Z_Ignore        at 0 range 2 .. 2;
+      Vx_Ignore       at 0 range 3 .. 3;
+      Vy_Ignore       at 0 range 4 .. 4;
+      Vz_Ignore       at 0 range 5 .. 5;
+      Ax_Ignore       at 0 range 6 .. 6;
+      Ay_Ignore       at 0 range 7 .. 7;
+      Az_Ignore       at 0 range 8 .. 8;
+      Force_Set       at 0 range 9 .. 9;
+      Yaw_Ignore      at 0 range 10 .. 10;
+      Yaw_Rate_Ignore at 0 range 11 .. 11;
+      Reserved_12     at 0 range 12 .. 12;
+      Reserved_13     at 0 range 13 .. 13;
+      Reserved_14     at 0 range 14 .. 14;
+      Reserved_15     at 0 range 15 .. 15;
    end record;
 
    type Attitude_Target_Typemask is record
-      Attitude_Target_Typemask_Body_Roll_Rate_Ignore  : Boolean := False;
-      Attitude_Target_Typemask_Body_Pitch_Rate_Ignore : Boolean := False;
-      Attitude_Target_Typemask_Body_Yaw_Rate_Ignore   : Boolean := False;
-      Attitude_Target_Typemask_Thrust_Body_Set        : Boolean := False;
-      Attitude_Target_Typemask_Throttle_Ignore        : Boolean := False;
-      Attitude_Target_Typemask_Attitude_Ignore        : Boolean := False;
+      Body_Roll_Rate_Ignore  : Boolean := False;
+      Body_Pitch_Rate_Ignore : Boolean := False;
+      Body_Yaw_Rate_Ignore   : Boolean := False;
+      Thrust_Body_Set        : Boolean := False;
+      Throttle_Ignore        : Boolean := False;
+      Attitude_Ignore        : Boolean := False;
    end record with Size => 8;
    for Attitude_Target_Typemask use record
-      Attitude_Target_Typemask_Body_Roll_Rate_Ignore  at 0 range 0 .. 0;
-      Attitude_Target_Typemask_Body_Pitch_Rate_Ignore at 0 range 1 .. 1;
-      Attitude_Target_Typemask_Body_Yaw_Rate_Ignore   at 0 range 2 .. 2;
-      Attitude_Target_Typemask_Thrust_Body_Set        at 0 range 5 .. 5;
-      Attitude_Target_Typemask_Throttle_Ignore        at 0 range 6 .. 6;
-      Attitude_Target_Typemask_Attitude_Ignore        at 0 range 7 .. 7;
+      Body_Roll_Rate_Ignore  at 0 range 0 .. 0;
+      Body_Pitch_Rate_Ignore at 0 range 1 .. 1;
+      Body_Yaw_Rate_Ignore   at 0 range 2 .. 2;
+      Thrust_Body_Set        at 0 range 5 .. 5;
+      Throttle_Ignore        at 0 range 6 .. 6;
+      Attitude_Ignore        at 0 range 7 .. 7;
    end record;
 
-   type Mag_Cal_Status is
-     (Mag_Cal_Not_Started, Mag_Cal_Waiting_To_Start, Mag_Cal_Running_Step_One, 
-      Mag_Cal_Running_Step_Two, Mag_Cal_Success, Mag_Cal_Failed, 
-      Mag_Cal_Bad_Orientation, Mag_Cal_Bad_Radius) with Size => 8;
-   for Mag_Cal_Status use
-     (Mag_Cal_Not_Started      => 0,
-      Mag_Cal_Waiting_To_Start => 1,
-      Mag_Cal_Running_Step_One => 2,
-      Mag_Cal_Running_Step_Two => 3,
-      Mag_Cal_Success          => 4,
-      Mag_Cal_Failed           => 5,
-      Mag_Cal_Bad_Orientation  => 6,
-      Mag_Cal_Bad_Radius       => 7);
+   type Mag_Cal_Status is new Interfaces.Unsigned_8;
+
+   function Not_Started return Mag_Cal_Status is (0)
+     with Static;
+
+   function Waiting_To_Start return Mag_Cal_Status is (1)
+     with Static;
+
+   function Running_Step_One return Mag_Cal_Status is (2)
+     with Static;
+
+   function Running_Step_Two return Mag_Cal_Status is (3)
+     with Static;
+
+   function Success return Mag_Cal_Status is (4)
+     with Static;
+
+   function Failed return Mag_Cal_Status is (5)
+     with Static;
+
+   function Bad_Orientation return Mag_Cal_Status is (6)
+     with Static;
+
+   function Bad_Radius return Mag_Cal_Status is (7)
+     with Static;
+
 
    type Hil_Sensor_Updated_Flags is record
-      Hil_Sensor_Updated_Xacc          : Boolean := False;
-      Hil_Sensor_Updated_Yacc          : Boolean := False;
-      Hil_Sensor_Updated_Zacc          : Boolean := False;
-      Hil_Sensor_Updated_Xgyro         : Boolean := False;
-      Hil_Sensor_Updated_Ygyro         : Boolean := False;
-      Hil_Sensor_Updated_Zgyro         : Boolean := False;
-      Hil_Sensor_Updated_Xmag          : Boolean := False;
-      Hil_Sensor_Updated_Ymag          : Boolean := False;
-      Hil_Sensor_Updated_Zmag          : Boolean := False;
-      Hil_Sensor_Updated_Abs_Pressure  : Boolean := False;
-      Hil_Sensor_Updated_Diff_Pressure : Boolean := False;
-      Hil_Sensor_Updated_Pressure_Alt  : Boolean := False;
-      Hil_Sensor_Updated_Temperature   : Boolean := False;
-      Hil_Sensor_Updated_Reset         : Boolean := False;
+      Xacc          : Boolean := False;
+      Yacc          : Boolean := False;
+      Zacc          : Boolean := False;
+      Xgyro         : Boolean := False;
+      Ygyro         : Boolean := False;
+      Zgyro         : Boolean := False;
+      Xmag          : Boolean := False;
+      Ymag          : Boolean := False;
+      Zmag          : Boolean := False;
+      Abs_Pressure  : Boolean := False;
+      Diff_Pressure : Boolean := False;
+      Pressure_Alt  : Boolean := False;
+      Temperature   : Boolean := False;
+      Reset         : Boolean := False;
    end record with Size => 32;
    for Hil_Sensor_Updated_Flags use record
-      Hil_Sensor_Updated_Xacc          at 0 range 0 .. 0;
-      Hil_Sensor_Updated_Yacc          at 0 range 1 .. 1;
-      Hil_Sensor_Updated_Zacc          at 0 range 2 .. 2;
-      Hil_Sensor_Updated_Xgyro         at 0 range 3 .. 3;
-      Hil_Sensor_Updated_Ygyro         at 0 range 4 .. 4;
-      Hil_Sensor_Updated_Zgyro         at 0 range 5 .. 5;
-      Hil_Sensor_Updated_Xmag          at 0 range 6 .. 6;
-      Hil_Sensor_Updated_Ymag          at 0 range 7 .. 7;
-      Hil_Sensor_Updated_Zmag          at 0 range 8 .. 8;
-      Hil_Sensor_Updated_Abs_Pressure  at 0 range 9 .. 9;
-      Hil_Sensor_Updated_Diff_Pressure at 0 range 10 .. 10;
-      Hil_Sensor_Updated_Pressure_Alt  at 0 range 11 .. 11;
-      Hil_Sensor_Updated_Temperature   at 0 range 12 .. 12;
-      Hil_Sensor_Updated_Reset         at 0 range 31 .. 31;
+      Xacc          at 0 range 0 .. 0;
+      Yacc          at 0 range 1 .. 1;
+      Zacc          at 0 range 2 .. 2;
+      Xgyro         at 0 range 3 .. 3;
+      Ygyro         at 0 range 4 .. 4;
+      Zgyro         at 0 range 5 .. 5;
+      Xmag          at 0 range 6 .. 6;
+      Ymag          at 0 range 7 .. 7;
+      Zmag          at 0 range 8 .. 8;
+      Abs_Pressure  at 0 range 9 .. 9;
+      Diff_Pressure at 0 range 10 .. 10;
+      Pressure_Alt  at 0 range 11 .. 11;
+      Temperature   at 0 range 12 .. 12;
+      Reset         at 0 range 31 .. 31;
    end record;
 
    type Highres_Imu_Updated_Flags is record
-      Highres_Imu_Updated_Xacc          : Boolean := False;
-      Highres_Imu_Updated_Yacc          : Boolean := False;
-      Highres_Imu_Updated_Zacc          : Boolean := False;
-      Highres_Imu_Updated_Xgyro         : Boolean := False;
-      Highres_Imu_Updated_Ygyro         : Boolean := False;
-      Highres_Imu_Updated_Zgyro         : Boolean := False;
-      Highres_Imu_Updated_Xmag          : Boolean := False;
-      Highres_Imu_Updated_Ymag          : Boolean := False;
-      Highres_Imu_Updated_Zmag          : Boolean := False;
-      Highres_Imu_Updated_Abs_Pressure  : Boolean := False;
-      Highres_Imu_Updated_Diff_Pressure : Boolean := False;
-      Highres_Imu_Updated_Pressure_Alt  : Boolean := False;
-      Highres_Imu_Updated_Temperature   : Boolean := False;
+      Xacc          : Boolean := False;
+      Yacc          : Boolean := False;
+      Zacc          : Boolean := False;
+      Xgyro         : Boolean := False;
+      Ygyro         : Boolean := False;
+      Zgyro         : Boolean := False;
+      Xmag          : Boolean := False;
+      Ymag          : Boolean := False;
+      Zmag          : Boolean := False;
+      Abs_Pressure  : Boolean := False;
+      Diff_Pressure : Boolean := False;
+      Pressure_Alt  : Boolean := False;
+      Temperature   : Boolean := False;
    end record with Size => 16;
    for Highres_Imu_Updated_Flags use record
-      Highres_Imu_Updated_Xacc          at 0 range 0 .. 0;
-      Highres_Imu_Updated_Yacc          at 0 range 1 .. 1;
-      Highres_Imu_Updated_Zacc          at 0 range 2 .. 2;
-      Highres_Imu_Updated_Xgyro         at 0 range 3 .. 3;
-      Highres_Imu_Updated_Ygyro         at 0 range 4 .. 4;
-      Highres_Imu_Updated_Zgyro         at 0 range 5 .. 5;
-      Highres_Imu_Updated_Xmag          at 0 range 6 .. 6;
-      Highres_Imu_Updated_Ymag          at 0 range 7 .. 7;
-      Highres_Imu_Updated_Zmag          at 0 range 8 .. 8;
-      Highres_Imu_Updated_Abs_Pressure  at 0 range 9 .. 9;
-      Highres_Imu_Updated_Diff_Pressure at 0 range 10 .. 10;
-      Highres_Imu_Updated_Pressure_Alt  at 0 range 11 .. 11;
-      Highres_Imu_Updated_Temperature   at 0 range 12 .. 12;
+      Xacc          at 0 range 0 .. 0;
+      Yacc          at 0 range 1 .. 1;
+      Zacc          at 0 range 2 .. 2;
+      Xgyro         at 0 range 3 .. 3;
+      Ygyro         at 0 range 4 .. 4;
+      Zgyro         at 0 range 5 .. 5;
+      Xmag          at 0 range 6 .. 6;
+      Ymag          at 0 range 7 .. 7;
+      Zmag          at 0 range 8 .. 8;
+      Abs_Pressure  at 0 range 9 .. 9;
+      Diff_Pressure at 0 range 10 .. 10;
+      Pressure_Alt  at 0 range 11 .. 11;
+      Temperature   at 0 range 12 .. 12;
    end record;
 
-   type Mav_Autopilot is
-     (Mav_Autopilot_Generic, Mav_Autopilot_Reserved, Mav_Autopilot_Slugs, 
-      Mav_Autopilot_Ardupilotmega, Mav_Autopilot_Openpilot, 
-      Mav_Autopilot_Generic_Waypoints_Only, 
-      Mav_Autopilot_Generic_Waypoints_And_Simple_Navigation_Only, 
-      Mav_Autopilot_Generic_Mission_Full, Mav_Autopilot_Invalid, 
-      Mav_Autopilot_Ppz, Mav_Autopilot_Udb, Mav_Autopilot_Fp, 
-      Mav_Autopilot_Px4, Mav_Autopilot_Smaccmpilot, Mav_Autopilot_Autoquad, 
-      Mav_Autopilot_Armazila, Mav_Autopilot_Aerob, Mav_Autopilot_Asluav, 
-      Mav_Autopilot_Smartap, Mav_Autopilot_Airrails, Mav_Autopilot_Reflex)
-     with Size => 8;
-   for Mav_Autopilot use
-     (Mav_Autopilot_Generic                                      => 0,
-      Mav_Autopilot_Reserved                                     => 1,
-      Mav_Autopilot_Slugs                                        => 2,
-      Mav_Autopilot_Ardupilotmega                                => 3,
-      Mav_Autopilot_Openpilot                                    => 4,
-      Mav_Autopilot_Generic_Waypoints_Only                       => 5,
-      Mav_Autopilot_Generic_Waypoints_And_Simple_Navigation_Only => 6,
-      Mav_Autopilot_Generic_Mission_Full                         => 7,
-      Mav_Autopilot_Invalid                                      => 8,
-      Mav_Autopilot_Ppz                                          => 9,
-      Mav_Autopilot_Udb                                          => 10,
-      Mav_Autopilot_Fp                                           => 11,
-      Mav_Autopilot_Px4                                          => 12,
-      Mav_Autopilot_Smaccmpilot                                  => 13,
-      Mav_Autopilot_Autoquad                                     => 14,
-      Mav_Autopilot_Armazila                                     => 15,
-      Mav_Autopilot_Aerob                                        => 16,
-      Mav_Autopilot_Asluav                                       => 17,
-      Mav_Autopilot_Smartap                                      => 18,
-      Mav_Autopilot_Airrails                                     => 19,
-      Mav_Autopilot_Reflex                                       => 20);
+   type Mav_Autopilot is new Interfaces.Unsigned_8;
 
-   type Mav_Type is
-     (Mav_Type_Generic, Mav_Type_Fixed_Wing, Mav_Type_Quadrotor, 
-      Mav_Type_Coaxial, Mav_Type_Helicopter, Mav_Type_Antenna_Tracker, 
-      Mav_Type_Gcs, Mav_Type_Airship, Mav_Type_Free_Balloon, Mav_Type_Rocket, 
-      Mav_Type_Ground_Rover, Mav_Type_Surface_Boat, Mav_Type_Submarine, 
-      Mav_Type_Hexarotor, Mav_Type_Octorotor, Mav_Type_Tricopter, 
-      Mav_Type_Flapping_Wing, Mav_Type_Kite, Mav_Type_Onboard_Controller, 
-      Mav_Type_Vtol_Tailsitter_Duorotor, Mav_Type_Vtol_Tailsitter_Quadrotor, 
-      Mav_Type_Vtol_Tiltrotor, Mav_Type_Vtol_Fixedrotor, 
-      Mav_Type_Vtol_Tailsitter, Mav_Type_Vtol_Tiltwing, 
-      Mav_Type_Vtol_Reserved5, Mav_Type_Gimbal, Mav_Type_Adsb, 
-      Mav_Type_Parafoil, Mav_Type_Dodecarotor, Mav_Type_Camera, 
-      Mav_Type_Charging_Station, Mav_Type_Flarm, Mav_Type_Servo, 
-      Mav_Type_Odid, Mav_Type_Decarotor, Mav_Type_Battery, Mav_Type_Parachute, 
-      Mav_Type_Log, Mav_Type_Osd, Mav_Type_Imu, Mav_Type_Gps, Mav_Type_Winch, 
-      Mav_Type_Generic_Multirotor, Mav_Type_Illuminator) with Size => 8;
-   for Mav_Type use
-     (Mav_Type_Generic                   => 0,
-      Mav_Type_Fixed_Wing                => 1,
-      Mav_Type_Quadrotor                 => 2,
-      Mav_Type_Coaxial                   => 3,
-      Mav_Type_Helicopter                => 4,
-      Mav_Type_Antenna_Tracker           => 5,
-      Mav_Type_Gcs                       => 6,
-      Mav_Type_Airship                   => 7,
-      Mav_Type_Free_Balloon              => 8,
-      Mav_Type_Rocket                    => 9,
-      Mav_Type_Ground_Rover              => 10,
-      Mav_Type_Surface_Boat              => 11,
-      Mav_Type_Submarine                 => 12,
-      Mav_Type_Hexarotor                 => 13,
-      Mav_Type_Octorotor                 => 14,
-      Mav_Type_Tricopter                 => 15,
-      Mav_Type_Flapping_Wing             => 16,
-      Mav_Type_Kite                      => 17,
-      Mav_Type_Onboard_Controller        => 18,
-      Mav_Type_Vtol_Tailsitter_Duorotor  => 19,
-      Mav_Type_Vtol_Tailsitter_Quadrotor => 20,
-      Mav_Type_Vtol_Tiltrotor            => 21,
-      Mav_Type_Vtol_Fixedrotor           => 22,
-      Mav_Type_Vtol_Tailsitter           => 23,
-      Mav_Type_Vtol_Tiltwing             => 24,
-      Mav_Type_Vtol_Reserved5            => 25,
-      Mav_Type_Gimbal                    => 26,
-      Mav_Type_Adsb                      => 27,
-      Mav_Type_Parafoil                  => 28,
-      Mav_Type_Dodecarotor               => 29,
-      Mav_Type_Camera                    => 30,
-      Mav_Type_Charging_Station          => 31,
-      Mav_Type_Flarm                     => 32,
-      Mav_Type_Servo                     => 33,
-      Mav_Type_Odid                      => 34,
-      Mav_Type_Decarotor                 => 35,
-      Mav_Type_Battery                   => 36,
-      Mav_Type_Parachute                 => 37,
-      Mav_Type_Log                       => 38,
-      Mav_Type_Osd                       => 39,
-      Mav_Type_Imu                       => 40,
-      Mav_Type_Gps                       => 41,
-      Mav_Type_Winch                     => 42,
-      Mav_Type_Generic_Multirotor        => 43,
-      Mav_Type_Illuminator               => 44);
+   function Generic_Entry return Mav_Autopilot is (0)
+     with Static;
+
+   function Reserved return Mav_Autopilot is (1)
+     with Static;
+
+   function Slugs return Mav_Autopilot is (2)
+     with Static;
+
+   function Ardupilotmega return Mav_Autopilot is (3)
+     with Static;
+
+   function Openpilot return Mav_Autopilot is (4)
+     with Static;
+
+   function Generic_Waypoints_Only return Mav_Autopilot is (5)
+     with Static;
+
+   function Generic_Waypoints_And_Simple_Navigation_Only return Mav_Autopilot is (6)
+     with Static;
+
+   function Generic_Mission_Full return Mav_Autopilot is (7)
+     with Static;
+
+   function Invalid return Mav_Autopilot is (8)
+     with Static;
+
+   function Ppz return Mav_Autopilot is (9)
+     with Static;
+
+   function Udb return Mav_Autopilot is (10)
+     with Static;
+
+   function Fp return Mav_Autopilot is (11)
+     with Static;
+
+   function Px4 return Mav_Autopilot is (12)
+     with Static;
+
+   function Smaccmpilot return Mav_Autopilot is (13)
+     with Static;
+
+   function Autoquad return Mav_Autopilot is (14)
+     with Static;
+
+   function Armazila return Mav_Autopilot is (15)
+     with Static;
+
+   function Aerob return Mav_Autopilot is (16)
+     with Static;
+
+   function Asluav return Mav_Autopilot is (17)
+     with Static;
+
+   function Smartap return Mav_Autopilot is (18)
+     with Static;
+
+   function Airrails return Mav_Autopilot is (19)
+     with Static;
+
+   function Reflex return Mav_Autopilot is (20)
+     with Static;
+
+
+   type Mav_Type is new Interfaces.Unsigned_8;
+
+   function Generic_Entry return Mav_Type is (0)
+     with Static;
+
+   function Fixed_Wing return Mav_Type is (1)
+     with Static;
+
+   function Quadrotor return Mav_Type is (2)
+     with Static;
+
+   function Coaxial return Mav_Type is (3)
+     with Static;
+
+   function Helicopter return Mav_Type is (4)
+     with Static;
+
+   function Antenna_Tracker return Mav_Type is (5)
+     with Static;
+
+   function Gcs return Mav_Type is (6)
+     with Static;
+
+   function Airship return Mav_Type is (7)
+     with Static;
+
+   function Free_Balloon return Mav_Type is (8)
+     with Static;
+
+   function Rocket return Mav_Type is (9)
+     with Static;
+
+   function Ground_Rover return Mav_Type is (10)
+     with Static;
+
+   function Surface_Boat return Mav_Type is (11)
+     with Static;
+
+   function Submarine return Mav_Type is (12)
+     with Static;
+
+   function Hexarotor return Mav_Type is (13)
+     with Static;
+
+   function Octorotor return Mav_Type is (14)
+     with Static;
+
+   function Tricopter return Mav_Type is (15)
+     with Static;
+
+   function Flapping_Wing return Mav_Type is (16)
+     with Static;
+
+   function Kite return Mav_Type is (17)
+     with Static;
+
+   function Onboard_Controller return Mav_Type is (18)
+     with Static;
+
+   function Vtol_Tailsitter_Duorotor return Mav_Type is (19)
+     with Static;
+
+   function Vtol_Tailsitter_Quadrotor return Mav_Type is (20)
+     with Static;
+
+   function Vtol_Tiltrotor return Mav_Type is (21)
+     with Static;
+
+   function Vtol_Fixedrotor return Mav_Type is (22)
+     with Static;
+
+   function Vtol_Tailsitter return Mav_Type is (23)
+     with Static;
+
+   function Vtol_Tiltwing return Mav_Type is (24)
+     with Static;
+
+   function Vtol_Reserved5 return Mav_Type is (25)
+     with Static;
+
+   function Gimbal return Mav_Type is (26)
+     with Static;
+
+   function Adsb return Mav_Type is (27)
+     with Static;
+
+   function Parafoil return Mav_Type is (28)
+     with Static;
+
+   function Dodecarotor return Mav_Type is (29)
+     with Static;
+
+   function Camera return Mav_Type is (30)
+     with Static;
+
+   function Charging_Station return Mav_Type is (31)
+     with Static;
+
+   function Flarm return Mav_Type is (32)
+     with Static;
+
+   function Servo return Mav_Type is (33)
+     with Static;
+
+   function Odid return Mav_Type is (34)
+     with Static;
+
+   function Decarotor return Mav_Type is (35)
+     with Static;
+
+   function Battery return Mav_Type is (36)
+     with Static;
+
+   function Parachute return Mav_Type is (37)
+     with Static;
+
+   function Log return Mav_Type is (38)
+     with Static;
+
+   function Osd return Mav_Type is (39)
+     with Static;
+
+   function Imu return Mav_Type is (40)
+     with Static;
+
+   function Gps return Mav_Type is (41)
+     with Static;
+
+   function Winch return Mav_Type is (42)
+     with Static;
+
+   function Generic_Multirotor return Mav_Type is (43)
+     with Static;
+
+   function Illuminator return Mav_Type is (44)
+     with Static;
+
 
    type Mav_Mode_Flag is record
-      Mav_Mode_Flag_Custom_Mode_Enabled  : Boolean := False;
-      Mav_Mode_Flag_Test_Enabled         : Boolean := False;
-      Mav_Mode_Flag_Auto_Enabled         : Boolean := False;
-      Mav_Mode_Flag_Guided_Enabled       : Boolean := False;
-      Mav_Mode_Flag_Stabilize_Enabled    : Boolean := False;
-      Mav_Mode_Flag_Hil_Enabled          : Boolean := False;
-      Mav_Mode_Flag_Manual_Input_Enabled : Boolean := False;
-      Mav_Mode_Flag_Safety_Armed         : Boolean := False;
+      Custom_Mode_Enabled  : Boolean := False;
+      Test_Enabled         : Boolean := False;
+      Auto_Enabled         : Boolean := False;
+      Guided_Enabled       : Boolean := False;
+      Stabilize_Enabled    : Boolean := False;
+      Hil_Enabled          : Boolean := False;
+      Manual_Input_Enabled : Boolean := False;
+      Safety_Armed         : Boolean := False;
    end record with Size => 8;
    for Mav_Mode_Flag use record
-      Mav_Mode_Flag_Custom_Mode_Enabled  at 0 range 0 .. 0;
-      Mav_Mode_Flag_Test_Enabled         at 0 range 1 .. 1;
-      Mav_Mode_Flag_Auto_Enabled         at 0 range 2 .. 2;
-      Mav_Mode_Flag_Guided_Enabled       at 0 range 3 .. 3;
-      Mav_Mode_Flag_Stabilize_Enabled    at 0 range 4 .. 4;
-      Mav_Mode_Flag_Hil_Enabled          at 0 range 5 .. 5;
-      Mav_Mode_Flag_Manual_Input_Enabled at 0 range 6 .. 6;
-      Mav_Mode_Flag_Safety_Armed         at 0 range 7 .. 7;
+      Custom_Mode_Enabled  at 0 range 0 .. 0;
+      Test_Enabled         at 0 range 1 .. 1;
+      Auto_Enabled         at 0 range 2 .. 2;
+      Guided_Enabled       at 0 range 3 .. 3;
+      Stabilize_Enabled    at 0 range 4 .. 4;
+      Hil_Enabled          at 0 range 5 .. 5;
+      Manual_Input_Enabled at 0 range 6 .. 6;
+      Safety_Armed         at 0 range 7 .. 7;
    end record;
 
-   type Mav_State is
-     (Mav_State_Uninit, Mav_State_Boot, Mav_State_Calibrating, 
-      Mav_State_Standby, Mav_State_Active, Mav_State_Critical, 
-      Mav_State_Emergency, Mav_State_Poweroff, Mav_State_Flight_Termination)
-     with Size => 8;
-   for Mav_State use
-     (Mav_State_Uninit             => 0,
-      Mav_State_Boot               => 1,
-      Mav_State_Calibrating        => 2,
-      Mav_State_Standby            => 3,
-      Mav_State_Active             => 4,
-      Mav_State_Critical           => 5,
-      Mav_State_Emergency          => 6,
-      Mav_State_Poweroff           => 7,
-      Mav_State_Flight_Termination => 8);
+   type Mav_State is new Interfaces.Unsigned_8;
+
+   function Uninit return Mav_State is (0)
+     with Static;
+
+   function Boot return Mav_State is (1)
+     with Static;
+
+   function Calibrating return Mav_State is (2)
+     with Static;
+
+   function Standby return Mav_State is (3)
+     with Static;
+
+   function Active return Mav_State is (4)
+     with Static;
+
+   function Critical return Mav_State is (5)
+     with Static;
+
+   function Emergency return Mav_State is (6)
+     with Static;
+
+   function Poweroff return Mav_State is (7)
+     with Static;
+
+   function Flight_Termination return Mav_State is (8)
+     with Static;
+
 
 end MAVLink.Types;
