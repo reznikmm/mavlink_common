@@ -1,6 +1,6 @@
 # mavlink_common
 
-[![Build with Alire](https://github.com/reznikmm/mavlink_common/actions/workflows/alire.yml/badge.svg?branch=v1)](https://github.com/reznikmm/mavlink_common/actions/workflows/alire.yml)
+[![Build with Alire](https://github.com/reznikmm/mavlink_common/actions/workflows/alire.yml/badge.svg?branch=v2)](https://github.com/reznikmm/mavlink_common/actions/workflows/alire.yml)
 [![Alire](https://img.shields.io/endpoint?url=https://alire.ada.dev/badges/mavlink_common.json)](https://alire.ada.dev/crates/mavlink_common.html)
 
 > MAVLink -- Micro Air Vehicle Message Marshalling Library.
@@ -20,9 +20,9 @@ and ground control software. With support for multiple message types,
 the library offers a robust solution for developing applications that
 require communication with MAVLink-compliant devices. Features
 
-- Generated MAVLink 1.0 protocol support,
-  [Common Message Set](https://mavlink.io/en/messages/common.html).
-  (See `v2` branch for 2.0 wire protocol.)
+- Generated MAVLink 2.0 protocol support,
+  [Common Message Set](https://mavlink.io/en/messages/common.html)
+  (See `v1` branch for 1.0 wire protocol.)
 - Compatible with the Ada bareboard profiles for real-time applications
 - Modular structure for easy integration with existing Ada projects
 - Supports message serialization and deserialization
@@ -37,7 +37,7 @@ Add MAVLink as a dependency:
 
 ##  Usage
 
-TBD. See [`examples`](examples/) for now.
+TBD.
 
 ## Mavlink commit id
 
@@ -53,7 +53,7 @@ git clone --depth=1 -b version2 https://github.com/ReladormAndry/pymavlink/
 git clone --depth=1 https://github.com/mavlink/mavlink
 MDEF=$PWD/mavlink/message_definitions python -m pip install pymavlink
 
-python3 -m pymavlink.tools.mavgen --lang=Ada --wire-protocol=1.0 \
+python3 -m pymavlink.tools.mavgen --lang=Ada --wire-protocol=2.0 \
   --output=generated mavlink/message_definitions/v1.0/common.xml
 ```
 
