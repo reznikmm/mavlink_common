@@ -1,177 +1,386 @@
 
 pragma Warnings (Off); --  prevent `not used`
-with MAVLink.V1.Common.Types;
-with MAVLink.V1.Standard.Types;
-with MAVLink.V1.Minimal.Types;
+with MAVLink.V2.Common.Types;
+with MAVLink.V2.Standard.Types;
+with MAVLink.V2.Minimal.Types;
 pragma Warnings (On);
 
-with MAVLink.V1.Common.Sys_Statuses;
-with MAVLink.V1.Common.System_Times;
-with MAVLink.V1.Common.Pings;
-with MAVLink.V1.Common.Change_Operator_Controls;
-with MAVLink.V1.Common.Change_Operator_Control_Acks;
-with MAVLink.V1.Common.Auth_Keys;
-with MAVLink.V1.Common.Link_Node_Statuses;
-with MAVLink.V1.Common.Set_Modes;
-with MAVLink.V1.Common.Param_Request_Reads;
-with MAVLink.V1.Common.Param_Request_Lists;
-with MAVLink.V1.Common.Param_Values;
-with MAVLink.V1.Common.Param_Sets;
-with MAVLink.V1.Common.Gps_Raw_Ints;
-with MAVLink.V1.Common.Gps_Statuses;
-with MAVLink.V1.Common.Scaled_Imus;
-with MAVLink.V1.Common.Raw_Imus;
-with MAVLink.V1.Common.Raw_Pressures;
-with MAVLink.V1.Common.Scaled_Pressures;
-with MAVLink.V1.Common.Attitudes;
-with MAVLink.V1.Common.Attitude_Quaternions;
-with MAVLink.V1.Common.Local_Position_Neds;
-with MAVLink.V1.Common.Rc_Channels_Scaleds;
-with MAVLink.V1.Common.Rc_Channels_Raws;
-with MAVLink.V1.Common.Servo_Output_Raws;
-with MAVLink.V1.Common.Mission_Request_Partial_Lists;
-with MAVLink.V1.Common.Mission_Write_Partial_Lists;
-with MAVLink.V1.Common.Mission_Items;
-with MAVLink.V1.Common.Mission_Requests;
-with MAVLink.V1.Common.Mission_Set_Currents;
-with MAVLink.V1.Common.Mission_Currents;
-with MAVLink.V1.Common.Mission_Request_Lists;
-with MAVLink.V1.Common.Mission_Counts;
-with MAVLink.V1.Common.Mission_Clear_Alls;
-with MAVLink.V1.Common.Mission_Item_Reacheds;
-with MAVLink.V1.Common.Mission_Acks;
-with MAVLink.V1.Common.Set_Gps_Global_Origins;
-with MAVLink.V1.Common.Gps_Global_Origins;
-with MAVLink.V1.Common.Param_Map_Rcs;
-with MAVLink.V1.Common.Mission_Request_Ints;
-with MAVLink.V1.Common.Safety_Set_Allowed_Areas;
-with MAVLink.V1.Common.Safety_Allowed_Areas;
-with MAVLink.V1.Common.Attitude_Quaternion_Covs;
-with MAVLink.V1.Common.Nav_Controller_Outputs;
-with MAVLink.V1.Common.Global_Position_Int_Covs;
-with MAVLink.V1.Common.Local_Position_Ned_Covs;
-with MAVLink.V1.Common.Rc_Channelses;
-with MAVLink.V1.Common.Request_Data_Streams;
-with MAVLink.V1.Common.Data_Streams;
-with MAVLink.V1.Common.Manual_Controls;
-with MAVLink.V1.Common.Rc_Channels_Overrides;
-with MAVLink.V1.Common.Mission_Item_Ints;
-with MAVLink.V1.Common.Vfr_Huds;
-with MAVLink.V1.Common.Command_Ints;
-with MAVLink.V1.Common.Command_Longs;
-with MAVLink.V1.Common.Command_Acks;
-with MAVLink.V1.Common.Command_Cancels;
-with MAVLink.V1.Common.Manual_Setpoints;
-with MAVLink.V1.Common.Set_Attitude_Targets;
-with MAVLink.V1.Common.Attitude_Targets;
-with MAVLink.V1.Common.Set_Position_Target_Local_Neds;
-with MAVLink.V1.Common.Position_Target_Local_Neds;
-with MAVLink.V1.Common.Set_Position_Target_Global_Ints;
-with MAVLink.V1.Common.Position_Target_Global_Ints;
-with MAVLink.V1.Common.Local_Position_Ned_System_Global_Offsets;
-with MAVLink.V1.Common.Hil_States;
-with MAVLink.V1.Common.Hil_Controlses;
-with MAVLink.V1.Common.Hil_Rc_Inputs_Raws;
-with MAVLink.V1.Common.Hil_Actuator_Controlses;
-with MAVLink.V1.Common.Optical_Flows;
-with MAVLink.V1.Common.Global_Vision_Position_Estimates;
-with MAVLink.V1.Common.Vision_Position_Estimates;
-with MAVLink.V1.Common.Vision_Speed_Estimates;
-with MAVLink.V1.Common.Vicon_Position_Estimates;
-with MAVLink.V1.Common.Highres_Imus;
-with MAVLink.V1.Common.Optical_Flow_Rads;
-with MAVLink.V1.Common.Hil_Sensors;
-with MAVLink.V1.Common.Sim_States;
-with MAVLink.V1.Common.Radio_Statuses;
-with MAVLink.V1.Common.File_Transfer_Protocols;
-with MAVLink.V1.Common.Timesyncs;
-with MAVLink.V1.Common.Camera_Triggers;
-with MAVLink.V1.Common.Hil_Gpses;
-with MAVLink.V1.Common.Hil_Optical_Flows;
-with MAVLink.V1.Common.Hil_State_Quaternions;
-with MAVLink.V1.Common.Scaled_Imu2s;
-with MAVLink.V1.Common.Log_Request_Lists;
-with MAVLink.V1.Common.Log_Entrys;
-with MAVLink.V1.Common.Log_Request_Datas;
-with MAVLink.V1.Common.Log_Datas;
-with MAVLink.V1.Common.Log_Erases;
-with MAVLink.V1.Common.Log_Request_Ends;
-with MAVLink.V1.Common.Gps_Inject_Datas;
-with MAVLink.V1.Common.Gps2_Raws;
-with MAVLink.V1.Common.Power_Statuses;
-with MAVLink.V1.Common.Serial_Controls;
-with MAVLink.V1.Common.Gps_Rtks;
-with MAVLink.V1.Common.Gps2_Rtks;
-with MAVLink.V1.Common.Scaled_Imu3s;
-with MAVLink.V1.Common.Data_Transmission_Handshakes;
-with MAVLink.V1.Common.Encapsulated_Datas;
-with MAVLink.V1.Common.Distance_Sensors;
-with MAVLink.V1.Common.Terrain_Requests;
-with MAVLink.V1.Common.Terrain_Datas;
-with MAVLink.V1.Common.Terrain_Checks;
-with MAVLink.V1.Common.Terrain_Reports;
-with MAVLink.V1.Common.Scaled_Pressure2s;
-with MAVLink.V1.Common.Att_Pos_Mocaps;
-with MAVLink.V1.Common.Set_Actuator_Control_Targets;
-with MAVLink.V1.Common.Actuator_Control_Targets;
-with MAVLink.V1.Common.Altitudes;
-with MAVLink.V1.Common.Resource_Requests;
-with MAVLink.V1.Common.Scaled_Pressure3s;
-with MAVLink.V1.Common.Follow_Targets;
-with MAVLink.V1.Common.Control_System_States;
-with MAVLink.V1.Common.Battery_Statuses;
-with MAVLink.V1.Common.Landing_Targets;
-with MAVLink.V1.Common.Fence_Statuses;
-with MAVLink.V1.Common.Mag_Cal_Reports;
-with MAVLink.V1.Common.Efi_Statuses;
-with MAVLink.V1.Common.Estimator_Statuses;
-with MAVLink.V1.Common.Wind_Covs;
-with MAVLink.V1.Common.Gps_Inputs;
-with MAVLink.V1.Common.Gps_Rtcm_Datas;
-with MAVLink.V1.Common.High_Latencys;
-with MAVLink.V1.Common.High_Latency2s;
-with MAVLink.V1.Common.Vibrations;
-with MAVLink.V1.Common.Home_Positions;
-with MAVLink.V1.Common.Set_Home_Positions;
-with MAVLink.V1.Common.Message_Intervals;
-with MAVLink.V1.Common.Extended_Sys_States;
-with MAVLink.V1.Common.Adsb_Vehicles;
-with MAVLink.V1.Common.Collisions;
-with MAVLink.V1.Common.V2_Extensions;
-with MAVLink.V1.Common.Memory_Vects;
-with MAVLink.V1.Common.Debug_Vects;
-with MAVLink.V1.Common.Named_Value_Floats;
-with MAVLink.V1.Common.Named_Value_Ints;
-with MAVLink.V1.Common.Statustexts;
-with MAVLink.V1.Common.Debugs;
-with MAVLink.V1.Standard.Global_Position_Ints;
-with MAVLink.V1.Standard.Autopilot_Versions;
-with MAVLink.V1.Minimal.Heartbeats;
+with MAVLink.V2.Common.Sys_Statuses;
+with MAVLink.V2.Common.System_Times;
+with MAVLink.V2.Common.Pings;
+with MAVLink.V2.Common.Change_Operator_Controls;
+with MAVLink.V2.Common.Change_Operator_Control_Acks;
+with MAVLink.V2.Common.Auth_Keys;
+with MAVLink.V2.Common.Link_Node_Statuses;
+with MAVLink.V2.Common.Set_Modes;
+with MAVLink.V2.Common.Param_Request_Reads;
+with MAVLink.V2.Common.Param_Request_Lists;
+with MAVLink.V2.Common.Param_Values;
+with MAVLink.V2.Common.Param_Sets;
+with MAVLink.V2.Common.Gps_Raw_Ints;
+with MAVLink.V2.Common.Gps_Statuses;
+with MAVLink.V2.Common.Scaled_Imus;
+with MAVLink.V2.Common.Raw_Imus;
+with MAVLink.V2.Common.Raw_Pressures;
+with MAVLink.V2.Common.Scaled_Pressures;
+with MAVLink.V2.Common.Attitudes;
+with MAVLink.V2.Common.Attitude_Quaternions;
+with MAVLink.V2.Common.Local_Position_Neds;
+with MAVLink.V2.Common.Rc_Channels_Scaleds;
+with MAVLink.V2.Common.Rc_Channels_Raws;
+with MAVLink.V2.Common.Servo_Output_Raws;
+with MAVLink.V2.Common.Mission_Request_Partial_Lists;
+with MAVLink.V2.Common.Mission_Write_Partial_Lists;
+with MAVLink.V2.Common.Mission_Items;
+with MAVLink.V2.Common.Mission_Requests;
+with MAVLink.V2.Common.Mission_Set_Currents;
+with MAVLink.V2.Common.Mission_Currents;
+with MAVLink.V2.Common.Mission_Request_Lists;
+with MAVLink.V2.Common.Mission_Counts;
+with MAVLink.V2.Common.Mission_Clear_Alls;
+with MAVLink.V2.Common.Mission_Item_Reacheds;
+with MAVLink.V2.Common.Mission_Acks;
+with MAVLink.V2.Common.Set_Gps_Global_Origins;
+with MAVLink.V2.Common.Gps_Global_Origins;
+with MAVLink.V2.Common.Param_Map_Rcs;
+with MAVLink.V2.Common.Mission_Request_Ints;
+with MAVLink.V2.Common.Safety_Set_Allowed_Areas;
+with MAVLink.V2.Common.Safety_Allowed_Areas;
+with MAVLink.V2.Common.Attitude_Quaternion_Covs;
+with MAVLink.V2.Common.Nav_Controller_Outputs;
+with MAVLink.V2.Common.Global_Position_Int_Covs;
+with MAVLink.V2.Common.Local_Position_Ned_Covs;
+with MAVLink.V2.Common.Rc_Channelses;
+with MAVLink.V2.Common.Request_Data_Streams;
+with MAVLink.V2.Common.Data_Streams;
+with MAVLink.V2.Common.Manual_Controls;
+with MAVLink.V2.Common.Rc_Channels_Overrides;
+with MAVLink.V2.Common.Mission_Item_Ints;
+with MAVLink.V2.Common.Vfr_Huds;
+with MAVLink.V2.Common.Command_Ints;
+with MAVLink.V2.Common.Command_Longs;
+with MAVLink.V2.Common.Command_Acks;
+with MAVLink.V2.Common.Command_Cancels;
+with MAVLink.V2.Common.Manual_Setpoints;
+with MAVLink.V2.Common.Set_Attitude_Targets;
+with MAVLink.V2.Common.Attitude_Targets;
+with MAVLink.V2.Common.Set_Position_Target_Local_Neds;
+with MAVLink.V2.Common.Position_Target_Local_Neds;
+with MAVLink.V2.Common.Set_Position_Target_Global_Ints;
+with MAVLink.V2.Common.Position_Target_Global_Ints;
+with MAVLink.V2.Common.Local_Position_Ned_System_Global_Offsets;
+with MAVLink.V2.Common.Hil_States;
+with MAVLink.V2.Common.Hil_Controlses;
+with MAVLink.V2.Common.Hil_Rc_Inputs_Raws;
+with MAVLink.V2.Common.Hil_Actuator_Controlses;
+with MAVLink.V2.Common.Optical_Flows;
+with MAVLink.V2.Common.Global_Vision_Position_Estimates;
+with MAVLink.V2.Common.Vision_Position_Estimates;
+with MAVLink.V2.Common.Vision_Speed_Estimates;
+with MAVLink.V2.Common.Vicon_Position_Estimates;
+with MAVLink.V2.Common.Highres_Imus;
+with MAVLink.V2.Common.Optical_Flow_Rads;
+with MAVLink.V2.Common.Hil_Sensors;
+with MAVLink.V2.Common.Sim_States;
+with MAVLink.V2.Common.Radio_Statuses;
+with MAVLink.V2.Common.File_Transfer_Protocols;
+with MAVLink.V2.Common.Timesyncs;
+with MAVLink.V2.Common.Camera_Triggers;
+with MAVLink.V2.Common.Hil_Gpses;
+with MAVLink.V2.Common.Hil_Optical_Flows;
+with MAVLink.V2.Common.Hil_State_Quaternions;
+with MAVLink.V2.Common.Scaled_Imu2s;
+with MAVLink.V2.Common.Log_Request_Lists;
+with MAVLink.V2.Common.Log_Entrys;
+with MAVLink.V2.Common.Log_Request_Datas;
+with MAVLink.V2.Common.Log_Datas;
+with MAVLink.V2.Common.Log_Erases;
+with MAVLink.V2.Common.Log_Request_Ends;
+with MAVLink.V2.Common.Gps_Inject_Datas;
+with MAVLink.V2.Common.Gps2_Raws;
+with MAVLink.V2.Common.Power_Statuses;
+with MAVLink.V2.Common.Serial_Controls;
+with MAVLink.V2.Common.Gps_Rtks;
+with MAVLink.V2.Common.Gps2_Rtks;
+with MAVLink.V2.Common.Scaled_Imu3s;
+with MAVLink.V2.Common.Data_Transmission_Handshakes;
+with MAVLink.V2.Common.Encapsulated_Datas;
+with MAVLink.V2.Common.Distance_Sensors;
+with MAVLink.V2.Common.Terrain_Requests;
+with MAVLink.V2.Common.Terrain_Datas;
+with MAVLink.V2.Common.Terrain_Checks;
+with MAVLink.V2.Common.Terrain_Reports;
+with MAVLink.V2.Common.Scaled_Pressure2s;
+with MAVLink.V2.Common.Att_Pos_Mocaps;
+with MAVLink.V2.Common.Set_Actuator_Control_Targets;
+with MAVLink.V2.Common.Actuator_Control_Targets;
+with MAVLink.V2.Common.Altitudes;
+with MAVLink.V2.Common.Resource_Requests;
+with MAVLink.V2.Common.Scaled_Pressure3s;
+with MAVLink.V2.Common.Follow_Targets;
+with MAVLink.V2.Common.Control_System_States;
+with MAVLink.V2.Common.Battery_Statuses;
+with MAVLink.V2.Common.Landing_Targets;
+with MAVLink.V2.Common.Fence_Statuses;
+with MAVLink.V2.Common.Mag_Cal_Reports;
+with MAVLink.V2.Common.Efi_Statuses;
+with MAVLink.V2.Common.Estimator_Statuses;
+with MAVLink.V2.Common.Wind_Covs;
+with MAVLink.V2.Common.Gps_Inputs;
+with MAVLink.V2.Common.Gps_Rtcm_Datas;
+with MAVLink.V2.Common.High_Latencys;
+with MAVLink.V2.Common.High_Latency2s;
+with MAVLink.V2.Common.Vibrations;
+with MAVLink.V2.Common.Home_Positions;
+with MAVLink.V2.Common.Set_Home_Positions;
+with MAVLink.V2.Common.Message_Intervals;
+with MAVLink.V2.Common.Extended_Sys_States;
+with MAVLink.V2.Common.Adsb_Vehicles;
+with MAVLink.V2.Common.Collisions;
+with MAVLink.V2.Common.V2_Extensions;
+with MAVLink.V2.Common.Memory_Vects;
+with MAVLink.V2.Common.Debug_Vects;
+with MAVLink.V2.Common.Named_Value_Floats;
+with MAVLink.V2.Common.Named_Value_Ints;
+with MAVLink.V2.Common.Statustexts;
+with MAVLink.V2.Common.Debugs;
+with MAVLink.V2.Common.Setup_Signings;
+with MAVLink.V2.Common.Button_Changes;
+with MAVLink.V2.Common.Play_Tunes;
+with MAVLink.V2.Common.Camera_Informations;
+with MAVLink.V2.Common.Camera_Settingses;
+with MAVLink.V2.Common.Storage_Informations;
+with MAVLink.V2.Common.Camera_Capture_Statuses;
+with MAVLink.V2.Common.Camera_Image_Captureds;
+with MAVLink.V2.Common.Flight_Informations;
+with MAVLink.V2.Common.Mount_Orientations;
+with MAVLink.V2.Common.Logging_Datas;
+with MAVLink.V2.Common.Logging_Data_Ackeds;
+with MAVLink.V2.Common.Logging_Acks;
+with MAVLink.V2.Common.Video_Stream_Informations;
+with MAVLink.V2.Common.Video_Stream_Statuses;
+with MAVLink.V2.Common.Camera_Fov_Statuses;
+with MAVLink.V2.Common.Camera_Tracking_Image_Statuses;
+with MAVLink.V2.Common.Camera_Tracking_Geo_Statuses;
+with MAVLink.V2.Common.Camera_Thermal_Ranges;
+with MAVLink.V2.Common.Gimbal_Manager_Informations;
+with MAVLink.V2.Common.Gimbal_Manager_Statuses;
+with MAVLink.V2.Common.Gimbal_Manager_Set_Attitudes;
+with MAVLink.V2.Common.Gimbal_Device_Informations;
+with MAVLink.V2.Common.Gimbal_Device_Set_Attitudes;
+with MAVLink.V2.Common.Gimbal_Device_Attitude_Statuses;
+with MAVLink.V2.Common.Autopilot_State_For_Gimbal_Devices;
+with MAVLink.V2.Common.Gimbal_Manager_Set_Pitchyaws;
+with MAVLink.V2.Common.Gimbal_Manager_Set_Manual_Controls;
+with MAVLink.V2.Common.Esc_Infos;
+with MAVLink.V2.Common.Esc_Statuses;
+with MAVLink.V2.Common.Wifi_Config_Aps;
+with MAVLink.V2.Common.Ais_Vessels;
+with MAVLink.V2.Common.Uavcan_Node_Statuses;
+with MAVLink.V2.Common.Uavcan_Node_Infos;
+with MAVLink.V2.Common.Param_Ext_Request_Reads;
+with MAVLink.V2.Common.Param_Ext_Request_Lists;
+with MAVLink.V2.Common.Param_Ext_Values;
+with MAVLink.V2.Common.Param_Ext_Sets;
+with MAVLink.V2.Common.Param_Ext_Acks;
+with MAVLink.V2.Common.Obstacle_Distances;
+with MAVLink.V2.Common.Odometrys;
+with MAVLink.V2.Common.Trajectory_Representation_Waypointses;
+with MAVLink.V2.Common.Trajectory_Representation_Beziers;
+with MAVLink.V2.Common.Cellular_Statuses;
+with MAVLink.V2.Common.Isbd_Link_Statuses;
+with MAVLink.V2.Common.Cellular_Configs;
+with MAVLink.V2.Common.Raw_Rpms;
+with MAVLink.V2.Common.Utm_Global_Positions;
+with MAVLink.V2.Common.Param_Errors;
+with MAVLink.V2.Common.Debug_Float_Arrays;
+with MAVLink.V2.Common.Orbit_Execution_Statuses;
+with MAVLink.V2.Common.Smart_Battery_Infos;
+with MAVLink.V2.Common.Fuel_Statuses;
+with MAVLink.V2.Common.Battery_Infos;
+with MAVLink.V2.Common.Generator_Statuses;
+with MAVLink.V2.Common.Actuator_Output_Statuses;
+with MAVLink.V2.Common.Time_Estimate_To_Targets;
+with MAVLink.V2.Common.Tunnels;
+with MAVLink.V2.Common.Can_Frames;
+with MAVLink.V2.Common.Onboard_Computer_Statuses;
+with MAVLink.V2.Common.Component_Informations;
+with MAVLink.V2.Common.Component_Information_Basics;
+with MAVLink.V2.Common.Component_Metadatas;
+with MAVLink.V2.Common.Play_Tune_V2s;
+with MAVLink.V2.Common.Supported_Tuneses;
+with MAVLink.V2.Common.Events;
+with MAVLink.V2.Common.Current_Event_Sequences;
+with MAVLink.V2.Common.Request_Events;
+with MAVLink.V2.Common.Response_Event_Errors;
+with MAVLink.V2.Common.Available_Modeses;
+with MAVLink.V2.Common.Current_Modes;
+with MAVLink.V2.Common.Available_Modes_Monitors;
+with MAVLink.V2.Common.Illuminator_Statuses;
+with MAVLink.V2.Common.Canfd_Frames;
+with MAVLink.V2.Common.Can_Filter_Modifys;
+with MAVLink.V2.Common.Wheel_Distances;
+with MAVLink.V2.Common.Winch_Statuses;
+with MAVLink.V2.Common.Open_Drone_Id_Basic_Ids;
+with MAVLink.V2.Common.Open_Drone_Id_Locations;
+with MAVLink.V2.Common.Open_Drone_Id_Authentications;
+with MAVLink.V2.Common.Open_Drone_Id_Self_Ids;
+with MAVLink.V2.Common.Open_Drone_Id_Systems;
+with MAVLink.V2.Common.Open_Drone_Id_Operator_Ids;
+with MAVLink.V2.Common.Open_Drone_Id_Message_Packs;
+with MAVLink.V2.Common.Open_Drone_Id_Arm_Statuses;
+with MAVLink.V2.Common.Open_Drone_Id_System_Updates;
+with MAVLink.V2.Common.Hygrometer_Sensors;
+with MAVLink.V2.Standard.Global_Position_Ints;
+with MAVLink.V2.Standard.Autopilot_Versions;
+with MAVLink.V2.Minimal.Heartbeats;
+with MAVLink.V2.Minimal.Protocol_Versions;
 
 with Ada.Text_IO;
 
 pragma Warnings (Off); --  prevent "not used"
-with MAVLink.Raw_Floats; use MAVLink.Raw_Floats;
+with MAVLink.Raw_Floats;      use MAVLink.Raw_Floats;
 with MAVLink.Raw_Long_Floats; use MAVLink.Raw_Long_Floats;
+with MAVLink.SHA_256;
 pragma Warnings (On);
 
-use MAVLink.V1;
+use MAVLink.V2;
 
 procedure Test
 is
-   In_Connect  : MAVLink.V1.Connection;
-   Out_Connect : MAVLink.V1.Out_Connection;
+   D1 : constant MAVLink.SHA_256.Data  := [16#61#, 16#62#, 16#63#];
+   R1 : constant MAVLink.SHA_256.State :=
+     [16#ba7816bf#, 16#8f01cfea#, 16#414140de#, 16#5dae2223#,
+      16#b00361a3#, 16#96177a9c#, 16#b410ff61#, 16#f20015ad#];
+
+   D2 : constant MAVLink.SHA_256.Data :=
+     [16#61#, 16#62#, 16#63#, 16#64#, 16#62#, 16#63#, 16#64#, 16#65#, 16#63#,
+      16#64#, 16#65#, 16#66#, 16#64#, 16#65#, 16#66#, 16#67#, 16#65#, 16#66#,
+      16#67#, 16#68#, 16#66#, 16#67#, 16#68#, 16#69#, 16#67#, 16#68#, 16#69#,
+      16#6a#, 16#68#, 16#69#, 16#6a#, 16#6b#, 16#69#, 16#6a#, 16#6b#, 16#6c#,
+      16#6a#, 16#6b#, 16#6c#, 16#6d#, 16#6b#, 16#6c#, 16#6d#, 16#6e#, 16#6c#,
+      16#6d#, 16#6e#, 16#6f#, 16#6d#, 16#6e#, 16#6f#, 16#70#, 16#6e#, 16#6f#,
+      16#70#, 16#71#];
+   R2 : constant MAVLink.SHA_256.State :=
+     [16#248d6a61#, 16#d20638b8#, 16#e5c02693#, 16#0c3e6039#,
+      16#a33ce459#, 16#64ff2167#, 16#f6ecedd4#, 16#19db06c1#];
+
+   D3 : constant MAVLink.SHA_256.Data :=
+     [16#6C#, 16#6F#, 16#6E#, 16#67#, 16#5F#, 16#70#, 16#61#, 16#73#, 16#73#,
+      16#77#, 16#6F#, 16#72#, 16#64#, 16#fd#, 16#05#, 16#01#, 16#00#, 16#00#,
+      16#01#, 16#01#, 16#78#, 16#32#, 16#00#, 16#01#, 16#00#, 16#00#, 16#00#,
+      16#01#, 16#08#, 16#98#, 16#01#, 16#c8#, 16#00#, 16#00#, 16#00#, 16#00#,
+      16#00#];
+   R3 : constant MAVLink.SHA_256.State :=
+     [16#48c298bd#, 16#a123637a#, 16#f1103486#, 16#180a716a#,
+      16#9c41e4b1#, 16#42293472#, 16#ea587ff5#, 16#247d5943#];
+   T  : Data_Buffer (1 .. 32) with Import, Address => R3'Address;
+
+   procedure Do_SHA_256_Test (D : MAVLink.SHA_256.Data; R : MAVLink.SHA_256.State);
+   procedure Do_SHA_256_Test (D : MAVLink.SHA_256.Data; R : MAVLink.SHA_256.State)
+   is
+      use type MAVLink.SHA_256.State;
+
+      Checksum : MAVLink.SHA_256.Context;
+      Result   : MAVLink.SHA_256.Digest_Type;
+      Res      : MAVLink.SHA_256.State (1 .. 8) with Import,
+        Address => Result'Address;
+   begin
+      MAVLink.SHA_256.Update (Checksum, D);
+      MAVLink.SHA_256.Digest (Checksum, Result);
+      pragma Assert (Res = R);
+   end Do_SHA_256_Test;
+
+   Hygrometer_Sensors_Data : constant Data_Buffer :=
+     [253, 5, 1, 0, 0, 1, 1, 120, 50,  0, --  Header
+      1, 0, 0, 0, 1, --  Message
+      8, 152, --  CRC
+      1, -- Link_Id
+      200, 0, 0, 0, 0, 0, --  Timestamp
+      189, 152, 194, 72,  122, 99]; --  SHA
+
+   Sig         : MAVLink.V2.Signature;
+   In_Connect  : MAVLink.V2.Connection;
+   Out_Connect : MAVLink.V2.Out_Connection;
+   Pass        : constant String := "long_password";
+   Pass_Data   : Signature_Key (1 .. Pass'Length) with Import,
+     Address => Pass'Address;
    Res         : Boolean;
-   Buffer      : Data_Buffer (1 .. MAVLink.V1.Maximum_Buffer_Len);
+
+   Seq         : Sequence_Id_Type;
+   Sys_Id      : System_Id_Type;
+   Comp_Id     : Component_Id_Type;
+   Id          : Msg_Id;
+   Link_Id     : Link_Id_Type;
+   Timestamp   : Timestamp_Type;
+   Signature   : Three_Boolean;
+   Buffer      : Data_Buffer (1 .. MAVLink.V2.Maximum_Buffer_Len);
    Last        : Positive;
 
 begin
+   Initialize (Sig,  1, Pass_Data, 200);
    Set_System_Id (In_Connect, 1);
    Set_Component_Id (In_Connect, 1);
    Set_System_Id (Out_Connect, 1);
    Set_Component_Id (Out_Connect, 1);
+
+   Do_SHA_256_Test (D1, R1);
+   Do_SHA_256_Test (D2, R2);
+   Do_SHA_256_Test (D3, R3);
+
+   -- Income
+   for Index in Hygrometer_Sensors_Data'First ..
+     Hygrometer_Sensors_Data'Last
+   loop
+      Res := Parse_Byte (In_Connect, Hygrometer_Sensors_Data (Index));
+   end loop;
+   pragma Assert (Res);
+
+   Get_Message_Information
+     (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+
+   pragma Assert (Seq = 0);
+   pragma Assert (Sys_Id = 1);
+   pragma Assert (Comp_Id = 1);
+   pragma Assert
+     (Id =
+        MAVLink.V2.Common.Hygrometer_Sensor_Id);
+   pragma Assert (Link_Id = 1);
+   pragma Assert (Timestamp = 200);
+   pragma Assert (Signature = True);
+
+   -- In / Out
    declare
-      use MAVLink.V1.Common.Sys_Statuses;
+      use MAVLink.V2.Common.Hygrometer_Sensors;
+      M : constant Hygrometer_Sensor :=
+        (Id => 1, Temperature => 1, Humidity => 0);
+      O : Hygrometer_Sensor;
+   begin
+      Encode (M, Out_Connect, Sig, Buffer, Last);
+      pragma Assert (Last = 30);
+
+      for Index in Buffer'First .. Last loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+      end loop;
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+
+      pragma Assert (Seq = 0);
+      pragma Assert (Sys_Id = 1);
+      pragma Assert (Comp_Id = 1);
+      pragma Assert (Id = MAVLink.V2.Common.Hygrometer_Sensor_Id);
+      pragma Assert (Link_Id = 1);
+      pragma Assert (Timestamp = 200);
+      pragma Assert (Signature = True);
+
+      Decode (O, In_Connect, Res);
+      pragma Assert (M = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Sys_Statuses;
       I : Sys_Status;
       O : constant Sys_Status :=
          (Onboard_Control_Sensors_Present => <>,
@@ -186,14 +395,23 @@ begin
           Errors_Count1 => 2,
           Errors_Count2 => 2,
           Errors_Count3 => 2,
-          Errors_Count4 => 2);
+          Errors_Count4 => 2,
+          Onboard_Control_Sensors_Present_Extended => <>,
+          Onboard_Control_Sensors_Enabled_Extended => <>,
+          Onboard_Control_Sensors_Health_Extended => <>);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -201,18 +419,24 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.System_Times;
+      use MAVLink.V2.Common.System_Times;
       I : System_Time;
       O : constant System_Time :=
          (Time_Unix_Usec => 4,
           Time_Boot_Ms => 3);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -220,7 +444,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Pings;
+      use MAVLink.V2.Common.Pings;
       I : Ping;
       O : constant Ping :=
          (Time_Usec => 4,
@@ -228,12 +452,18 @@ begin
           Target_System => 1,
           Target_Component => 1);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -241,7 +471,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Change_Operator_Controls;
+      use MAVLink.V2.Common.Change_Operator_Controls;
       I : Change_Operator_Control;
       O : constant Change_Operator_Control :=
          (Target_System => 1,
@@ -249,12 +479,18 @@ begin
           Version => 1,
           Passkey => [others => 'A']);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -262,19 +498,25 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Change_Operator_Control_Acks;
+      use MAVLink.V2.Common.Change_Operator_Control_Acks;
       I : Change_Operator_Control_Ack;
       O : constant Change_Operator_Control_Ack :=
          (Gcs_System_Id => 1,
           Control_Request => 1,
           Ack => 1);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -282,17 +524,23 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Auth_Keys;
+      use MAVLink.V2.Common.Auth_Keys;
       I : Auth_Key;
       O : constant Auth_Key :=
          (Key => [others => 'A']);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -300,7 +548,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Link_Node_Statuses;
+      use MAVLink.V2.Common.Link_Node_Statuses;
       I : Link_Node_Status;
       O : constant Link_Node_Status :=
          (Timestamp => 4,
@@ -315,12 +563,18 @@ begin
           Messages_Received => 3,
           Messages_Lost => 3);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -328,19 +582,25 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Set_Modes;
+      use MAVLink.V2.Common.Set_Modes;
       I : Set_Mode;
       O : constant Set_Mode :=
          (Target_System => 1,
-          Base_Mode => MAVLink.V1.Common.Types.Mav_Mode'First,
+          Base_Mode => MAVLink.V2.Common.Types.Mav_Mode'First,
           Custom_Mode => 3);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -348,7 +608,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Param_Request_Reads;
+      use MAVLink.V2.Common.Param_Request_Reads;
       I : Param_Request_Read;
       O : constant Param_Request_Read :=
          (Target_System => 1,
@@ -356,12 +616,18 @@ begin
           Param_Id => [others => 'A'],
           Param_Index => <>);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -369,18 +635,24 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Param_Request_Lists;
+      use MAVLink.V2.Common.Param_Request_Lists;
       I : Param_Request_List;
       O : constant Param_Request_List :=
          (Target_System => 1,
           Target_Component => 1);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -388,21 +660,27 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Param_Values;
+      use MAVLink.V2.Common.Param_Values;
       I : Param_Value;
       O : constant Param_Value :=
          (Param_Id => [others => 'A'],
           Param_Value => To_Raw (9.9),
-          Param_Type => MAVLink.V1.Common.Types.Mav_Param_Type'First,
+          Param_Type => MAVLink.V2.Common.Types.Mav_Param_Type'First,
           Param_Count => 2,
           Param_Index => 2);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -410,21 +688,27 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Param_Sets;
+      use MAVLink.V2.Common.Param_Sets;
       I : Param_Set;
       O : constant Param_Set :=
          (Target_System => 1,
           Target_Component => 1,
           Param_Id => [others => 'A'],
           Param_Value => To_Raw (9.9),
-          Param_Type => MAVLink.V1.Common.Types.Mav_Param_Type'First);
+          Param_Type => MAVLink.V2.Common.Types.Mav_Param_Type'First);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -432,11 +716,11 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Gps_Raw_Ints;
+      use MAVLink.V2.Common.Gps_Raw_Ints;
       I : Gps_Raw_Int;
       O : constant Gps_Raw_Int :=
          (Time_Usec => 4,
-          Fix_Type => MAVLink.V1.Common.Types.Gps_Fix_Type'First,
+          Fix_Type => MAVLink.V2.Common.Types.Gps_Fix_Type'First,
           Lat => 7,
           Lon => 7,
           Alt => 7,
@@ -444,14 +728,26 @@ begin
           Epv => <>,
           Vel => <>,
           Cog => <>,
-          Satellites_Visible => <>);
+          Satellites_Visible => <>,
+          Alt_Ellipsoid => 7,
+          H_Acc => 3,
+          V_Acc => 3,
+          Vel_Acc => 3,
+          Hdg_Acc => 3,
+          Yaw => <>);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -459,7 +755,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Gps_Statuses;
+      use MAVLink.V2.Common.Gps_Statuses;
       I : Gps_Status;
       O : constant Gps_Status :=
          (Satellites_Visible => 1,
@@ -469,12 +765,18 @@ begin
           Satellite_Azimuth => [others => 1],
           Satellite_Snr => [others => 1]);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -482,7 +784,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Scaled_Imus;
+      use MAVLink.V2.Common.Scaled_Imus;
       I : Scaled_Imu;
       O : constant Scaled_Imu :=
          (Time_Boot_Ms => 3,
@@ -494,14 +796,21 @@ begin
           Zgyro => 6,
           Xmag => 6,
           Ymag => 6,
-          Zmag => 6);
+          Zmag => 6,
+          Temperature => 6);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -509,7 +818,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Raw_Imus;
+      use MAVLink.V2.Common.Raw_Imus;
       I : Raw_Imu;
       O : constant Raw_Imu :=
          (Time_Usec => 4,
@@ -521,14 +830,22 @@ begin
           Zgyro => 6,
           Xmag => 6,
           Ymag => 6,
-          Zmag => 6);
+          Zmag => 6,
+          Id => 1,
+          Temperature => 6);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -536,7 +853,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Raw_Pressures;
+      use MAVLink.V2.Common.Raw_Pressures;
       I : Raw_Pressure;
       O : constant Raw_Pressure :=
          (Time_Usec => 4,
@@ -545,12 +862,18 @@ begin
           Press_Diff2 => <>,
           Temperature => 6);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -558,20 +881,27 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Scaled_Pressures;
+      use MAVLink.V2.Common.Scaled_Pressures;
       I : Scaled_Pressure;
       O : constant Scaled_Pressure :=
          (Time_Boot_Ms => 3,
           Press_Abs => To_Raw (9.9),
           Press_Diff => To_Raw (9.9),
-          Temperature => 6);
+          Temperature => 6,
+          Temperature_Press_Diff => <>);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -579,7 +909,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Attitudes;
+      use MAVLink.V2.Common.Attitudes;
       I : Attitude;
       O : constant Attitude :=
          (Time_Boot_Ms => 3,
@@ -590,12 +920,18 @@ begin
           Pitchspeed => To_Raw (9.9),
           Yawspeed => To_Raw (9.9));
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -603,7 +939,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Attitude_Quaternions;
+      use MAVLink.V2.Common.Attitude_Quaternions;
       I : Attitude_Quaternion;
       O : constant Attitude_Quaternion :=
          (Time_Boot_Ms => 3,
@@ -613,14 +949,21 @@ begin
           Q4 => To_Raw (9.9),
           Rollspeed => To_Raw (9.9),
           Pitchspeed => To_Raw (9.9),
-          Yawspeed => To_Raw (9.9));
+          Yawspeed => To_Raw (9.9),
+          Repr_Offset_Q => <>);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -628,7 +971,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Local_Position_Neds;
+      use MAVLink.V2.Common.Local_Position_Neds;
       I : Local_Position_Ned;
       O : constant Local_Position_Ned :=
          (Time_Boot_Ms => 3,
@@ -639,12 +982,18 @@ begin
           Vy => To_Raw (9.9),
           Vz => To_Raw (9.9));
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -652,7 +1001,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Rc_Channels_Scaleds;
+      use MAVLink.V2.Common.Rc_Channels_Scaleds;
       I : Rc_Channels_Scaled;
       O : constant Rc_Channels_Scaled :=
          (Time_Boot_Ms => 3,
@@ -667,12 +1016,18 @@ begin
           Chan8_Scaled => <>,
           Rssi => <>);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -680,7 +1035,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Rc_Channels_Raws;
+      use MAVLink.V2.Common.Rc_Channels_Raws;
       I : Rc_Channels_Raw;
       O : constant Rc_Channels_Raw :=
          (Time_Boot_Ms => 3,
@@ -695,12 +1050,18 @@ begin
           Chan8_Raw => <>,
           Rssi => <>);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -708,7 +1069,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Servo_Output_Raws;
+      use MAVLink.V2.Common.Servo_Output_Raws;
       I : Servo_Output_Raw;
       O : constant Servo_Output_Raw :=
          (Time_Usec => 3,
@@ -720,14 +1081,28 @@ begin
           Servo5_Raw => 2,
           Servo6_Raw => 2,
           Servo7_Raw => 2,
-          Servo8_Raw => 2);
+          Servo8_Raw => 2,
+          Servo9_Raw => 2,
+          Servo10_Raw => 2,
+          Servo11_Raw => 2,
+          Servo12_Raw => 2,
+          Servo13_Raw => 2,
+          Servo14_Raw => 2,
+          Servo15_Raw => 2,
+          Servo16_Raw => 2);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -735,20 +1110,27 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Mission_Request_Partial_Lists;
+      use MAVLink.V2.Common.Mission_Request_Partial_Lists;
       I : Mission_Request_Partial_List;
       O : constant Mission_Request_Partial_List :=
          (Target_System => 1,
           Target_Component => 1,
           Start_Index => 6,
-          End_Index => 6);
+          End_Index => 6,
+          Mission_Type => MAVLink.V2.Common.Types.Mav_Mission_Type'First);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -756,20 +1138,27 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Mission_Write_Partial_Lists;
+      use MAVLink.V2.Common.Mission_Write_Partial_Lists;
       I : Mission_Write_Partial_List;
       O : constant Mission_Write_Partial_List :=
          (Target_System => 1,
           Target_Component => 1,
           Start_Index => 6,
-          End_Index => 6);
+          End_Index => 6,
+          Mission_Type => MAVLink.V2.Common.Types.Mav_Mission_Type'First);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -777,14 +1166,14 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Mission_Items;
+      use MAVLink.V2.Common.Mission_Items;
       I : Mission_Item;
       O : constant Mission_Item :=
          (Target_System => 1,
           Target_Component => 1,
           Seq => 2,
-          Frame => MAVLink.V1.Common.Types.Mav_Frame'First,
-          Command => MAVLink.V1.Common.Types.Mav_Cmd'First,
+          Frame => MAVLink.V2.Common.Types.Mav_Frame'First,
+          Command => MAVLink.V2.Common.Types.Mav_Cmd'First,
           Current => 1,
           Autocontinue => 1,
           Param1 => To_Raw (9.9),
@@ -793,14 +1182,21 @@ begin
           Param4 => To_Raw (9.9),
           X => To_Raw (9.9),
           Y => To_Raw (9.9),
-          Z => To_Raw (9.9));
+          Z => To_Raw (9.9),
+          Mission_Type => MAVLink.V2.Common.Types.Mav_Mission_Type'First);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -808,19 +1204,26 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Mission_Requests;
+      use MAVLink.V2.Common.Mission_Requests;
       I : Mission_Request;
       O : constant Mission_Request :=
          (Target_System => 1,
           Target_Component => 1,
-          Seq => 2);
+          Seq => 2,
+          Mission_Type => MAVLink.V2.Common.Types.Mav_Mission_Type'First);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -828,19 +1231,25 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Mission_Set_Currents;
+      use MAVLink.V2.Common.Mission_Set_Currents;
       I : Mission_Set_Current;
       O : constant Mission_Set_Current :=
          (Target_System => 1,
           Target_Component => 1,
           Seq => 2);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -848,17 +1257,29 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Mission_Currents;
+      use MAVLink.V2.Common.Mission_Currents;
       I : Mission_Current;
       O : constant Mission_Current :=
-         (Seq => 2);
+         (Seq => 2,
+          Total => <>,
+          Mission_State => <>,
+          Mission_Mode => <>,
+          Mission_Id => <>,
+          Fence_Id => <>,
+          Rally_Points_Id => <>);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -866,18 +1287,25 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Mission_Request_Lists;
+      use MAVLink.V2.Common.Mission_Request_Lists;
       I : Mission_Request_List;
       O : constant Mission_Request_List :=
          (Target_System => 1,
-          Target_Component => 1);
+          Target_Component => 1,
+          Mission_Type => MAVLink.V2.Common.Types.Mav_Mission_Type'First);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -885,19 +1313,27 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Mission_Counts;
+      use MAVLink.V2.Common.Mission_Counts;
       I : Mission_Count;
       O : constant Mission_Count :=
          (Target_System => 1,
           Target_Component => 1,
-          Count => 2);
+          Count => 2,
+          Mission_Type => MAVLink.V2.Common.Types.Mav_Mission_Type'First,
+          Opaque_Id => <>);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -905,18 +1341,25 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Mission_Clear_Alls;
+      use MAVLink.V2.Common.Mission_Clear_Alls;
       I : Mission_Clear_All;
       O : constant Mission_Clear_All :=
          (Target_System => 1,
-          Target_Component => 1);
+          Target_Component => 1,
+          Mission_Type => MAVLink.V2.Common.Types.Mav_Mission_Type'First);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -924,17 +1367,23 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Mission_Item_Reacheds;
+      use MAVLink.V2.Common.Mission_Item_Reacheds;
       I : Mission_Item_Reached;
       O : constant Mission_Item_Reached :=
          (Seq => 2);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -942,19 +1391,27 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Mission_Acks;
+      use MAVLink.V2.Common.Mission_Acks;
       I : Mission_Ack;
       O : constant Mission_Ack :=
          (Target_System => 1,
           Target_Component => 1,
-          Type_Field => MAVLink.V1.Common.Types.Mav_Mission_Result'First);
+          Type_Field => MAVLink.V2.Common.Types.Mav_Mission_Result'First,
+          Mission_Type => MAVLink.V2.Common.Types.Mav_Mission_Type'First,
+          Opaque_Id => <>);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -962,20 +1419,27 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Set_Gps_Global_Origins;
+      use MAVLink.V2.Common.Set_Gps_Global_Origins;
       I : Set_Gps_Global_Origin;
       O : constant Set_Gps_Global_Origin :=
          (Target_System => 1,
           Latitude => 7,
           Longitude => 7,
-          Altitude => 7);
+          Altitude => 7,
+          Time_Usec => 4);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -983,19 +1447,26 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Gps_Global_Origins;
+      use MAVLink.V2.Common.Gps_Global_Origins;
       I : Gps_Global_Origin;
       O : constant Gps_Global_Origin :=
          (Latitude => 7,
           Longitude => 7,
-          Altitude => 7);
+          Altitude => 7,
+          Time_Usec => 4);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -1003,7 +1474,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Param_Map_Rcs;
+      use MAVLink.V2.Common.Param_Map_Rcs;
       I : Param_Map_Rc;
       O : constant Param_Map_Rc :=
          (Target_System => 1,
@@ -1016,12 +1487,18 @@ begin
           Param_Value_Min => To_Raw (9.9),
           Param_Value_Max => To_Raw (9.9));
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -1029,19 +1506,26 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Mission_Request_Ints;
+      use MAVLink.V2.Common.Mission_Request_Ints;
       I : Mission_Request_Int;
       O : constant Mission_Request_Int :=
          (Target_System => 1,
           Target_Component => 1,
-          Seq => 2);
+          Seq => 2,
+          Mission_Type => MAVLink.V2.Common.Types.Mav_Mission_Type'First);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -1049,12 +1533,12 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Safety_Set_Allowed_Areas;
+      use MAVLink.V2.Common.Safety_Set_Allowed_Areas;
       I : Safety_Set_Allowed_Area;
       O : constant Safety_Set_Allowed_Area :=
          (Target_System => 1,
           Target_Component => 1,
-          Frame => MAVLink.V1.Common.Types.Mav_Frame'First,
+          Frame => MAVLink.V2.Common.Types.Mav_Frame'First,
           P1X => To_Raw (9.9),
           P1Y => To_Raw (9.9),
           P1Z => To_Raw (9.9),
@@ -1062,12 +1546,18 @@ begin
           P2Y => To_Raw (9.9),
           P2Z => To_Raw (9.9));
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -1075,10 +1565,10 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Safety_Allowed_Areas;
+      use MAVLink.V2.Common.Safety_Allowed_Areas;
       I : Safety_Allowed_Area;
       O : constant Safety_Allowed_Area :=
-         (Frame => MAVLink.V1.Common.Types.Mav_Frame'First,
+         (Frame => MAVLink.V2.Common.Types.Mav_Frame'First,
           P1X => To_Raw (9.9),
           P1Y => To_Raw (9.9),
           P1Z => To_Raw (9.9),
@@ -1086,12 +1576,18 @@ begin
           P2Y => To_Raw (9.9),
           P2Z => To_Raw (9.9));
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -1099,7 +1595,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Attitude_Quaternion_Covs;
+      use MAVLink.V2.Common.Attitude_Quaternion_Covs;
       I : Attitude_Quaternion_Cov;
       O : constant Attitude_Quaternion_Cov :=
          (Time_Usec => 4,
@@ -1109,12 +1605,18 @@ begin
           Yawspeed => To_Raw (9.9),
           Covariance => <>);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -1122,7 +1624,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Nav_Controller_Outputs;
+      use MAVLink.V2.Common.Nav_Controller_Outputs;
       I : Nav_Controller_Output;
       O : constant Nav_Controller_Output :=
          (Nav_Roll => To_Raw (9.9),
@@ -1134,12 +1636,18 @@ begin
           Aspd_Error => To_Raw (9.9),
           Xtrack_Error => To_Raw (9.9));
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -1147,11 +1655,11 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Global_Position_Int_Covs;
+      use MAVLink.V2.Common.Global_Position_Int_Covs;
       I : Global_Position_Int_Cov;
       O : constant Global_Position_Int_Cov :=
          (Time_Usec => 4,
-          Estimator_Type => MAVLink.V1.Common.Types.Mav_Estimator_Type'First,
+          Estimator_Type => MAVLink.V2.Common.Types.Mav_Estimator_Type'First,
           Lat => 7,
           Lon => 7,
           Alt => 7,
@@ -1161,12 +1669,18 @@ begin
           Vz => To_Raw (9.9),
           Covariance => <>);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -1174,11 +1688,11 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Local_Position_Ned_Covs;
+      use MAVLink.V2.Common.Local_Position_Ned_Covs;
       I : Local_Position_Ned_Cov;
       O : constant Local_Position_Ned_Cov :=
          (Time_Usec => 4,
-          Estimator_Type => MAVLink.V1.Common.Types.Mav_Estimator_Type'First,
+          Estimator_Type => MAVLink.V2.Common.Types.Mav_Estimator_Type'First,
           X => To_Raw (9.9),
           Y => To_Raw (9.9),
           Z => To_Raw (9.9),
@@ -1190,12 +1704,18 @@ begin
           Az => To_Raw (9.9),
           Covariance => <>);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -1203,7 +1723,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Rc_Channelses;
+      use MAVLink.V2.Common.Rc_Channelses;
       I : Rc_Channels;
       O : constant Rc_Channels :=
          (Time_Boot_Ms => 3,
@@ -1228,12 +1748,18 @@ begin
           Chan18_Raw => <>,
           Rssi => <>);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -1241,7 +1767,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Request_Data_Streams;
+      use MAVLink.V2.Common.Request_Data_Streams;
       I : Request_Data_Stream;
       O : constant Request_Data_Stream :=
          (Target_System => 1,
@@ -1250,12 +1776,18 @@ begin
           Req_Message_Rate => 2,
           Start_Stop => 1);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -1263,19 +1795,25 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Data_Streams;
+      use MAVLink.V2.Common.Data_Streams;
       I : Data_Stream;
       O : constant Data_Stream :=
          (Stream_Id => 1,
           Message_Rate => 2,
           On_Off => 1);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -1283,7 +1821,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Manual_Controls;
+      use MAVLink.V2.Common.Manual_Controls;
       I : Manual_Control;
       O : constant Manual_Control :=
          (Target => 1,
@@ -1291,14 +1829,30 @@ begin
           Y => <>,
           Z => <>,
           R => <>,
-          Buttons => 2);
+          Buttons => 2,
+          Buttons2 => 2,
+          Enabled_Extensions => 1,
+          S => 6,
+          T => 6,
+          Aux1 => 6,
+          Aux2 => 6,
+          Aux3 => 6,
+          Aux4 => 6,
+          Aux5 => 6,
+          Aux6 => 6);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -1306,7 +1860,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Rc_Channels_Overrides;
+      use MAVLink.V2.Common.Rc_Channels_Overrides;
       I : Rc_Channels_Override;
       O : constant Rc_Channels_Override :=
          (Target_System => 1,
@@ -1318,14 +1872,30 @@ begin
           Chan5_Raw => <>,
           Chan6_Raw => <>,
           Chan7_Raw => <>,
-          Chan8_Raw => <>);
+          Chan8_Raw => <>,
+          Chan9_Raw => <>,
+          Chan10_Raw => <>,
+          Chan11_Raw => <>,
+          Chan12_Raw => <>,
+          Chan13_Raw => <>,
+          Chan14_Raw => <>,
+          Chan15_Raw => <>,
+          Chan16_Raw => <>,
+          Chan17_Raw => <>,
+          Chan18_Raw => <>);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -1333,14 +1903,14 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Mission_Item_Ints;
+      use MAVLink.V2.Common.Mission_Item_Ints;
       I : Mission_Item_Int;
       O : constant Mission_Item_Int :=
          (Target_System => 1,
           Target_Component => 1,
           Seq => 2,
-          Frame => MAVLink.V1.Common.Types.Mav_Frame'First,
-          Command => MAVLink.V1.Common.Types.Mav_Cmd'First,
+          Frame => MAVLink.V2.Common.Types.Mav_Frame'First,
+          Command => MAVLink.V2.Common.Types.Mav_Cmd'First,
           Current => 1,
           Autocontinue => 1,
           Param1 => To_Raw (9.9),
@@ -1349,14 +1919,21 @@ begin
           Param4 => To_Raw (9.9),
           X => 7,
           Y => 7,
-          Z => To_Raw (9.9));
+          Z => To_Raw (9.9),
+          Mission_Type => MAVLink.V2.Common.Types.Mav_Mission_Type'First);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -1364,7 +1941,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Vfr_Huds;
+      use MAVLink.V2.Common.Vfr_Huds;
       I : Vfr_Hud;
       O : constant Vfr_Hud :=
          (Airspeed => To_Raw (9.9),
@@ -1374,12 +1951,18 @@ begin
           Alt => To_Raw (9.9),
           Climb => To_Raw (9.9));
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -1387,13 +1970,13 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Command_Ints;
+      use MAVLink.V2.Common.Command_Ints;
       I : Command_Int;
       O : constant Command_Int :=
          (Target_System => 1,
           Target_Component => 1,
-          Frame => MAVLink.V1.Common.Types.Mav_Frame'First,
-          Command => MAVLink.V1.Common.Types.Mav_Cmd'First,
+          Frame => MAVLink.V2.Common.Types.Mav_Frame'First,
+          Command => MAVLink.V2.Common.Types.Mav_Cmd'First,
           Current => 1,
           Autocontinue => 1,
           Param1 => <>,
@@ -1404,12 +1987,18 @@ begin
           Y => <>,
           Z => <>);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -1417,12 +2006,12 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Command_Longs;
+      use MAVLink.V2.Common.Command_Longs;
       I : Command_Long;
       O : constant Command_Long :=
          (Target_System => 1,
           Target_Component => 1,
-          Command => MAVLink.V1.Common.Types.Mav_Cmd'First,
+          Command => MAVLink.V2.Common.Types.Mav_Cmd'First,
           Confirmation => 1,
           Param1 => <>,
           Param2 => <>,
@@ -1432,12 +2021,18 @@ begin
           Param6 => <>,
           Param7 => <>);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -1445,18 +2040,28 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Command_Acks;
+      use MAVLink.V2.Common.Command_Acks;
       I : Command_Ack;
       O : constant Command_Ack :=
-         (Command => MAVLink.V1.Common.Types.Mav_Cmd'First,
-          Result => MAVLink.V1.Common.Types.Mav_Result'First);
+         (Command => MAVLink.V2.Common.Types.Mav_Cmd'First,
+          Result => MAVLink.V2.Common.Types.Mav_Result'First,
+          Progress => <>,
+          Result_Param2 => 7,
+          Target_System => 1,
+          Target_Component => 1);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -1464,19 +2069,25 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Command_Cancels;
+      use MAVLink.V2.Common.Command_Cancels;
       I : Command_Cancel;
       O : constant Command_Cancel :=
          (Target_System => 1,
           Target_Component => 1,
-          Command => MAVLink.V1.Common.Types.Mav_Cmd'First);
+          Command => MAVLink.V2.Common.Types.Mav_Cmd'First);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -1484,7 +2095,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Manual_Setpoints;
+      use MAVLink.V2.Common.Manual_Setpoints;
       I : Manual_Setpoint;
       O : constant Manual_Setpoint :=
          (Time_Boot_Ms => 3,
@@ -1495,12 +2106,18 @@ begin
           Mode_Switch => 1,
           Manual_Override_Switch => 1);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -1508,7 +2125,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Set_Attitude_Targets;
+      use MAVLink.V2.Common.Set_Attitude_Targets;
       I : Set_Attitude_Target;
       O : constant Set_Attitude_Target :=
          (Time_Boot_Ms => 3,
@@ -1519,14 +2136,21 @@ begin
           Body_Roll_Rate => To_Raw (9.9),
           Body_Pitch_Rate => To_Raw (9.9),
           Body_Yaw_Rate => To_Raw (9.9),
-          Thrust => To_Raw (9.9));
+          Thrust => To_Raw (9.9),
+          Thrust_Body => [others => To_Raw (9.9)]);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -1534,7 +2158,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Attitude_Targets;
+      use MAVLink.V2.Common.Attitude_Targets;
       I : Attitude_Target;
       O : constant Attitude_Target :=
          (Time_Boot_Ms => 3,
@@ -1545,12 +2169,18 @@ begin
           Body_Yaw_Rate => To_Raw (9.9),
           Thrust => To_Raw (9.9));
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -1558,13 +2188,13 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Set_Position_Target_Local_Neds;
+      use MAVLink.V2.Common.Set_Position_Target_Local_Neds;
       I : Set_Position_Target_Local_Ned;
       O : constant Set_Position_Target_Local_Ned :=
          (Time_Boot_Ms => 3,
           Target_System => 1,
           Target_Component => 1,
-          Coordinate_Frame => MAVLink.V1.Common.Types.Mav_Frame'First,
+          Coordinate_Frame => MAVLink.V2.Common.Types.Mav_Frame'First,
           Type_Mask => <>,
           X => To_Raw (9.9),
           Y => To_Raw (9.9),
@@ -1578,12 +2208,18 @@ begin
           Yaw => To_Raw (9.9),
           Yaw_Rate => To_Raw (9.9));
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -1591,11 +2227,11 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Position_Target_Local_Neds;
+      use MAVLink.V2.Common.Position_Target_Local_Neds;
       I : Position_Target_Local_Ned;
       O : constant Position_Target_Local_Ned :=
          (Time_Boot_Ms => 3,
-          Coordinate_Frame => MAVLink.V1.Common.Types.Mav_Frame'First,
+          Coordinate_Frame => MAVLink.V2.Common.Types.Mav_Frame'First,
           Type_Mask => <>,
           X => To_Raw (9.9),
           Y => To_Raw (9.9),
@@ -1609,12 +2245,18 @@ begin
           Yaw => To_Raw (9.9),
           Yaw_Rate => To_Raw (9.9));
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -1622,13 +2264,13 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Set_Position_Target_Global_Ints;
+      use MAVLink.V2.Common.Set_Position_Target_Global_Ints;
       I : Set_Position_Target_Global_Int;
       O : constant Set_Position_Target_Global_Int :=
          (Time_Boot_Ms => 3,
           Target_System => 1,
           Target_Component => 1,
-          Coordinate_Frame => MAVLink.V1.Common.Types.Mav_Frame'First,
+          Coordinate_Frame => MAVLink.V2.Common.Types.Mav_Frame'First,
           Type_Mask => <>,
           Lat_Int => 7,
           Lon_Int => 7,
@@ -1642,12 +2284,18 @@ begin
           Yaw => To_Raw (9.9),
           Yaw_Rate => To_Raw (9.9));
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -1655,11 +2303,11 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Position_Target_Global_Ints;
+      use MAVLink.V2.Common.Position_Target_Global_Ints;
       I : Position_Target_Global_Int;
       O : constant Position_Target_Global_Int :=
          (Time_Boot_Ms => 3,
-          Coordinate_Frame => MAVLink.V1.Common.Types.Mav_Frame'First,
+          Coordinate_Frame => MAVLink.V2.Common.Types.Mav_Frame'First,
           Type_Mask => <>,
           Lat_Int => 7,
           Lon_Int => 7,
@@ -1673,12 +2321,18 @@ begin
           Yaw => To_Raw (9.9),
           Yaw_Rate => To_Raw (9.9));
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -1686,7 +2340,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Local_Position_Ned_System_Global_Offsets;
+      use MAVLink.V2.Common.Local_Position_Ned_System_Global_Offsets;
       I : Local_Position_Ned_System_Global_Offset;
       O : constant Local_Position_Ned_System_Global_Offset :=
          (Time_Boot_Ms => 3,
@@ -1697,12 +2351,18 @@ begin
           Pitch => To_Raw (9.9),
           Yaw => To_Raw (9.9));
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -1710,7 +2370,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Hil_States;
+      use MAVLink.V2.Common.Hil_States;
       I : Hil_State;
       O : constant Hil_State :=
          (Time_Usec => 4,
@@ -1730,12 +2390,18 @@ begin
           Yacc => 6,
           Zacc => 6);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -1743,7 +2409,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Hil_Controlses;
+      use MAVLink.V2.Common.Hil_Controlses;
       I : Hil_Controls;
       O : constant Hil_Controls :=
          (Time_Usec => 4,
@@ -1755,15 +2421,21 @@ begin
           Aux2 => To_Raw (9.9),
           Aux3 => To_Raw (9.9),
           Aux4 => To_Raw (9.9),
-          Mode => MAVLink.V1.Common.Types.Mav_Mode'First,
+          Mode => MAVLink.V2.Common.Types.Mav_Mode'First,
           Nav_Mode => 1);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -1771,7 +2443,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Hil_Rc_Inputs_Raws;
+      use MAVLink.V2.Common.Hil_Rc_Inputs_Raws;
       I : Hil_Rc_Inputs_Raw;
       O : constant Hil_Rc_Inputs_Raw :=
          (Time_Usec => 4,
@@ -1789,12 +2461,18 @@ begin
           Chan12_Raw => 2,
           Rssi => <>);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -1802,7 +2480,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Hil_Actuator_Controlses;
+      use MAVLink.V2.Common.Hil_Actuator_Controlses;
       I : Hil_Actuator_Controls;
       O : constant Hil_Actuator_Controls :=
          (Time_Usec => 4,
@@ -1810,12 +2488,18 @@ begin
           Mode => <>,
           Flags => <>);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -1823,7 +2507,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Optical_Flows;
+      use MAVLink.V2.Common.Optical_Flows;
       I : Optical_Flow;
       O : constant Optical_Flow :=
          (Time_Usec => 4,
@@ -1833,14 +2517,22 @@ begin
           Flow_Comp_M_X => To_Raw (9.9),
           Flow_Comp_M_Y => To_Raw (9.9),
           Quality => 1,
-          Ground_Distance => To_Raw (9.9));
+          Ground_Distance => To_Raw (9.9),
+          Flow_Rate_X => To_Raw (9.9),
+          Flow_Rate_Y => To_Raw (9.9));
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -1848,7 +2540,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Global_Vision_Position_Estimates;
+      use MAVLink.V2.Common.Global_Vision_Position_Estimates;
       I : Global_Vision_Position_Estimate;
       O : constant Global_Vision_Position_Estimate :=
          (Usec => 4,
@@ -1857,14 +2549,22 @@ begin
           Z => To_Raw (9.9),
           Roll => To_Raw (9.9),
           Pitch => To_Raw (9.9),
-          Yaw => To_Raw (9.9));
+          Yaw => To_Raw (9.9),
+          Covariance => <>,
+          Reset_Counter => 1);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -1872,7 +2572,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Vision_Position_Estimates;
+      use MAVLink.V2.Common.Vision_Position_Estimates;
       I : Vision_Position_Estimate;
       O : constant Vision_Position_Estimate :=
          (Usec => 4,
@@ -1881,14 +2581,22 @@ begin
           Z => To_Raw (9.9),
           Roll => To_Raw (9.9),
           Pitch => To_Raw (9.9),
-          Yaw => To_Raw (9.9));
+          Yaw => To_Raw (9.9),
+          Covariance => <>,
+          Reset_Counter => 1);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -1896,20 +2604,28 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Vision_Speed_Estimates;
+      use MAVLink.V2.Common.Vision_Speed_Estimates;
       I : Vision_Speed_Estimate;
       O : constant Vision_Speed_Estimate :=
          (Usec => 4,
           X => To_Raw (9.9),
           Y => To_Raw (9.9),
-          Z => To_Raw (9.9));
+          Z => To_Raw (9.9),
+          Covariance => <>,
+          Reset_Counter => 1);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -1917,7 +2633,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Vicon_Position_Estimates;
+      use MAVLink.V2.Common.Vicon_Position_Estimates;
       I : Vicon_Position_Estimate;
       O : constant Vicon_Position_Estimate :=
          (Usec => 4,
@@ -1926,14 +2642,21 @@ begin
           Z => To_Raw (9.9),
           Roll => To_Raw (9.9),
           Pitch => To_Raw (9.9),
-          Yaw => To_Raw (9.9));
+          Yaw => To_Raw (9.9),
+          Covariance => <>);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -1941,7 +2664,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Highres_Imus;
+      use MAVLink.V2.Common.Highres_Imus;
       I : Highres_Imu;
       O : constant Highres_Imu :=
          (Time_Usec => 4,
@@ -1958,14 +2681,21 @@ begin
           Diff_Pressure => To_Raw (9.9),
           Pressure_Alt => To_Raw (9.9),
           Temperature => To_Raw (9.9),
-          Fields_Updated => <>);
+          Fields_Updated => <>,
+          Id => 1);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -1973,7 +2703,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Optical_Flow_Rads;
+      use MAVLink.V2.Common.Optical_Flow_Rads;
       I : Optical_Flow_Rad;
       O : constant Optical_Flow_Rad :=
          (Time_Usec => 4,
@@ -1989,12 +2719,18 @@ begin
           Time_Delta_Distance_Us => 3,
           Distance => To_Raw (9.9));
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -2002,7 +2738,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Hil_Sensors;
+      use MAVLink.V2.Common.Hil_Sensors;
       I : Hil_Sensor;
       O : constant Hil_Sensor :=
          (Time_Usec => 4,
@@ -2019,14 +2755,21 @@ begin
           Diff_Pressure => To_Raw (9.9),
           Pressure_Alt => To_Raw (9.9),
           Temperature => To_Raw (9.9),
-          Fields_Updated => <>);
+          Fields_Updated => <>,
+          Id => 1);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -2034,7 +2777,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Sim_States;
+      use MAVLink.V2.Common.Sim_States;
       I : Sim_State;
       O : constant Sim_State :=
          (Q1 => To_Raw (9.9),
@@ -2057,14 +2800,22 @@ begin
           Std_Dev_Vert => To_Raw (9.9),
           Vn => To_Raw (9.9),
           Ve => To_Raw (9.9),
-          Vd => To_Raw (9.9));
+          Vd => To_Raw (9.9),
+          Lat_Int => <>,
+          Lon_Int => <>);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -2072,7 +2823,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Radio_Statuses;
+      use MAVLink.V2.Common.Radio_Statuses;
       I : Radio_Status;
       O : constant Radio_Status :=
          (Rssi => <>,
@@ -2083,12 +2834,18 @@ begin
           Rxerrors => 2,
           Fixed => 2);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -2096,7 +2853,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.File_Transfer_Protocols;
+      use MAVLink.V2.Common.File_Transfer_Protocols;
       I : File_Transfer_Protocol;
       O : constant File_Transfer_Protocol :=
          (Target_Network => 1,
@@ -2104,12 +2861,18 @@ begin
           Target_Component => 1,
           Payload => [others => 1]);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -2117,18 +2880,26 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Timesyncs;
+      use MAVLink.V2.Common.Timesyncs;
       I : Timesync;
       O : constant Timesync :=
          (Tc1 => 8,
-          Ts1 => 8);
+          Ts1 => 8,
+          Target_System => 1,
+          Target_Component => 1);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -2136,18 +2907,24 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Camera_Triggers;
+      use MAVLink.V2.Common.Camera_Triggers;
       I : Camera_Trigger;
       O : constant Camera_Trigger :=
          (Time_Usec => 4,
           Seq => 3);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -2155,7 +2932,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Hil_Gpses;
+      use MAVLink.V2.Common.Hil_Gpses;
       I : Hil_Gps;
       O : constant Hil_Gps :=
          (Time_Usec => 4,
@@ -2170,14 +2947,22 @@ begin
           Ve => 6,
           Vd => 6,
           Cog => <>,
-          Satellites_Visible => <>);
+          Satellites_Visible => <>,
+          Id => 1,
+          Yaw => 2);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -2185,7 +2970,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Hil_Optical_Flows;
+      use MAVLink.V2.Common.Hil_Optical_Flows;
       I : Hil_Optical_Flow;
       O : constant Hil_Optical_Flow :=
          (Time_Usec => 4,
@@ -2201,12 +2986,18 @@ begin
           Time_Delta_Distance_Us => 3,
           Distance => <>);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -2214,7 +3005,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Hil_State_Quaternions;
+      use MAVLink.V2.Common.Hil_State_Quaternions;
       I : Hil_State_Quaternion;
       O : constant Hil_State_Quaternion :=
          (Time_Usec => 4,
@@ -2234,12 +3025,18 @@ begin
           Yacc => 6,
           Zacc => 6);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -2247,7 +3044,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Scaled_Imu2s;
+      use MAVLink.V2.Common.Scaled_Imu2s;
       I : Scaled_Imu2;
       O : constant Scaled_Imu2 :=
          (Time_Boot_Ms => 3,
@@ -2259,14 +3056,21 @@ begin
           Zgyro => 6,
           Xmag => 6,
           Ymag => 6,
-          Zmag => 6);
+          Zmag => 6,
+          Temperature => <>);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -2274,7 +3078,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Log_Request_Lists;
+      use MAVLink.V2.Common.Log_Request_Lists;
       I : Log_Request_List;
       O : constant Log_Request_List :=
          (Target_System => 1,
@@ -2282,12 +3086,18 @@ begin
           Start => 2,
           End_Field => 2);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -2295,7 +3105,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Log_Entrys;
+      use MAVLink.V2.Common.Log_Entrys;
       I : Log_Entry;
       O : constant Log_Entry :=
          (Id => 2,
@@ -2304,12 +3114,18 @@ begin
           Time_Utc => <>,
           Size => 3);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -2317,7 +3133,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Log_Request_Datas;
+      use MAVLink.V2.Common.Log_Request_Datas;
       I : Log_Request_Data;
       O : constant Log_Request_Data :=
          (Target_System => 1,
@@ -2326,12 +3142,18 @@ begin
           Ofs => 3,
           Count => 3);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -2339,7 +3161,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Log_Datas;
+      use MAVLink.V2.Common.Log_Datas;
       I : Log_Data;
       O : constant Log_Data :=
          (Id => 2,
@@ -2347,12 +3169,18 @@ begin
           Count => 1,
           Data => [others => 1]);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -2360,18 +3188,24 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Log_Erases;
+      use MAVLink.V2.Common.Log_Erases;
       I : Log_Erase;
       O : constant Log_Erase :=
          (Target_System => 1,
           Target_Component => 1);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -2379,18 +3213,24 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Log_Request_Ends;
+      use MAVLink.V2.Common.Log_Request_Ends;
       I : Log_Request_End;
       O : constant Log_Request_End :=
          (Target_System => 1,
           Target_Component => 1);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -2398,7 +3238,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Gps_Inject_Datas;
+      use MAVLink.V2.Common.Gps_Inject_Datas;
       I : Gps_Inject_Data;
       O : constant Gps_Inject_Data :=
          (Target_System => 1,
@@ -2406,12 +3246,18 @@ begin
           Len => 1,
           Data => [others => 1]);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -2419,11 +3265,11 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Gps2_Raws;
+      use MAVLink.V2.Common.Gps2_Raws;
       I : Gps2_Raw;
       O : constant Gps2_Raw :=
          (Time_Usec => 4,
-          Fix_Type => MAVLink.V1.Common.Types.Gps_Fix_Type'First,
+          Fix_Type => MAVLink.V2.Common.Types.Gps_Fix_Type'First,
           Lat => 7,
           Lon => 7,
           Alt => 7,
@@ -2433,14 +3279,26 @@ begin
           Cog => <>,
           Satellites_Visible => <>,
           Dgps_Numch => 1,
-          Dgps_Age => 3);
+          Dgps_Age => 3,
+          Yaw => <>,
+          Alt_Ellipsoid => 7,
+          H_Acc => 3,
+          V_Acc => 3,
+          Vel_Acc => 3,
+          Hdg_Acc => 3);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -2448,19 +3306,25 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Power_Statuses;
+      use MAVLink.V2.Common.Power_Statuses;
       I : Power_Status;
       O : constant Power_Status :=
          (Vcc => 2,
           Vservo => 2,
           Flags => <>);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -2468,22 +3332,30 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Serial_Controls;
+      use MAVLink.V2.Common.Serial_Controls;
       I : Serial_Control;
       O : constant Serial_Control :=
-         (Device => MAVLink.V1.Common.Types.Serial_Control_Dev'First,
+         (Device => MAVLink.V2.Common.Types.Serial_Control_Dev'First,
           Flags => <>,
           Timeout => 2,
           Baudrate => 3,
           Count => 1,
-          Data => [others => 1]);
+          Data => [others => 1],
+          Target_System => 1,
+          Target_Component => 1);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -2491,7 +3363,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Gps_Rtks;
+      use MAVLink.V2.Common.Gps_Rtks;
       I : Gps_Rtk;
       O : constant Gps_Rtk :=
          (Time_Last_Baseline_Ms => 3,
@@ -2501,19 +3373,25 @@ begin
           Rtk_Health => 1,
           Rtk_Rate => 1,
           Nsats => 1,
-          Baseline_Coords_Type => MAVLink.V1.Common.Types.Rtk_Baseline_Coordinate_System'First,
+          Baseline_Coords_Type => MAVLink.V2.Common.Types.Rtk_Baseline_Coordinate_System'First,
           Baseline_A_Mm => 7,
           Baseline_B_Mm => 7,
           Baseline_C_Mm => 7,
           Accuracy => 3,
           Iar_Num_Hypotheses => 7);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -2521,7 +3399,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Gps2_Rtks;
+      use MAVLink.V2.Common.Gps2_Rtks;
       I : Gps2_Rtk;
       O : constant Gps2_Rtk :=
          (Time_Last_Baseline_Ms => 3,
@@ -2531,19 +3409,25 @@ begin
           Rtk_Health => 1,
           Rtk_Rate => 1,
           Nsats => 1,
-          Baseline_Coords_Type => MAVLink.V1.Common.Types.Rtk_Baseline_Coordinate_System'First,
+          Baseline_Coords_Type => MAVLink.V2.Common.Types.Rtk_Baseline_Coordinate_System'First,
           Baseline_A_Mm => 7,
           Baseline_B_Mm => 7,
           Baseline_C_Mm => 7,
           Accuracy => 3,
           Iar_Num_Hypotheses => 7);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -2551,7 +3435,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Scaled_Imu3s;
+      use MAVLink.V2.Common.Scaled_Imu3s;
       I : Scaled_Imu3;
       O : constant Scaled_Imu3 :=
          (Time_Boot_Ms => 3,
@@ -2563,14 +3447,21 @@ begin
           Zgyro => 6,
           Xmag => 6,
           Ymag => 6,
-          Zmag => 6);
+          Zmag => 6,
+          Temperature => <>);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -2578,10 +3469,10 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Data_Transmission_Handshakes;
+      use MAVLink.V2.Common.Data_Transmission_Handshakes;
       I : Data_Transmission_Handshake;
       O : constant Data_Transmission_Handshake :=
-         (Type_Field => MAVLink.V1.Common.Types.Mavlink_Data_Stream_Type'First,
+         (Type_Field => MAVLink.V2.Common.Types.Mavlink_Data_Stream_Type'First,
           Size => 3,
           Width => 2,
           Height => 2,
@@ -2589,12 +3480,18 @@ begin
           Payload => 1,
           Jpg_Quality => 1);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -2602,18 +3499,24 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Encapsulated_Datas;
+      use MAVLink.V2.Common.Encapsulated_Datas;
       I : Encapsulated_Data;
       O : constant Encapsulated_Data :=
          (Seqnr => 2,
           Data => [others => 1]);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -2621,24 +3524,34 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Distance_Sensors;
+      use MAVLink.V2.Common.Distance_Sensors;
       I : Distance_Sensor;
       O : constant Distance_Sensor :=
          (Time_Boot_Ms => 3,
           Min_Distance => 2,
           Max_Distance => 2,
           Current_Distance => 2,
-          Type_Field => MAVLink.V1.Common.Types.Mav_Distance_Sensor'First,
+          Type_Field => MAVLink.V2.Common.Types.Mav_Distance_Sensor'First,
           Id => 1,
-          Orientation => MAVLink.V1.Common.Types.Mav_Sensor_Orientation'First,
-          Covariance => <>);
+          Orientation => MAVLink.V2.Common.Types.Mav_Sensor_Orientation'First,
+          Covariance => <>,
+          Horizontal_Fov => <>,
+          Vertical_Fov => <>,
+          Quaternion => <>,
+          Signal_Quality => <>);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -2646,7 +3559,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Terrain_Requests;
+      use MAVLink.V2.Common.Terrain_Requests;
       I : Terrain_Request;
       O : constant Terrain_Request :=
          (Lat => 7,
@@ -2654,12 +3567,18 @@ begin
           Grid_Spacing => 2,
           Mask => 4);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -2667,7 +3586,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Terrain_Datas;
+      use MAVLink.V2.Common.Terrain_Datas;
       I : Terrain_Data;
       O : constant Terrain_Data :=
          (Lat => 7,
@@ -2676,12 +3595,18 @@ begin
           Gridbit => 1,
           Data => [others => 6]);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -2689,18 +3614,24 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Terrain_Checks;
+      use MAVLink.V2.Common.Terrain_Checks;
       I : Terrain_Check;
       O : constant Terrain_Check :=
          (Lat => 7,
           Lon => 7);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -2708,7 +3639,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Terrain_Reports;
+      use MAVLink.V2.Common.Terrain_Reports;
       I : Terrain_Report;
       O : constant Terrain_Report :=
          (Lat => 7,
@@ -2719,12 +3650,18 @@ begin
           Pending => 2,
           Loaded => 2);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -2732,20 +3669,27 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Scaled_Pressure2s;
+      use MAVLink.V2.Common.Scaled_Pressure2s;
       I : Scaled_Pressure2;
       O : constant Scaled_Pressure2 :=
          (Time_Boot_Ms => 3,
           Press_Abs => To_Raw (9.9),
           Press_Diff => To_Raw (9.9),
-          Temperature => 6);
+          Temperature => 6,
+          Temperature_Press_Diff => <>);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -2753,21 +3697,28 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Att_Pos_Mocaps;
+      use MAVLink.V2.Common.Att_Pos_Mocaps;
       I : Att_Pos_Mocap;
       O : constant Att_Pos_Mocap :=
          (Time_Usec => 4,
           Q => [others => To_Raw (9.9)],
           X => To_Raw (9.9),
           Y => To_Raw (9.9),
-          Z => To_Raw (9.9));
+          Z => To_Raw (9.9),
+          Covariance => <>);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -2775,7 +3726,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Set_Actuator_Control_Targets;
+      use MAVLink.V2.Common.Set_Actuator_Control_Targets;
       I : Set_Actuator_Control_Target;
       O : constant Set_Actuator_Control_Target :=
          (Time_Usec => 4,
@@ -2784,12 +3735,18 @@ begin
           Target_Component => 1,
           Controls => [others => To_Raw (9.9)]);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -2797,19 +3754,25 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Actuator_Control_Targets;
+      use MAVLink.V2.Common.Actuator_Control_Targets;
       I : Actuator_Control_Target;
       O : constant Actuator_Control_Target :=
          (Time_Usec => 4,
           Group_Mlx => 1,
           Controls => [others => To_Raw (9.9)]);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -2817,7 +3780,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Altitudes;
+      use MAVLink.V2.Common.Altitudes;
       I : Altitude;
       O : constant Altitude :=
          (Time_Usec => 4,
@@ -2828,12 +3791,18 @@ begin
           Altitude_Terrain => To_Raw (9.9),
           Bottom_Clearance => To_Raw (9.9));
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -2841,7 +3810,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Resource_Requests;
+      use MAVLink.V2.Common.Resource_Requests;
       I : Resource_Request;
       O : constant Resource_Request :=
          (Request_Id => 1,
@@ -2850,12 +3819,18 @@ begin
           Transfer_Type => 1,
           Storage => [others => 1]);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -2863,20 +3838,27 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Scaled_Pressure3s;
+      use MAVLink.V2.Common.Scaled_Pressure3s;
       I : Scaled_Pressure3;
       O : constant Scaled_Pressure3 :=
          (Time_Boot_Ms => 3,
           Press_Abs => To_Raw (9.9),
           Press_Diff => To_Raw (9.9),
-          Temperature => 6);
+          Temperature => 6,
+          Temperature_Press_Diff => <>);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -2884,7 +3866,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Follow_Targets;
+      use MAVLink.V2.Common.Follow_Targets;
       I : Follow_Target;
       O : constant Follow_Target :=
          (Timestamp => 4,
@@ -2899,12 +3881,18 @@ begin
           Position_Cov => [others => To_Raw (9.9)],
           Custom_State => 4);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -2912,7 +3900,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Control_System_States;
+      use MAVLink.V2.Common.Control_System_States;
       I : Control_System_State;
       O : constant Control_System_State :=
          (Time_Usec => 4,
@@ -2933,12 +3921,18 @@ begin
           Pitch_Rate => To_Raw (9.9),
           Yaw_Rate => To_Raw (9.9));
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -2946,25 +3940,36 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Battery_Statuses;
+      use MAVLink.V2.Common.Battery_Statuses;
       I : Battery_Status;
       O : constant Battery_Status :=
          (Id => 1,
-          Battery_Function => MAVLink.V1.Common.Types.Mav_Battery_Function'First,
-          Type_Field => MAVLink.V1.Common.Types.Mav_Battery_Type'First,
+          Battery_Function => MAVLink.V2.Common.Types.Mav_Battery_Function'First,
+          Type_Field => MAVLink.V2.Common.Types.Mav_Battery_Type'First,
           Temperature => <>,
           Voltages => <>,
           Current_Battery => <>,
           Current_Consumed => <>,
           Energy_Consumed => <>,
-          Battery_Remaining => <>);
+          Battery_Remaining => <>,
+          Time_Remaining => <>,
+          Charge_State => MAVLink.V2.Common.Types.Mav_Battery_Charge_State'First,
+          Voltages_Ext => <>,
+          Mode => MAVLink.V2.Common.Types.Mav_Battery_Mode'First,
+          Fault_Bitmask => <>);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -2972,24 +3977,36 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Landing_Targets;
+      use MAVLink.V2.Common.Landing_Targets;
       I : Landing_Target;
       O : constant Landing_Target :=
          (Time_Usec => 4,
           Target_Num => 1,
-          Frame => MAVLink.V1.Common.Types.Mav_Frame'First,
+          Frame => MAVLink.V2.Common.Types.Mav_Frame'First,
           Angle_X => To_Raw (9.9),
           Angle_Y => To_Raw (9.9),
           Distance => To_Raw (9.9),
           Size_X => To_Raw (9.9),
-          Size_Y => To_Raw (9.9));
+          Size_Y => To_Raw (9.9),
+          X => To_Raw (9.9),
+          Y => To_Raw (9.9),
+          Z => To_Raw (9.9),
+          Q => [others => To_Raw (9.9)],
+          Type_Field => MAVLink.V2.Common.Types.Landing_Target_Type'First,
+          Position_Valid => <>);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -2997,20 +4014,27 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Fence_Statuses;
+      use MAVLink.V2.Common.Fence_Statuses;
       I : Fence_Status;
       O : constant Fence_Status :=
          (Breach_Status => 1,
           Breach_Count => 2,
-          Breach_Type => MAVLink.V1.Common.Types.Fence_Breach'First,
-          Breach_Time => 3);
+          Breach_Type => MAVLink.V2.Common.Types.Fence_Breach'First,
+          Breach_Time => 3,
+          Breach_Mitigation => MAVLink.V2.Common.Types.Fence_Mitigate'First);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -3018,12 +4042,12 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Mag_Cal_Reports;
+      use MAVLink.V2.Common.Mag_Cal_Reports;
       I : Mag_Cal_Report;
       O : constant Mag_Cal_Report :=
          (Compass_Id => 1,
           Cal_Mask => 1,
-          Cal_Status => MAVLink.V1.Common.Types.Mag_Cal_Status'First,
+          Cal_Status => MAVLink.V2.Common.Types.Mag_Cal_Status'First,
           Autosaved => 1,
           Fitness => To_Raw (9.9),
           Ofs_X => To_Raw (9.9),
@@ -3034,14 +4058,24 @@ begin
           Diag_Z => To_Raw (9.9),
           Offdiag_X => To_Raw (9.9),
           Offdiag_Y => To_Raw (9.9),
-          Offdiag_Z => To_Raw (9.9));
+          Offdiag_Z => To_Raw (9.9),
+          Orientation_Confidence => To_Raw (9.9),
+          Old_Orientation => MAVLink.V2.Common.Types.Mav_Sensor_Orientation'First,
+          New_Orientation => MAVLink.V2.Common.Types.Mav_Sensor_Orientation'First,
+          Scale_Factor => To_Raw (9.9));
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -3049,7 +4083,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Efi_Statuses;
+      use MAVLink.V2.Common.Efi_Statuses;
       I : Efi_Status;
       O : constant Efi_Status :=
          (Health => 1,
@@ -3068,14 +4102,22 @@ begin
           Injection_Time => To_Raw (9.9),
           Exhaust_Gas_Temperature => To_Raw (9.9),
           Throttle_Out => To_Raw (9.9),
-          Pt_Compensation => To_Raw (9.9));
+          Pt_Compensation => To_Raw (9.9),
+          Ignition_Voltage => To_Raw (9.9),
+          Fuel_Pressure => To_Raw (9.9));
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -3083,7 +4125,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Estimator_Statuses;
+      use MAVLink.V2.Common.Estimator_Statuses;
       I : Estimator_Status;
       O : constant Estimator_Status :=
          (Time_Usec => 4,
@@ -3097,12 +4139,18 @@ begin
           Pos_Horiz_Accuracy => To_Raw (9.9),
           Pos_Vert_Accuracy => To_Raw (9.9));
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -3110,7 +4158,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Wind_Covs;
+      use MAVLink.V2.Common.Wind_Covs;
       I : Wind_Cov;
       O : constant Wind_Cov :=
          (Time_Usec => 4,
@@ -3123,12 +4171,18 @@ begin
           Horiz_Accuracy => <>,
           Vert_Accuracy => <>);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -3136,7 +4190,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Gps_Inputs;
+      use MAVLink.V2.Common.Gps_Inputs;
       I : Gps_Input;
       O : constant Gps_Input :=
          (Time_Usec => 4,
@@ -3156,14 +4210,21 @@ begin
           Speed_Accuracy => To_Raw (9.9),
           Horiz_Accuracy => To_Raw (9.9),
           Vert_Accuracy => To_Raw (9.9),
-          Satellites_Visible => 1);
+          Satellites_Visible => 1,
+          Yaw => 2);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -3171,19 +4232,25 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Gps_Rtcm_Datas;
+      use MAVLink.V2.Common.Gps_Rtcm_Datas;
       I : Gps_Rtcm_Data;
       O : constant Gps_Rtcm_Data :=
          (Flags => 1,
           Len => 1,
           Data => [others => 1]);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -3191,12 +4258,12 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.High_Latencys;
+      use MAVLink.V2.Common.High_Latencys;
       I : High_Latency;
       O : constant High_Latency :=
          (Base_Mode => <>,
           Custom_Mode => 3,
-          Landed_State => MAVLink.V1.Common.Types.Mav_Landed_State'First,
+          Landed_State => MAVLink.V2.Common.Types.Mav_Landed_State'First,
           Roll => 6,
           Pitch => 6,
           Heading => 2,
@@ -3211,7 +4278,7 @@ begin
           Groundspeed => 1,
           Climb_Rate => 5,
           Gps_Nsat => <>,
-          Gps_Fix_Type => MAVLink.V1.Common.Types.Gps_Fix_Type'First,
+          Gps_Fix_Type => MAVLink.V2.Common.Types.Gps_Fix_Type'First,
           Battery_Remaining => 1,
           Temperature => 5,
           Temperature_Air => 5,
@@ -3219,12 +4286,18 @@ begin
           Wp_Num => 1,
           Wp_Distance => 2);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -3232,12 +4305,12 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.High_Latency2s;
+      use MAVLink.V2.Common.High_Latency2s;
       I : High_Latency2;
       O : constant High_Latency2 :=
          (Timestamp => 3,
-          Type_Field => MAVLink.V1.Minimal.Types.Mav_Type'First,
-          Autopilot => MAVLink.V1.Minimal.Types.Mav_Autopilot'First,
+          Type_Field => MAVLink.V2.Minimal.Types.Mav_Type'First,
+          Autopilot => MAVLink.V2.Minimal.Types.Mav_Autopilot'First,
           Custom_Mode => 2,
           Latitude => 7,
           Longitude => 7,
@@ -3263,12 +4336,18 @@ begin
           Custom1 => 5,
           Custom2 => 5);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -3276,7 +4355,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Vibrations;
+      use MAVLink.V2.Common.Vibrations;
       I : Vibration;
       O : constant Vibration :=
          (Time_Usec => 4,
@@ -3287,12 +4366,18 @@ begin
           Clipping_1 => 3,
           Clipping_2 => 3);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -3300,7 +4385,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Home_Positions;
+      use MAVLink.V2.Common.Home_Positions;
       I : Home_Position;
       O : constant Home_Position :=
          (Latitude => 7,
@@ -3312,14 +4397,21 @@ begin
           Q => <>,
           Approach_X => To_Raw (9.9),
           Approach_Y => To_Raw (9.9),
-          Approach_Z => To_Raw (9.9));
+          Approach_Z => To_Raw (9.9),
+          Time_Usec => 4);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -3327,7 +4419,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Set_Home_Positions;
+      use MAVLink.V2.Common.Set_Home_Positions;
       I : Set_Home_Position;
       O : constant Set_Home_Position :=
          (Target_System => 1,
@@ -3340,14 +4432,21 @@ begin
           Q => [others => To_Raw (9.9)],
           Approach_X => To_Raw (9.9),
           Approach_Y => To_Raw (9.9),
-          Approach_Z => To_Raw (9.9));
+          Approach_Z => To_Raw (9.9),
+          Time_Usec => 4);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -3355,18 +4454,24 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Message_Intervals;
+      use MAVLink.V2.Common.Message_Intervals;
       I : Message_Interval;
       O : constant Message_Interval :=
          (Message_Id_Field => 2,
           Interval_Us => 7);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -3374,18 +4479,24 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Extended_Sys_States;
+      use MAVLink.V2.Common.Extended_Sys_States;
       I : Extended_Sys_State;
       O : constant Extended_Sys_State :=
-         (Vtol_State => MAVLink.V1.Common.Types.Mav_Vtol_State'First,
-          Landed_State => MAVLink.V1.Common.Types.Mav_Landed_State'First);
+         (Vtol_State => MAVLink.V2.Common.Types.Mav_Vtol_State'First,
+          Landed_State => MAVLink.V2.Common.Types.Mav_Landed_State'First);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -3393,29 +4504,35 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Adsb_Vehicles;
+      use MAVLink.V2.Common.Adsb_Vehicles;
       I : Adsb_Vehicle;
       O : constant Adsb_Vehicle :=
          (Icao_Address => 3,
           Lat => 7,
           Lon => 7,
-          Altitude_Type => MAVLink.V1.Common.Types.Adsb_Altitude_Type'First,
+          Altitude_Type => MAVLink.V2.Common.Types.Adsb_Altitude_Type'First,
           Altitude => 7,
           Heading => 2,
           Hor_Velocity => 2,
           Ver_Velocity => 6,
           Callsign => [others => 'A'],
-          Emitter_Type => MAVLink.V1.Common.Types.Adsb_Emitter_Type'First,
+          Emitter_Type => MAVLink.V2.Common.Types.Adsb_Emitter_Type'First,
           Tslc => 1,
           Flags => <>,
           Squawk => 2);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -3423,23 +4540,29 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Collisions;
+      use MAVLink.V2.Common.Collisions;
       I : Collision;
       O : constant Collision :=
-         (Src => MAVLink.V1.Common.Types.Mav_Collision_Src'First,
+         (Src => MAVLink.V2.Common.Types.Mav_Collision_Src'First,
           Id => 3,
-          Action => MAVLink.V1.Common.Types.Mav_Collision_Action'First,
-          Threat_Level => MAVLink.V1.Common.Types.Mav_Collision_Threat_Level'First,
+          Action => MAVLink.V2.Common.Types.Mav_Collision_Action'First,
+          Threat_Level => MAVLink.V2.Common.Types.Mav_Collision_Threat_Level'First,
           Time_To_Minimum_Delta => To_Raw (9.9),
           Altitude_Minimum_Delta => To_Raw (9.9),
           Horizontal_Minimum_Delta => To_Raw (9.9));
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -3447,7 +4570,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.V2_Extensions;
+      use MAVLink.V2.Common.V2_Extensions;
       I : V2_Extension;
       O : constant V2_Extension :=
          (Target_Network => 1,
@@ -3456,12 +4579,18 @@ begin
           Message_Type => 2,
           Payload => [others => 1]);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -3469,7 +4598,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Memory_Vects;
+      use MAVLink.V2.Common.Memory_Vects;
       I : Memory_Vect;
       O : constant Memory_Vect :=
          (Address => 2,
@@ -3477,12 +4606,18 @@ begin
           Type_Field => 1,
           Value => [others => 5]);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -3490,7 +4625,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Debug_Vects;
+      use MAVLink.V2.Common.Debug_Vects;
       I : Debug_Vect;
       O : constant Debug_Vect :=
          (Name => [others => 'A'],
@@ -3499,12 +4634,18 @@ begin
           Y => To_Raw (9.9),
           Z => To_Raw (9.9));
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -3512,19 +4653,25 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Named_Value_Floats;
+      use MAVLink.V2.Common.Named_Value_Floats;
       I : Named_Value_Float;
       O : constant Named_Value_Float :=
          (Time_Boot_Ms => 3,
           Name => [others => 'A'],
           Value => To_Raw (9.9));
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -3532,19 +4679,25 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Named_Value_Ints;
+      use MAVLink.V2.Common.Named_Value_Ints;
       I : Named_Value_Int;
       O : constant Named_Value_Int :=
          (Time_Boot_Ms => 3,
           Name => [others => 'A'],
           Value => 7);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -3552,18 +4705,26 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Statustexts;
+      use MAVLink.V2.Common.Statustexts;
       I : Statustext;
       O : constant Statustext :=
-         (Severity => MAVLink.V1.Common.Types.Mav_Severity'First,
-          Text => [others => 'A']);
+         (Severity => MAVLink.V2.Common.Types.Mav_Severity'First,
+          Text => [others => 'A'],
+          Id => 2,
+          Chunk_Seq => 1);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -3571,19 +4732,25 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Common.Debugs;
+      use MAVLink.V2.Common.Debugs;
       I : Debug;
       O : constant Debug :=
          (Time_Boot_Ms => 3,
           Ind => 1,
           Value => To_Raw (9.9));
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -3591,7 +4758,2684 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Standard.Global_Position_Ints;
+      use MAVLink.V2.Common.Setup_Signings;
+      I : Setup_Signing;
+      O : constant Setup_Signing :=
+         (Target_System => 1,
+          Target_Component => 1,
+          Secret_Key => [others => 1],
+          Initial_Timestamp => 4);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Button_Changes;
+      I : Button_Change;
+      O : constant Button_Change :=
+         (Time_Boot_Ms => 3,
+          Last_Change_Ms => 3,
+          State => 1);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Play_Tunes;
+      I : Play_Tune;
+      O : constant Play_Tune :=
+         (Target_System => 1,
+          Target_Component => 1,
+          Tune => [others => 'A'],
+          Tune2 => [others => 'A']);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Camera_Informations;
+      I : Camera_Information;
+      O : constant Camera_Information :=
+         (Time_Boot_Ms => 3,
+          Vendor_Name => [others => 1],
+          Model_Name => [others => 1],
+          Firmware_Version => <>,
+          Focal_Length => <>,
+          Sensor_Size_H => <>,
+          Sensor_Size_V => <>,
+          Resolution_H => <>,
+          Resolution_V => <>,
+          Lens_Id => <>,
+          Flags => <>,
+          Cam_Definition_Version => 2,
+          Cam_Definition_Uri => [others => 'A'],
+          Gimbal_Device_Id => <>,
+          Camera_Device_Id => 1);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Camera_Settingses;
+      I : Camera_Settings;
+      O : constant Camera_Settings :=
+         (Time_Boot_Ms => 3,
+          Mode_Id => MAVLink.V2.Common.Types.Camera_Mode'First,
+          Zoomlevel => <>,
+          Focuslevel => <>,
+          Camera_Device_Id => 1);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Storage_Informations;
+      I : Storage_Information;
+      O : constant Storage_Information :=
+         (Time_Boot_Ms => 3,
+          Storage_Id => 1,
+          Storage_Count => 1,
+          Status => MAVLink.V2.Common.Types.Storage_Status'First,
+          Total_Capacity => To_Raw (9.9),
+          Used_Capacity => To_Raw (9.9),
+          Available_Capacity => To_Raw (9.9),
+          Read_Speed => To_Raw (9.9),
+          Write_Speed => To_Raw (9.9),
+          Type_Field => MAVLink.V2.Common.Types.Storage_Type'First,
+          Name => [others => 'A'],
+          Storage_Usage => <>);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Camera_Capture_Statuses;
+      I : Camera_Capture_Status;
+      O : constant Camera_Capture_Status :=
+         (Time_Boot_Ms => 3,
+          Image_Status => 1,
+          Video_Status => 1,
+          Image_Interval => To_Raw (9.9),
+          Recording_Time_Ms => 3,
+          Available_Capacity => To_Raw (9.9),
+          Image_Count => 7,
+          Camera_Device_Id => 1);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Camera_Image_Captureds;
+      I : Camera_Image_Captured;
+      O : constant Camera_Image_Captured :=
+         (Time_Boot_Ms => 3,
+          Time_Utc => <>,
+          Camera_Id => 1,
+          Lat => 7,
+          Lon => 7,
+          Alt => 7,
+          Relative_Alt => 7,
+          Q => [others => To_Raw (9.9)],
+          Image_Index => 7,
+          Capture_Result => <>,
+          File_Url => [others => 'A']);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Flight_Informations;
+      I : Flight_Information;
+      O : constant Flight_Information :=
+         (Time_Boot_Ms => 3,
+          Arming_Time_Utc => <>,
+          Takeoff_Time_Utc => <>,
+          Flight_Uuid => <>,
+          Landing_Time => <>);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Mount_Orientations;
+      I : Mount_Orientation;
+      O : constant Mount_Orientation :=
+         (Time_Boot_Ms => 3,
+          Roll => <>,
+          Pitch => <>,
+          Yaw => <>,
+          Yaw_Absolute => <>);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Logging_Datas;
+      I : Logging_Data;
+      O : constant Logging_Data :=
+         (Target_System => 1,
+          Target_Component => 1,
+          Sequence_Field => 2,
+          Length => 1,
+          First_Message_Offset => <>,
+          Data => [others => 1]);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Logging_Data_Ackeds;
+      I : Logging_Data_Acked;
+      O : constant Logging_Data_Acked :=
+         (Target_System => 1,
+          Target_Component => 1,
+          Sequence_Field => 2,
+          Length => 1,
+          First_Message_Offset => <>,
+          Data => [others => 1]);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Logging_Acks;
+      I : Logging_Ack;
+      O : constant Logging_Ack :=
+         (Target_System => 1,
+          Target_Component => 1,
+          Sequence_Field => 2);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Video_Stream_Informations;
+      I : Video_Stream_Information;
+      O : constant Video_Stream_Information :=
+         (Stream_Id => 1,
+          Count => 1,
+          Type_Field => MAVLink.V2.Common.Types.Video_Stream_Type'First,
+          Flags => <>,
+          Framerate => To_Raw (9.9),
+          Resolution_H => 2,
+          Resolution_V => 2,
+          Bitrate => 3,
+          Rotation => 2,
+          Hfov => 2,
+          Name => [others => 'A'],
+          Uri => [others => 'A'],
+          Encoding => MAVLink.V2.Common.Types.Video_Stream_Encoding'First,
+          Camera_Device_Id => 1);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Video_Stream_Statuses;
+      I : Video_Stream_Status;
+      O : constant Video_Stream_Status :=
+         (Stream_Id => 1,
+          Flags => <>,
+          Framerate => To_Raw (9.9),
+          Resolution_H => 2,
+          Resolution_V => 2,
+          Bitrate => 3,
+          Rotation => 2,
+          Hfov => 2,
+          Camera_Device_Id => 1);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Camera_Fov_Statuses;
+      I : Camera_Fov_Status;
+      O : constant Camera_Fov_Status :=
+         (Time_Boot_Ms => 3,
+          Lat_Camera => <>,
+          Lon_Camera => <>,
+          Alt_Camera => <>,
+          Lat_Image => <>,
+          Lon_Image => <>,
+          Alt_Image => <>,
+          Q => [others => To_Raw (9.9)],
+          Hfov => <>,
+          Vfov => <>,
+          Camera_Device_Id => 1);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Camera_Tracking_Image_Statuses;
+      I : Camera_Tracking_Image_Status;
+      O : constant Camera_Tracking_Image_Status :=
+         (Tracking_Status => <>,
+          Tracking_Mode => MAVLink.V2.Common.Types.Camera_Tracking_Mode'First,
+          Target_Data => <>,
+          Point_X => <>,
+          Point_Y => <>,
+          Radius => <>,
+          Rec_Top_X => <>,
+          Rec_Top_Y => <>,
+          Rec_Bottom_X => <>,
+          Rec_Bottom_Y => <>,
+          Camera_Device_Id => 1);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Camera_Tracking_Geo_Statuses;
+      I : Camera_Tracking_Geo_Status;
+      O : constant Camera_Tracking_Geo_Status :=
+         (Tracking_Status => <>,
+          Lat => 7,
+          Lon => 7,
+          Alt => To_Raw (9.9),
+          H_Acc => <>,
+          V_Acc => <>,
+          Vel_N => <>,
+          Vel_E => <>,
+          Vel_D => <>,
+          Vel_Acc => <>,
+          Dist => <>,
+          Hdg => <>,
+          Hdg_Acc => <>,
+          Camera_Device_Id => 1);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Camera_Thermal_Ranges;
+      I : Camera_Thermal_Range;
+      O : constant Camera_Thermal_Range :=
+         (Time_Boot_Ms => 3,
+          Stream_Id => 1,
+          Camera_Device_Id => 1,
+          Max => To_Raw (9.9),
+          Max_Point_X => <>,
+          Max_Point_Y => <>,
+          Min => To_Raw (9.9),
+          Min_Point_X => <>,
+          Min_Point_Y => <>);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Gimbal_Manager_Informations;
+      I : Gimbal_Manager_Information;
+      O : constant Gimbal_Manager_Information :=
+         (Time_Boot_Ms => 3,
+          Cap_Flags => <>,
+          Gimbal_Device_Id => 1,
+          Roll_Min => To_Raw (9.9),
+          Roll_Max => To_Raw (9.9),
+          Pitch_Min => To_Raw (9.9),
+          Pitch_Max => To_Raw (9.9),
+          Yaw_Min => To_Raw (9.9),
+          Yaw_Max => To_Raw (9.9));
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Gimbal_Manager_Statuses;
+      I : Gimbal_Manager_Status;
+      O : constant Gimbal_Manager_Status :=
+         (Time_Boot_Ms => 3,
+          Flags => <>,
+          Gimbal_Device_Id => 1,
+          Primary_Control_Sysid => 1,
+          Primary_Control_Compid => 1,
+          Secondary_Control_Sysid => 1,
+          Secondary_Control_Compid => 1);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Gimbal_Manager_Set_Attitudes;
+      I : Gimbal_Manager_Set_Attitude;
+      O : constant Gimbal_Manager_Set_Attitude :=
+         (Target_System => 1,
+          Target_Component => 1,
+          Flags => <>,
+          Gimbal_Device_Id => 1,
+          Q => [others => To_Raw (9.9)],
+          Angular_Velocity_X => <>,
+          Angular_Velocity_Y => <>,
+          Angular_Velocity_Z => <>);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Gimbal_Device_Informations;
+      I : Gimbal_Device_Information;
+      O : constant Gimbal_Device_Information :=
+         (Time_Boot_Ms => 3,
+          Vendor_Name => [others => 'A'],
+          Model_Name => [others => 'A'],
+          Custom_Name => [others => 'A'],
+          Firmware_Version => 3,
+          Hardware_Version => 3,
+          Uid => <>,
+          Cap_Flags => <>,
+          Custom_Cap_Flags => 2,
+          Roll_Min => <>,
+          Roll_Max => <>,
+          Pitch_Min => <>,
+          Pitch_Max => <>,
+          Yaw_Min => <>,
+          Yaw_Max => <>,
+          Gimbal_Device_Id => <>);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Gimbal_Device_Set_Attitudes;
+      I : Gimbal_Device_Set_Attitude;
+      O : constant Gimbal_Device_Set_Attitude :=
+         (Target_System => 1,
+          Target_Component => 1,
+          Flags => <>,
+          Q => <>,
+          Angular_Velocity_X => <>,
+          Angular_Velocity_Y => <>,
+          Angular_Velocity_Z => <>);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Gimbal_Device_Attitude_Statuses;
+      I : Gimbal_Device_Attitude_Status;
+      O : constant Gimbal_Device_Attitude_Status :=
+         (Target_System => 1,
+          Target_Component => 1,
+          Time_Boot_Ms => 3,
+          Flags => <>,
+          Q => [others => To_Raw (9.9)],
+          Angular_Velocity_X => <>,
+          Angular_Velocity_Y => <>,
+          Angular_Velocity_Z => <>,
+          Failure_Flags => <>,
+          Delta_Yaw => <>,
+          Delta_Yaw_Velocity => <>,
+          Gimbal_Device_Id => <>);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Autopilot_State_For_Gimbal_Devices;
+      I : Autopilot_State_For_Gimbal_Device;
+      O : constant Autopilot_State_For_Gimbal_Device :=
+         (Target_System => 1,
+          Target_Component => 1,
+          Time_Boot_Us => 4,
+          Q => [others => To_Raw (9.9)],
+          Q_Estimated_Delay_Us => <>,
+          Vx => <>,
+          Vy => <>,
+          Vz => <>,
+          V_Estimated_Delay_Us => <>,
+          Feed_Forward_Angular_Velocity_Z => <>,
+          Estimator_Status => <>,
+          Landed_State => <>,
+          Angular_Velocity_Z => <>);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Gimbal_Manager_Set_Pitchyaws;
+      I : Gimbal_Manager_Set_Pitchyaw;
+      O : constant Gimbal_Manager_Set_Pitchyaw :=
+         (Target_System => 1,
+          Target_Component => 1,
+          Flags => <>,
+          Gimbal_Device_Id => 1,
+          Pitch => <>,
+          Yaw => <>,
+          Pitch_Rate => <>,
+          Yaw_Rate => <>);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Gimbal_Manager_Set_Manual_Controls;
+      I : Gimbal_Manager_Set_Manual_Control;
+      O : constant Gimbal_Manager_Set_Manual_Control :=
+         (Target_System => 1,
+          Target_Component => 1,
+          Flags => <>,
+          Gimbal_Device_Id => 1,
+          Pitch => <>,
+          Yaw => <>,
+          Pitch_Rate => <>,
+          Yaw_Rate => <>);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Esc_Infos;
+      I : Esc_Info;
+      O : constant Esc_Info :=
+         (Index => 1,
+          Time_Usec => 4,
+          Counter => 2,
+          Count => 1,
+          Connection_Type => MAVLink.V2.Common.Types.Esc_Connection_Type'First,
+          Info => 1,
+          Failure_Flags => [others => 2],
+          Error_Count => [others => 3],
+          Temperature => <>);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Esc_Statuses;
+      I : Esc_Status;
+      O : constant Esc_Status :=
+         (Index => 1,
+          Time_Usec => 4,
+          Rpm => [others => 7],
+          Voltage => [others => To_Raw (9.9)],
+          Current => [others => To_Raw (9.9)]);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Wifi_Config_Aps;
+      I : Wifi_Config_Ap;
+      O : constant Wifi_Config_Ap :=
+         (Ssid => [others => 'A'],
+          Password => [others => 'A'],
+          Mode => MAVLink.V2.Common.Types.Wifi_Config_Ap_Mode'First,
+          Response => MAVLink.V2.Common.Types.Wifi_Config_Ap_Response'First);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Ais_Vessels;
+      I : Ais_Vessel;
+      O : constant Ais_Vessel :=
+         (Mmsi => 3,
+          Lat => 7,
+          Lon => 7,
+          Cog => 2,
+          Heading => 2,
+          Velocity => 2,
+          Turn_Rate => 5,
+          Navigational_Status => MAVLink.V2.Common.Types.Ais_Nav_Status'First,
+          Type_Field => MAVLink.V2.Common.Types.Ais_Type'First,
+          Dimension_Bow => 2,
+          Dimension_Stern => 2,
+          Dimension_Port => 1,
+          Dimension_Starboard => 1,
+          Callsign => [others => 'A'],
+          Name => [others => 'A'],
+          Tslc => 2,
+          Flags => <>);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Uavcan_Node_Statuses;
+      I : Uavcan_Node_Status;
+      O : constant Uavcan_Node_Status :=
+         (Time_Usec => 4,
+          Uptime_Sec => 3,
+          Health => MAVLink.V2.Common.Types.Uavcan_Node_Health'First,
+          Mode => MAVLink.V2.Common.Types.Uavcan_Node_Mode'First,
+          Sub_Mode => 1,
+          Vendor_Specific_Status_Code => 2);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Uavcan_Node_Infos;
+      I : Uavcan_Node_Info;
+      O : constant Uavcan_Node_Info :=
+         (Time_Usec => 4,
+          Uptime_Sec => 3,
+          Name => [others => 'A'],
+          Hw_Version_Major => 1,
+          Hw_Version_Minor => 1,
+          Hw_Unique_Id => [others => 1],
+          Sw_Version_Major => 1,
+          Sw_Version_Minor => 1,
+          Sw_Vcs_Commit => <>);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Param_Ext_Request_Reads;
+      I : Param_Ext_Request_Read;
+      O : constant Param_Ext_Request_Read :=
+         (Target_System => 1,
+          Target_Component => 1,
+          Param_Id => [others => 'A'],
+          Param_Index => <>);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Param_Ext_Request_Lists;
+      I : Param_Ext_Request_List;
+      O : constant Param_Ext_Request_List :=
+         (Target_System => 1,
+          Target_Component => 1);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Param_Ext_Values;
+      I : Param_Ext_Value;
+      O : constant Param_Ext_Value :=
+         (Param_Id => [others => 'A'],
+          Param_Value => [others => 'A'],
+          Param_Type => MAVLink.V2.Common.Types.Mav_Param_Ext_Type'First,
+          Param_Count => 2,
+          Param_Index => 2);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Param_Ext_Sets;
+      I : Param_Ext_Set;
+      O : constant Param_Ext_Set :=
+         (Target_System => 1,
+          Target_Component => 1,
+          Param_Id => [others => 'A'],
+          Param_Value => [others => 'A'],
+          Param_Type => MAVLink.V2.Common.Types.Mav_Param_Ext_Type'First);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Param_Ext_Acks;
+      I : Param_Ext_Ack;
+      O : constant Param_Ext_Ack :=
+         (Param_Id => [others => 'A'],
+          Param_Value => [others => 'A'],
+          Param_Type => MAVLink.V2.Common.Types.Mav_Param_Ext_Type'First,
+          Param_Result => MAVLink.V2.Common.Types.Param_Ack'First);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Obstacle_Distances;
+      I : Obstacle_Distance;
+      O : constant Obstacle_Distance :=
+         (Time_Usec => 4,
+          Sensor_Type => MAVLink.V2.Common.Types.Mav_Distance_Sensor'First,
+          Distances => <>,
+          Increment => 1,
+          Min_Distance => 2,
+          Max_Distance => 2,
+          Increment_F => To_Raw (9.9),
+          Angle_Offset => To_Raw (9.9),
+          Frame => MAVLink.V2.Common.Types.Mav_Frame'First);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Odometrys;
+      I : Odometry;
+      O : constant Odometry :=
+         (Time_Usec => 4,
+          Frame_Id => MAVLink.V2.Common.Types.Mav_Frame'First,
+          Child_Frame_Id => MAVLink.V2.Common.Types.Mav_Frame'First,
+          X => To_Raw (9.9),
+          Y => To_Raw (9.9),
+          Z => To_Raw (9.9),
+          Q => [others => To_Raw (9.9)],
+          Vx => To_Raw (9.9),
+          Vy => To_Raw (9.9),
+          Vz => To_Raw (9.9),
+          Rollspeed => To_Raw (9.9),
+          Pitchspeed => To_Raw (9.9),
+          Yawspeed => To_Raw (9.9),
+          Pose_Covariance => <>,
+          Velocity_Covariance => <>,
+          Reset_Counter => 1,
+          Estimator_Type => MAVLink.V2.Common.Types.Mav_Estimator_Type'First,
+          Quality => <>);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Trajectory_Representation_Waypointses;
+      I : Trajectory_Representation_Waypoints;
+      O : constant Trajectory_Representation_Waypoints :=
+         (Time_Usec => 4,
+          Valid_Points => 1,
+          Pos_X => <>,
+          Pos_Y => <>,
+          Pos_Z => <>,
+          Vel_X => <>,
+          Vel_Y => <>,
+          Vel_Z => <>,
+          Acc_X => <>,
+          Acc_Y => <>,
+          Acc_Z => <>,
+          Pos_Yaw => <>,
+          Vel_Yaw => <>,
+          Command => <>);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Trajectory_Representation_Beziers;
+      I : Trajectory_Representation_Bezier;
+      O : constant Trajectory_Representation_Bezier :=
+         (Time_Usec => 4,
+          Valid_Points => 1,
+          Pos_X => <>,
+          Pos_Y => <>,
+          Pos_Z => <>,
+          Delta_Field => <>,
+          Pos_Yaw => <>);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Cellular_Statuses;
+      I : Cellular_Status;
+      O : constant Cellular_Status :=
+         (Status => MAVLink.V2.Common.Types.Cellular_Status_Flag'First,
+          Failure_Reason => MAVLink.V2.Common.Types.Cellular_Network_Failed_Reason'First,
+          Type_Field => MAVLink.V2.Common.Types.Cellular_Network_Radio_Type'First,
+          Quality => <>,
+          Mcc => <>,
+          Mnc => <>,
+          Lac => <>);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Isbd_Link_Statuses;
+      I : Isbd_Link_Status;
+      O : constant Isbd_Link_Status :=
+         (Timestamp => 4,
+          Last_Heartbeat => 4,
+          Failed_Sessions => 2,
+          Successful_Sessions => 2,
+          Signal_Quality => 1,
+          Ring_Pending => 1,
+          Tx_Session_Pending => 1,
+          Rx_Session_Pending => 1);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Cellular_Configs;
+      I : Cellular_Config;
+      O : constant Cellular_Config :=
+         (Enable_Lte => 1,
+          Enable_Pin => 1,
+          Pin => [others => 'A'],
+          New_Pin => [others => 'A'],
+          Apn => [others => 'A'],
+          Puk => [others => 'A'],
+          Roaming => 1,
+          Response => MAVLink.V2.Common.Types.Cellular_Config_Response'First);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Raw_Rpms;
+      I : Raw_Rpm;
+      O : constant Raw_Rpm :=
+         (Index => 1,
+          Frequency => To_Raw (9.9));
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Utm_Global_Positions;
+      I : Utm_Global_Position;
+      O : constant Utm_Global_Position :=
+         (Time => 4,
+          Uas_Id => [others => 1],
+          Lat => 7,
+          Lon => 7,
+          Alt => 7,
+          Relative_Alt => 7,
+          Vx => 6,
+          Vy => 6,
+          Vz => 6,
+          H_Acc => 2,
+          V_Acc => 2,
+          Vel_Acc => 2,
+          Next_Lat => 7,
+          Next_Lon => 7,
+          Next_Alt => 7,
+          Update_Rate => <>,
+          Flight_State => MAVLink.V2.Common.Types.Utm_Flight_State'First,
+          Flags => <>);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Param_Errors;
+      I : Param_Error;
+      O : constant Param_Error :=
+         (Target_System => 1,
+          Target_Component => 1,
+          Param_Id => [others => 'A'],
+          Param_Index => 6,
+          Error => MAVLink.V2.Common.Types.Mav_Param_Error'First);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Debug_Float_Arrays;
+      I : Debug_Float_Array;
+      O : constant Debug_Float_Array :=
+         (Time_Usec => 4,
+          Name => [others => 'A'],
+          Array_Id => 2,
+          Data => [others => To_Raw (9.9)]);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Orbit_Execution_Statuses;
+      I : Orbit_Execution_Status;
+      O : constant Orbit_Execution_Status :=
+         (Time_Usec => 4,
+          Radius => To_Raw (9.9),
+          Frame => MAVLink.V2.Common.Types.Mav_Frame'First,
+          X => 7,
+          Y => 7,
+          Z => To_Raw (9.9));
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Smart_Battery_Infos;
+      I : Smart_Battery_Info;
+      O : constant Smart_Battery_Info :=
+         (Id => 1,
+          Battery_Function => MAVLink.V2.Common.Types.Mav_Battery_Function'First,
+          Type_Field => MAVLink.V2.Common.Types.Mav_Battery_Type'First,
+          Capacity_Full_Specification => <>,
+          Capacity_Full => <>,
+          Cycle_Count => <>,
+          Serial_Number => <>,
+          Device_Name => <>,
+          Weight => <>,
+          Discharge_Minimum_Voltage => <>,
+          Charging_Minimum_Voltage => <>,
+          Resting_Minimum_Voltage => <>,
+          Charging_Maximum_Voltage => <>,
+          Cells_In_Series => <>,
+          Discharge_Maximum_Current => <>,
+          Discharge_Maximum_Burst_Current => <>,
+          Manufacture_Date => <>);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Fuel_Statuses;
+      I : Fuel_Status;
+      O : constant Fuel_Status :=
+         (Id => 1,
+          Maximum_Fuel => To_Raw (9.9),
+          Consumed_Fuel => <>,
+          Remaining_Fuel => <>,
+          Percent_Remaining => <>,
+          Flow_Rate => <>,
+          Temperature => <>,
+          Fuel_Type => MAVLink.V2.Common.Types.Mav_Fuel_Type'First);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Battery_Infos;
+      I : Battery_Info;
+      O : constant Battery_Info :=
+         (Id => 1,
+          Battery_Function => MAVLink.V2.Common.Types.Mav_Battery_Function'First,
+          Type_Field => MAVLink.V2.Common.Types.Mav_Battery_Type'First,
+          State_Of_Health => <>,
+          Cells_In_Series => <>,
+          Cycle_Count => <>,
+          Weight => <>,
+          Discharge_Minimum_Voltage => <>,
+          Charging_Minimum_Voltage => <>,
+          Resting_Minimum_Voltage => <>,
+          Charging_Maximum_Voltage => <>,
+          Charging_Maximum_Current => <>,
+          Nominal_Voltage => <>,
+          Discharge_Maximum_Current => <>,
+          Discharge_Maximum_Burst_Current => <>,
+          Design_Capacity => <>,
+          Full_Charge_Capacity => <>,
+          Manufacture_Date => <>,
+          Serial_Number => <>,
+          Name => <>);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Generator_Statuses;
+      I : Generator_Status;
+      O : constant Generator_Status :=
+         (Status => <>,
+          Generator_Speed => <>,
+          Battery_Current => <>,
+          Load_Current => <>,
+          Power_Generated => <>,
+          Bus_Voltage => To_Raw (9.9),
+          Rectifier_Temperature => <>,
+          Bat_Current_Setpoint => <>,
+          Generator_Temperature => <>,
+          Runtime => <>,
+          Time_Until_Maintenance => <>);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Actuator_Output_Statuses;
+      I : Actuator_Output_Status;
+      O : constant Actuator_Output_Status :=
+         (Time_Usec => 4,
+          Active => 3,
+          Actuator => [others => To_Raw (9.9)]);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Time_Estimate_To_Targets;
+      I : Time_Estimate_To_Target;
+      O : constant Time_Estimate_To_Target :=
+         (Safe_Return => 7,
+          Land => 7,
+          Mission_Next_Item => <>,
+          Mission_End => <>,
+          Commanded_Action => <>);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Tunnels;
+      I : Tunnel;
+      O : constant Tunnel :=
+         (Target_System => 1,
+          Target_Component => 1,
+          Payload_Type => MAVLink.V2.Common.Types.Mav_Tunnel_Payload_Type'First,
+          Payload_Length => 1,
+          Payload => [others => 1]);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Can_Frames;
+      I : Can_Frame;
+      O : constant Can_Frame :=
+         (Target_System => 1,
+          Target_Component => 1,
+          Bus => 1,
+          Len => 1,
+          Id => 3,
+          Data => [others => 1]);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Onboard_Computer_Statuses;
+      I : Onboard_Computer_Status;
+      O : constant Onboard_Computer_Status :=
+         (Time_Usec => 4,
+          Uptime => 3,
+          Type_Field => 1,
+          Cpu_Cores => <>,
+          Cpu_Combined => <>,
+          Gpu_Cores => <>,
+          Gpu_Combined => <>,
+          Temperature_Board => <>,
+          Temperature_Core => <>,
+          Fan_Speed => <>,
+          Ram_Usage => <>,
+          Ram_Total => <>,
+          Storage_Type => <>,
+          Storage_Usage => <>,
+          Storage_Total => <>,
+          Link_Type => [others => 3],
+          Link_Tx_Rate => <>,
+          Link_Rx_Rate => <>,
+          Link_Tx_Max => <>,
+          Link_Rx_Max => <>,
+          Status_Flags => <>);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Component_Informations;
+      I : Component_Information;
+      O : constant Component_Information :=
+         (Time_Boot_Ms => 3,
+          General_Metadata_File_Crc => 3,
+          General_Metadata_Uri => [others => 'A'],
+          Peripherals_Metadata_File_Crc => 3,
+          Peripherals_Metadata_Uri => [others => 'A']);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Component_Information_Basics;
+      I : Component_Information_Basic;
+      O : constant Component_Information_Basic :=
+         (Time_Boot_Ms => 3,
+          Capabilities => <>,
+          Time_Manufacture_S => <>,
+          Vendor_Name => [others => 'A'],
+          Model_Name => [others => 'A'],
+          Software_Version => [others => 'A'],
+          Hardware_Version => [others => 'A'],
+          Serial_Number => [others => 'A']);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Component_Metadatas;
+      I : Component_Metadata;
+      O : constant Component_Metadata :=
+         (Time_Boot_Ms => 3,
+          File_Crc => 3,
+          Uri => [others => 'A']);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Play_Tune_V2s;
+      I : Play_Tune_V2;
+      O : constant Play_Tune_V2 :=
+         (Target_System => 1,
+          Target_Component => 1,
+          Format => MAVLink.V2.Common.Types.Tune_Format'First,
+          Tune => [others => 'A']);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Supported_Tuneses;
+      I : Supported_Tunes;
+      O : constant Supported_Tunes :=
+         (Target_System => 1,
+          Target_Component => 1,
+          Format => MAVLink.V2.Common.Types.Tune_Format'First);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Events;
+      I : Event;
+      O : constant Event :=
+         (Destination_Component => 1,
+          Destination_System => 1,
+          Id => 3,
+          Event_Time_Boot_Ms => 3,
+          Sequence_Field => 2,
+          Log_Levels => 1,
+          Arguments => [others => 1]);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Current_Event_Sequences;
+      I : Current_Event_Sequence;
+      O : constant Current_Event_Sequence :=
+         (Sequence_Field => 2,
+          Flags => <>);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Request_Events;
+      I : Request_Event;
+      O : constant Request_Event :=
+         (Target_System => 1,
+          Target_Component => 1,
+          First_Sequence => 2,
+          Last_Sequence => 2);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Response_Event_Errors;
+      I : Response_Event_Error;
+      O : constant Response_Event_Error :=
+         (Target_System => 1,
+          Target_Component => 1,
+          Sequence_Field => 2,
+          Sequence_Oldest_Available => 2,
+          Reason => MAVLink.V2.Common.Types.Mav_Event_Error_Reason'First);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Available_Modeses;
+      I : Available_Modes;
+      O : constant Available_Modes :=
+         (Number_Modes => 1,
+          Mode_Index => 1,
+          Standard_Mode => MAVLink.V2.Common.Types.Mav_Standard_Mode'First,
+          Custom_Mode => 3,
+          Properties => <>,
+          Mode_Name => [others => 'A']);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Current_Modes;
+      I : Current_Mode;
+      O : constant Current_Mode :=
+         (Standard_Mode => MAVLink.V2.Common.Types.Mav_Standard_Mode'First,
+          Custom_Mode => 3,
+          Intended_Custom_Mode => <>);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Available_Modes_Monitors;
+      I : Available_Modes_Monitor;
+      O : constant Available_Modes_Monitor :=
+         (Seq => 1);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Illuminator_Statuses;
+      I : Illuminator_Status;
+      O : constant Illuminator_Status :=
+         (Uptime_Ms => 3,
+          Enable => 1,
+          Mode_Bitmask => MAVLink.V2.Common.Types.Illuminator_Mode'First,
+          Error_Status => <>,
+          Mode => MAVLink.V2.Common.Types.Illuminator_Mode'First,
+          Brightness => To_Raw (9.9),
+          Strobe_Period => To_Raw (9.9),
+          Strobe_Duty_Cycle => To_Raw (9.9),
+          Temp_C => To_Raw (9.9),
+          Min_Strobe_Period => To_Raw (9.9),
+          Max_Strobe_Period => To_Raw (9.9));
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Canfd_Frames;
+      I : Canfd_Frame;
+      O : constant Canfd_Frame :=
+         (Target_System => 1,
+          Target_Component => 1,
+          Bus => 1,
+          Len => 1,
+          Id => 3,
+          Data => [others => 1]);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Can_Filter_Modifys;
+      I : Can_Filter_Modify;
+      O : constant Can_Filter_Modify :=
+         (Target_System => 1,
+          Target_Component => 1,
+          Bus => 1,
+          Operation => MAVLink.V2.Common.Types.Can_Filter_Op'First,
+          Num_Ids => 1,
+          Ids => [others => 2]);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Wheel_Distances;
+      I : Wheel_Distance;
+      O : constant Wheel_Distance :=
+         (Time_Usec => 4,
+          Count => 1,
+          Distance => [others => To_Raw (10.10)]);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Winch_Statuses;
+      I : Winch_Status;
+      O : constant Winch_Status :=
+         (Time_Usec => 4,
+          Line_Length => <>,
+          Speed => <>,
+          Tension => <>,
+          Voltage => <>,
+          Current => <>,
+          Temperature => <>,
+          Status => <>);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Open_Drone_Id_Basic_Ids;
+      I : Open_Drone_Id_Basic_Id;
+      O : constant Open_Drone_Id_Basic_Id :=
+         (Target_System => 1,
+          Target_Component => 1,
+          Id_Or_Mac => [others => 1],
+          Id_Type => MAVLink.V2.Common.Types.Mav_Odid_Id_Type'First,
+          Ua_Type => MAVLink.V2.Common.Types.Mav_Odid_Ua_Type'First,
+          Uas_Id => [others => 1]);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Open_Drone_Id_Locations;
+      I : Open_Drone_Id_Location;
+      O : constant Open_Drone_Id_Location :=
+         (Target_System => 1,
+          Target_Component => 1,
+          Id_Or_Mac => [others => 1],
+          Status => MAVLink.V2.Common.Types.Mav_Odid_Status'First,
+          Direction => <>,
+          Speed_Horizontal => 2,
+          Speed_Vertical => 6,
+          Latitude => <>,
+          Longitude => <>,
+          Altitude_Barometric => <>,
+          Altitude_Geodetic => <>,
+          Height_Reference => MAVLink.V2.Common.Types.Mav_Odid_Height_Ref'First,
+          Height => <>,
+          Horizontal_Accuracy => MAVLink.V2.Common.Types.Mav_Odid_Hor_Acc'First,
+          Vertical_Accuracy => MAVLink.V2.Common.Types.Mav_Odid_Ver_Acc'First,
+          Barometer_Accuracy => MAVLink.V2.Common.Types.Mav_Odid_Ver_Acc'First,
+          Speed_Accuracy => MAVLink.V2.Common.Types.Mav_Odid_Speed_Acc'First,
+          Timestamp => <>,
+          Timestamp_Accuracy => MAVLink.V2.Common.Types.Mav_Odid_Time_Acc'First);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Open_Drone_Id_Authentications;
+      I : Open_Drone_Id_Authentication;
+      O : constant Open_Drone_Id_Authentication :=
+         (Target_System => 1,
+          Target_Component => 1,
+          Id_Or_Mac => [others => 1],
+          Authentication_Type => MAVLink.V2.Common.Types.Mav_Odid_Auth_Type'First,
+          Data_Page => 1,
+          Last_Page_Index => 1,
+          Length => 1,
+          Timestamp => 3,
+          Authentication_Data => [others => 1]);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Open_Drone_Id_Self_Ids;
+      I : Open_Drone_Id_Self_Id;
+      O : constant Open_Drone_Id_Self_Id :=
+         (Target_System => 1,
+          Target_Component => 1,
+          Id_Or_Mac => [others => 1],
+          Description_Type => MAVLink.V2.Common.Types.Mav_Odid_Desc_Type'First,
+          Description => [others => 'A']);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Open_Drone_Id_Systems;
+      I : Open_Drone_Id_System;
+      O : constant Open_Drone_Id_System :=
+         (Target_System => 1,
+          Target_Component => 1,
+          Id_Or_Mac => [others => 1],
+          Operator_Location_Type => MAVLink.V2.Common.Types.Mav_Odid_Operator_Location_Type'First,
+          Classification_Type => MAVLink.V2.Common.Types.Mav_Odid_Classification_Type'First,
+          Operator_Latitude => <>,
+          Operator_Longitude => <>,
+          Area_Count => 2,
+          Area_Radius => 2,
+          Area_Ceiling => <>,
+          Area_Floor => <>,
+          Category_Eu => MAVLink.V2.Common.Types.Mav_Odid_Category_Eu'First,
+          Class_Eu => MAVLink.V2.Common.Types.Mav_Odid_Class_Eu'First,
+          Operator_Altitude_Geo => <>,
+          Timestamp => 3);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Open_Drone_Id_Operator_Ids;
+      I : Open_Drone_Id_Operator_Id;
+      O : constant Open_Drone_Id_Operator_Id :=
+         (Target_System => 1,
+          Target_Component => 1,
+          Id_Or_Mac => [others => 1],
+          Operator_Id_Type => MAVLink.V2.Common.Types.Mav_Odid_Operator_Id_Type'First,
+          Operator_Id => [others => 'A']);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Open_Drone_Id_Message_Packs;
+      I : Open_Drone_Id_Message_Pack;
+      O : constant Open_Drone_Id_Message_Pack :=
+         (Target_System => 1,
+          Target_Component => 1,
+          Id_Or_Mac => [others => 1],
+          Single_Message_Size => 1,
+          Msg_Pack_Size => 1,
+          Messages => [others => 1]);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Open_Drone_Id_Arm_Statuses;
+      I : Open_Drone_Id_Arm_Status;
+      O : constant Open_Drone_Id_Arm_Status :=
+         (Status => MAVLink.V2.Common.Types.Mav_Odid_Arm_Status'First,
+          Error => [others => 'A']);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Open_Drone_Id_System_Updates;
+      I : Open_Drone_Id_System_Update;
+      O : constant Open_Drone_Id_System_Update :=
+         (Target_System => 1,
+          Target_Component => 1,
+          Operator_Latitude => <>,
+          Operator_Longitude => <>,
+          Operator_Altitude_Geo => <>,
+          Timestamp => 3);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Common.Hygrometer_Sensors;
+      I : Hygrometer_Sensor;
+      O : constant Hygrometer_Sensor :=
+         (Id => 1,
+          Temperature => 6,
+          Humidity => 2);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Standard.Global_Position_Ints;
       I : Global_Position_Int;
       O : constant Global_Position_Int :=
          (Time_Boot_Ms => 3,
@@ -3604,12 +7448,18 @@ begin
           Vz => 6,
           Hdg => <>);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -3617,7 +7467,7 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Standard.Autopilot_Versions;
+      use MAVLink.V2.Standard.Autopilot_Versions;
       I : Autopilot_Version;
       O : constant Autopilot_Version :=
          (Capabilities => <>,
@@ -3630,14 +7480,21 @@ begin
           Os_Custom_Version => [others => 1],
           Vendor_Id => 2,
           Product_Id => 2,
-          Uid => 4);
+          Uid => 4,
+          Uid2 => [others => 1]);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
@@ -3645,22 +7502,56 @@ begin
    end;
 
    declare
-      use MAVLink.V1.Minimal.Heartbeats;
+      use MAVLink.V2.Minimal.Heartbeats;
       I : Heartbeat;
       O : constant Heartbeat :=
-         (Type_Field => MAVLink.V1.Minimal.Types.Mav_Type'First,
-          Autopilot => MAVLink.V1.Minimal.Types.Mav_Autopilot'First,
+         (Type_Field => MAVLink.V2.Minimal.Types.Mav_Type'First,
+          Autopilot => MAVLink.V2.Minimal.Types.Mav_Autopilot'First,
           Base_Mode => <>,
           Custom_Mode => 3,
-          System_Status => MAVLink.V1.Minimal.Types.Mav_State'First,
+          System_Status => MAVLink.V2.Minimal.Types.Mav_State'First,
           Mavlink_Version => 1);
    begin
-      Encode (O, Out_Connect, Buffer, Last);
+      Encode (O, Out_Connect, Sig, Buffer, Last);
 
-      for Index in Buffer'First .. Last loop
+      for Index in Buffer'First .. Last - 1 loop
          Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
       end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
       pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
+
+      Decode (I, In_Connect, Res);
+      pragma Assert (Res);
+      pragma Assert (I = O);
+   end;
+
+   declare
+      use MAVLink.V2.Minimal.Protocol_Versions;
+      I : Protocol_Version;
+      O : constant Protocol_Version :=
+         (Version => 2,
+          Min_Version => 2,
+          Max_Version => 2,
+          Spec_Version_Hash => [others => 1],
+          Library_Version_Hash => [others => 1]);
+   begin
+      Encode (O, Out_Connect, Sig, Buffer, Last);
+
+      for Index in Buffer'First .. Last - 1 loop
+         Res := Parse_Byte (In_Connect, Buffer (Index));
+         pragma Assert (not Res);
+      end loop;
+      Res := Parse_Byte (In_Connect, Buffer (Last));
+      pragma Assert (Res);
+
+      Get_Message_Information
+        (In_Connect, Sig, Seq, Sys_Id, Comp_Id, Id, Link_Id, Timestamp, Signature);
+      pragma Assert (Signature = True);
 
       Decode (I, In_Connect, Res);
       pragma Assert (Res);
