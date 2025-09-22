@@ -28,35 +28,11 @@ require communication with MAVLink-compliant devices. Features
 
 ## Installation
 
-1. Add MAVLink as a dependency:
+Add MAVLink as a dependency:
 
    ```shell
    alr with mavlink_common
    ```
-
-2. Add `with`-clause for the Project
-
-   This library offers two projects to suit different needs:
-
-   - **Standard Version**: This version, configured with `mavlink_common.gpr`,
-     provides the full set of MAVLink message types and capabilities.
-
-     ```gpr
-     with "mavlink_common.gpr";
-     ```
-
-   - **Limited Type Version**: To achieve a more compact compiled output, you
-     can use the `mavlink_common_limited.gpr` project file. This configuration
-     declares the Message type as a `limited` record, which can lead
-     to reduced code size, making it particularly beneficial for
-     resource-constrained embedded applications.
-
-     ```gpr
-     with "mavlink_common_limited.gpr";
-     ```
-
-   Choose the project file that best fits your requirements when building your
-   application.
 
 ##  Usage
 
@@ -65,12 +41,14 @@ TBD. See [`examples`](examples/) for now.
 ## Mavlink commit id
 
 The code was generated from `fdacb2b` commit of
-the [mavlink](https://github.com/mavlink/mavlink) repo. I used this steps:
+the [mavlink](https://github.com/mavlink/mavlink) repo.
+And `9c270e5` from `ReladormAndry/pymavlink`.
+I used this steps:
 
 ```shell
 python -m venv venv
 source venv/bin/activate
-git clone --depth=1 https://github.com/reznikmm/pymavlink
+git clone --depth=1 -b version2 https://github.com/ReladormAndry/pymavlink/
 git clone --depth=1 https://github.com/mavlink/mavlink
 MDEF=$PWD/mavlink/message_definitions python -m pip install pymavlink
 
