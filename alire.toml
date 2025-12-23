@@ -14,3 +14,9 @@ project-files = ["gnat/mavlink_common.gpr"]
 [build-switches]
 "*".style_checks = ["-gnatyN"]
 "*".ada_version = "Ada2022"
+
+[[depends-on]]
+mavlink_shared = "^1.0"
+
+[[pins]]
+mavlink_shared = { url='https://github.com/reznikmm/mavlink_shared' }
