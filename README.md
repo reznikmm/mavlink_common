@@ -22,7 +22,8 @@ require communication with MAVLink-compliant devices. Features
 
 - Generated MAVLink 2.0 protocol support,
   [Common Message Set](https://mavlink.io/en/messages/common.html)
-  (See `v1` branch for 1.0 wire protocol.)
+  See [`v1`](https://github.com/reznikmm/mavlink_common/tree/v1) branch
+  for 1.0 wire protocol.
 - Compatible with the Ada bareboard profiles for real-time applications
 - Modular structure for easy integration with existing Ada projects
 - Supports message serialization and deserialization
@@ -43,7 +44,7 @@ TBD.
 
 The code was generated from `e31f7de` commit of
 the [mavlink](https://github.com/mavlink/mavlink) repo.
-And `a365606` from `ReladormAndry/pymavlink`.
+And `b136b21` from `ReladormAndry/pymavlink`.
 I used this steps:
 
 ```shell
@@ -56,7 +57,7 @@ MDEF=$PWD/mavlink/message_definitions python -m pip install pymavlink
 python3 -m pymavlink.tools.mavgen --lang=Ada --wire-protocol=2.0 \
   --output=generated mavlink/message_definitions/v1.0/common.xml
 
-sed -i -e s/Preelaborate/Pure/ -e "s/ *$//" generated/*.ad[sb]
+sed -i -e 's/  *$//' *.ad[sb]
 ```
 
 ## Contributing
