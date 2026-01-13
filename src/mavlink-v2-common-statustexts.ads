@@ -20,7 +20,8 @@ package MAVLink.V2.Common.Statustexts is
       Severity  : Mav_Severity;
       --  Severity of status. Relies on the definitions within RFC-5424.
       Text      : String (1 .. 50);
-      --  Status text message, without null termination character
+      --  Status text message, without null termination character. UTF-8
+      --  encoded.
       Id        : Interfaces.Unsigned_16;
       --  Unique (opaque) identifier for this statustext message. May be used
       --  to reassemble a logical long-statustext message from a sequence of

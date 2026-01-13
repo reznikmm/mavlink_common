@@ -2,10 +2,6 @@
 --  DO NOT EDIT. This file is generated. --
 -------------------------------------------
 
-------------
---  DEPRECATED SINCE: 2022-05 REPLACED BY: GPS_RTCM_DATA
-------------
-
 --  Data for injecting into the onboard GPS (used for DGPS)
 
 pragma Ada_2022;
@@ -25,8 +21,6 @@ package MAVLink.V2.Common.Gps_Inject_Datas is
       Data             : Unsigned_8_Array (1 .. 110);
       --  Raw data (110 is enough for 12 satellites of RTCMv2)
    end record;
-
-   pragma Obsolescent (Gps_Inject_Data);
 
    for Gps_Inject_Data use record
       Target_System    at 0 range 0 .. 7;

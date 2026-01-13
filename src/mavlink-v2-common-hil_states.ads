@@ -2,11 +2,6 @@
 --  DO NOT EDIT. This file is generated. --
 -------------------------------------------
 
-------------
---  DEPRECATED SINCE: 2013-07 REPLACED BY: HIL_STATE_QUATERNION
---  Suffers from missing airspeed fields and singularities due to Euler angles
-------------
-
 --  Sent from simulation to autopilot. This packet is useful for high
 --  throughput applications such as hardware in the loop simulations.
 
@@ -68,8 +63,6 @@ package MAVLink.V2.Common.Hil_States is
       --  Units: [mG]
       --  Z acceleration
    end record;
-
-   pragma Obsolescent (Hil_State);
 
    for Hil_State use record
       Time_Usec  at 0  range 0 .. 63;

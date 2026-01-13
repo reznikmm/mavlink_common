@@ -2,13 +2,6 @@
 --  DO NOT EDIT. This file is generated. --
 -------------------------------------------
 
-------------
---  DEPRECATED SINCE: 2020-01 REPLACED BY: MAV_CMD_DO_GIMBAL_MANAGER_PITCHYAW
---  This message is being superseded by MAV_CMD_DO_GIMBAL_MANAGER_PITCHYAW.
---  The message can still be used to communicate with legacy gimbals
---  implementing it.
-------------
-
 --  Orientation of a mount
 
 pragma Ada_2022;
@@ -39,8 +32,6 @@ package MAVLink.V2.Common.Mount_Orientations is
       --  Yaw in absolute frame relative to Earth's North, north is 0 (set to
       --  NaN for invalid).
    end record;
-
-   pragma Obsolescent (Mount_Orientation);
 
    for Mount_Orientation use record
       Time_Boot_Ms at 0  range 0 .. 31;

@@ -2,28 +2,28 @@
 --  DO NOT EDIT. This file is generated. --
 -------------------------------------------
 
-package body MAVLink.V2.Minimal.Protocol_Versions is
+package body MAVLink.V2.Common.Figure_Eight_Execution_Statuses is
 
    ------------
    -- Encode --
    ------------
 
    procedure Encode
-     (Message : Protocol_Version;
+     (Message : Figure_Eight_Execution_Status;
       Connect : in out MAVLink.V2.Connection;
       Buffer  : out Data_Buffer;
       Last    : out Positive)
    is
-      Local : Data_Buffer (1 .. Protocol_Version'Value_Size / 8)
+      Local : Data_Buffer (1 .. Figure_Eight_Execution_Status'Value_Size / 8)
         with Import, Address => Message'Address,
         Convention => Ada;
 
    begin
       Last := Buffer'First +
         Packet_Payload_First +
-        (Protocol_Version'Value_Size / 8) - 1;
+        (Figure_Eight_Execution_Status'Value_Size / 8) - 1;
       Buffer (Buffer'First + Packet_Payload_First .. Last) := Local;
-      Encode (Connect, Protocol_Version_Id, 217, Buffer, Last);
+      Encode (Connect, Figure_Eight_Execution_Status_Id, 93, Buffer, Last);
    end Encode;
 
    ------------
@@ -31,22 +31,22 @@ package body MAVLink.V2.Minimal.Protocol_Versions is
    ------------
 
    procedure Encode
-     (Message : Protocol_Version;
+     (Message : Figure_Eight_Execution_Status;
       Connect : in out MAVLink.V2.Connection;
       Sign    : in out MAVLink.V2.Signature;
       Buffer  : out Data_Buffer;
       Last    : out Positive)
    is
-      Local : Data_Buffer (1 .. Protocol_Version'Value_Size / 8)
+      Local : Data_Buffer (1 .. Figure_Eight_Execution_Status'Value_Size / 8)
         with Import, Address => Message'Address,
         Convention => Ada;
 
    begin
       Last := Buffer'First +
         Packet_Payload_First +
-        (Protocol_Version'Value_Size / 8) - 1;
+        (Figure_Eight_Execution_Status'Value_Size / 8) - 1;
       Buffer (Buffer'First + Packet_Payload_First .. Last) := Local;
-      Encode (Connect, Protocol_Version_Id, 217, Sign, Buffer, Last);
+      Encode (Connect, Figure_Eight_Execution_Status_Id, 93, Sign, Buffer, Last);
    end Encode;
 
    ------------
@@ -54,21 +54,21 @@ package body MAVLink.V2.Minimal.Protocol_Versions is
    ------------
 
    procedure Encode
-     (Message : Protocol_Version;
+     (Message : Figure_Eight_Execution_Status;
       Connect : in out MAVLink.V2.Out_Connection;
       Buffer  : out Data_Buffer;
       Last    : out Positive)
    is
-      Local : Data_Buffer (1 .. Protocol_Version'Value_Size / 8)
+      Local : Data_Buffer (1 .. Figure_Eight_Execution_Status'Value_Size / 8)
         with Import, Address => Message'Address,
         Convention => Ada;
 
    begin
       Last := Buffer'First +
         Packet_Payload_First +
-        (Protocol_Version'Value_Size / 8) - 1;
+        (Figure_Eight_Execution_Status'Value_Size / 8) - 1;
       Buffer (Buffer'First + Packet_Payload_First .. Last) := Local;
-      Encode (Connect, Protocol_Version_Id, 217, Buffer, Last);
+      Encode (Connect, Figure_Eight_Execution_Status_Id, 93, Buffer, Last);
    end Encode;
 
    ------------
@@ -76,22 +76,22 @@ package body MAVLink.V2.Minimal.Protocol_Versions is
    ------------
 
    procedure Encode
-     (Message : Protocol_Version;
+     (Message : Figure_Eight_Execution_Status;
       Connect : in out MAVLink.V2.Out_Connection;
       Sign    : in out MAVLink.V2.Signature;
       Buffer  : out Data_Buffer;
       Last    : out Positive)
    is
-      Local : Data_Buffer (1 .. Protocol_Version'Value_Size / 8)
+      Local : Data_Buffer (1 .. Figure_Eight_Execution_Status'Value_Size / 8)
         with Import, Address => Message'Address,
         Convention => Ada;
 
    begin
       Last := Buffer'First +
         Packet_Payload_First +
-        (Protocol_Version'Value_Size / 8) - 1;
+        (Figure_Eight_Execution_Status'Value_Size / 8) - 1;
       Buffer (Buffer'First + Packet_Payload_First .. Last) := Local;
-      Encode (Connect, Protocol_Version_Id, 217, Sign, Buffer, Last);
+      Encode (Connect, Figure_Eight_Execution_Status_Id, 93, Sign, Buffer, Last);
    end Encode;
 
    ------------
@@ -99,14 +99,14 @@ package body MAVLink.V2.Minimal.Protocol_Versions is
    ------------
 
    procedure Decode
-     (Message   : out Protocol_Version;
+     (Message   : out Figure_Eight_Execution_Status;
       Connect   : MAVLink.V2.Connection;
       CRC_Valid : out Boolean)
    is
-      Data : Data_Buffer (1 .. Protocol_Version'Value_Size / 8);
+      Data : Data_Buffer (1 .. Figure_Eight_Execution_Status'Value_Size / 8);
       Last : Natural;
       Buf  : Data_Buffer
-        (1 .. Protocol_Version'Size / 8) := [others => 0]
+        (1 .. Figure_Eight_Execution_Status'Size / 8) := [others => 0]
         with Address => Message'Address,
         Convention   => Ada;
    begin
@@ -120,13 +120,13 @@ package body MAVLink.V2.Minimal.Protocol_Versions is
    ------------
 
    procedure Decode
-     (Message : out Protocol_Version;
+     (Message : out Figure_Eight_Execution_Status;
       Connect : MAVLink.V2.Connection)
    is
-      Data : Data_Buffer (1 .. Protocol_Version'Value_Size / 8);
+      Data : Data_Buffer (1 .. Figure_Eight_Execution_Status'Value_Size / 8);
       Last : Natural;
       Buf  : Data_Buffer
-        (1 .. Protocol_Version'Size / 8) := [others => 0]
+        (1 .. Figure_Eight_Execution_Status'Size / 8) := [others => 0]
         with Address => Message'Address,
         Convention   => Ada;
    begin
@@ -139,14 +139,14 @@ package body MAVLink.V2.Minimal.Protocol_Versions is
    ------------
 
    procedure Decode
-     (Message   : out Protocol_Version;
+     (Message   : out Figure_Eight_Execution_Status;
       Connect   : MAVLink.V2.In_Connection;
       CRC_Valid : out Boolean)
    is
-      Data : Data_Buffer (1 .. Protocol_Version'Value_Size / 8);
+      Data : Data_Buffer (1 .. Figure_Eight_Execution_Status'Value_Size / 8);
       Last : Natural;
       Buf  : Data_Buffer
-        (1 .. Protocol_Version'Size / 8) := [others => 0]
+        (1 .. Figure_Eight_Execution_Status'Size / 8) := [others => 0]
         with Address => Message'Address,
         Convention   => Ada;
    begin
@@ -160,13 +160,13 @@ package body MAVLink.V2.Minimal.Protocol_Versions is
    ------------
 
    procedure Decode
-     (Message : out Protocol_Version;
+     (Message : out Figure_Eight_Execution_Status;
       Connect : MAVLink.V2.In_Connection)
    is
-      Data : Data_Buffer (1 .. Protocol_Version'Value_Size / 8);
+      Data : Data_Buffer (1 .. Figure_Eight_Execution_Status'Value_Size / 8);
       Last : Natural;
       Buf  : Data_Buffer
-        (1 .. Protocol_Version'Size / 8) := [others => 0]
+        (1 .. Figure_Eight_Execution_Status'Size / 8) := [others => 0]
         with Address => Message'Address,
         Convention   => Ada;
    begin
@@ -181,7 +181,7 @@ package body MAVLink.V2.Minimal.Protocol_Versions is
    function Check_CRC
      (Connect : MAVLink.V2.Connection) return Boolean is
    begin
-      return Is_CRC_Valid (Connect, 217);
+      return Is_CRC_Valid (Connect, 93);
    end Check_CRC;
 
    ---------------
@@ -191,7 +191,7 @@ package body MAVLink.V2.Minimal.Protocol_Versions is
    function Check_CRC
      (Connect : MAVLink.V2.In_Connection) return Boolean is
    begin
-      return Is_CRC_Valid (Connect, 217);
+      return Is_CRC_Valid (Connect, 93);
    end Check_CRC;
 
-end MAVLink.V2.Minimal.Protocol_Versions;
+end MAVLink.V2.Common.Figure_Eight_Execution_Statuses;

@@ -180,6 +180,7 @@ package MAVLink.V2.Common is
    Gimbal_Manager_Set_Manual_Control_Id       : constant Msg_Id := 288;
    Esc_Info_Id                                : constant Msg_Id := 290;
    Esc_Status_Id                              : constant Msg_Id := 291;
+   Airspeed_Id                                : constant Msg_Id := 295;
    Wifi_Config_Ap_Id                          : constant Msg_Id := 299;
    Protocol_Version_Id                        : constant Msg_Id := 300;
    Ais_Vessel_Id                              : constant Msg_Id := 301;
@@ -202,6 +203,7 @@ package MAVLink.V2.Common is
    Param_Error_Id                             : constant Msg_Id := 345;
    Debug_Float_Array_Id                       : constant Msg_Id := 350;
    Orbit_Execution_Status_Id                  : constant Msg_Id := 360;
+   Figure_Eight_Execution_Status_Id           : constant Msg_Id := 361;
    Smart_Battery_Info_Id                      : constant Msg_Id := 370;
    Fuel_Status_Id                             : constant Msg_Id := 371;
    Battery_Info_Id                            : constant Msg_Id := 372;
@@ -262,6 +264,7 @@ package MAVLink.V2.Common is
        275   .. 277   |
        280   .. 288   |
        290   .. 291   |
+       295   .. 295   |
        299   .. 301   |
        310   .. 311   |
        320   .. 324   |
@@ -269,7 +272,7 @@ package MAVLink.V2.Common is
        339   .. 340   |
        345   .. 345   |
        350   .. 350   |
-       360   .. 360   |
+       360   .. 361   |
        370   .. 373   |
        375   .. 375   |
        380   .. 380   |
@@ -460,6 +463,7 @@ package MAVLink.V2.Common is
          when 288   => "Gimbal_Manager_Set_Manual_Control",
          when 290   => "Esc_Info",
          when 291   => "Esc_Status",
+         when 295   => "Airspeed",
          when 299   => "Wifi_Config_Ap",
          when 300   => "Protocol_Version",
          when 301   => "Ais_Vessel",
@@ -482,6 +486,7 @@ package MAVLink.V2.Common is
          when 345   => "Param_Error",
          when 350   => "Debug_Float_Array",
          when 360   => "Orbit_Execution_Status",
+         when 361   => "Figure_Eight_Execution_Status",
          when 370   => "Smart_Battery_Info",
          when 371   => "Fuel_Status",
          when 372   => "Battery_Info",

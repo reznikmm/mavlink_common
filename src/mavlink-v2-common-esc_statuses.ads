@@ -15,8 +15,8 @@ package MAVLink.V2.Common.Esc_Statuses is
 
    type Esc_Status is record
       Index     : Interfaces.Unsigned_8;
-      --  Index of the first ESC in this message. minValue = 0, maxValue = 60,
-      --  increment = 4.
+      --  Index of the first ESC in this message (ESC are indexed in motor
+      --  order). minValue = 0, maxValue = 60, increment = 4.
       Time_Usec : Interfaces.Unsigned_64;
       --  Units: [us]
       --  Timestamp (UNIX Epoch time or time since system boot). The receiving

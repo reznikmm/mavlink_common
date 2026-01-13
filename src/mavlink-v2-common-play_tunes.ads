@@ -2,11 +2,6 @@
 --  DO NOT EDIT. This file is generated. --
 -------------------------------------------
 
-------------
---  DEPRECATED SINCE: 2019-10 REPLACED BY: PLAY_TUNE_V2
---  New version explicitly defines format. More interoperable.
-------------
-
 --  Control vehicle tone generation (buzzer).
 
 pragma Ada_2022;
@@ -25,8 +20,6 @@ package MAVLink.V2.Common.Play_Tunes is
       Tune2            : String (1 .. 200);
       --  tune extension (appended to tune)
    end record;
-
-   pragma Obsolescent (Play_Tune);
 
    for Play_Tune use record
       Target_System    at 0  range 0 .. 7;

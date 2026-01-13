@@ -2,10 +2,6 @@
 --  DO NOT EDIT. This file is generated. --
 -------------------------------------------
 
-------------
---  DEPRECATED SINCE: 2022-08 REPLACED BY: MAV_CMD_DO_SET_MISSION_CURRENT
-------------
-
 --  Set the mission item with sequence number seq as the current item and emit
 --  MISSION_CURRENT (whether or not the mission number changed). If a mission
 --  is currently being executed, the system will continue to this new mission
@@ -32,8 +28,6 @@ package MAVLink.V2.Common.Mission_Set_Currents is
       Seq              : Interfaces.Unsigned_16;
       --  Sequence
    end record;
-
-   pragma Obsolescent (Mission_Set_Current);
 
    for Mission_Set_Current use record
       Seq              at 0 range 0 .. 15;

@@ -2,10 +2,6 @@
 --  DO NOT EDIT. This file is generated. --
 -------------------------------------------
 
-------------
---  DEPRECATED SINCE: 2015-08 REPLACED BY: MAV_CMD_SET_MESSAGE_INTERVAL
-------------
-
 --  Request a data stream.
 
 pragma Ada_2022;
@@ -27,8 +23,6 @@ package MAVLink.V2.Common.Request_Data_Streams is
       Start_Stop       : Interfaces.Unsigned_8;
       --  1 to start sending, 0 to stop sending.
    end record;
-
-   pragma Obsolescent (Request_Data_Stream);
 
    for Request_Data_Stream use record
       Req_Message_Rate at 0 range 0 .. 15;

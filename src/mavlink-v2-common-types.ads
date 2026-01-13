@@ -444,25 +444,11 @@ package MAVLink.V2.Common.Types is
 
    function Global_Int return Mav_Frame is (5)
      with Static;
-   pragma Obsolescent (Global_Int);
-   ------------
-   --  DEPRECATED SINCE: 2024-03 REPLACED BY: MAV_FRAME_GLOBAL
-   --  Use MAV_FRAME_GLOBAL in COMMAND_INT (and elsewhere) as a synonymous
-   --  replacement.
-   ------------
-
    --  Global (WGS84) coordinate frame (scaled) + altitude relative to mean
    --  sea level (MSL).
 
    function Global_Relative_Alt_Int return Mav_Frame is (6)
      with Static;
-   pragma Obsolescent (Global_Relative_Alt_Int);
-   ------------
-   --  DEPRECATED SINCE: 2024-03 REPLACED BY: MAV_FRAME_GLOBAL_RELATIVE_ALT
-   --  Use MAV_FRAME_GLOBAL_RELATIVE_ALT in COMMAND_INT (and elsewhere) as a
-   --  synonymous replacement.
-   ------------
-
    --  Global (WGS84) coordinate frame (scaled) + altitude relative to the
    --  home position.
 
@@ -473,21 +459,11 @@ package MAVLink.V2.Common.Types is
 
    function Body_Ned return Mav_Frame is (8)
      with Static;
-   pragma Obsolescent (Body_Ned);
-   ------------
-   --  DEPRECATED SINCE: 2019-08 REPLACED BY: MAV_FRAME_BODY_FRD
-   ------------
-
    --  Same as MAV_FRAME_LOCAL_NED when used to represent position values.
    --  Same as MAV_FRAME_BODY_FRD when used with velocity/acceleration values.
 
    function Body_Offset_Ned return Mav_Frame is (9)
      with Static;
-   pragma Obsolescent (Body_Offset_Ned);
-   ------------
-   --  DEPRECATED SINCE: 2019-08 REPLACED BY: MAV_FRAME_BODY_FRD
-   ------------
-
    --  This is the same as MAV_FRAME_BODY_FRD.
 
    function Global_Terrain_Alt return Mav_Frame is (10)
@@ -497,13 +473,6 @@ package MAVLink.V2.Common.Types is
 
    function Global_Terrain_Alt_Int return Mav_Frame is (11)
      with Static;
-   pragma Obsolescent (Global_Terrain_Alt_Int);
-   ------------
-   --  DEPRECATED SINCE: 2024-03 REPLACED BY: MAV_FRAME_GLOBAL_TERRAIN_ALT
-   --  Use MAV_FRAME_GLOBAL_TERRAIN_ALT in COMMAND_INT (and elsewhere) as a
-   --  synonymous replacement.
-   ------------
-
    --  Global (WGS84) coordinate frame (scaled) with AGL altitude (altitude at
    --  ground level).
 
@@ -1200,28 +1169,28 @@ package MAVLink.V2.Common.Types is
    type Gripper_Actions is new Interfaces.Unsigned_8;
    --  Gripper actions.
 
-   function Open return Gripper_Actions is (0)
+   function Release return Gripper_Actions is (0)
      with Static;
-   --  Gripper commence open. Often used to release cargo.
+   --  Gripper release cargo.
 
-   function Close return Gripper_Actions is (1)
+   function Grab return Gripper_Actions is (1)
      with Static;
-   --  Gripper commence close. Often used to grab onto cargo.
+   --  Gripper grab onto cargo.
 
-   function Stop return Gripper_Actions is (2)
+   function Hold return Gripper_Actions is (2)
      with Static;
-   --  Gripper stop (maintain current grip position).
+   --  Gripper hold current grip state/position.
 
    subtype Gripper_Actions_Well_Known is Gripper_Actions
      with Static_Predicate => Gripper_Actions_Well_Known in
-       Open .. Stop;
+       Release .. Hold;
 
    function Well_Known_Image
      (Value : Gripper_Actions_Well_Known) return String is
        (case Value is
-        when Open => "Open",
-        when Close => "Close",
-        when Stop => "Stop");
+        when Release => "Release",
+        when Grab => "Grab",
+        when Hold => "Hold");
 
    function Image (Value : Gripper_Actions) return String is
      (if Value in Gripper_Actions_Well_Known
@@ -2336,13 +2305,20 @@ package MAVLink.V2.Common.Types is
    --  parameters. Setting values to NaN/INT32_MAX (as appropriate) results in
    --  using defaults.
 
+   function Do_Figure_Eight return Mav_Cmd is (35)
+     with Static;
+   --  Fly a figure eight path as defined by the parameters. Set parameters to
+   --  NaN/INT32_MAX (as appropriate) to use system-default values. The
+   --  command is intended for fixed wing vehicles (and VTOL hybrids flying in
+   --  fixed-wing mode), allowing POI tracking for gimbals that don't support
+   --  infinite rotation. This command only defines the flight path. Speed
+   --  should be set independently (use e.g. MAV_CMD_DO_CHANGE_SPEED). Yaw and
+   --  other degrees of freedom are not specified, and will be flight-stack
+   --  specific (on vehicles where they can be controlled independent of the
+   --  heading).
+
    function Nav_Roi return Mav_Cmd is (80)
      with Static;
-   pragma Obsolescent (Nav_Roi);
-   ------------
-   --  DEPRECATED SINCE: 2018-01 REPLACED BY: `MAV_CMD_DO_SET_ROI_*`
-   ------------
-
    --  Sets the region of interest (ROI) for a sensor set or the vehicle
    --  itself. This can then be used by the vehicle's control system to
    --  control the vehicle attitude and the attitude of various sensors such
@@ -2591,11 +2567,6 @@ package MAVLink.V2.Common.Types is
 
    function Do_Set_Roi return Mav_Cmd is (201)
      with Static;
-   pragma Obsolescent (Do_Set_Roi);
-   ------------
-   --  DEPRECATED SINCE: 2018-01 REPLACED BY: `MAV_CMD_DO_SET_ROI_*`
-   ------------
-
    --  Sets the region of interest (ROI) for a sensor set or the vehicle
    --  itself. This can then be used by the vehicle's control system to
    --  control the vehicle attitude and the attitude of various sensors such
@@ -2615,27 +2586,10 @@ package MAVLink.V2.Common.Types is
 
    function Do_Mount_Configure return Mav_Cmd is (204)
      with Static;
-   pragma Obsolescent (Do_Mount_Configure);
-   ------------
-   --  DEPRECATED SINCE: 2020-01 REPLACED BY: MAV_CMD_DO_GIMBAL_MANAGER_CONFIGURE
-   --  This message has been superseded by
-   --  MAV_CMD_DO_GIMBAL_MANAGER_CONFIGURE. The message can still be used to
-   --  communicate with legacy gimbals implementing it.
-   ------------
-
    --  Mission command to configure a camera or antenna mount
 
    function Do_Mount_Control return Mav_Cmd is (205)
      with Static;
-   pragma Obsolescent (Do_Mount_Control);
-   ------------
-   --  DEPRECATED SINCE: 2020-01 REPLACED BY: MAV_CMD_DO_GIMBAL_MANAGER_PITCHYAW
-   --  This message is ambiguous and inconsistent. It has been superseded by
-   --  MAV_CMD_DO_GIMBAL_MANAGER_PITCHYAW and `MAV_CMD_DO_SET_ROI_*` variants.
-   --  The message can still be used to communicate with legacy gimbals
-   --  implementing it.
-   ------------
-
    --  Mission command to control a camera or antenna mount
 
    function Do_Set_Cam_Trigg_Dist return Mav_Cmd is (206)
@@ -2687,11 +2641,6 @@ package MAVLink.V2.Common.Types is
 
    function Do_Mount_Control_Quat return Mav_Cmd is (220)
      with Static;
-   pragma Obsolescent (Do_Mount_Control_Quat);
-   ------------
-   --  DEPRECATED SINCE: 2020-01 REPLACED BY: MAV_CMD_DO_GIMBAL_MANAGER_PITCHYAW
-   ------------
-
    --  Mission command to control a camera or antenna mount, using a
    --  quaternion as reference.
 
@@ -2835,11 +2784,6 @@ package MAVLink.V2.Common.Types is
 
    function Get_Home_Position return Mav_Cmd is (410)
      with Static;
-   pragma Obsolescent (Get_Home_Position);
-   ------------
-   --  DEPRECATED SINCE: 2022-04 REPLACED BY: MAV_CMD_REQUEST_MESSAGE
-   ------------
-
    --  Request the home position from the vehicle. The vehicle will ACK the
    --  command and then emit the HOME_POSITION message.
 
@@ -2855,11 +2799,6 @@ package MAVLink.V2.Common.Types is
 
    function Get_Message_Interval return Mav_Cmd is (510)
      with Static;
-   pragma Obsolescent (Get_Message_Interval);
-   ------------
-   --  DEPRECATED SINCE: 2022-04 REPLACED BY: MAV_CMD_REQUEST_MESSAGE
-   ------------
-
    --  Request the interval between messages for a particular MAVLink message
    --  ID. The receiver should ACK the command and then emit its response in a
    --  MESSAGE_INTERVAL message.
@@ -2878,7 +2817,7 @@ package MAVLink.V2.Common.Types is
      with Static;
    pragma Obsolescent (Request_Protocol_Version);
    ------------
-   --  DEPRECATED SINCE: 2019-08 REPLACED BY: MAV_CMD_REQUEST_MESSAGE
+   --  DEPRECATED SINCE: 2025-11 REPLACED BY: MAV_CMD_REQUEST_MESSAGE
    ------------
 
    --  Request MAVLink protocol version compatibility. All receivers should
@@ -2887,39 +2826,19 @@ package MAVLink.V2.Common.Types is
 
    function Request_Autopilot_Capabilities return Mav_Cmd is (520)
      with Static;
-   pragma Obsolescent (Request_Autopilot_Capabilities);
-   ------------
-   --  DEPRECATED SINCE: 2019-08 REPLACED BY: MAV_CMD_REQUEST_MESSAGE
-   ------------
-
    --  Request autopilot capabilities. The receiver should ACK the command and
    --  then emit its capabilities in an AUTOPILOT_VERSION message
 
    function Request_Camera_Information return Mav_Cmd is (521)
      with Static;
-   pragma Obsolescent (Request_Camera_Information);
-   ------------
-   --  DEPRECATED SINCE: 2019-08 REPLACED BY: MAV_CMD_REQUEST_MESSAGE
-   ------------
-
    --  Request camera information (CAMERA_INFORMATION).
 
    function Request_Camera_Settings return Mav_Cmd is (522)
      with Static;
-   pragma Obsolescent (Request_Camera_Settings);
-   ------------
-   --  DEPRECATED SINCE: 2019-08 REPLACED BY: MAV_CMD_REQUEST_MESSAGE
-   ------------
-
    --  Request camera settings (CAMERA_SETTINGS).
 
    function Request_Storage_Information return Mav_Cmd is (525)
      with Static;
-   pragma Obsolescent (Request_Storage_Information);
-   ------------
-   --  DEPRECATED SINCE: 2019-08 REPLACED BY: MAV_CMD_REQUEST_MESSAGE
-   ------------
-
    --  Request storage information (STORAGE_INFORMATION). Use the command's
    --  target_component to target a specific component's storage.
 
@@ -2931,20 +2850,10 @@ package MAVLink.V2.Common.Types is
 
    function Request_Camera_Capture_Status return Mav_Cmd is (527)
      with Static;
-   pragma Obsolescent (Request_Camera_Capture_Status);
-   ------------
-   --  DEPRECATED SINCE: 2019-08 REPLACED BY: MAV_CMD_REQUEST_MESSAGE
-   ------------
-
    --  Request camera capture status (CAMERA_CAPTURE_STATUS)
 
    function Request_Flight_Information return Mav_Cmd is (528)
      with Static;
-   pragma Obsolescent (Request_Flight_Information);
-   ------------
-   --  DEPRECATED SINCE: 2019-08 REPLACED BY: MAV_CMD_REQUEST_MESSAGE
-   ------------
-
    --  Request flight information (FLIGHT_INFORMATION)
 
    function Reset_Camera_Settings return Mav_Cmd is (529)
@@ -3067,11 +2976,6 @@ package MAVLink.V2.Common.Types is
 
    function Request_Camera_Image_Capture return Mav_Cmd is (2002)
      with Static;
-   pragma Obsolescent (Request_Camera_Image_Capture);
-   ------------
-   --  DEPRECATED SINCE: 2019-08 REPLACED BY: MAV_CMD_REQUEST_MESSAGE
-   ------------
-
    --  Re-request a CAMERA_IMAGE_CAPTURED message.
 
    function Do_Trigger_Control return Mav_Cmd is (2003)
@@ -3112,20 +3016,10 @@ package MAVLink.V2.Common.Types is
 
    function Request_Video_Stream_Information return Mav_Cmd is (2504)
      with Static;
-   pragma Obsolescent (Request_Video_Stream_Information);
-   ------------
-   --  DEPRECATED SINCE: 2019-08 REPLACED BY: MAV_CMD_REQUEST_MESSAGE
-   ------------
-
    --  Request video stream information (VIDEO_STREAM_INFORMATION)
 
    function Request_Video_Stream_Status return Mav_Cmd is (2505)
      with Static;
-   pragma Obsolescent (Request_Video_Stream_Status);
-   ------------
-   --  DEPRECATED SINCE: 2019-08 REPLACED BY: MAV_CMD_REQUEST_MESSAGE
-   ------------
-
    --  Request video stream status (VIDEO_STREAM_STATUS)
 
    function Logging_Start return Mav_Cmd is (2510)
@@ -3235,21 +3129,11 @@ package MAVLink.V2.Common.Types is
 
    function Payload_Prepare_Deploy return Mav_Cmd is (30001)
      with Static;
-   pragma Obsolescent (Payload_Prepare_Deploy);
-   ------------
-   --  DEPRECATED SINCE: 2021-06 REPLACED BY:
-   ------------
-
    --  Deploy payload on a Lat / Lon / Alt position. This includes the
    --  navigation to reach the required release position and velocity.
 
    function Payload_Control_Deploy return Mav_Cmd is (30002)
      with Static;
-   pragma Obsolescent (Payload_Control_Deploy);
-   ------------
-   --  DEPRECATED SINCE: 2021-06 REPLACED BY:
-   ------------
-
    --  Control the payload deployment.
 
    function Waypoint_User_1 return Mav_Cmd is (31000)
@@ -3353,7 +3237,7 @@ package MAVLink.V2.Common.Types is
    subtype Mav_Cmd_Well_Known is Mav_Cmd
      with Static_Predicate => Mav_Cmd_Well_Known in
        Nav_Waypoint .. Nav_Follow
-       | Nav_Continue_And_Change_Alt .. Do_Orbit
+       | Nav_Continue_And_Change_Alt .. Do_Figure_Eight
        | Nav_Roi .. Nav_Spline_Waypoint
        | Nav_Vtol_Takeoff .. Nav_Vtol_Land
        | Nav_Guided_Enable .. Nav_Last
@@ -3419,6 +3303,7 @@ package MAVLink.V2.Common.Types is
         when Do_Follow => "Do_Follow",
         when Do_Follow_Reposition => "Do_Follow_Reposition",
         when Do_Orbit => "Do_Orbit",
+        when Do_Figure_Eight => "Do_Figure_Eight",
         when Nav_Roi => "Nav_Roi",
         when Nav_Pathplanning => "Nav_Pathplanning",
         when Nav_Spline_Waypoint => "Nav_Spline_Waypoint",
@@ -3575,11 +3460,6 @@ package MAVLink.V2.Common.Types is
       then Well_Known_Image (Value) else "Unknown:" & Value'Image);
 
    type Mav_Data_Stream is new Interfaces.Unsigned_8;
-   pragma Obsolescent (Mav_Data_Stream);
-   ------------
-   --  DEPRECATED SINCE: 2015-06 REPLACED BY: MESSAGE_INTERVAL
-   ------------
-
    --  A data stream is not a fixed set of messages, but rather a
    --  recommendation to the autopilot software. Individual autopilots may or
    --  may not obey the recommended messages.
@@ -3645,11 +3525,6 @@ package MAVLink.V2.Common.Types is
       then Well_Known_Image (Value) else "Unknown:" & Value'Image);
 
    type Mav_Roi is new Interfaces.Unsigned_8;
-   pragma Obsolescent (Mav_Roi);
-   ------------
-   --  DEPRECATED SINCE: 2018-01 REPLACED BY: `MAV_CMD_DO_SET_ROI_*`
-   ------------
-
    --  The ROI (region of interest) for the vehicle. This can be be used by
    --  the vehicle for camera/vehicle attitude alignment (see
    --  MAV_CMD_NAV_ROI).
@@ -3905,8 +3780,10 @@ package MAVLink.V2.Common.Types is
 
    function Denied return Mav_Result is (2)
      with Static;
-   --  Command is invalid (is supported but has invalid parameters). Retrying
-   --  same command and parameters will not work.
+   --  Command is invalid; it is supported but one or more parameter values
+   --  are invalid (i.e. parameter reserved, value allowed by spec but not
+   --  supported by flight stack, and so on). Retrying the same command and
+   --  parameters will not work.
 
    function Unsupported return Mav_Result is (3)
      with Static;
@@ -6480,6 +6357,34 @@ package MAVLink.V2.Common.Types is
    function Image (Value : Rc_Sub_Type) return String is
      (if Value in Rc_Sub_Type_Well_Known
       then Well_Known_Image (Value) else "Unknown:" & Value'Image);
+
+   type Engine_Control_Options is record
+      Engine_Control_Options_Allow_Start_While_Disarmed : Boolean := False;
+      Reserved_1                                        : Boolean := False;
+      Reserved_2                                        : Boolean := False;
+      Reserved_3                                        : Boolean := False;
+      Reserved_4                                        : Boolean := False;
+      Reserved_5                                        : Boolean := False;
+      Reserved_6                                        : Boolean := False;
+      Reserved_7                                        : Boolean := False;
+   end record with Size => 8;
+   --  Engine control options
+
+   for Engine_Control_Options use record
+      Engine_Control_Options_Allow_Start_While_Disarmed at 0 range 0 .. 0;
+      Reserved_1                                        at 0 range 1 .. 1;
+      Reserved_2                                        at 0 range 2 .. 2;
+      Reserved_3                                        at 0 range 3 .. 3;
+      Reserved_4                                        at 0 range 4 .. 4;
+      Reserved_5                                        at 0 range 5 .. 5;
+      Reserved_6                                        at 0 range 6 .. 6;
+      Reserved_7                                        at 0 range 7 .. 7;
+   end record;
+
+   function Image (V : Engine_Control_Options) return String is
+     ("["
+      & (if V.Engine_Control_Options_Allow_Start_While_Disarmed then "ENGINE_CONTROL_OPTIONS_ALLOW_START_WHILE_DISARMED " else "")
+      & "]");
 
    type Position_Target_Typemask is record
       X_Ignore        : Boolean := False;
@@ -9501,6 +9406,35 @@ package MAVLink.V2.Common.Types is
       & (if V.Cpu_Throttle then "CPU_THROTTLE " else "")
       & (if V.Thermal_Throttle then "THERMAL_THROTTLE " else "")
       & (if V.Disk_Full then "DISK_FULL " else "")
+      & "]");
+
+   type Airspeed_Sensor_Flags is record
+      Nhealthy   : Boolean := False;
+      Sing       : Boolean := False;
+      Reserved_2 : Boolean := False;
+      Reserved_3 : Boolean := False;
+      Reserved_4 : Boolean := False;
+      Reserved_5 : Boolean := False;
+      Reserved_6 : Boolean := False;
+      Reserved_7 : Boolean := False;
+   end record with Size => 8;
+   --  Airspeed sensor flags
+
+   for Airspeed_Sensor_Flags use record
+      Nhealthy   at 0 range 0 .. 0;
+      Sing       at 0 range 1 .. 1;
+      Reserved_2 at 0 range 2 .. 2;
+      Reserved_3 at 0 range 3 .. 3;
+      Reserved_4 at 0 range 4 .. 4;
+      Reserved_5 at 0 range 5 .. 5;
+      Reserved_6 at 0 range 6 .. 6;
+      Reserved_7 at 0 range 7 .. 7;
+   end record;
+
+   function Image (V : Airspeed_Sensor_Flags) return String is
+     ("["
+      & (if V.Nhealthy then "NHEALTHY " else "")
+      & (if V.Sing then "SING " else "")
       & "]");
 
 end MAVLink.V2.Common.Types;
