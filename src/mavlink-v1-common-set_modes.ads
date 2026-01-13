@@ -4,11 +4,6 @@
 
 --  Copyright Fil Andrii root.fi36@gmail.com 2022-2025
 
-------------
---  DEPRECATED SINCE: 2015-12 REPLACED BY: MAV_CMD_DO_SET_MODE
---  Use COMMAND_LONG with MAV_CMD_DO_SET_MODE instead
-------------
-
 --  Set the system mode, as defined by enum MAV_MODE. There is no target
 --  component id as the mode is by definition for the overall aircraft, not
 --  only for one component.
@@ -32,8 +27,6 @@ package MAVLink.V1.Common.Set_Modes is
       --  The new autopilot-specific mode. This field can be ignored by an
       --  autopilot.
    end record;
-
-   pragma Obsolescent (Set_Mode);
 
    for Set_Mode use record
       Custom_Mode   at 0 range 0 .. 31;

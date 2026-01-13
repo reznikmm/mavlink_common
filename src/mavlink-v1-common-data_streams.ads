@@ -4,10 +4,6 @@
 
 --  Copyright Fil Andrii root.fi36@gmail.com 2022-2025
 
-------------
---  DEPRECATED SINCE: 2015-08 REPLACED BY: MESSAGE_INTERVAL
-------------
-
 --  Data stream status information.
 
 pragma Ada_2022;
@@ -27,8 +23,6 @@ package MAVLink.V1.Common.Data_Streams is
       On_Off       : Interfaces.Unsigned_8;
       --  1 stream is enabled, 0 stream is stopped.
    end record;
-
-   pragma Obsolescent (Data_Stream);
 
    for Data_Stream use record
       Message_Rate at 0 range 0 .. 15;

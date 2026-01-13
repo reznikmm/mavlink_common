@@ -4,10 +4,6 @@
 
 --  Copyright Fil Andrii root.fi36@gmail.com 2022-2025
 
-------------
---  DEPRECATED SINCE: 2025-04 REPLACED BY: MAV_CMD_DO_SET_GLOBAL_ORIGIN
-------------
-
 --  Sets the GPS coordinates of the vehicle local origin (0,0,0) position.
 --  Vehicle should emit GPS_GLOBAL_ORIGIN irrespective of whether the origin
 --  is changed. This enables transform between the local coordinate frame and
@@ -36,8 +32,6 @@ package MAVLink.V1.Common.Set_Gps_Global_Origins is
       --  Units: [mm]
       --  Altitude (MSL). Positive for up.
    end record;
-
-   pragma Obsolescent (Set_Gps_Global_Origin);
 
    for Set_Gps_Global_Origin use record
       Latitude      at 0  range 0 .. 31;

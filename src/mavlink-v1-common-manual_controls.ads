@@ -44,8 +44,8 @@ package MAVLink.V1.Common.Manual_Controls is
         Interfaces.Integer_16'Last;
       --  R-axis, normalized to the range [-1000,1000]. A value of INT16_MAX
       --  indicates that this axis is invalid. Generally corresponds to a
-      --  twisting of the joystick, with counter-clockwise being 1000 and
-      --  clockwise being -1000, and the yaw of a vehicle.
+      --  twisting of the joystick, with clockwise being 1000 and
+      --  counter-clockwise being -1000, and the yaw of a vehicle.
       Buttons : Interfaces.Unsigned_16;
       --  A bitfield corresponding to the joystick buttons' 0-15 current
       --  state, 1 for pressed, 0 for released. The lowest bit corresponds to

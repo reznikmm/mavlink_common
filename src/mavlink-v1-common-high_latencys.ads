@@ -4,10 +4,6 @@
 
 --  Copyright Fil Andrii root.fi36@gmail.com 2022-2025
 
-------------
---  DEPRECATED SINCE: 2020-10 REPLACED BY: HIGH_LATENCY2
-------------
-
 --  Message appropriate for high latency connections like Iridium
 
 pragma Ada_2022;
@@ -91,8 +87,6 @@ package MAVLink.V1.Common.High_Latencys is
       --  Units: [m]
       --  distance to target
    end record;
-
-   pragma Obsolescent (High_Latency);
 
    for High_Latency use record
       Custom_Mode       at 0  range 0 .. 31;

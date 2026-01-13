@@ -4,13 +4,13 @@
 
 --  Copyright Fil Andrii root.fi36@gmail.com 2022-2025
 
---  The system time is the time of the master clock. This can be emitted by
---  flight controllers, onboard computers, or other components in the MAVLink
---  network. Components that are using a less reliable time source, such as a
---  battery-backed real time clock, can choose to match their system clock to
---  that of a SYSTEM_TYPE that indicates a more recent time. This allows more
---  broadly accurate date stamping of logs, and so on. If precise time
---  synchronization is needed then use TIMESYNC instead.
+--  The system time is the time of the sender's master clock. This can be
+--  emitted by flight controllers, onboard computers, or other components in
+--  the MAVLink network. Components that are using a less reliable time
+--  source, such as a battery-backed real time clock, can choose to match
+--  their system clock to that of a system that indicates a more recent time.
+--  This allows more broadly accurate date stamping of logs, and so on. If
+--  precise time synchronization is needed then use TIMESYNC instead.
 
 pragma Ada_2022;
 

@@ -20,7 +20,6 @@ package MAVLink.V1.Common.Change_Operator_Controls is
       Control_Request : Interfaces.Unsigned_8;
       --  0: request control of this MAV, 1: Release control of this MAV
       Version         : Interfaces.Unsigned_8;
-      --  Units: [rad]
       --  0: key as plaintext, 1-255: future, different hashing/encryption
       --  variants. The GCS should in general use the safest mode possible
       --  initially and then gradually move down the encryption level if it
