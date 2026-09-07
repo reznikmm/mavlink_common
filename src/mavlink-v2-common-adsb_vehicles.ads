@@ -15,24 +15,30 @@ package MAVLink.V2.Common.Adsb_Vehicles is
    type Adsb_Vehicle is record
       Icao_Address  : Interfaces.Unsigned_32;
       --  ICAO address
-      Lat           : Interfaces.Integer_32;
+      Lat           : Interfaces.Integer_32 :=
+        Interfaces.Integer_32'Last;
       --  Units: [degE7]
       --  Latitude
-      Lon           : Interfaces.Integer_32;
+      Lon           : Interfaces.Integer_32 :=
+        Interfaces.Integer_32'Last;
       --  Units: [degE7]
       --  Longitude
       Altitude_Type : Adsb_Altitude_Type;
       --  ADSB altitude type.
-      Altitude      : Interfaces.Integer_32;
+      Altitude      : Interfaces.Integer_32 :=
+        Interfaces.Integer_32'Last;
       --  Units: [mm]
-      --  Altitude(ASL)
-      Heading       : Interfaces.Unsigned_16;
+      --  Altitude (ASL)
+      Heading       : Interfaces.Unsigned_16 :=
+        Interfaces.Unsigned_16'Last;
       --  Units: [cdeg]
       --  Course over ground
-      Hor_Velocity  : Interfaces.Unsigned_16;
+      Hor_Velocity  : Interfaces.Unsigned_16 :=
+        Interfaces.Unsigned_16'Last;
       --  Units: [cm/s]
       --  The horizontal velocity
-      Ver_Velocity  : Interfaces.Integer_16;
+      Ver_Velocity  : Interfaces.Integer_16 :=
+        Interfaces.Integer_16'Last;
       --  Units: [cm/s]
       --  The vertical velocity. Positive is up
       Callsign      : String (1 .. 9);
@@ -41,7 +47,8 @@ package MAVLink.V2.Common.Adsb_Vehicles is
       --  ADSB emitter type.
       Tslc          : Interfaces.Unsigned_8;
       --  Units: [s]
-      --  Time since last communication in seconds
+      --  Time since last communication. This is the age of the ADS-B
+      --  information in this message, in seconds.
       Flags         : Adsb_Flags;
       --  Bitmap to indicate various statuses including valid data fields
       Squawk        : Interfaces.Unsigned_16;
@@ -83,27 +90,37 @@ package MAVLink.V2.Common.Adsb_Vehicles is
      (Message   : out Adsb_Vehicle;
       Connect   : MAVLink.V2.Connection;
       CRC_Valid : out Boolean);
-   --  Get the message from the Connect and delete it
-   --  from the Connect's buffer. CRC_Valid is set to
-   --  True if x25crc is valid for the message.
+   --  Get the message from the Connect if x25crc is valid and
+   --  set CRC_Valid to True.
+   --  Won't read data from the Connect if x25crc is False.
+   --  For v1: Won't read data from the Connect if message length mismatch
+   --    and set CRC_Valid to False in this case.
+   --  For v2: Truncate the extension fields.
 
    procedure Decode
      (Message : out Adsb_Vehicle;
       Connect : MAVLink.V2.Connection);
-   --  Same as Above but does not check CRC
+   --  Get the message from the Connect.
+   --  For v1: May raise exception when message length mismatch
+   --  For v2: Truncate the extension fields.
 
    procedure Decode
      (Message   : out Adsb_Vehicle;
       Connect   : MAVLink.V2.In_Connection;
       CRC_Valid : out Boolean);
-   --  Get the message from the Connect and delete it
-   --  from the Connect's buffer. CRC_Valid is set to
-   --  True if x25crc is valid for the message.
+   --  Get the message from the Connect if x25crc is valid and
+   --  set CRC_Valid to True.
+   --  Won't read data from the Connect if x25crc is False.
+   --  For v1: Won't read data from the Connect if message length mismatch
+   --    and set CRC_Valid to False in this case.
+   --  For v2: Truncate the extension fields.
 
    procedure Decode
      (Message : out Adsb_Vehicle;
       Connect : MAVLink.V2.In_Connection);
-   --  Same as Above but does not check CRC
+   --  Get the message from the Connect.
+   --  For v1: May raise an exception when message length mismatch
+   --  For v2: Truncate the extension fields.
 
    function Check_CRC
      (Connect : MAVLink.V2.Connection)

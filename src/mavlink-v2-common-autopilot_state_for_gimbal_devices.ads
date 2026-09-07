@@ -63,8 +63,8 @@ package MAVLink.V2.Common.Autopilot_State_For_Gimbal_Devices is
       Angular_Velocity_Z              : Raw_Float :=
         To_Raw (0.0);
       --  Units: [rad/s]
-      --  Z component of angular velocity in NED (North, East, Down). NaN if
-      --  unknown.
+      --  Z component of angular velocity in NED (North, East, Down). 0 if
+      --  unknown. Use 0.00001 to represent a measured value of zero.
    end record;
 
    for Autopilot_State_For_Gimbal_Device use record
@@ -100,27 +100,37 @@ package MAVLink.V2.Common.Autopilot_State_For_Gimbal_Devices is
      (Message   : out Autopilot_State_For_Gimbal_Device;
       Connect   : MAVLink.V2.Connection;
       CRC_Valid : out Boolean);
-   --  Get the message from the Connect and delete it
-   --  from the Connect's buffer. CRC_Valid is set to
-   --  True if x25crc is valid for the message.
+   --  Get the message from the Connect if x25crc is valid and
+   --  set CRC_Valid to True.
+   --  Won't read data from the Connect if x25crc is False.
+   --  For v1: Won't read data from the Connect if message length mismatch
+   --    and set CRC_Valid to False in this case.
+   --  For v2: Truncate the extension fields.
 
    procedure Decode
      (Message : out Autopilot_State_For_Gimbal_Device;
       Connect : MAVLink.V2.Connection);
-   --  Same as Above but does not check CRC
+   --  Get the message from the Connect.
+   --  For v1: May raise exception when message length mismatch
+   --  For v2: Truncate the extension fields.
 
    procedure Decode
      (Message   : out Autopilot_State_For_Gimbal_Device;
       Connect   : MAVLink.V2.In_Connection;
       CRC_Valid : out Boolean);
-   --  Get the message from the Connect and delete it
-   --  from the Connect's buffer. CRC_Valid is set to
-   --  True if x25crc is valid for the message.
+   --  Get the message from the Connect if x25crc is valid and
+   --  set CRC_Valid to True.
+   --  Won't read data from the Connect if x25crc is False.
+   --  For v1: Won't read data from the Connect if message length mismatch
+   --    and set CRC_Valid to False in this case.
+   --  For v2: Truncate the extension fields.
 
    procedure Decode
      (Message : out Autopilot_State_For_Gimbal_Device;
       Connect : MAVLink.V2.In_Connection);
-   --  Same as Above but does not check CRC
+   --  Get the message from the Connect.
+   --  For v1: May raise an exception when message length mismatch
+   --  For v2: Truncate the extension fields.
 
    function Check_CRC
      (Connect : MAVLink.V2.Connection)

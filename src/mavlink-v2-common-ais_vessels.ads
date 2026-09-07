@@ -15,47 +15,66 @@ package MAVLink.V2.Common.Ais_Vessels is
    type Ais_Vessel is record
       Mmsi                : Interfaces.Unsigned_32;
       --  Mobile Marine Service Identifier, 9 decimal digits
-      Lat                 : Interfaces.Integer_32;
+      Lat                 : Interfaces.Integer_32 :=
+        Interfaces.Integer_32'Last;
       --  Units: [degE7]
       --  Latitude
-      Lon                 : Interfaces.Integer_32;
+      Lon                 : Interfaces.Integer_32 :=
+        Interfaces.Integer_32'Last;
       --  Units: [degE7]
       --  Longitude
-      Cog                 : Interfaces.Unsigned_16;
+      Cog                 : Interfaces.Unsigned_16 :=
+        Interfaces.Unsigned_16'Last;
       --  Units: [cdeg]
       --  Course over ground
-      Heading             : Interfaces.Unsigned_16;
+      Heading             : Interfaces.Unsigned_16 :=
+        Interfaces.Unsigned_16'Last;
       --  Units: [cdeg]
       --  True heading
-      Velocity            : Interfaces.Unsigned_16;
+      Velocity            : Interfaces.Unsigned_16 :=
+        Interfaces.Unsigned_16'Last;
       --  Units: [cm/s]
       --  Speed over ground
-      Turn_Rate           : Interfaces.Integer_8;
+      Turn_Rate           : Interfaces.Integer_8 :=
+        Interfaces.Integer_8'Last;
       --  Units: [ddeg/s]
       --  Turn rate, 0.1 degrees per second
       Navigational_Status : Ais_Nav_Status;
       --  Navigational status
       Type_Field          : Ais_Type;
       --  Type of vessels
-      Dimension_Bow       : Interfaces.Unsigned_16;
+      Dimension_Bow       : Interfaces.Unsigned_16 :=
+        Interfaces.Unsigned_16'Last;
       --  Units: [m]
       --  Distance from lat/lon location to bow
-      Dimension_Stern     : Interfaces.Unsigned_16;
+      Dimension_Stern     : Interfaces.Unsigned_16 :=
+        Interfaces.Unsigned_16'Last;
       --  Units: [m]
       --  Distance from lat/lon location to stern
-      Dimension_Port      : Interfaces.Unsigned_8;
+      Dimension_Port      : Interfaces.Unsigned_8 :=
+        Interfaces.Unsigned_8'Last;
       --  Units: [m]
       --  Distance from lat/lon location to port side
-      Dimension_Starboard : Interfaces.Unsigned_8;
+      Dimension_Starboard : Interfaces.Unsigned_8 :=
+        Interfaces.Unsigned_8'Last;
       --  Units: [m]
       --  Distance from lat/lon location to starboard side
       Callsign            : String (1 .. 7);
-      --  The vessel callsign
+      --  The vessel callsign. Characters are encoded as 7-bit ASCII, but only
+      --  characters in the [AIS 6-bit ASCII
+      --  subset](https://en.wikipedia.org/wiki/Six-bit_character_code#AIS_SixBit_ASCII)
+      --  are permitted. Also set AIS_FLAGS_VALID_CALLSIGN if valid. The
+      --  string is NULL-terminated if it is shorter than the array length.
       Name                : String (1 .. 20);
-      --  The vessel name
+      --  The vessel name. Characters are encoded as 7-bit ASCII, but only
+      --  characters in the [AIS 6-bit ASCII
+      --  subset](https://en.wikipedia.org/wiki/Six-bit_character_code#AIS_SixBit_ASCII)
+      --  are permitted. Also set AIS_FLAGS_VALID_NAME if valid. The string is
+      --  NULL-terminated if it is shorter than the array length.
       Tslc                : Interfaces.Unsigned_16;
       --  Units: [s]
-      --  Time since last communication in seconds
+      --  Time since last communication. This is the age of the AIS
+      --  information in this message, in seconds.
       Flags               : Ais_Flags;
       --  Bitmask to indicate various statuses including valid data fields
    end record;
@@ -97,27 +116,37 @@ package MAVLink.V2.Common.Ais_Vessels is
      (Message   : out Ais_Vessel;
       Connect   : MAVLink.V2.Connection;
       CRC_Valid : out Boolean);
-   --  Get the message from the Connect and delete it
-   --  from the Connect's buffer. CRC_Valid is set to
-   --  True if x25crc is valid for the message.
+   --  Get the message from the Connect if x25crc is valid and
+   --  set CRC_Valid to True.
+   --  Won't read data from the Connect if x25crc is False.
+   --  For v1: Won't read data from the Connect if message length mismatch
+   --    and set CRC_Valid to False in this case.
+   --  For v2: Truncate the extension fields.
 
    procedure Decode
      (Message : out Ais_Vessel;
       Connect : MAVLink.V2.Connection);
-   --  Same as Above but does not check CRC
+   --  Get the message from the Connect.
+   --  For v1: May raise exception when message length mismatch
+   --  For v2: Truncate the extension fields.
 
    procedure Decode
      (Message   : out Ais_Vessel;
       Connect   : MAVLink.V2.In_Connection;
       CRC_Valid : out Boolean);
-   --  Get the message from the Connect and delete it
-   --  from the Connect's buffer. CRC_Valid is set to
-   --  True if x25crc is valid for the message.
+   --  Get the message from the Connect if x25crc is valid and
+   --  set CRC_Valid to True.
+   --  Won't read data from the Connect if x25crc is False.
+   --  For v1: Won't read data from the Connect if message length mismatch
+   --    and set CRC_Valid to False in this case.
+   --  For v2: Truncate the extension fields.
 
    procedure Decode
      (Message : out Ais_Vessel;
       Connect : MAVLink.V2.In_Connection);
-   --  Same as Above but does not check CRC
+   --  Get the message from the Connect.
+   --  For v1: May raise an exception when message length mismatch
+   --  For v2: Truncate the extension fields.
 
    function Check_CRC
      (Connect : MAVLink.V2.Connection)

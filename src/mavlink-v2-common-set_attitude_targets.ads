@@ -38,7 +38,7 @@ package MAVLink.V2.Common.Set_Attitude_Targets is
       --  Body yaw rate
       Thrust           : Raw_Float;
       --  Collective thrust, normalized to 0 .. 1 (-1 .. 1 for vehicles
-      --  capable of reverse trust)
+      --  capable of reverse thrust)
       Thrust_Body      : Short_Float_Array (1 .. 3);
       --  3D thrust setpoint in the body NED frame, normalized to -1 .. 1
    end record;
@@ -73,27 +73,37 @@ package MAVLink.V2.Common.Set_Attitude_Targets is
      (Message   : out Set_Attitude_Target;
       Connect   : MAVLink.V2.Connection;
       CRC_Valid : out Boolean);
-   --  Get the message from the Connect and delete it
-   --  from the Connect's buffer. CRC_Valid is set to
-   --  True if x25crc is valid for the message.
+   --  Get the message from the Connect if x25crc is valid and
+   --  set CRC_Valid to True.
+   --  Won't read data from the Connect if x25crc is False.
+   --  For v1: Won't read data from the Connect if message length mismatch
+   --    and set CRC_Valid to False in this case.
+   --  For v2: Truncate the extension fields.
 
    procedure Decode
      (Message : out Set_Attitude_Target;
       Connect : MAVLink.V2.Connection);
-   --  Same as Above but does not check CRC
+   --  Get the message from the Connect.
+   --  For v1: May raise exception when message length mismatch
+   --  For v2: Truncate the extension fields.
 
    procedure Decode
      (Message   : out Set_Attitude_Target;
       Connect   : MAVLink.V2.In_Connection;
       CRC_Valid : out Boolean);
-   --  Get the message from the Connect and delete it
-   --  from the Connect's buffer. CRC_Valid is set to
-   --  True if x25crc is valid for the message.
+   --  Get the message from the Connect if x25crc is valid and
+   --  set CRC_Valid to True.
+   --  Won't read data from the Connect if x25crc is False.
+   --  For v1: Won't read data from the Connect if message length mismatch
+   --    and set CRC_Valid to False in this case.
+   --  For v2: Truncate the extension fields.
 
    procedure Decode
      (Message : out Set_Attitude_Target;
       Connect : MAVLink.V2.In_Connection);
-   --  Same as Above but does not check CRC
+   --  Get the message from the Connect.
+   --  For v1: May raise an exception when message length mismatch
+   --  For v2: Truncate the extension fields.
 
    function Check_CRC
      (Connect : MAVLink.V2.Connection)

@@ -5,8 +5,7 @@
 --  The interval between messages for a particular MAVLink message ID. This
 --  message is sent in response to the MAV_CMD_REQUEST_MESSAGE command with
 --  param1=244 (this message) and param2=message_id (the id of the message for
---  which the interval is required). It may also be sent in response to
---  MAV_CMD_GET_MESSAGE_INTERVAL. This interface replaces DATA_STREAM.
+--  which the interval is required). This interface replaces DATA_STREAM.
 
 pragma Ada_2022;
 
@@ -47,27 +46,37 @@ package MAVLink.V2.Common.Message_Intervals is
      (Message   : out Message_Interval;
       Connect   : MAVLink.V2.Connection;
       CRC_Valid : out Boolean);
-   --  Get the message from the Connect and delete it
-   --  from the Connect's buffer. CRC_Valid is set to
-   --  True if x25crc is valid for the message.
+   --  Get the message from the Connect if x25crc is valid and
+   --  set CRC_Valid to True.
+   --  Won't read data from the Connect if x25crc is False.
+   --  For v1: Won't read data from the Connect if message length mismatch
+   --    and set CRC_Valid to False in this case.
+   --  For v2: Truncate the extension fields.
 
    procedure Decode
      (Message : out Message_Interval;
       Connect : MAVLink.V2.Connection);
-   --  Same as Above but does not check CRC
+   --  Get the message from the Connect.
+   --  For v1: May raise exception when message length mismatch
+   --  For v2: Truncate the extension fields.
 
    procedure Decode
      (Message   : out Message_Interval;
       Connect   : MAVLink.V2.In_Connection;
       CRC_Valid : out Boolean);
-   --  Get the message from the Connect and delete it
-   --  from the Connect's buffer. CRC_Valid is set to
-   --  True if x25crc is valid for the message.
+   --  Get the message from the Connect if x25crc is valid and
+   --  set CRC_Valid to True.
+   --  Won't read data from the Connect if x25crc is False.
+   --  For v1: Won't read data from the Connect if message length mismatch
+   --    and set CRC_Valid to False in this case.
+   --  For v2: Truncate the extension fields.
 
    procedure Decode
      (Message : out Message_Interval;
       Connect : MAVLink.V2.In_Connection);
-   --  Same as Above but does not check CRC
+   --  Get the message from the Connect.
+   --  For v1: May raise an exception when message length mismatch
+   --  For v2: Truncate the extension fields.
 
    function Check_CRC
      (Connect : MAVLink.V2.Connection)

@@ -35,7 +35,7 @@ package MAVLink.V2.Common.Gimbal_Device_Informations is
       Uid              : Interfaces.Unsigned_64 :=
         0;
       --  UID of gimbal hardware (0 if unknown).
-      Cap_Flags        : Gimbal_Device_Cap_Flags;
+      Cap_Flags        : Interfaces.Unsigned_16;
       --  Bitmap of gimbal capability flags.
       Custom_Cap_Flags : Interfaces.Unsigned_16;
       --  Bitmap for use for gimbal-specific capability flags.
@@ -75,6 +75,10 @@ package MAVLink.V2.Common.Gimbal_Device_Informations is
       --  are the same component and hence have the same component ID. This
       --  field is then set to a number between 1-6. If the component ID is
       --  separate, this field is not required and must be set to 0.
+      Cap_Flags2       : Gimbal_Device_Cap_Flags;
+      --  Extended bitmap of gimbal capability flags (32 bit). For backwards
+      --  compatibility, the lower 16 bits should also be set in cap_flags.
+      --  Ground stations should prefer this field if non-zero.
    end record;
 
    for Gimbal_Device_Information use record
@@ -94,6 +98,7 @@ package MAVLink.V2.Common.Gimbal_Device_Informations is
       Model_Name       at 80  range 0 .. 255;
       Custom_Name      at 112 range 0 .. 255;
       Gimbal_Device_Id at 144 range 0 .. 7;
+      Cap_Flags2       at 145 range 0 .. 31;
    end record;
 
    procedure Encode
@@ -113,27 +118,37 @@ package MAVLink.V2.Common.Gimbal_Device_Informations is
      (Message   : out Gimbal_Device_Information;
       Connect   : MAVLink.V2.Connection;
       CRC_Valid : out Boolean);
-   --  Get the message from the Connect and delete it
-   --  from the Connect's buffer. CRC_Valid is set to
-   --  True if x25crc is valid for the message.
+   --  Get the message from the Connect if x25crc is valid and
+   --  set CRC_Valid to True.
+   --  Won't read data from the Connect if x25crc is False.
+   --  For v1: Won't read data from the Connect if message length mismatch
+   --    and set CRC_Valid to False in this case.
+   --  For v2: Truncate the extension fields.
 
    procedure Decode
      (Message : out Gimbal_Device_Information;
       Connect : MAVLink.V2.Connection);
-   --  Same as Above but does not check CRC
+   --  Get the message from the Connect.
+   --  For v1: May raise exception when message length mismatch
+   --  For v2: Truncate the extension fields.
 
    procedure Decode
      (Message   : out Gimbal_Device_Information;
       Connect   : MAVLink.V2.In_Connection;
       CRC_Valid : out Boolean);
-   --  Get the message from the Connect and delete it
-   --  from the Connect's buffer. CRC_Valid is set to
-   --  True if x25crc is valid for the message.
+   --  Get the message from the Connect if x25crc is valid and
+   --  set CRC_Valid to True.
+   --  Won't read data from the Connect if x25crc is False.
+   --  For v1: Won't read data from the Connect if message length mismatch
+   --    and set CRC_Valid to False in this case.
+   --  For v2: Truncate the extension fields.
 
    procedure Decode
      (Message : out Gimbal_Device_Information;
       Connect : MAVLink.V2.In_Connection);
-   --  Same as Above but does not check CRC
+   --  Get the message from the Connect.
+   --  For v1: May raise an exception when message length mismatch
+   --  For v2: Truncate the extension fields.
 
    function Check_CRC
      (Connect : MAVLink.V2.Connection)

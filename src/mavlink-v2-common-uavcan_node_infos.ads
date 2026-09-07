@@ -5,11 +5,11 @@
 --  General information describing a particular UAVCAN node. Please refer to
 --  the definition of the UAVCAN service "uavcan.protocol.GetNodeInfo" for the
 --  background information. This message should be emitted by the system
---  whenever a new node appears online, or an existing node reboots.
---  Additionally, it can be emitted upon request from the other end of the
---  MAVLink channel (see MAV_CMD_UAVCAN_GET_NODE_INFO). It is also not
---  prohibited to emit this message unconditionally at a low frequency. The
---  UAVCAN specification is available at http://uavcan.org.
+--  whenever a new node appears online, or an existing node reboots. The
+--  message may also be explicitly requested using MAV_CMD_REQUEST_MESSAGE. It
+--  is also not prohibited to emit this message unconditionally at a low
+--  frequency. The DroneCAN specification is available at
+--  https://dronecan.github.io/Specification/1._Introduction/.
 
 pragma Ada_2022;
 
@@ -73,27 +73,37 @@ package MAVLink.V2.Common.Uavcan_Node_Infos is
      (Message   : out Uavcan_Node_Info;
       Connect   : MAVLink.V2.Connection;
       CRC_Valid : out Boolean);
-   --  Get the message from the Connect and delete it
-   --  from the Connect's buffer. CRC_Valid is set to
-   --  True if x25crc is valid for the message.
+   --  Get the message from the Connect if x25crc is valid and
+   --  set CRC_Valid to True.
+   --  Won't read data from the Connect if x25crc is False.
+   --  For v1: Won't read data from the Connect if message length mismatch
+   --    and set CRC_Valid to False in this case.
+   --  For v2: Truncate the extension fields.
 
    procedure Decode
      (Message : out Uavcan_Node_Info;
       Connect : MAVLink.V2.Connection);
-   --  Same as Above but does not check CRC
+   --  Get the message from the Connect.
+   --  For v1: May raise exception when message length mismatch
+   --  For v2: Truncate the extension fields.
 
    procedure Decode
      (Message   : out Uavcan_Node_Info;
       Connect   : MAVLink.V2.In_Connection;
       CRC_Valid : out Boolean);
-   --  Get the message from the Connect and delete it
-   --  from the Connect's buffer. CRC_Valid is set to
-   --  True if x25crc is valid for the message.
+   --  Get the message from the Connect if x25crc is valid and
+   --  set CRC_Valid to True.
+   --  Won't read data from the Connect if x25crc is False.
+   --  For v1: Won't read data from the Connect if message length mismatch
+   --    and set CRC_Valid to False in this case.
+   --  For v2: Truncate the extension fields.
 
    procedure Decode
      (Message : out Uavcan_Node_Info;
       Connect : MAVLink.V2.In_Connection);
-   --  Same as Above but does not check CRC
+   --  Get the message from the Connect.
+   --  For v1: May raise an exception when message length mismatch
+   --  For v2: Truncate the extension fields.
 
    function Check_CRC
      (Connect : MAVLink.V2.Connection)

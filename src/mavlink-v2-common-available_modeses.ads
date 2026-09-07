@@ -37,6 +37,12 @@ package MAVLink.V2.Common.Available_Modeses is
       Mode_Name     : String (1 .. 35);
       --  Name of custom mode, with null termination character. Should be
       --  omitted for standard modes.
+      Seq           : Interfaces.Unsigned_8;
+      --  Sequence number. The value iterates sequentially whenever the set of
+      --  AVAILABLE_MODES changes and should match value of
+      --  AVAILABLE_MODES_MONITOR. Note, a GCS must ignore 0 values, and
+      --  should re-start the download if the value changes part-way through
+      --  fetching modes.
    end record;
 
    for Available_Modes use record
@@ -46,6 +52,7 @@ package MAVLink.V2.Common.Available_Modeses is
       Mode_Index    at 9  range 0 .. 7;
       Standard_Mode at 10 range 0 .. 7;
       Mode_Name     at 11 range 0 .. 279;
+      Seq           at 46 range 0 .. 7;
    end record;
 
    procedure Encode
@@ -65,27 +72,37 @@ package MAVLink.V2.Common.Available_Modeses is
      (Message   : out Available_Modes;
       Connect   : MAVLink.V2.Connection;
       CRC_Valid : out Boolean);
-   --  Get the message from the Connect and delete it
-   --  from the Connect's buffer. CRC_Valid is set to
-   --  True if x25crc is valid for the message.
+   --  Get the message from the Connect if x25crc is valid and
+   --  set CRC_Valid to True.
+   --  Won't read data from the Connect if x25crc is False.
+   --  For v1: Won't read data from the Connect if message length mismatch
+   --    and set CRC_Valid to False in this case.
+   --  For v2: Truncate the extension fields.
 
    procedure Decode
      (Message : out Available_Modes;
       Connect : MAVLink.V2.Connection);
-   --  Same as Above but does not check CRC
+   --  Get the message from the Connect.
+   --  For v1: May raise exception when message length mismatch
+   --  For v2: Truncate the extension fields.
 
    procedure Decode
      (Message   : out Available_Modes;
       Connect   : MAVLink.V2.In_Connection;
       CRC_Valid : out Boolean);
-   --  Get the message from the Connect and delete it
-   --  from the Connect's buffer. CRC_Valid is set to
-   --  True if x25crc is valid for the message.
+   --  Get the message from the Connect if x25crc is valid and
+   --  set CRC_Valid to True.
+   --  Won't read data from the Connect if x25crc is False.
+   --  For v1: Won't read data from the Connect if message length mismatch
+   --    and set CRC_Valid to False in this case.
+   --  For v2: Truncate the extension fields.
 
    procedure Decode
      (Message : out Available_Modes;
       Connect : MAVLink.V2.In_Connection);
-   --  Same as Above but does not check CRC
+   --  Get the message from the Connect.
+   --  For v1: May raise an exception when message length mismatch
+   --  For v2: Truncate the extension fields.
 
    function Check_CRC
      (Connect : MAVLink.V2.Connection)

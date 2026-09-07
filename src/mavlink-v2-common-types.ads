@@ -323,80 +323,87 @@ package MAVLink.V2.Common.Types is
       & "]");
 
    type Mav_Sys_Status_Sensor_Extended is record
-      Mav_Sys_Status_Recovery_System : Boolean := False;
-      Reserved_1                     : Boolean := False;
-      Reserved_2                     : Boolean := False;
-      Reserved_3                     : Boolean := False;
-      Reserved_4                     : Boolean := False;
-      Reserved_5                     : Boolean := False;
-      Reserved_6                     : Boolean := False;
-      Reserved_7                     : Boolean := False;
-      Reserved_8                     : Boolean := False;
-      Reserved_9                     : Boolean := False;
-      Reserved_10                    : Boolean := False;
-      Reserved_11                    : Boolean := False;
-      Reserved_12                    : Boolean := False;
-      Reserved_13                    : Boolean := False;
-      Reserved_14                    : Boolean := False;
-      Reserved_15                    : Boolean := False;
-      Reserved_16                    : Boolean := False;
-      Reserved_17                    : Boolean := False;
-      Reserved_18                    : Boolean := False;
-      Reserved_19                    : Boolean := False;
-      Reserved_20                    : Boolean := False;
-      Reserved_21                    : Boolean := False;
-      Reserved_22                    : Boolean := False;
-      Reserved_23                    : Boolean := False;
-      Reserved_24                    : Boolean := False;
-      Reserved_25                    : Boolean := False;
-      Reserved_26                    : Boolean := False;
-      Reserved_27                    : Boolean := False;
-      Reserved_28                    : Boolean := False;
-      Reserved_29                    : Boolean := False;
-      Reserved_30                    : Boolean := False;
-      Reserved_31                    : Boolean := False;
+      Recovery_System  : Boolean := False;
+      Sensor_Leak      : Boolean := False;
+      Sensor_3D_Gyro3  : Boolean := False;
+      Sensor_3D_Accel3 : Boolean := False;
+      Sensor_3D_Gyro4  : Boolean := False;
+      Sensor_3D_Accel4 : Boolean := False;
+      Sensor_3D_Mag3   : Boolean := False;
+      Sensor_3D_Mag4   : Boolean := False;
+      Reserved_8       : Boolean := False;
+      Reserved_9       : Boolean := False;
+      Reserved_10      : Boolean := False;
+      Reserved_11      : Boolean := False;
+      Reserved_12      : Boolean := False;
+      Reserved_13      : Boolean := False;
+      Reserved_14      : Boolean := False;
+      Reserved_15      : Boolean := False;
+      Reserved_16      : Boolean := False;
+      Reserved_17      : Boolean := False;
+      Reserved_18      : Boolean := False;
+      Reserved_19      : Boolean := False;
+      Reserved_20      : Boolean := False;
+      Reserved_21      : Boolean := False;
+      Reserved_22      : Boolean := False;
+      Reserved_23      : Boolean := False;
+      Reserved_24      : Boolean := False;
+      Reserved_25      : Boolean := False;
+      Reserved_26      : Boolean := False;
+      Reserved_27      : Boolean := False;
+      Reserved_28      : Boolean := False;
+      Reserved_29      : Boolean := False;
+      Reserved_30      : Boolean := False;
+      Reserved_31      : Boolean := False;
    end record with Size => 32;
    --  These encode the sensors whose status is sent as part of the SYS_STATUS
    --  message in the extended fields.
 
    for Mav_Sys_Status_Sensor_Extended use record
-      Mav_Sys_Status_Recovery_System at 0 range 0 .. 0;
-      Reserved_1                     at 0 range 1 .. 1;
-      Reserved_2                     at 0 range 2 .. 2;
-      Reserved_3                     at 0 range 3 .. 3;
-      Reserved_4                     at 0 range 4 .. 4;
-      Reserved_5                     at 0 range 5 .. 5;
-      Reserved_6                     at 0 range 6 .. 6;
-      Reserved_7                     at 0 range 7 .. 7;
-      Reserved_8                     at 0 range 8 .. 8;
-      Reserved_9                     at 0 range 9 .. 9;
-      Reserved_10                    at 0 range 10 .. 10;
-      Reserved_11                    at 0 range 11 .. 11;
-      Reserved_12                    at 0 range 12 .. 12;
-      Reserved_13                    at 0 range 13 .. 13;
-      Reserved_14                    at 0 range 14 .. 14;
-      Reserved_15                    at 0 range 15 .. 15;
-      Reserved_16                    at 0 range 16 .. 16;
-      Reserved_17                    at 0 range 17 .. 17;
-      Reserved_18                    at 0 range 18 .. 18;
-      Reserved_19                    at 0 range 19 .. 19;
-      Reserved_20                    at 0 range 20 .. 20;
-      Reserved_21                    at 0 range 21 .. 21;
-      Reserved_22                    at 0 range 22 .. 22;
-      Reserved_23                    at 0 range 23 .. 23;
-      Reserved_24                    at 0 range 24 .. 24;
-      Reserved_25                    at 0 range 25 .. 25;
-      Reserved_26                    at 0 range 26 .. 26;
-      Reserved_27                    at 0 range 27 .. 27;
-      Reserved_28                    at 0 range 28 .. 28;
-      Reserved_29                    at 0 range 29 .. 29;
-      Reserved_30                    at 0 range 30 .. 30;
-      Reserved_31                    at 0 range 31 .. 31;
+      Recovery_System  at 0 range 0 .. 0;
+      Sensor_Leak      at 0 range 1 .. 1;
+      Sensor_3D_Gyro3  at 0 range 2 .. 2;
+      Sensor_3D_Accel3 at 0 range 3 .. 3;
+      Sensor_3D_Gyro4  at 0 range 4 .. 4;
+      Sensor_3D_Accel4 at 0 range 5 .. 5;
+      Sensor_3D_Mag3   at 0 range 6 .. 6;
+      Sensor_3D_Mag4   at 0 range 7 .. 7;
+      Reserved_8       at 0 range 8 .. 8;
+      Reserved_9       at 0 range 9 .. 9;
+      Reserved_10      at 0 range 10 .. 10;
+      Reserved_11      at 0 range 11 .. 11;
+      Reserved_12      at 0 range 12 .. 12;
+      Reserved_13      at 0 range 13 .. 13;
+      Reserved_14      at 0 range 14 .. 14;
+      Reserved_15      at 0 range 15 .. 15;
+      Reserved_16      at 0 range 16 .. 16;
+      Reserved_17      at 0 range 17 .. 17;
+      Reserved_18      at 0 range 18 .. 18;
+      Reserved_19      at 0 range 19 .. 19;
+      Reserved_20      at 0 range 20 .. 20;
+      Reserved_21      at 0 range 21 .. 21;
+      Reserved_22      at 0 range 22 .. 22;
+      Reserved_23      at 0 range 23 .. 23;
+      Reserved_24      at 0 range 24 .. 24;
+      Reserved_25      at 0 range 25 .. 25;
+      Reserved_26      at 0 range 26 .. 26;
+      Reserved_27      at 0 range 27 .. 27;
+      Reserved_28      at 0 range 28 .. 28;
+      Reserved_29      at 0 range 29 .. 29;
+      Reserved_30      at 0 range 30 .. 30;
+      Reserved_31      at 0 range 31 .. 31;
    end record;
 
    function Image (V : Mav_Sys_Status_Sensor_Extended) return String is
      ("["
-      & (if V.Mav_Sys_Status_Recovery_System then "MAV_SYS_STATUS_RECOVERY_SYSTEM " else "")
+      & (if V.Recovery_System then "RECOVERY_SYSTEM " else "")
+      & (if V.Sensor_Leak then "SENSOR_LEAK " else "")
+      & (if V.Sensor_3D_Gyro3 then "SENSOR_3D_GYRO3 " else "")
+      & (if V.Sensor_3D_Accel3 then "SENSOR_3D_ACCEL3 " else "")
+      & (if V.Sensor_3D_Gyro4 then "SENSOR_3D_GYRO4 " else "")
+      & (if V.Sensor_3D_Accel4 then "SENSOR_3D_ACCEL4 " else "")
+      & (if V.Sensor_3D_Mag3 then "SENSOR_3D_MAG3 " else "")
+      & (if V.Sensor_3D_Mag4 then "SENSOR_3D_MAG4 " else "")
       & "]");
 
    type Mav_Frame is new Interfaces.Unsigned_8;
@@ -776,9 +783,13 @@ package MAVLink.V2.Common.Types is
      with Static;
    --  Gimbal tracks home position
 
+   function Wpnext_Offset return Mav_Mount_Mode is (7)
+     with Static;
+   --  Gimbal tracks next waypoint location with offset
+
    subtype Mav_Mount_Mode_Well_Known is Mav_Mount_Mode
      with Static_Predicate => Mav_Mount_Mode_Well_Known in
-       Retract .. Home_Location;
+       Retract .. Wpnext_Offset;
 
    function Well_Known_Image
      (Value : Mav_Mount_Mode_Well_Known) return String is
@@ -789,7 +800,8 @@ package MAVLink.V2.Common.Types is
         when Rc_Targeting => "Rc_Targeting",
         when Gps_Point => "Gps_Point",
         when Sysid_Target => "Sysid_Target",
-        when Home_Location => "Home_Location");
+        when Home_Location => "Home_Location",
+        when Wpnext_Offset => "Wpnext_Offset");
 
    function Image (Value : Mav_Mount_Mode) return String is
      (if Value in Mav_Mount_Mode_Well_Known
@@ -810,9 +822,23 @@ package MAVLink.V2.Common.Types is
       Supports_Infinite_Yaw       : Boolean := False;
       Supports_Yaw_In_Earth_Frame : Boolean := False;
       Has_Rc_Inputs               : Boolean := False;
-      Reserved_14                 : Boolean := False;
-      Reserved_15                 : Boolean := False;
-   end record with Size => 16;
+      Can_Point_Location_Local    : Boolean := False;
+      Can_Point_Location_Global   : Boolean := False;
+      Reserved_18                 : Boolean := False;
+      Reserved_19                 : Boolean := False;
+      Reserved_20                 : Boolean := False;
+      Reserved_21                 : Boolean := False;
+      Reserved_22                 : Boolean := False;
+      Reserved_23                 : Boolean := False;
+      Reserved_24                 : Boolean := False;
+      Reserved_25                 : Boolean := False;
+      Reserved_26                 : Boolean := False;
+      Reserved_27                 : Boolean := False;
+      Reserved_28                 : Boolean := False;
+      Reserved_29                 : Boolean := False;
+      Reserved_30                 : Boolean := False;
+      Reserved_31                 : Boolean := False;
+   end record with Size => 32;
    --  Gimbal device (low level) capability flags (bitmap).
 
    for Gimbal_Device_Cap_Flags use record
@@ -830,8 +856,22 @@ package MAVLink.V2.Common.Types is
       Supports_Infinite_Yaw       at 0 range 11 .. 11;
       Supports_Yaw_In_Earth_Frame at 0 range 12 .. 12;
       Has_Rc_Inputs               at 0 range 13 .. 13;
-      Reserved_14                 at 0 range 14 .. 14;
-      Reserved_15                 at 0 range 15 .. 15;
+      Can_Point_Location_Local    at 0 range 16 .. 16;
+      Can_Point_Location_Global   at 0 range 17 .. 17;
+      Reserved_18                 at 0 range 18 .. 18;
+      Reserved_19                 at 0 range 19 .. 19;
+      Reserved_20                 at 0 range 20 .. 20;
+      Reserved_21                 at 0 range 21 .. 21;
+      Reserved_22                 at 0 range 22 .. 22;
+      Reserved_23                 at 0 range 23 .. 23;
+      Reserved_24                 at 0 range 24 .. 24;
+      Reserved_25                 at 0 range 25 .. 25;
+      Reserved_26                 at 0 range 26 .. 26;
+      Reserved_27                 at 0 range 27 .. 27;
+      Reserved_28                 at 0 range 28 .. 28;
+      Reserved_29                 at 0 range 29 .. 29;
+      Reserved_30                 at 0 range 30 .. 30;
+      Reserved_31                 at 0 range 31 .. 31;
    end record;
 
    function Image (V : Gimbal_Device_Cap_Flags) return String is
@@ -850,6 +890,8 @@ package MAVLink.V2.Common.Types is
       & (if V.Supports_Infinite_Yaw then "SUPPORTS_INFINITE_YAW " else "")
       & (if V.Supports_Yaw_In_Earth_Frame then "SUPPORTS_YAW_IN_EARTH_FRAME " else "")
       & (if V.Has_Rc_Inputs then "HAS_RC_INPUTS " else "")
+      & (if V.Can_Point_Location_Local then "CAN_POINT_LOCATION_LOCAL " else "")
+      & (if V.Can_Point_Location_Global then "CAN_POINT_LOCATION_GLOBAL " else "")
       & "]");
 
    type Gimbal_Manager_Cap_Flags is record
@@ -884,10 +926,10 @@ package MAVLink.V2.Common.Types is
       Reserved_30                 : Boolean := False;
       Reserved_31                 : Boolean := False;
    end record with Size => 32;
-   --  Gimbal manager high level capability flags (bitmap). The first 16 bits
-   --  are identical to the GIMBAL_DEVICE_CAP_FLAGS. However, the gimbal
-   --  manager does not need to copy the flags from the gimbal but can also
-   --  enhance the capabilities and thus add flags.
+   --  Gimbal manager high level capability flags (bitmap). The flags are
+   --  identical to the GIMBAL_DEVICE_CAP_FLAGS. However, the gimbal manager
+   --  does not need to copy the flags from the gimbal but can also enhance
+   --  the capabilities and thus add flags.
 
    for Gimbal_Manager_Cap_Flags use record
       Has_Retract                 at 0 range 0 .. 0;
@@ -2075,12 +2117,12 @@ package MAVLink.V2.Common.Types is
      with Static;
    --  Write all parameter values to persistent storage (flash/EEPROM)
 
-   function Reset_Config_Default return Preflight_Storage_Parameter_Action is (2)
+   function Reset_Factory_Default return Preflight_Storage_Parameter_Action is (2)
      with Static;
-   --  Reset all user configurable parameters to their default value
-   --  (including airframe selection, sensor calibration data, safety
-   --  settings, and so on). Does not reset values that contain operation
-   --  counters and vehicle computed statistics.
+   --  Reset parameters to default values (such as sensor calibration, safety
+   --  settings, and so on). Note that a flight stack may choose not to reset
+   --  some parameters at their own discretion (such as those that are locked
+   --  or expected to persist for the vehicle lifetime).
 
    function Reset_Sensor_Default return Preflight_Storage_Parameter_Action is (3)
      with Static;
@@ -2089,7 +2131,7 @@ package MAVLink.V2.Common.Types is
 
    function Reset_All_Default return Preflight_Storage_Parameter_Action is (4)
      with Static;
-   --  Reset all parameters, including operation counters, to default values
+   --  Reset all parameters to default values.
 
    subtype Preflight_Storage_Parameter_Action_Well_Known is Preflight_Storage_Parameter_Action
      with Static_Predicate => Preflight_Storage_Parameter_Action_Well_Known in
@@ -2100,47 +2142,12 @@ package MAVLink.V2.Common.Types is
        (case Value is
         when Read_Persistent => "Read_Persistent",
         when Write_Persistent => "Write_Persistent",
-        when Reset_Config_Default => "Reset_Config_Default",
+        when Reset_Factory_Default => "Reset_Factory_Default",
         when Reset_Sensor_Default => "Reset_Sensor_Default",
         when Reset_All_Default => "Reset_All_Default");
 
    function Image (Value : Preflight_Storage_Parameter_Action) return String is
      (if Value in Preflight_Storage_Parameter_Action_Well_Known
-      then Well_Known_Image (Value) else "Unknown:" & Value'Image);
-
-   type Preflight_Storage_Mission_Action is new Interfaces.Unsigned_8;
-   --  Actions for reading and writing plan information (mission, rally
-   --  points, geofence) between persistent and volatile storage when using
-   --  MAV_CMD_PREFLIGHT_STORAGE. (Commonly missions are loaded from
-   --  persistent storage (flash/EEPROM) into volatile storage (RAM) on
-   --  startup and written back when they are changed.)
-
-   function Read_Persistent return Preflight_Storage_Mission_Action is (0)
-     with Static;
-   --  Read current mission data from persistent storage
-
-   function Write_Persistent return Preflight_Storage_Mission_Action is (1)
-     with Static;
-   --  Write current mission data to persistent storage
-
-   function Reset_Default return Preflight_Storage_Mission_Action is (2)
-     with Static;
-   --  Erase all mission data stored on the vehicle (both persistent and
-   --  volatile storage)
-
-   subtype Preflight_Storage_Mission_Action_Well_Known is Preflight_Storage_Mission_Action
-     with Static_Predicate => Preflight_Storage_Mission_Action_Well_Known in
-       Read_Persistent .. Reset_Default;
-
-   function Well_Known_Image
-     (Value : Preflight_Storage_Mission_Action_Well_Known) return String is
-       (case Value is
-        when Read_Persistent => "Read_Persistent",
-        when Write_Persistent => "Write_Persistent",
-        when Reset_Default => "Reset_Default");
-
-   function Image (Value : Preflight_Storage_Mission_Action) return String is
-     (if Value in Preflight_Storage_Mission_Action_Well_Known
       then Well_Known_Image (Value) else "Unknown:" & Value'Image);
 
    type Reboot_Shutdown_Action is new Interfaces.Unsigned_8;
@@ -2168,9 +2175,13 @@ package MAVLink.V2.Common.Types is
    --  Power on component. Do nothing if component is already powered (ACK
    --  command with MAV_RESULT_ACCEPTED).
 
+   function Reboot_To_Mass_Storage return Reboot_Shutdown_Action is (5)
+     with Static;
+   --  Reboot component into a mass storage mode.
+
    subtype Reboot_Shutdown_Action_Well_Known is Reboot_Shutdown_Action
      with Static_Predicate => Reboot_Shutdown_Action_Well_Known in
-       None .. Power_On;
+       None .. Reboot_To_Mass_Storage;
 
    function Well_Known_Image
      (Value : Reboot_Shutdown_Action_Well_Known) return String is
@@ -2179,7 +2190,8 @@ package MAVLink.V2.Common.Types is
         when Reboot => "Reboot",
         when Shutdown => "Shutdown",
         when Reboot_To_Bootloader => "Reboot_To_Bootloader",
-        when Power_On => "Power_On");
+        when Power_On => "Power_On",
+        when Reboot_To_Mass_Storage => "Reboot_To_Mass_Storage");
 
    function Image (Value : Reboot_Shutdown_Action) return String is
      (if Value in Reboot_Shutdown_Action_Well_Known
@@ -2212,6 +2224,114 @@ package MAVLink.V2.Common.Types is
    function Image (Value : Reboot_Shutdown_Conditions) return String is
      (if Value in Reboot_Shutdown_Conditions_Well_Known
       then Well_Known_Image (Value) else "Unknown:" & Value'Image);
+
+   type Preflight_Calibration_Magnetometer is new Interfaces.Unsigned_8;
+   --  Action for the magnetometer (param2) of MAV_CMD_PREFLIGHT_CALIBRATION.
+
+   function None return Preflight_Calibration_Magnetometer is (0)
+     with Static;
+   --  No action.
+
+   function Start return Preflight_Calibration_Magnetometer is (1)
+     with Static;
+   --  Start magnetometer calibration.
+
+   function Force_Save return Preflight_Calibration_Magnetometer is (76)
+     with Static;
+   --  Force-accept the existing compass calibration as valid without
+   --  re-running it. Useful after a parameter reload that cleared calibration
+   --  validity flags.
+
+   subtype Preflight_Calibration_Magnetometer_Well_Known is Preflight_Calibration_Magnetometer
+     with Static_Predicate => Preflight_Calibration_Magnetometer_Well_Known in
+       None .. Start
+       | Force_Save;
+
+   function Well_Known_Image
+     (Value : Preflight_Calibration_Magnetometer_Well_Known) return String is
+       (case Value is
+        when None => "None",
+        when Start => "Start",
+        when Force_Save => "Force_Save");
+
+   function Image (Value : Preflight_Calibration_Magnetometer) return String is
+     (if Value in Preflight_Calibration_Magnetometer_Well_Known
+      then Well_Known_Image (Value) else "Unknown:" & Value'Image);
+
+   type Preflight_Calibration_Accelerometer is new Interfaces.Unsigned_8;
+   --  Action for the accelerometer (param5) of MAV_CMD_PREFLIGHT_CALIBRATION.
+
+   function None return Preflight_Calibration_Accelerometer is (0)
+     with Static;
+   --  No action.
+
+   function Full return Preflight_Calibration_Accelerometer is (1)
+     with Static;
+   --  Full 6-position accelerometer calibration.
+
+   function Trim return Preflight_Calibration_Accelerometer is (2)
+     with Static;
+   --  Board level (trim) calibration.
+
+   function Temperature return Preflight_Calibration_Accelerometer is (3)
+     with Static;
+   --  Accelerometer temperature calibration.
+
+   function Simple return Preflight_Calibration_Accelerometer is (4)
+     with Static;
+   --  Simple accelerometer calibration.
+
+   function Force_Save return Preflight_Calibration_Accelerometer is (76)
+     with Static;
+   --  Force-accept the existing accelerometer calibration as valid without
+   --  re-running it. Useful after a parameter reload that cleared calibration
+   --  validity flags.
+
+   subtype Preflight_Calibration_Accelerometer_Well_Known is Preflight_Calibration_Accelerometer
+     with Static_Predicate => Preflight_Calibration_Accelerometer_Well_Known in
+       None .. Simple
+       | Force_Save;
+
+   function Well_Known_Image
+     (Value : Preflight_Calibration_Accelerometer_Well_Known) return String is
+       (case Value is
+        when None => "None",
+        when Full => "Full",
+        when Trim => "Trim",
+        when Temperature => "Temperature",
+        when Simple => "Simple",
+        when Force_Save => "Force_Save");
+
+   function Image (Value : Preflight_Calibration_Accelerometer) return String is
+     (if Value in Preflight_Calibration_Accelerometer_Well_Known
+      then Well_Known_Image (Value) else "Unknown:" & Value'Image);
+
+   type Nav_Takeoff_Flags is record
+      Nav_Takeoff_Flags_Horizontal_Position_Not_Required : Boolean := False;
+      Reserved_1                                         : Boolean := False;
+      Reserved_2                                         : Boolean := False;
+      Reserved_3                                         : Boolean := False;
+      Reserved_4                                         : Boolean := False;
+      Reserved_5                                         : Boolean := False;
+      Reserved_6                                         : Boolean := False;
+      Reserved_7                                         : Boolean := False;
+   end record with Size => 8;
+
+   for Nav_Takeoff_Flags use record
+      Nav_Takeoff_Flags_Horizontal_Position_Not_Required at 0 range 0 .. 0;
+      Reserved_1                                         at 0 range 1 .. 1;
+      Reserved_2                                         at 0 range 2 .. 2;
+      Reserved_3                                         at 0 range 3 .. 3;
+      Reserved_4                                         at 0 range 4 .. 4;
+      Reserved_5                                         at 0 range 5 .. 5;
+      Reserved_6                                         at 0 range 6 .. 6;
+      Reserved_7                                         at 0 range 7 .. 7;
+   end record;
+
+   function Image (V : Nav_Takeoff_Flags) return String is
+     ("["
+      & (if V.Nav_Takeoff_Flags_Horizontal_Position_Not_Required then "NAV_TAKEOFF_FLAGS_HORIZONTAL_POSITION_NOT_REQUIRED " else "")
+      & "]");
 
    type Mav_Cmd is new Interfaces.Unsigned_16;
    --  Commands to be executed by the MAV. They can be executed on user
@@ -2316,6 +2436,16 @@ package MAVLink.V2.Common.Types is
    --  other degrees of freedom are not specified, and will be flight-stack
    --  specific (on vehicles where they can be controlled independent of the
    --  heading).
+
+   function Nav_Arc_Waypoint return Mav_Cmd is (36)
+     with Static;
+   --  Circular arc path waypoint. This defines the end/exit point and angle
+   --  (param1) of an arc path from the previous waypoint. A position is
+   --  required before this command to define the start of the arc (e.g.
+   --  current position, a MAV_CMD_NAV_WAYPOINT, or a
+   --  MAV_CMD_NAV_ARC_WAYPOINT). The resulting path is a circular arc in the
+   --  NE frame, with the difference in height being defined by the difference
+   --  in waypoint altitudes.
 
    function Nav_Roi return Mav_Cmd is (80)
      with Static;
@@ -2423,7 +2553,8 @@ package MAVLink.V2.Common.Types is
 
    function Do_Set_Relay return Mav_Cmd is (181)
      with Static;
-   --  Set a relay to a condition.
+   --  Set a relay to a condition. The current value may optionally be
+   --  reported using RELAY_STATUS.
 
    function Do_Repeat_Relay return Mav_Cmd is (182)
      with Static;
@@ -2785,7 +2916,7 @@ package MAVLink.V2.Common.Types is
    function Get_Home_Position return Mav_Cmd is (410)
      with Static;
    --  Request the home position from the vehicle. The vehicle will ACK the
-   --  command and then emit the HOME_POSITION message.
+   --  command and emit the HOME_POSITION message.
 
    function Inject_Failure return Mav_Cmd is (420)
      with Static;
@@ -2906,6 +3037,18 @@ package MAVLink.V2.Common.Types is
    --  missing tag should complete the mission, and a jump where there are
    --  multiple matching tags should always select the one with the lowest
    --  mission sequence number.
+
+   function Do_Set_Global_Origin return Mav_Cmd is (611)
+     with Static;
+   --  Sets the GNSS coordinates of the vehicle local origin (0,0,0) position.
+   --  Vehicle should emit GPS_GLOBAL_ORIGIN irrespective of whether the
+   --  origin is changed. This enables transform between the local coordinate
+   --  frame and the global (GNSS) coordinate frame, which may be necessary
+   --  when (for example) indoor and outdoor settings are connected and the
+   --  MAV should move from in- to outdoor. This command supersedes
+   --  SET_GPS_GLOBAL_ORIGIN. Should be sent in a COMMAND_INT (Expected frame
+   --  is MAV_FRAME_GLOBAL, and this should be assumed when sent in
+   --  COMMAND_LONG).
 
    function Do_Gimbal_Manager_Pitchyaw return Mav_Cmd is (1000)
      with Static;
@@ -3054,7 +3197,7 @@ package MAVLink.V2.Common.Types is
    --  COMMAND_ACK message progress field should be set with period of time
    --  that this authorization is valid in seconds. If the authorization is
    --  denied COMMAND_ACK.result_param2 should be set with one of the reasons
-   --  in ARM_AUTH_DENIED_REASON.
+   --  in MAV_ARM_AUTH_DENIED_REASON.
 
    function Set_Guided_Submode_Standard return Mav_Cmd is (4000)
      with Static;
@@ -3214,7 +3357,8 @@ package MAVLink.V2.Common.Types is
    function Can_Forward return Mav_Cmd is (32000)
      with Static;
    --  Request forwarding of CAN packets from the given CAN bus to this
-   --  component. CAN Frames are sent using CAN_FRAME and CANFD_FRAME messages
+   --  component via this MAVLink channel. CAN Frames are sent using CAN_FRAME
+   --  and CANFD_FRAME messages
 
    function Fixed_Mag_Cal_Yaw return Mav_Cmd is (42006)
      with Static;
@@ -3227,6 +3371,22 @@ package MAVLink.V2.Common.Types is
      with Static;
    --  Command to operate winch.
 
+   function Guided_Change_Speed return Mav_Cmd is (43000)
+     with Static;
+   --  Change flight speed at a given rate. This slews the vehicle at a
+   --  controllable rate between it's previous speed and the new one.
+
+   function Guided_Change_Altitude return Mav_Cmd is (43001)
+     with Static;
+   --  Change target altitude at a given rate. This slews the vehicle at a
+   --  controllable rate between it's previous altitude and the new one.
+
+   function Guided_Change_Heading return Mav_Cmd is (43002)
+     with Static;
+   --  Change to target direction at a given rate, overriding previous
+   --  heading/s. This slews the vehicle at a controllable rate between its
+   --  previous heading and the new one.
+
    function External_Position_Estimate return Mav_Cmd is (43003)
      with Static;
    --  Provide an external position estimate for use when dead-reckoning. This
@@ -3237,7 +3397,7 @@ package MAVLink.V2.Common.Types is
    subtype Mav_Cmd_Well_Known is Mav_Cmd
      with Static_Predicate => Mav_Cmd_Well_Known in
        Nav_Waypoint .. Nav_Follow
-       | Nav_Continue_And_Change_Alt .. Do_Figure_Eight
+       | Nav_Continue_And_Change_Alt .. Nav_Arc_Waypoint
        | Nav_Roi .. Nav_Spline_Waypoint
        | Nav_Vtol_Takeoff .. Nav_Vtol_Land
        | Nav_Guided_Enable .. Nav_Last
@@ -3262,6 +3422,7 @@ package MAVLink.V2.Common.Types is
        | Request_Protocol_Version .. Request_Camera_Settings
        | Request_Storage_Information .. Set_Camera_Source
        | Jump_Tag .. Do_Jump_Tag
+       | Do_Set_Global_Origin
        | Do_Gimbal_Manager_Pitchyaw .. Do_Gimbal_Manager_Configure
        | Image_Start_Capture .. Camera_Track_Rectangle
        | Camera_Stop_Tracking
@@ -3283,7 +3444,7 @@ package MAVLink.V2.Common.Types is
        | Can_Forward
        | Fixed_Mag_Cal_Yaw
        | Do_Winch
-       | External_Position_Estimate;
+       | Guided_Change_Speed .. External_Position_Estimate;
 
    function Well_Known_Image
      (Value : Mav_Cmd_Well_Known) return String is
@@ -3304,6 +3465,7 @@ package MAVLink.V2.Common.Types is
         when Do_Follow_Reposition => "Do_Follow_Reposition",
         when Do_Orbit => "Do_Orbit",
         when Do_Figure_Eight => "Do_Figure_Eight",
+        when Nav_Arc_Waypoint => "Nav_Arc_Waypoint",
         when Nav_Roi => "Nav_Roi",
         when Nav_Pathplanning => "Nav_Pathplanning",
         when Nav_Spline_Waypoint => "Nav_Spline_Waypoint",
@@ -3399,6 +3561,7 @@ package MAVLink.V2.Common.Types is
         when Set_Camera_Source => "Set_Camera_Source",
         when Jump_Tag => "Jump_Tag",
         when Do_Jump_Tag => "Do_Jump_Tag",
+        when Do_Set_Global_Origin => "Do_Set_Global_Origin",
         when Do_Gimbal_Manager_Pitchyaw => "Do_Gimbal_Manager_Pitchyaw",
         when Do_Gimbal_Manager_Configure => "Do_Gimbal_Manager_Configure",
         when Image_Start_Capture => "Image_Start_Capture",
@@ -3453,6 +3616,9 @@ package MAVLink.V2.Common.Types is
         when Can_Forward => "Can_Forward",
         when Fixed_Mag_Cal_Yaw => "Fixed_Mag_Cal_Yaw",
         when Do_Winch => "Do_Winch",
+        when Guided_Change_Speed => "Guided_Change_Speed",
+        when Guided_Change_Altitude => "Guided_Change_Altitude",
+        when Guided_Change_Heading => "Guided_Change_Heading",
         when External_Position_Estimate => "External_Position_Estimate");
 
    function Image (Value : Mav_Cmd) return String is
@@ -4081,9 +4247,49 @@ package MAVLink.V2.Common.Types is
      with Static;
    --  Second GPS port
 
+   function Dev_Telem3 return Serial_Control_Dev is (4)
+     with Static;
+   --  Third telemetry port
+
+   function Dev_Telem4 return Serial_Control_Dev is (5)
+     with Static;
+   --  Fourth telemetry port
+
    function Dev_Shell return Serial_Control_Dev is (10)
      with Static;
    --  system shell
+
+   function Dev_Esc0 return Serial_Control_Dev is (20)
+     with Static;
+   --  Electronic Speed Controller 0
+
+   function Dev_Esc1 return Serial_Control_Dev is (21)
+     with Static;
+   --  Electronic Speed Controller 1
+
+   function Dev_Esc2 return Serial_Control_Dev is (22)
+     with Static;
+   --  Electronic Speed Controller 2
+
+   function Dev_Esc3 return Serial_Control_Dev is (23)
+     with Static;
+   --  Electronic Speed Controller 3
+
+   function Dev_Esc4 return Serial_Control_Dev is (24)
+     with Static;
+   --  Electronic Speed Controller 4
+
+   function Dev_Esc5 return Serial_Control_Dev is (25)
+     with Static;
+   --  Electronic Speed Controller 5
+
+   function Dev_Esc6 return Serial_Control_Dev is (26)
+     with Static;
+   --  Electronic Speed Controller 6
+
+   function Dev_Esc7 return Serial_Control_Dev is (27)
+     with Static;
+   --  Electronic Speed Controller 7
 
    function Serial0 return Serial_Control_Dev is (100)
      with Static;
@@ -4127,8 +4333,9 @@ package MAVLink.V2.Common.Types is
 
    subtype Serial_Control_Dev_Well_Known is Serial_Control_Dev
      with Static_Predicate => Serial_Control_Dev_Well_Known in
-       Dev_Telem1 .. Dev_Gps2
+       Dev_Telem1 .. Dev_Telem4
        | Dev_Shell
+       | Dev_Esc0 .. Dev_Esc7
        | Serial0 .. Serial9;
 
    function Well_Known_Image
@@ -4138,7 +4345,17 @@ package MAVLink.V2.Common.Types is
         when Dev_Telem2 => "Dev_Telem2",
         when Dev_Gps1 => "Dev_Gps1",
         when Dev_Gps2 => "Dev_Gps2",
+        when Dev_Telem3 => "Dev_Telem3",
+        when Dev_Telem4 => "Dev_Telem4",
         when Dev_Shell => "Dev_Shell",
+        when Dev_Esc0 => "Dev_Esc0",
+        when Dev_Esc1 => "Dev_Esc1",
+        when Dev_Esc2 => "Dev_Esc2",
+        when Dev_Esc3 => "Dev_Esc3",
+        when Dev_Esc4 => "Dev_Esc4",
+        when Dev_Esc5 => "Dev_Esc5",
+        when Dev_Esc6 => "Dev_Esc6",
+        when Dev_Esc7 => "Dev_Esc7",
         when Serial0 => "Serial0",
         when Serial1 => "Serial1",
         when Serial2 => "Serial2",
@@ -5317,6 +5534,36 @@ package MAVLink.V2.Common.Types is
      (if Value in Speed_Type_Well_Known
       then Well_Known_Image (Value) else "Unknown:" & Value'Image);
 
+   type Heading_Type is new Interfaces.Unsigned_8;
+   --  Heading setpoint types used in MAV_CMD_GUIDED_CHANGE_HEADING
+
+   function Course_Over_Ground return Heading_Type is (0)
+     with Static;
+   --  Course over ground.
+
+   function Heading return Heading_Type is (1)
+     with Static;
+   --  Raw vehicle heading.
+
+   function Default return Heading_Type is (2)
+     with Static;
+   --  Default heading.
+
+   subtype Heading_Type_Well_Known is Heading_Type
+     with Static_Predicate => Heading_Type_Well_Known in
+       Course_Over_Ground .. Default;
+
+   function Well_Known_Image
+     (Value : Heading_Type_Well_Known) return String is
+       (case Value is
+        when Course_Over_Ground => "Course_Over_Ground",
+        when Heading => "Heading",
+        when Default => "Default");
+
+   function Image (Value : Heading_Type) return String is
+     (if Value in Heading_Type_Well_Known
+      then Well_Known_Image (Value) else "Unknown:" & Value'Image);
+
    type Estimator_Status_Flags is record
       Attitude           : Boolean := False;
       Velocity_Horiz     : Boolean := False;
@@ -5909,9 +6156,13 @@ package MAVLink.V2.Common.Types is
      with Static;
    --  Stream is MPEG TS (URI gives the port number)
 
+   function Whep return Video_Stream_Type is (4)
+     with Static;
+   --  Stream is WHEP (WebRTC-HTTP Egress Protocol)
+
    subtype Video_Stream_Type_Well_Known is Video_Stream_Type
      with Static_Predicate => Video_Stream_Type_Well_Known in
-       Rtsp .. Mpeg_Ts;
+       Rtsp .. Whep;
 
    function Well_Known_Image
      (Value : Video_Stream_Type_Well_Known) return String is
@@ -5919,7 +6170,8 @@ package MAVLink.V2.Common.Types is
         when Rtsp => "Rtsp",
         when Rtpudp => "Rtpudp",
         when Tcp_Mpeg => "Tcp_Mpeg",
-        when Mpeg_Ts => "Mpeg_Ts");
+        when Mpeg_Ts => "Mpeg_Ts",
+        when Whep => "Whep");
 
    function Image (Value : Video_Stream_Type) return String is
      (if Value in Video_Stream_Type_Well_Known
@@ -6258,6 +6510,10 @@ package MAVLink.V2.Common.Types is
       then Well_Known_Image (Value) else "Unknown:" & Value'Image);
 
    type Mav_Arm_Auth_Denied_Reason is new Interfaces.Unsigned_8;
+   --  Reasons for denying an authorization request made with
+   --  MAV_CMD_ARM_AUTHORIZATION_REQUEST. If the COMMAND_ACK result is
+   --  MAV_RESULT_DENIED, this is used to set the reason in the result_param2
+   --  field.
 
    function Generic_Entry return Mav_Arm_Auth_Denied_Reason is (0)
      with Static;
@@ -8182,74 +8438,112 @@ package MAVLink.V2.Common.Types is
    type Failure_Unit is new Interfaces.Unsigned_8;
    --  List of possible units where failures can be injected.
 
-   function Ensor_Gyro return Failure_Unit is (0)
+   function Sensor_Gyro return Failure_Unit is (0)
      with Static;
 
-   function Ensor_Accel return Failure_Unit is (1)
+   function Sensor_Accel return Failure_Unit is (1)
      with Static;
 
-   function Ensor_Mag return Failure_Unit is (2)
+   function Sensor_Mag return Failure_Unit is (2)
      with Static;
 
-   function Ensor_Baro return Failure_Unit is (3)
+   function Sensor_Baro return Failure_Unit is (3)
      with Static;
 
-   function Ensor_Gps return Failure_Unit is (4)
+   function Sensor_Gps return Failure_Unit is (4)
      with Static;
 
-   function Ensor_Optical_Flow return Failure_Unit is (5)
+   function Sensor_Optical_Flow return Failure_Unit is (5)
      with Static;
 
-   function Ensor_Vio return Failure_Unit is (6)
+   function Sensor_Vio return Failure_Unit is (6)
      with Static;
 
-   function Ensor_Distance_Sensor return Failure_Unit is (7)
+   function Sensor_Distance_Sensor return Failure_Unit is (7)
      with Static;
 
-   function Ensor_Airspeed return Failure_Unit is (8)
+   function Sensor_Airspeed return Failure_Unit is (8)
      with Static;
 
-   function Ystem_Battery return Failure_Unit is (100)
+   function System_Battery return Failure_Unit is (100)
      with Static;
 
-   function Ystem_Motor return Failure_Unit is (101)
+   function System_Motor return Failure_Unit is (101)
+     with Static;
+   --  Interrupts the commanded output to the motor.
+
+   function System_Servo return Failure_Unit is (102)
      with Static;
 
-   function Ystem_Servo return Failure_Unit is (102)
+   function System_Avoidance return Failure_Unit is (103)
      with Static;
 
-   function Ystem_Avoidance return Failure_Unit is (103)
+   function System_Rc_Signal return Failure_Unit is (104)
      with Static;
 
-   function Ystem_Rc_Signal return Failure_Unit is (104)
+   function System_Mavlink_Signal return Failure_Unit is (105)
      with Static;
 
-   function Ystem_Mavlink_Signal return Failure_Unit is (105)
+   function System_Esc return Failure_Unit is (106)
      with Static;
+   --  Interrupts the telemetry reported by the ESC.
+
+   function System_Traffic_Avoidance return Failure_Unit is (107)
+     with Static;
+   --  Traffic avoidance system like ADS-B or FLARM.
+
+   function Datalink_Lte return Failure_Unit is (150)
+     with Static;
+   --  Data link over a cellular (LTE) connection.
+
+   function Datalink_Wifi return Failure_Unit is (151)
+     with Static;
+   --  Data link over a Wi-Fi connection.
+
+   function Datalink_Telem_Radio return Failure_Unit is (152)
+     with Static;
+   --  Data link over a telemetry radio, e.g. a SiK radio.
+
+   function Bus_Can return Failure_Unit is (200)
+     with Static;
+   --  CAN bus. Instance is the bus number, e.g. 1 for CAN1.
+
+   function Bus_I2C return Failure_Unit is (201)
+     with Static;
+   --  I2C bus. Instance is the bus number, e.g. 1 for I2C1.
 
    subtype Failure_Unit_Well_Known is Failure_Unit
      with Static_Predicate => Failure_Unit_Well_Known in
-       Ensor_Gyro .. Ensor_Airspeed
-       | Ystem_Battery .. Ystem_Mavlink_Signal;
+       Sensor_Gyro .. Sensor_Airspeed
+       | System_Battery .. System_Traffic_Avoidance
+       | Datalink_Lte .. Datalink_Telem_Radio
+       | Bus_Can .. Bus_I2C;
 
    function Well_Known_Image
      (Value : Failure_Unit_Well_Known) return String is
        (case Value is
-        when Ensor_Gyro => "Ensor_Gyro",
-        when Ensor_Accel => "Ensor_Accel",
-        when Ensor_Mag => "Ensor_Mag",
-        when Ensor_Baro => "Ensor_Baro",
-        when Ensor_Gps => "Ensor_Gps",
-        when Ensor_Optical_Flow => "Ensor_Optical_Flow",
-        when Ensor_Vio => "Ensor_Vio",
-        when Ensor_Distance_Sensor => "Ensor_Distance_Sensor",
-        when Ensor_Airspeed => "Ensor_Airspeed",
-        when Ystem_Battery => "Ystem_Battery",
-        when Ystem_Motor => "Ystem_Motor",
-        when Ystem_Servo => "Ystem_Servo",
-        when Ystem_Avoidance => "Ystem_Avoidance",
-        when Ystem_Rc_Signal => "Ystem_Rc_Signal",
-        when Ystem_Mavlink_Signal => "Ystem_Mavlink_Signal");
+        when Sensor_Gyro => "Sensor_Gyro",
+        when Sensor_Accel => "Sensor_Accel",
+        when Sensor_Mag => "Sensor_Mag",
+        when Sensor_Baro => "Sensor_Baro",
+        when Sensor_Gps => "Sensor_Gps",
+        when Sensor_Optical_Flow => "Sensor_Optical_Flow",
+        when Sensor_Vio => "Sensor_Vio",
+        when Sensor_Distance_Sensor => "Sensor_Distance_Sensor",
+        when Sensor_Airspeed => "Sensor_Airspeed",
+        when System_Battery => "System_Battery",
+        when System_Motor => "System_Motor",
+        when System_Servo => "System_Servo",
+        when System_Avoidance => "System_Avoidance",
+        when System_Rc_Signal => "System_Rc_Signal",
+        when System_Mavlink_Signal => "System_Mavlink_Signal",
+        when System_Esc => "System_Esc",
+        when System_Traffic_Avoidance => "System_Traffic_Avoidance",
+        when Datalink_Lte => "Datalink_Lte",
+        when Datalink_Wifi => "Datalink_Wifi",
+        when Datalink_Telem_Radio => "Datalink_Telem_Radio",
+        when Bus_Can => "Bus_Can",
+        when Bus_I2C => "Bus_I2C");
 
    function Image (Value : Failure_Unit) return String is
      (if Value in Failure_Unit_Well_Known
@@ -8290,9 +8584,13 @@ package MAVLink.V2.Common.Types is
      with Static;
    --  Unit is sometimes working, sometimes not.
 
+   function Drift return Failure_Type is (8)
+     with Static;
+   --  Unit is publishing plausible values but drifting away from true values.
+
    subtype Failure_Type_Well_Known is Failure_Type
      with Static_Predicate => Failure_Type_Well_Known in
-       Ok .. Intermittent;
+       Ok .. Drift;
 
    function Well_Known_Image
      (Value : Failure_Type_Well_Known) return String is
@@ -8304,7 +8602,8 @@ package MAVLink.V2.Common.Types is
         when Wrong => "Wrong",
         when Slow => "Slow",
         when Delayed => "Delayed",
-        when Intermittent => "Intermittent");
+        when Intermittent => "Intermittent",
+        when Drift => "Drift");
 
    function Image (Value : Failure_Type) return String is
      (if Value in Failure_Type_Well_Known
@@ -8316,102 +8615,99 @@ package MAVLink.V2.Common.Types is
      with Static;
    --  Default autopilot landing behaviour.
 
-   function Fw_Descent return Nav_Vtol_Land_Options is (1)
+   function Fw_Spiral_Approach return Nav_Vtol_Land_Options is (1)
      with Static;
-   --  Descend in fixed wing mode, transitioning to multicopter mode for
-   --  vertical landing when close to the ground. The fixed wing descent
-   --  pattern is at the discretion of the vehicle (e.g. transition altitude,
-   --  loiter direction, radius, and speed, etc.).
+   --  Use a fixed wing spiral desent approach before landing.
 
-   function Hover_Descent return Nav_Vtol_Land_Options is (2)
+   function Fw_Approach return Nav_Vtol_Land_Options is (2)
      with Static;
-   --  Land in multicopter mode on reaching the landing coordinates (the whole
-   --  landing is by "hover descent").
+   --  Use a fixed wing approach before detransitioning and landing
+   --  vertically.
 
    subtype Nav_Vtol_Land_Options_Well_Known is Nav_Vtol_Land_Options
      with Static_Predicate => Nav_Vtol_Land_Options_Well_Known in
-       Default .. Hover_Descent;
+       Default .. Fw_Approach;
 
    function Well_Known_Image
      (Value : Nav_Vtol_Land_Options_Well_Known) return String is
        (case Value is
         when Default => "Default",
-        when Fw_Descent => "Fw_Descent",
-        when Hover_Descent => "Hover_Descent");
+        when Fw_Spiral_Approach => "Fw_Spiral_Approach",
+        when Fw_Approach => "Fw_Approach");
 
    function Image (Value : Nav_Vtol_Land_Options) return String is
      (if Value in Nav_Vtol_Land_Options_Well_Known
       then Well_Known_Image (Value) else "Unknown:" & Value'Image);
 
    type Mav_Winch_Status_Flag is record
-      Healthy         : Boolean := False;
-      Fully_Retracted : Boolean := False;
-      Moving          : Boolean := False;
-      Clutch_Engaged  : Boolean := False;
-      Locked          : Boolean := False;
-      Dropping        : Boolean := False;
-      Arresting       : Boolean := False;
-      Ground_Sense    : Boolean := False;
-      Retracting      : Boolean := False;
-      Redeliver       : Boolean := False;
-      Abandon_Line    : Boolean := False;
-      Locking         : Boolean := False;
-      Load_Line       : Boolean := False;
-      Load_Payload    : Boolean := False;
-      Reserved_14     : Boolean := False;
-      Reserved_15     : Boolean := False;
-      Reserved_16     : Boolean := False;
-      Reserved_17     : Boolean := False;
-      Reserved_18     : Boolean := False;
-      Reserved_19     : Boolean := False;
-      Reserved_20     : Boolean := False;
-      Reserved_21     : Boolean := False;
-      Reserved_22     : Boolean := False;
-      Reserved_23     : Boolean := False;
-      Reserved_24     : Boolean := False;
-      Reserved_25     : Boolean := False;
-      Reserved_26     : Boolean := False;
-      Reserved_27     : Boolean := False;
-      Reserved_28     : Boolean := False;
-      Reserved_29     : Boolean := False;
-      Reserved_30     : Boolean := False;
-      Reserved_31     : Boolean := False;
+      Healthy           : Boolean := False;
+      Fully_Retracted   : Boolean := False;
+      Moving            : Boolean := False;
+      Clutch_Disengaged : Boolean := False;
+      Locked            : Boolean := False;
+      Dropping          : Boolean := False;
+      Arresting         : Boolean := False;
+      Ground_Sense      : Boolean := False;
+      Retracting        : Boolean := False;
+      Redeliver         : Boolean := False;
+      Abandon_Line      : Boolean := False;
+      Locking           : Boolean := False;
+      Load_Line         : Boolean := False;
+      Load_Payload      : Boolean := False;
+      Reserved_14       : Boolean := False;
+      Reserved_15       : Boolean := False;
+      Reserved_16       : Boolean := False;
+      Reserved_17       : Boolean := False;
+      Reserved_18       : Boolean := False;
+      Reserved_19       : Boolean := False;
+      Reserved_20       : Boolean := False;
+      Reserved_21       : Boolean := False;
+      Reserved_22       : Boolean := False;
+      Reserved_23       : Boolean := False;
+      Reserved_24       : Boolean := False;
+      Reserved_25       : Boolean := False;
+      Reserved_26       : Boolean := False;
+      Reserved_27       : Boolean := False;
+      Reserved_28       : Boolean := False;
+      Reserved_29       : Boolean := False;
+      Reserved_30       : Boolean := False;
+      Reserved_31       : Boolean := False;
    end record with Size => 32;
    --  Winch status flags used in WINCH_STATUS
 
    for Mav_Winch_Status_Flag use record
-      Healthy         at 0 range 0 .. 0;
-      Fully_Retracted at 0 range 1 .. 1;
-      Moving          at 0 range 2 .. 2;
-      Clutch_Engaged  at 0 range 3 .. 3;
-      Locked          at 0 range 4 .. 4;
-      Dropping        at 0 range 5 .. 5;
-      Arresting       at 0 range 6 .. 6;
-      Ground_Sense    at 0 range 7 .. 7;
-      Retracting      at 0 range 8 .. 8;
-      Redeliver       at 0 range 9 .. 9;
-      Abandon_Line    at 0 range 10 .. 10;
-      Locking         at 0 range 11 .. 11;
-      Load_Line       at 0 range 12 .. 12;
-      Load_Payload    at 0 range 13 .. 13;
-      Reserved_14     at 0 range 14 .. 14;
-      Reserved_15     at 0 range 15 .. 15;
-      Reserved_16     at 0 range 16 .. 16;
-      Reserved_17     at 0 range 17 .. 17;
-      Reserved_18     at 0 range 18 .. 18;
-      Reserved_19     at 0 range 19 .. 19;
-      Reserved_20     at 0 range 20 .. 20;
-      Reserved_21     at 0 range 21 .. 21;
-      Reserved_22     at 0 range 22 .. 22;
-      Reserved_23     at 0 range 23 .. 23;
-      Reserved_24     at 0 range 24 .. 24;
-      Reserved_25     at 0 range 25 .. 25;
-      Reserved_26     at 0 range 26 .. 26;
-      Reserved_27     at 0 range 27 .. 27;
-      Reserved_28     at 0 range 28 .. 28;
-      Reserved_29     at 0 range 29 .. 29;
-      Reserved_30     at 0 range 30 .. 30;
-      Reserved_31     at 0 range 31 .. 31;
+      Healthy           at 0 range 0 .. 0;
+      Fully_Retracted   at 0 range 1 .. 1;
+      Moving            at 0 range 2 .. 2;
+      Clutch_Disengaged at 0 range 3 .. 3;
+      Locked            at 0 range 4 .. 4;
+      Dropping          at 0 range 5 .. 5;
+      Arresting         at 0 range 6 .. 6;
+      Ground_Sense      at 0 range 7 .. 7;
+      Retracting        at 0 range 8 .. 8;
+      Redeliver         at 0 range 9 .. 9;
+      Abandon_Line      at 0 range 10 .. 10;
+      Locking           at 0 range 11 .. 11;
+      Load_Line         at 0 range 12 .. 12;
+      Load_Payload      at 0 range 13 .. 13;
+      Reserved_14       at 0 range 14 .. 14;
+      Reserved_15       at 0 range 15 .. 15;
+      Reserved_16       at 0 range 16 .. 16;
+      Reserved_17       at 0 range 17 .. 17;
+      Reserved_18       at 0 range 18 .. 18;
+      Reserved_19       at 0 range 19 .. 19;
+      Reserved_20       at 0 range 20 .. 20;
+      Reserved_21       at 0 range 21 .. 21;
+      Reserved_22       at 0 range 22 .. 22;
+      Reserved_23       at 0 range 23 .. 23;
+      Reserved_24       at 0 range 24 .. 24;
+      Reserved_25       at 0 range 25 .. 25;
+      Reserved_26       at 0 range 26 .. 26;
+      Reserved_27       at 0 range 27 .. 27;
+      Reserved_28       at 0 range 28 .. 28;
+      Reserved_29       at 0 range 29 .. 29;
+      Reserved_30       at 0 range 30 .. 30;
+      Reserved_31       at 0 range 31 .. 31;
    end record;
 
    function Image (V : Mav_Winch_Status_Flag) return String is
@@ -8419,7 +8715,7 @@ package MAVLink.V2.Common.Types is
       & (if V.Healthy then "HEALTHY " else "")
       & (if V.Fully_Retracted then "FULLY_RETRACTED " else "")
       & (if V.Moving then "MOVING " else "")
-      & (if V.Clutch_Engaged then "CLUTCH_ENGAGED " else "")
+      & (if V.Clutch_Disengaged then "CLUTCH_DISENGAGED " else "")
       & (if V.Locked then "LOCKED " else "")
       & (if V.Dropping then "DROPPING " else "")
       & (if V.Arresting then "ARRESTING " else "")
@@ -8452,15 +8748,32 @@ package MAVLink.V2.Common.Types is
    function Failed return Mag_Cal_Status is (5)
      with Static;
 
-   function Bad_Orientation return Mag_Cal_Status is (6)
+   function Failed_Orientation return Mag_Cal_Status is (6)
      with Static;
+   --  Compass calibration failed: the vehicle orientation is outside the
+   --  required tolerance.
 
-   function Bad_Radius return Mag_Cal_Status is (7)
+   function Failed_Radius return Mag_Cal_Status is (7)
      with Static;
+   --  Compass calibration failed: the radius of the fitted sphere is
+   --  unrealistically small or large.
+
+   function Failed_Offsets return Mag_Cal_Status is (8)
+     with Static;
+   --  Compass calibration failed: offset magnitude too large.
+
+   function Failed_Diag_Scaling return Mag_Cal_Status is (9)
+     with Static;
+   --  Compass calibration failed: diagonal or off-diagonal scaling values out
+   --  of valid range.
+
+   function Failed_Residuals_High return Mag_Cal_Status is (10)
+     with Static;
+   --  Compass calibration failed: fitness (RMS residual) exceeds tolerance.
 
    subtype Mag_Cal_Status_Well_Known is Mag_Cal_Status
      with Static_Predicate => Mag_Cal_Status_Well_Known in
-       Not_Started .. Bad_Radius;
+       Not_Started .. Failed_Residuals_High;
 
    function Well_Known_Image
      (Value : Mag_Cal_Status_Well_Known) return String is
@@ -8471,8 +8784,11 @@ package MAVLink.V2.Common.Types is
         when Running_Step_Two => "Running_Step_Two",
         when Success => "Success",
         when Failed => "Failed",
-        when Bad_Orientation => "Bad_Orientation",
-        when Bad_Radius => "Bad_Radius");
+        when Failed_Orientation => "Failed_Orientation",
+        when Failed_Radius => "Failed_Radius",
+        when Failed_Offsets => "Failed_Offsets",
+        when Failed_Diag_Scaling => "Failed_Diag_Scaling",
+        when Failed_Residuals_High => "Failed_Residuals_High");
 
    function Image (Value : Mag_Cal_Status) return String is
      (if Value in Mag_Cal_Status_Well_Known
@@ -8664,7 +8980,8 @@ package MAVLink.V2.Common.Types is
       then Well_Known_Image (Value) else "Unknown:" & Value'Image);
 
    type Mav_Ftp_Err is new Interfaces.Unsigned_8;
-   --  MAV FTP error codes (https://mavlink.io/en/services/ftp.html)
+   --  MAV FTP error codes (may be used in FILE_TRANSFER_PROTOCOL). See
+   --  https://mavlink.io/en/services/ftp.html.
 
    function None return Mav_Ftp_Err is (0)
      with Static;
@@ -8736,7 +9053,8 @@ package MAVLink.V2.Common.Types is
       then Well_Known_Image (Value) else "Unknown:" & Value'Image);
 
    type Mav_Ftp_Opcode is new Interfaces.Unsigned_8;
-   --  MAV FTP opcodes: https://mavlink.io/en/services/ftp.html
+   --  MAV FTP opcodes (may be used in FILE_TRANSFER_PROTOCOL). See
+   --  https://mavlink.io/en/services/ftp.html.
 
    function None return Mav_Ftp_Opcode is (0)
      with Static;
@@ -8803,6 +9121,14 @@ package MAVLink.V2.Common.Types is
      with Static;
    --  BurstReadFile: Burst download session file
 
+   function Listdirectorywithtime return Mav_Ftp_Opcode is (16)
+     with Static;
+   --  ListDirectoryWithTime: List files and directories, along with
+   --  last-modification timestamps, in path from offset. This is the same as
+   --  ListDirectory except for the addition of timestamps. Servers that do
+   --  not support this opcode respond with a NAK
+   --  (MAV_FTP_ERR_UNKNOWNCOMMAND).
+
    function Ack return Mav_Ftp_Opcode is (128)
      with Static;
    --  ACK: ACK response
@@ -8813,7 +9139,7 @@ package MAVLink.V2.Common.Types is
 
    subtype Mav_Ftp_Opcode_Well_Known is Mav_Ftp_Opcode
      with Static_Predicate => Mav_Ftp_Opcode_Well_Known in
-       None .. Burstreadfile
+       None .. Listdirectorywithtime
        | Ack .. Nak;
 
    function Well_Known_Image
@@ -8835,6 +9161,7 @@ package MAVLink.V2.Common.Types is
         when Rename => "Rename",
         when Calcfilecrc => "Calcfilecrc",
         when Burstreadfile => "Burstreadfile",
+        when Listdirectorywithtime => "Listdirectorywithtime",
         when Ack => "Ack",
         when Nak => "Nak");
 
@@ -9435,6 +9762,126 @@ package MAVLink.V2.Common.Types is
      ("["
       & (if V.Nhealthy then "NHEALTHY " else "")
       & (if V.Sing then "SING " else "")
+      & "]");
+
+   type Global_Position_Src is new Interfaces.Unsigned_8;
+   --  Source for GLOBAL_POSITION measurement or estimate.
+
+   function Unknown return Global_Position_Src is (0)
+     with Static;
+   --  Source is unknown or not one of the listed types.
+
+   function Gnss return Global_Position_Src is (1)
+     with Static;
+   --  Global Navigation Satellite System (e.g.: GPS, Galileo, Glonass,
+   --  BeiDou).
+
+   function Vision return Global_Position_Src is (2)
+     with Static;
+   --  Vision system (e.g.: map matching).
+
+   function Pseudolites return Global_Position_Src is (3)
+     with Static;
+   --  A pseudo-satellite system using transceiver beacons to perform
+   --  GNSS-like positioning.
+
+   function Terrain return Global_Position_Src is (4)
+     with Static;
+   --  Terrain referenced navigation.
+
+   function Magnetic return Global_Position_Src is (5)
+     with Static;
+   --  Magnetic positioning.
+
+   function Estimator return Global_Position_Src is (6)
+     with Static;
+   --  Estimated position based on various sensors (eg. a Kalman Filter).
+
+   function Leo return Global_Position_Src is (7)
+     with Static;
+   --  Low Earth Orbit satellite-based positioning (e.g.: Starlink, Xona
+   --  PULSAR).
+
+   subtype Global_Position_Src_Well_Known is Global_Position_Src
+     with Static_Predicate => Global_Position_Src_Well_Known in
+       Unknown .. Leo;
+
+   function Well_Known_Image
+     (Value : Global_Position_Src_Well_Known) return String is
+       (case Value is
+        when Unknown => "Unknown",
+        when Gnss => "Gnss",
+        when Vision => "Vision",
+        when Pseudolites => "Pseudolites",
+        when Terrain => "Terrain",
+        when Magnetic => "Magnetic",
+        when Estimator => "Estimator",
+        when Leo => "Leo");
+
+   function Image (Value : Global_Position_Src) return String is
+     (if Value in Global_Position_Src_Well_Known
+      then Well_Known_Image (Value) else "Unknown:" & Value'Image);
+
+   type Global_Position_Flags is record
+      Unhealthy  : Boolean := False;
+      Primary    : Boolean := False;
+      Reserved_2 : Boolean := False;
+      Reserved_3 : Boolean := False;
+      Reserved_4 : Boolean := False;
+      Reserved_5 : Boolean := False;
+      Reserved_6 : Boolean := False;
+      Reserved_7 : Boolean := False;
+   end record with Size => 8;
+   --  Status flags for GLOBAL_POSITION
+
+   for Global_Position_Flags use record
+      Unhealthy  at 0 range 0 .. 0;
+      Primary    at 0 range 1 .. 1;
+      Reserved_2 at 0 range 2 .. 2;
+      Reserved_3 at 0 range 3 .. 3;
+      Reserved_4 at 0 range 4 .. 4;
+      Reserved_5 at 0 range 5 .. 5;
+      Reserved_6 at 0 range 6 .. 6;
+      Reserved_7 at 0 range 7 .. 7;
+   end record;
+
+   function Image (V : Global_Position_Flags) return String is
+     ("["
+      & (if V.Unhealthy then "UNHEALTHY " else "")
+      & (if V.Primary then "PRIMARY " else "")
+      & "]");
+
+   type Follow_Target_Cap_Flags is record
+      Pos        : Boolean := False;
+      Vel        : Boolean := False;
+      Accel      : Boolean := False;
+      Att_Rates  : Boolean := False;
+      Reserved_4 : Boolean := False;
+      Reserved_5 : Boolean := False;
+      Reserved_6 : Boolean := False;
+      Reserved_7 : Boolean := False;
+   end record with Size => 8;
+   --  Bitmask indicating which fields contain valid data in a FOLLOW_TARGET
+   --  message (lat/lon/alt, vel, acc, attitude_q, rates). If a bit is unset,
+   --  the corresponding field(s) are zero-filled and should be ignored.
+
+   for Follow_Target_Cap_Flags use record
+      Pos        at 0 range 0 .. 0;
+      Vel        at 0 range 1 .. 1;
+      Accel      at 0 range 2 .. 2;
+      Att_Rates  at 0 range 3 .. 3;
+      Reserved_4 at 0 range 4 .. 4;
+      Reserved_5 at 0 range 5 .. 5;
+      Reserved_6 at 0 range 6 .. 6;
+      Reserved_7 at 0 range 7 .. 7;
+   end record;
+
+   function Image (V : Follow_Target_Cap_Flags) return String is
+     ("["
+      & (if V.Pos then "POS " else "")
+      & (if V.Vel then "VEL " else "")
+      & (if V.Accel then "ACCEL " else "")
+      & (if V.Att_Rates then "ATT_RATES " else "")
       & "]");
 
 end MAVLink.V2.Common.Types;
