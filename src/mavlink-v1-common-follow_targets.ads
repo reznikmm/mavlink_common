@@ -8,6 +8,8 @@
 
 pragma Ada_2022;
 
+with MAVLink.V1.Common.Types; use MAVLink.V1.Common.Types;
+
 package MAVLink.V1.Common.Follow_Targets is
 
    pragma Pure;
@@ -18,9 +20,8 @@ package MAVLink.V1.Common.Follow_Targets is
       Timestamp        : Interfaces.Unsigned_64;
       --  Units: [ms]
       --  Timestamp (time since system boot).
-      Est_Capabilities : Interfaces.Unsigned_8;
-      --  bit positions for tracker reporting capabilities (POS = 0, VEL = 1,
-      --  ACCEL = 2, ATT + RATES = 3)
+      Est_Capabilities : Follow_Target_Cap_Flags;
+      --  Bitmask indicating which fields in this message contain valid data.
       Lat              : Interfaces.Integer_32;
       --  Units: [degE7]
       --  Latitude (WGS84)
@@ -33,17 +34,22 @@ package MAVLink.V1.Common.Follow_Targets is
       Vel              : Short_Float_Array (1 .. 3) :=
         [others => To_Raw (0.0)];
       --  Units: [m/s]
-      --  target velocity (0,0,0) for unknown
+      --  Target velocity in MAV_FRAME_LOCAL_NED frame. (0,0,0) for unknown.
       Acc              : Short_Float_Array (1 .. 3) :=
         [others => To_Raw (0.0)];
       --  Units: [m/s/s]
-      --  linear target acceleration (0,0,0) for unknown
+      --  Target linear acceleration in MAV_FRAME_LOCAL_NED frame. (0,0,0) for
+      --  unknown.
       Attitude_Q       : Short_Float_Array (1 .. 4) :=
         [others => To_Raw (0.0)];
-      --  (0 0 0 0 for unknown)
+      --  Target orientation as a quaternion rotating from MAV_FRAME_BODY_FRD
+      --  to MAV_FRAME_LOCAL_NED (w, x, y, z order, zero-rotation is [1, 0, 0,
+      --  0]). (0, 0, 0, 0) for unknown.
       Rates            : Short_Float_Array (1 .. 3) :=
         [others => To_Raw (0.0)];
-      --  (0 0 0 for unknown)
+      --  Units: [rad/s]
+      --  Target angular rates (roll, pitch, yaw) in MAV_FRAME_BODY_FRD frame.
+      --  (0,0,0) for unknown.
       Position_Cov     : Short_Float_Array (1 .. 3);
       --  eph epv
       Custom_State     : Interfaces.Unsigned_64;
@@ -81,27 +87,37 @@ package MAVLink.V1.Common.Follow_Targets is
      (Message   : out Follow_Target;
       Connect   : in out MAVLink.V1.Connection;
       CRC_Valid : out Boolean);
-   --  Get the message from the Connect and delete it
-   --  from the Connect's buffer. CRC_Valid is set to
-   --  True if x25crc is valid for the message.
+   --  Get the message from the Connect if x25crc is valid and
+   --  set CRC_Valid to True.
+   --  Won't read data from the Connect if x25crc is False.
+   --  For v1: Won't read data from the Connect if message length mismatch
+   --    and set CRC_Valid to False in this case.
+   --  For v2: Truncate the extension fields.
 
    procedure Decode
      (Message : out Follow_Target;
       Connect : MAVLink.V1.Connection);
-   --  Same as Above but does not check CRC
+   --  Get the message from the Connect.
+   --  For v1: May raise exception when message length mismatch
+   --  For v2: Truncate the extension fields.
 
    procedure Decode
      (Message   : out Follow_Target;
       Connect   : in out MAVLink.V1.In_Connection;
       CRC_Valid : out Boolean);
-   --  Get the message from the Connect and delete it
-   --  from the Connect's buffer. CRC_Valid is set to
-   --  True if x25crc is valid for the message.
+   --  Get the message from the Connect if x25crc is valid and
+   --  set CRC_Valid to True.
+   --  Won't read data from the Connect if x25crc is False.
+   --  For v1: Won't read data from the Connect if message length mismatch
+   --    and set CRC_Valid to False in this case.
+   --  For v2: Truncate the extension fields.
 
    procedure Decode
      (Message : out Follow_Target;
       Connect : MAVLink.V1.In_Connection);
-   --  Same as Above but does not check CRC
+   --  Get the message from the Connect.
+   --  For v1: May raise an exception when message length mismatch
+   --  For v2: Truncate the extension fields.
 
    function Check_CRC
      (Connect : in out MAVLink.V1.Connection)

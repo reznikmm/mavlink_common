@@ -44,7 +44,8 @@ package MAVLink.V1.Common.Battery_Statuses is
       Current_Battery   : Interfaces.Integer_16 :=
         -1;
       --  Units: [cA]
-      --  Battery current, -1: autopilot does not measure the current
+      --  Battery current, -1: autopilot does not measure the current. Value
+      --  may overflow/rollover for very high currents (> 327.67A)
       Current_Consumed  : Interfaces.Integer_32 :=
         -1;
       --  Units: [mAh]
@@ -90,27 +91,37 @@ package MAVLink.V1.Common.Battery_Statuses is
      (Message   : out Battery_Status;
       Connect   : in out MAVLink.V1.Connection;
       CRC_Valid : out Boolean);
-   --  Get the message from the Connect and delete it
-   --  from the Connect's buffer. CRC_Valid is set to
-   --  True if x25crc is valid for the message.
+   --  Get the message from the Connect if x25crc is valid and
+   --  set CRC_Valid to True.
+   --  Won't read data from the Connect if x25crc is False.
+   --  For v1: Won't read data from the Connect if message length mismatch
+   --    and set CRC_Valid to False in this case.
+   --  For v2: Truncate the extension fields.
 
    procedure Decode
      (Message : out Battery_Status;
       Connect : MAVLink.V1.Connection);
-   --  Same as Above but does not check CRC
+   --  Get the message from the Connect.
+   --  For v1: May raise exception when message length mismatch
+   --  For v2: Truncate the extension fields.
 
    procedure Decode
      (Message   : out Battery_Status;
       Connect   : in out MAVLink.V1.In_Connection;
       CRC_Valid : out Boolean);
-   --  Get the message from the Connect and delete it
-   --  from the Connect's buffer. CRC_Valid is set to
-   --  True if x25crc is valid for the message.
+   --  Get the message from the Connect if x25crc is valid and
+   --  set CRC_Valid to True.
+   --  Won't read data from the Connect if x25crc is False.
+   --  For v1: Won't read data from the Connect if message length mismatch
+   --    and set CRC_Valid to False in this case.
+   --  For v2: Truncate the extension fields.
 
    procedure Decode
      (Message : out Battery_Status;
       Connect : MAVLink.V1.In_Connection);
-   --  Same as Above but does not check CRC
+   --  Get the message from the Connect.
+   --  For v1: May raise an exception when message length mismatch
+   --  For v2: Truncate the extension fields.
 
    function Check_CRC
      (Connect : in out MAVLink.V1.Connection)

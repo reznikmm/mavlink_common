@@ -33,8 +33,8 @@ package MAVLink.V1.Common.Gps_Inputs is
       --  GPS time (from start of GPS week)
       Time_Week          : Interfaces.Unsigned_16;
       --  GPS week number
-      Fix_Type           : Interfaces.Unsigned_8;
-      --  0-1: no fix, 2: 2D fix, 3: 3D fix. 4: 3D with DGPS. 5: 3D with RTK
+      Fix_Type           : Gps_Fix_Type;
+      --  GNSS fix type
       Lat                : Interfaces.Integer_32;
       --  Units: [degE7]
       --  Latitude (WGS84)
@@ -112,27 +112,37 @@ package MAVLink.V1.Common.Gps_Inputs is
      (Message   : out Gps_Input;
       Connect   : in out MAVLink.V1.Connection;
       CRC_Valid : out Boolean);
-   --  Get the message from the Connect and delete it
-   --  from the Connect's buffer. CRC_Valid is set to
-   --  True if x25crc is valid for the message.
+   --  Get the message from the Connect if x25crc is valid and
+   --  set CRC_Valid to True.
+   --  Won't read data from the Connect if x25crc is False.
+   --  For v1: Won't read data from the Connect if message length mismatch
+   --    and set CRC_Valid to False in this case.
+   --  For v2: Truncate the extension fields.
 
    procedure Decode
      (Message : out Gps_Input;
       Connect : MAVLink.V1.Connection);
-   --  Same as Above but does not check CRC
+   --  Get the message from the Connect.
+   --  For v1: May raise exception when message length mismatch
+   --  For v2: Truncate the extension fields.
 
    procedure Decode
      (Message   : out Gps_Input;
       Connect   : in out MAVLink.V1.In_Connection;
       CRC_Valid : out Boolean);
-   --  Get the message from the Connect and delete it
-   --  from the Connect's buffer. CRC_Valid is set to
-   --  True if x25crc is valid for the message.
+   --  Get the message from the Connect if x25crc is valid and
+   --  set CRC_Valid to True.
+   --  Won't read data from the Connect if x25crc is False.
+   --  For v1: Won't read data from the Connect if message length mismatch
+   --    and set CRC_Valid to False in this case.
+   --  For v2: Truncate the extension fields.
 
    procedure Decode
      (Message : out Gps_Input;
       Connect : MAVLink.V1.In_Connection);
-   --  Same as Above but does not check CRC
+   --  Get the message from the Connect.
+   --  For v1: May raise an exception when message length mismatch
+   --  For v2: Truncate the extension fields.
 
    function Check_CRC
      (Connect : in out MAVLink.V1.Connection)

@@ -8,6 +8,8 @@
 
 pragma Ada_2022;
 
+with MAVLink.V1.Common.Types; use MAVLink.V1.Common.Types;
+
 package MAVLink.V1.Common.Data_Streams is
 
    pragma Pure;
@@ -15,8 +17,8 @@ package MAVLink.V1.Common.Data_Streams is
    Data_Stream_Len : constant Interfaces.Unsigned_8 := 4;
 
    type Data_Stream is record
-      Stream_Id    : Interfaces.Unsigned_8;
-      --  The ID of the requested data stream
+      Stream_Id    : Mav_Data_Stream;
+      --  The ID of the requested data stream.
       Message_Rate : Interfaces.Unsigned_16;
       --  Units: [Hz]
       --  The message rate
@@ -47,27 +49,37 @@ package MAVLink.V1.Common.Data_Streams is
      (Message   : out Data_Stream;
       Connect   : in out MAVLink.V1.Connection;
       CRC_Valid : out Boolean);
-   --  Get the message from the Connect and delete it
-   --  from the Connect's buffer. CRC_Valid is set to
-   --  True if x25crc is valid for the message.
+   --  Get the message from the Connect if x25crc is valid and
+   --  set CRC_Valid to True.
+   --  Won't read data from the Connect if x25crc is False.
+   --  For v1: Won't read data from the Connect if message length mismatch
+   --    and set CRC_Valid to False in this case.
+   --  For v2: Truncate the extension fields.
 
    procedure Decode
      (Message : out Data_Stream;
       Connect : MAVLink.V1.Connection);
-   --  Same as Above but does not check CRC
+   --  Get the message from the Connect.
+   --  For v1: May raise exception when message length mismatch
+   --  For v2: Truncate the extension fields.
 
    procedure Decode
      (Message   : out Data_Stream;
       Connect   : in out MAVLink.V1.In_Connection;
       CRC_Valid : out Boolean);
-   --  Get the message from the Connect and delete it
-   --  from the Connect's buffer. CRC_Valid is set to
-   --  True if x25crc is valid for the message.
+   --  Get the message from the Connect if x25crc is valid and
+   --  set CRC_Valid to True.
+   --  Won't read data from the Connect if x25crc is False.
+   --  For v1: Won't read data from the Connect if message length mismatch
+   --    and set CRC_Valid to False in this case.
+   --  For v2: Truncate the extension fields.
 
    procedure Decode
      (Message : out Data_Stream;
       Connect : MAVLink.V1.In_Connection);
-   --  Same as Above but does not check CRC
+   --  Get the message from the Connect.
+   --  For v1: May raise an exception when message length mismatch
+   --  For v2: Truncate the extension fields.
 
    function Check_CRC
      (Connect : in out MAVLink.V1.Connection)

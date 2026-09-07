@@ -10,34 +10,31 @@ package MAVLink.V1.Standard.Types is
 
    pragma Pure;
 
-   type Mav_Bool is record
-      True       : Boolean := False;
-      Reserved_1 : Boolean := False;
-      Reserved_2 : Boolean := False;
-      Reserved_3 : Boolean := False;
-      Reserved_4 : Boolean := False;
-      Reserved_5 : Boolean := False;
-      Reserved_6 : Boolean := False;
-      Reserved_7 : Boolean := False;
-   end record with Size => 8;
+   type Mav_Bool is new Interfaces.Unsigned_8;
    --  Enum used to indicate true or false (also: success or failure, enabled
    --  or disabled, active or inactive).
 
-   for Mav_Bool use record
-      True       at 0 range 0 .. 0;
-      Reserved_1 at 0 range 1 .. 1;
-      Reserved_2 at 0 range 2 .. 2;
-      Reserved_3 at 0 range 3 .. 3;
-      Reserved_4 at 0 range 4 .. 4;
-      Reserved_5 at 0 range 5 .. 5;
-      Reserved_6 at 0 range 6 .. 6;
-      Reserved_7 at 0 range 7 .. 7;
-   end record;
+   function False return Mav_Bool is (0)
+     with Static;
+   --  False.
 
-   function Image (V : Mav_Bool) return String is
-     ("["
-      & (if V.True then "TRUE " else "")
-      & "]");
+   function True return Mav_Bool is (1)
+     with Static;
+   --  True.
+
+   subtype Mav_Bool_Well_Known is Mav_Bool
+     with Static_Predicate => Mav_Bool_Well_Known in
+       False .. True;
+
+   function Well_Known_Image
+     (Value : Mav_Bool_Well_Known) return String is
+       (case Value is
+        when False => "False",
+        when True => "True");
+
+   function Image (Value : Mav_Bool) return String is
+     (if Value in Mav_Bool_Well_Known
+      then Well_Known_Image (Value) else "Unknown:" & Value'Image);
 
    type Mav_Protocol_Capability is record
       Mission_Float                       : Boolean := False;

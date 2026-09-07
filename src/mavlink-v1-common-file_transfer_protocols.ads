@@ -22,10 +22,10 @@ package MAVLink.V1.Common.File_Transfer_Protocols is
       Target_Component : Interfaces.Unsigned_8;
       --  Component ID (0 for broadcast)
       Payload          : Unsigned_8_Array (1 .. 251);
-      --  Variable length payload. The length is defined by the remaining
-      --  message length when subtracting the header and other fields. The
-      --  content/format of this block is defined in
-      --  https://mavlink.io/en/services/ftp.html.
+      --  Variable length payload. The content/format of this block is defined
+      --  in https://mavlink.io/en/services/ftp.html. The length is defined by
+      --  the remaining message length when subtracting the header and other
+      --  fields. See also MAV_FTP_OPCODE and MAV_FTP_ERR.
    end record;
 
    for File_Transfer_Protocol use record
@@ -52,27 +52,37 @@ package MAVLink.V1.Common.File_Transfer_Protocols is
      (Message   : out File_Transfer_Protocol;
       Connect   : in out MAVLink.V1.Connection;
       CRC_Valid : out Boolean);
-   --  Get the message from the Connect and delete it
-   --  from the Connect's buffer. CRC_Valid is set to
-   --  True if x25crc is valid for the message.
+   --  Get the message from the Connect if x25crc is valid and
+   --  set CRC_Valid to True.
+   --  Won't read data from the Connect if x25crc is False.
+   --  For v1: Won't read data from the Connect if message length mismatch
+   --    and set CRC_Valid to False in this case.
+   --  For v2: Truncate the extension fields.
 
    procedure Decode
      (Message : out File_Transfer_Protocol;
       Connect : MAVLink.V1.Connection);
-   --  Same as Above but does not check CRC
+   --  Get the message from the Connect.
+   --  For v1: May raise exception when message length mismatch
+   --  For v2: Truncate the extension fields.
 
    procedure Decode
      (Message   : out File_Transfer_Protocol;
       Connect   : in out MAVLink.V1.In_Connection;
       CRC_Valid : out Boolean);
-   --  Get the message from the Connect and delete it
-   --  from the Connect's buffer. CRC_Valid is set to
-   --  True if x25crc is valid for the message.
+   --  Get the message from the Connect if x25crc is valid and
+   --  set CRC_Valid to True.
+   --  Won't read data from the Connect if x25crc is False.
+   --  For v1: Won't read data from the Connect if message length mismatch
+   --    and set CRC_Valid to False in this case.
+   --  For v2: Truncate the extension fields.
 
    procedure Decode
      (Message : out File_Transfer_Protocol;
       Connect : MAVLink.V1.In_Connection);
-   --  Same as Above but does not check CRC
+   --  Get the message from the Connect.
+   --  For v1: May raise an exception when message length mismatch
+   --  For v2: Truncate the extension fields.
 
    function Check_CRC
      (Connect : in out MAVLink.V1.Connection)

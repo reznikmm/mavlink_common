@@ -52,7 +52,16 @@ python -m venv venv
 source venv/bin/activate
 git clone --depth=1 https://github.com/ardupilot/pymavlink
 git clone --depth=1 https://github.com/mavlink/mavlink
-MDEF=$PWD/mavlink/message_definitions python -m pip install pymavlink
+MDEF=$PWD/mavlink/message_definitions python -m pip install ./pymavlink
+
+sed -i 's|<field type="uint16_t" name="cap_flags" enum="GIMBAL_DEVICE_CAP_FLAGS">|<field type="uint16_t" name="cap_flags">|' \
+  mavlink/message_definitions/v1.0/common.xml
+
+sed -i 's|<field type="uint32_t" name="cap_flags2" enum="GIMBAL_DEVICE_CAP_FLAGS" invalid="0">|<field type="uint32_t" name="cap_flags2" enum="GIMBAL_DEVICE_CAP_FLAGS">|' \
+  mavlink/message_definitions/v1.0/common.xml
+
+sed -i 's|<field type="char\[9\]" name="cell_tower_id" invalid="0">|<field type="char[9]" name="cell_tower_id" invalid="[0]">|' \
+  mavlink/message_definitions/v1.0/common.xml
 
 python3 -m pymavlink.tools.mavgen --lang=Ada --wire-protocol=1.0 \
   --output=generated mavlink/message_definitions/v1.0/common.xml

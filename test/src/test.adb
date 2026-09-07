@@ -332,7 +332,7 @@ begin
       I : Set_Mode;
       O : constant Set_Mode :=
          (Target_System => 1,
-          Base_Mode => MAVLink.V1.Common.Types.Mav_Mode'First,
+          Base_Mode => <>,
           Custom_Mode => 3);
    begin
       Encode (O, Out_Connect, Buffer, Last);
@@ -1246,7 +1246,7 @@ begin
       O : constant Request_Data_Stream :=
          (Target_System => 1,
           Target_Component => 1,
-          Req_Stream_Id => 1,
+          Req_Stream_Id => MAVLink.V1.Common.Types.Mav_Data_Stream'First,
           Req_Message_Rate => 2,
           Start_Stop => 1);
    begin
@@ -1266,7 +1266,7 @@ begin
       use MAVLink.V1.Common.Data_Streams;
       I : Data_Stream;
       O : constant Data_Stream :=
-         (Stream_Id => 1,
+         (Stream_Id => MAVLink.V1.Common.Types.Mav_Data_Stream'First,
           Message_Rate => 2,
           On_Off => 1);
    begin
@@ -2888,7 +2888,7 @@ begin
       I : Follow_Target;
       O : constant Follow_Target :=
          (Timestamp => 4,
-          Est_Capabilities => 1,
+          Est_Capabilities => <>,
           Lat => 7,
           Lon => 7,
           Alt => To_Raw (9.9),
@@ -3144,7 +3144,7 @@ begin
           Ignore_Flags => <>,
           Time_Week_Ms => 3,
           Time_Week => 2,
-          Fix_Type => 1,
+          Fix_Type => MAVLink.V1.Common.Types.Gps_Fix_Type'First,
           Lat => 7,
           Lon => 7,
           Alt => To_Raw (9.9),
@@ -3397,13 +3397,13 @@ begin
       I : Adsb_Vehicle;
       O : constant Adsb_Vehicle :=
          (Icao_Address => 3,
-          Lat => 7,
-          Lon => 7,
+          Lat => <>,
+          Lon => <>,
           Altitude_Type => MAVLink.V1.Common.Types.Adsb_Altitude_Type'First,
-          Altitude => 7,
-          Heading => 2,
-          Hor_Velocity => 2,
-          Ver_Velocity => 6,
+          Altitude => <>,
+          Heading => <>,
+          Hor_Velocity => <>,
+          Ver_Velocity => <>,
           Callsign => [others => 'A'],
           Emitter_Type => MAVLink.V1.Common.Types.Adsb_Emitter_Type'First,
           Tslc => 1,

@@ -99,9 +99,13 @@ package MAVLink.V1.Minimal.Types is
      with Static;
    --  Fusion Reflex - https://fusion.engineering
 
+   function Flix return Mav_Autopilot is (21)
+     with Static;
+   --  Flix quadcopter - https://quadcopter.dev
+
    subtype Mav_Autopilot_Well_Known is Mav_Autopilot
      with Static_Predicate => Mav_Autopilot_Well_Known in
-       Generic_Entry .. Reflex;
+       Generic_Entry .. Flix;
 
    function Well_Known_Image
      (Value : Mav_Autopilot_Well_Known) return String is
@@ -126,7 +130,8 @@ package MAVLink.V1.Minimal.Types is
         when Asluav => "Asluav",
         when Smartap => "Smartap",
         when Airrails => "Airrails",
-        when Reflex => "Reflex");
+        when Reflex => "Reflex",
+        when Flix => "Flix");
 
    function Image (Value : Mav_Autopilot) return String is
      (if Value in Mav_Autopilot_Well_Known
